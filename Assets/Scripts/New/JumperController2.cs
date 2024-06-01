@@ -5,6 +5,7 @@ using OpenSkiJumping.ScriptableObjects.Variables;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace OpenSkiJumping.New
 {
@@ -15,11 +16,14 @@ namespace OpenSkiJumping.New
 
         [SerializeField] private float brakeForce;
         [SerializeField] private float inrunDrag = 0.0011f;
-
+        [SerializeField] private int timer = 0;
+        private float torqueCoef = 0.2f;
+        private int WindThrustDeterminer;
+        private int WindThrustDeterminerTimesUsed;
 
         bool button0, button1;
         private bool deductedforlanding;
-        public float dirChange;
+        public float dirChange;        
         public double drag = 0.001d;
         public float forceChange;
         private int goodSamples;
@@ -179,6 +183,9 @@ namespace OpenSkiJumping.New
             judged = false;
             takeoff = false;
             goodSamples = 0;
+            timer = 0;
+            torqueCoef = 0.2f;
+            WindThrustDeterminerTimesUsed = 0;
         }
 
         private bool shouldStart;
@@ -237,6 +244,7 @@ namespace OpenSkiJumping.New
         private void FixedUpdate()
         {
             var vel = rb.velocity + rb.velocity.normalized * windForce;
+            //Debug.Log("rb.velocity: " + rb.velocity + " rb velocity.normalized: " + rb.velocity.normalized);
 
             var liftVec = new Vector3(-vel.normalized.y, vel.normalized.x, 0.0f);
             double tmp = rb.rotation.eulerAngles.z;
@@ -278,11 +286,33 @@ namespace OpenSkiJumping.New
 
             if (State == 2 && !takeoff)
             {
-                rb.AddForce(-vel.normalized * ((float) drag * vel.sqrMagnitude * forceScale));
+
+
+
+                if (torqueCoef < 0.5)
+                {
+                    torqueCoef += 0.02f;
+                }
+             
+                    rb.AddForce(-vel.normalized * ((float) drag * vel.sqrMagnitude * forceScale));
                 rb.AddForce(liftVec * ((float) lift * vel.sqrMagnitude * forceScale));
                 var torque = new Vector3(0.0f, 0.0f,
-                    (90 - (float) angle) * Time.fixedDeltaTime * 0.5f);
-                rb.AddRelativeTorque(torque, ForceMode.Acceleration);
+                    (90 - (float) angle) * Time.fixedDeltaTime * torqueCoef);
+
+                //  Debug.Log("Torque: " + torque.z + " angle: " + angle + " 90 - angle: " + (90-(float)angle));
+                
+                
+                    rb.AddRelativeTorque(torque, ForceMode.Acceleration);
+
+                WindThrustDeterminer = Random.Range(0, 100);
+                if (WindThrustDeterminer > 96)
+                {
+                    
+                    rb.AddRelativeTorque(0,0,15, ForceMode.Acceleration); ;
+                    WindThrustDeterminerTimesUsed++;
+                }
+                Debug.Log(WindThrustDeterminer);
+                Debug.Log("Wind Thrust used " + WindThrustDeterminerTimesUsed + " times." );
             }
 
             if (State == 5)
