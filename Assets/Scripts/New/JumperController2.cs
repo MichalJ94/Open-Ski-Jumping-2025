@@ -16,8 +16,8 @@ namespace OpenSkiJumping.New
 
         [SerializeField] private float brakeForce;
         [SerializeField] private float inrunDrag = 0.0011f;
-        [SerializeField] private int timer = 0;
-        private float torqueCoef = 0.2f;
+        [SerializeField] private int windThrustDelayCounter = 0;
+        private float torqueCoef = 0f;
         private int WindThrustDeterminer;
         private int WindThrustDeterminerTimesUsed;
 
@@ -183,7 +183,7 @@ namespace OpenSkiJumping.New
             judged = false;
             takeoff = false;
             goodSamples = 0;
-            timer = 0;
+            windThrustDelayCounter = 0;
             torqueCoef = 0.2f;
             WindThrustDeterminerTimesUsed = 0;
         }
@@ -215,7 +215,9 @@ namespace OpenSkiJumping.New
             {
                 button0 |= Input.GetMouseButtonDown(0);
                 button1 |= Input.GetMouseButtonDown(1);
+                Debug.Log("Wind Thrust used " + WindThrustDeterminerTimesUsed + " times.");
                 Land();
+
             }
 
             if (State == 2 && !takeoff)
@@ -230,7 +232,6 @@ namespace OpenSkiJumping.New
 
                 var torque = new Vector3(0.0f, 0.0f, jumperAngle * rotCoef.Value);
                 rb.AddRelativeTorque(torque, ForceMode.Acceleration);
-
 
                 jumperModel.animator.SetFloat(JumperAngle, jumperAngle);
             }
@@ -291,28 +292,33 @@ namespace OpenSkiJumping.New
 
                 if (torqueCoef < 0.5)
                 {
-                    torqueCoef += 0.02f;
+                    torqueCoef += 0.01f;
                 }
-             
-                    rb.AddForce(-vel.normalized * ((float) drag * vel.sqrMagnitude * forceScale));
-                rb.AddForce(liftVec * ((float) lift * vel.sqrMagnitude * forceScale));
-                var torque = new Vector3(0.0f, 0.0f,
-                    (90 - (float) angle) * Time.fixedDeltaTime * torqueCoef);
 
-                //  Debug.Log("Torque: " + torque.z + " angle: " + angle + " 90 - angle: " + (90-(float)angle));
-                
-                
+                windThrustDelayCounter += 1;
+                //Debug.Log(windThrustDelayCounter);
+                    rb.AddForce(-vel.normalized * ((float)drag * vel.sqrMagnitude * forceScale));
+                    rb.AddForce(liftVec * ((float)lift * vel.sqrMagnitude * forceScale));
+                    var torque = new Vector3(0.0f, 0.0f,
+                        (90 - (float)angle) * Time.fixedDeltaTime * torqueCoef);
+
+                    //Debug.Log("Torque: " + torque.z + " angle: " + angle + " 90 - angle: " + (90 - (float)angle));
+
+
                     rb.AddRelativeTorque(torque, ForceMode.Acceleration);
 
-                WindThrustDeterminer = Random.Range(0, 100);
-                if (WindThrustDeterminer > 96)
-                {
-                    
-                    rb.AddRelativeTorque(0,0,15, ForceMode.Acceleration); ;
-                    WindThrustDeterminerTimesUsed++;
-                }
-                Debug.Log(WindThrustDeterminer);
-                Debug.Log("Wind Thrust used " + WindThrustDeterminerTimesUsed + " times." );
+
+                if(windThrustDelayCounter > 80)
+                    WindThrustDeterminer = Random.Range(0, 100);
+                    if (WindThrustDeterminer > 96)
+                    {
+
+                        rb.AddRelativeTorque(0, 0, 15, ForceMode.Acceleration); ;
+                        WindThrustDeterminerTimesUsed++;
+                    }
+                    // Debug.Log(WindThrustDeterminer);
+                   
+                
             }
 
             if (State == 5)
