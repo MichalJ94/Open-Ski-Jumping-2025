@@ -85,6 +85,7 @@ namespace OpenSkiJumping.UI.JumpersMenu
             suitBottomFrontColorPicker.OnColorChange += OnValueChanged;
             suitBottomBackColorPicker.OnColorChange += OnValueChanged;
             skisColorPicker.OnColorChange += OnValueChanged;
+            
         }
 
         private void OnValueChanged()
@@ -140,6 +141,9 @@ namespace OpenSkiJumping.UI.JumpersMenu
         [SerializeField] private Image image;
         [SerializeField] private Button addButton;
         [SerializeField] private Button removeButton;
+        [SerializeField] private Slider normalHillSlider;
+        [SerializeField] private Slider largeHillSlider;
+        [SerializeField] private Slider skiFlyingHillSlider;
 
         #endregion
 
@@ -209,6 +213,13 @@ namespace OpenSkiJumping.UI.JumpersMenu
         {
             get => imagePathInput.text;
             set => imagePathInput.SetTextWithoutNotify(value);
+        }
+
+
+        public int normalHillSKill
+        {
+            get => ((int)normalHillSlider.value);
+            set => normalHillSlider.SetValueWithoutNotify(value);
         }
 
         #endregion

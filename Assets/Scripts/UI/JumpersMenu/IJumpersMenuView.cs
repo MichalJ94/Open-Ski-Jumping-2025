@@ -21,8 +21,10 @@ namespace OpenSkiJumping.UI.JumpersMenu
         string Skis { get; set; }
         string ImagePath { get; set; }
 
+       // int normalHillSkill { get; set; }
 
-        
+
+
         event Action OnSelectionChanged;
         event Action OnCurrentJumperChanged;
         event Action OnAdd;
