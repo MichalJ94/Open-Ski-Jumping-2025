@@ -21,7 +21,7 @@ namespace OpenSkiJumping.UI.JumpersMenu
         string Skis { get; set; }
         string ImagePath { get; set; }
 
-       // int normalHillSkill { get; set; }
+        int NormalHillSkill { get; set; }
 
 
 

@@ -73,6 +73,7 @@ namespace OpenSkiJumping.UI.JumpersMenu
             view.SuitBottomBack = jumper.suitBottomBackColor;
             view.Helmet = jumper.helmetColor;
             view.Skis = jumper.skisColor;
+            view.NormalHillSkill = jumper.normalHillSkill;
             view.ImagePath = jumper.imagePath;
             view.LoadImage(jumper.imagePath);
         }
@@ -95,6 +96,7 @@ namespace OpenSkiJumping.UI.JumpersMenu
             jumper.suitBottomBackColor = view.SuitBottomBack;
             jumper.helmetColor = view.Helmet;
             jumper.skisColor = view.Skis;
+            jumper.normalHillSkill = view.NormalHillSkill;
             jumper.imagePath = view.ImagePath;
             view.LoadImage(jumper.imagePath);
             jumpers.Recalculate(jumper);

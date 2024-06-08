@@ -85,6 +85,7 @@ namespace OpenSkiJumping.UI.JumpersMenu
             suitBottomFrontColorPicker.OnColorChange += OnValueChanged;
             suitBottomBackColorPicker.OnColorChange += OnValueChanged;
             skisColorPicker.OnColorChange += OnValueChanged;
+            normalHillSlider.onValueChanged.AddListener(x => OnValueChanged()); 
             
         }
 
@@ -216,7 +217,7 @@ namespace OpenSkiJumping.UI.JumpersMenu
         }
 
 
-        public int normalHillSKill
+        public int NormalHillSkill
         {
             get => ((int)normalHillSlider.value);
             set => normalHillSlider.SetValueWithoutNotify(value);
