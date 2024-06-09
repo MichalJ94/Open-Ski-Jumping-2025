@@ -99,7 +99,25 @@ namespace OpenSkiJumping.Data
             dict = new Dictionary<string, int>();
             for (var i = 0; i < data.Count; i++)
             {
+
+                if (data[i].normalHillSkill == 0)
+                {
+                    data[i].normalHillSkill = 80;
+                }
+                if (data[i].largeHillSkill == 0)
+                {
+                    data[i].largeHillSkill = 80;
+                }
+                if (data[i].skiFlyingHillSkill == 0)
+                {
+                    data[i].skiFlyingHillSkill = 80;
+                }
+
+
+
+
                 AddToDict(data[i], i);
+
             }
             return true;
         }

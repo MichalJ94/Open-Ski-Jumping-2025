@@ -63,6 +63,8 @@ namespace OpenSkiJumping.UI.JumpersMenu
 
             view.JumperInfoEnabled = true;
 
+
+
             view.FirstName = jumper.firstName;
             view.LastName = jumper.lastName;
             view.CountryCode = jumper.countryCode;
@@ -122,5 +124,7 @@ namespace OpenSkiJumping.UI.JumpersMenu
             view.SelectedJumper = jumpers.GetData().OrderBy(item => item.countryCode).First();
             PresentJumperInfo();
         }
+
+
     }
 }
