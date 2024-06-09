@@ -23,7 +23,9 @@ namespace OpenSkiJumping.UI.JumpersMenu
 
         int NormalHillSkill { get; set; }
 
+        int LargeHillSkill { get; set; }
 
+        int SkiFlyingHillSkill { get; set; }
 
         event Action OnSelectionChanged;
         event Action OnCurrentJumperChanged;

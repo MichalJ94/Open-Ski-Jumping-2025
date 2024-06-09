@@ -85,8 +85,9 @@ namespace OpenSkiJumping.UI.JumpersMenu
             suitBottomFrontColorPicker.OnColorChange += OnValueChanged;
             suitBottomBackColorPicker.OnColorChange += OnValueChanged;
             skisColorPicker.OnColorChange += OnValueChanged;
-            normalHillSlider.onValueChanged.AddListener(x => OnValueChanged()); 
-            
+            normalHillSlider.onValueChanged.AddListener(x => OnValueChanged());
+            largeHillSlider.onValueChanged.AddListener(x => OnValueChanged());
+            skiFlyingHillSlider.onValueChanged.AddListener(x => OnValueChanged());
         }
 
         private void OnValueChanged()
@@ -221,6 +222,18 @@ namespace OpenSkiJumping.UI.JumpersMenu
         {
             get => ((int)normalHillSlider.value);
             set => normalHillSlider.SetValueWithoutNotify(value);
+        }
+
+        public int LargeHillSkill
+        {
+            get => ((int)largeHillSlider.value);
+            set => largeHillSlider.SetValueWithoutNotify(value);
+        }
+
+        public int SkiFlyingHillSkill
+        {
+            get => ((int)skiFlyingHillSlider.value);
+            set => skiFlyingHillSlider.SetValueWithoutNotify(value);
         }
 
         #endregion
