@@ -58,6 +58,9 @@ namespace OpenSkiJumping.New
         private bool takeoff;
         public int totalSamples;
 
+        private int normalHillSkill;
+
+
         // public float mouseSensitivity = 2f; 
         [Space] [Header("Wind")] public Vector2 windDir;
         public float windForce;
@@ -72,6 +75,8 @@ namespace OpenSkiJumping.New
             get => state;
             private set => state = value;
         }
+
+
 
         public float Distance { get; private set; }
         public bool Landed { get; private set; }
@@ -165,6 +170,7 @@ namespace OpenSkiJumping.New
             rb.isKinematic = true;
 
             ResetValues();
+
         }
 
         public void ResetValues()
@@ -188,7 +194,7 @@ namespace OpenSkiJumping.New
             goodSamples = 0;
             windThrustDelayCounter = 0;
             torqueCoef = 0.2f;
-            WindThrustDeterminerTimesUsed = 0;
+            WindThrustDeterminerTimesUsed = 0;   
         }
 
         private bool shouldStart;
@@ -225,6 +231,7 @@ namespace OpenSkiJumping.New
 
             if (State == 2 && !takeoff)
             {
+
                 jumperAngle += Time.deltaTime * Input.GetAxis("Mouse Y") * gameConfig.Config.mouseSensitivity;
                 jumperAngle /= 1.05f;
                 jumperAngle = Mathf.Clamp(jumperAngle, -1, 1);
@@ -339,12 +346,15 @@ namespace OpenSkiJumping.New
             State = 1;
             OnStartEvent.Invoke();
             rb.isKinematic = false;
+            normalHillSkill = skiJumperDataController.GetNormalHillSkill();
+            Debug.Log("Od JumperController2 normal hill skill: " + normalHillSkill);
         }
 
         public void Jump()
         {
             takeoff = true;
             State = 2;
+
         }
 
         public void Land()

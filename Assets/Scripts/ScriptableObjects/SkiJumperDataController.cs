@@ -29,7 +29,7 @@ namespace OpenSkiJumping.ScriptableObjects
         {
             var id = resultsManager.Value.GetCurrentJumperId();
             competitor = competitors.competitors[id];
-            Debug.Log("Od SkiJumperDataController competitor.normalskill: " + competitor.normalHillSkill + "id: " + id + "normalHillSKill: " + competitor.normalHillSkill);
+            //Debug.Log("Od SkiJumperDataController competitor.normalskill: " + competitor.normalHillSkill + "id: " + id + "normalHillSKill: " + competitor.normalHillSkill);
         }
 
         public int GetNormalHillSkill()

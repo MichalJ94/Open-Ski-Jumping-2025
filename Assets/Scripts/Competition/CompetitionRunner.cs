@@ -220,7 +220,7 @@ namespace OpenSkiJumping.Competition
             var id = resultsManager.Value.GetCurrentJumperId();
             onNewJumper.Invoke();
             skiJumperDataController.SetValues(_bibColors[id]);
-            Debug.Log("Competition runner var id = resultsManager.Value.GetCurrentJumperId();  id: " + id + "normal hill skill: " + competitors.competitors[id].normalHillSkill);
+            //Debug.Log("Competition runner var id = resultsManager.Value.GetCurrentJumperId();  id: " + id + "normal hill skill: " + competitors.competitors[id].normalHillSkill);
         }
 
         public void UpdateToBeat()
