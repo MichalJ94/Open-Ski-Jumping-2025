@@ -1,6 +1,9 @@
 ﻿using System;
+using OpenSkiJumping.Competition.Persistent;
+using OpenSkiJumping.Competition.Runtime;
 using OpenSkiJumping.Data;
 using OpenSkiJumping.Jumping;
+using OpenSkiJumping.ScriptableObjects;
 using OpenSkiJumping.ScriptableObjects.Variables;
 using UnityEngine;
 using UnityEngine.Events;
@@ -13,10 +16,10 @@ namespace OpenSkiJumping.New
     {
         [Space] [Header("Flight")] public double angle;
         [SerializeField] private AudioSource audioSource;
-
         [SerializeField] private float brakeForce;
         [SerializeField] private float inrunDrag = 0.0011f;
         [SerializeField] private int windThrustDelayCounter = 0;
+        [SerializeField] private SkiJumperDataController skiJumperDataController;
         private float torqueCoef = 0f;
         private int WindThrustDeterminer;
         private int WindThrustDeterminerTimesUsed;
@@ -215,7 +218,7 @@ namespace OpenSkiJumping.New
             {
                 button0 |= Input.GetMouseButtonDown(0);
                 button1 |= Input.GetMouseButtonDown(1);
-                Debug.Log("Wind Thrust used " + WindThrustDeterminerTimesUsed + " times.");
+                //Debug.Log("Wind Thrust used " + WindThrustDeterminerTimesUsed + " times.");
                 Land();
 
             }
@@ -268,7 +271,7 @@ namespace OpenSkiJumping.New
                     jumperModel.animator.IsInTransition(0))
                 {
                     takeoff = false;
-                    Debug.Log("Total samples: " + totalSamples + ", good samples: " + goodSamples);
+                   // Debug.Log("Total samples: " + totalSamples + ", good samples: " + goodSamples);
                 }
 
                 if (OnInrun && goodSamples < totalSamples)
