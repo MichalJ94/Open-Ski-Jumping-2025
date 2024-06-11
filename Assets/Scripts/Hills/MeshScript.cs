@@ -147,6 +147,18 @@ namespace OpenSkiJumping.Hills
             jumperRotation.eulerAngles = new Vector3(0, 0, -hill.gamma);
         }
 
+        public float GetKPointInCompetition()
+        {
+            hill.SetValues(profileData.Value);
+            return hill.w;
+        }
+
+        public float GetHSInCompetition()
+        {
+            hill.SetValues(profileData.Value);
+            return hill.hS;
+        }
+
         public void GenerateMesh()
         {
             hill.SetValues(profileData.Value);

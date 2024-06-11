@@ -25,6 +25,7 @@ namespace OpenSkiJumping.Competition
         [SerializeField] private ToBeatLineController toBeatLineController;
         [SerializeField] private RuntimeJumpData jumpData;
 
+      
 
         public UnityEvent onCompetitionFinish;
 
@@ -182,21 +183,34 @@ namespace OpenSkiJumping.Competition
                 }
             }
         }
-
+        private string hillId;
+        private float storeKPoint;
+        private float storeHS;
         private void HillSetUp(GameSave save, int eventId, EventInfo currentEventInfo)
         {
-            var hillId = save.calendar.events[eventId].hillId;
+            hillId = save.calendar.events[eventId].hillId;
             hill.profileData.Value = hillsRepository.GetProfileData(hillId);
             hill.landingAreaSO = hillsFactory.landingAreas[(int) currentEventInfo.hillSurface].Value;
             var track = currentEventInfo.hillSurface == HillSurface.Matting
                 ? hill.profileData.Value.inrunData.summerTrack
                 : hill.profileData.Value.inrunData.winterTrack;
             hill.inrunTrackSO = hillsFactory.inrunTracks[(int) track].Value;
-            hill.GenerateMesh();
-
+            hill.GenerateMesh();           
             _hillInfo = hillsRepository.GetHillInfo(hillId);
             var (head, tail, gate) = compensationsJumpSimulator.GetCompensations();
             _hillInfo.SetCompensations(head, tail, gate);
+            storeHS = hill.GetHSInCompetition();
+            storeKPoint = hill.GetKPointInCompetition();
+        }
+
+        public float GetHS()
+        {
+            return storeHS;
+        }
+        
+        public float GetKPoint()
+        {
+            return storeKPoint;
         }
 
 
@@ -206,6 +220,7 @@ namespace OpenSkiJumping.Competition
             UpdateToBeat();
             onRoundStart.Invoke();
             OnSubroundStart();
+           
         }
 
         public void OnSubroundStart()
@@ -220,7 +235,7 @@ namespace OpenSkiJumping.Competition
             var id = resultsManager.Value.GetCurrentJumperId();
             onNewJumper.Invoke();
             skiJumperDataController.SetValues(_bibColors[id]);
-            //Debug.Log("Competition runner var id = resultsManager.Value.GetCurrentJumperId();  id: " + id + "normal hill skill: " + competitors.competitors[id].normalHillSkill);
+            Debug.Log("From HillSetup hillid:" + hillId + " w: ");
         }
 
         public void UpdateToBeat()

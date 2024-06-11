@@ -184,6 +184,12 @@ namespace OpenSkiJumping.Competition
             return finalResults.Values[rank];
         }
 
+       /* public int GetNHS()
+        {
+            var id = GetCurrentJumperId();
+
+        }*/
+
         public JumpResults GetResultById(int primaryId, int secondaryId)
         {
             return Results[primaryId].Results[secondaryId];

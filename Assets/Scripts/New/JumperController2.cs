@@ -1,4 +1,5 @@
 ﻿using System;
+using OpenSkiJumping.Competition;
 using OpenSkiJumping.Competition.Persistent;
 using OpenSkiJumping.Competition.Runtime;
 using OpenSkiJumping.Data;
@@ -20,6 +21,9 @@ namespace OpenSkiJumping.New
         [SerializeField] private float inrunDrag = 0.0011f;
         [SerializeField] private int windThrustDelayCounter = 0;
         [SerializeField] private SkiJumperDataController skiJumperDataController;
+        [SerializeField] private HillsRuntime hillsRepository;
+        public CompetitionRunner competitionRunner;
+        public RuntimeResultsManager resultsManager;
         private float torqueCoef = 0f;
         private int WindThrustDeterminer;
         private int WindThrustDeterminerTimesUsed;
@@ -58,7 +62,8 @@ namespace OpenSkiJumping.New
         private bool takeoff;
         public int totalSamples;
 
-        private int normalHillSkill;
+        private int skillForPresentHill;
+        private float HillSize;
 
 
         // public float mouseSensitivity = 2f; 
@@ -343,11 +348,13 @@ namespace OpenSkiJumping.New
         public void Gate()
         {
             if (State != 0) return;
+            HillSize = competitionRunner.GetHS();
+            skillForPresentHill = skiJumperDataController.GetSkill(HillSize);
+            Debug.Log("Od JumperController2 skill for present hill: " + skillForPresentHill + " HillSize: " + HillSize);
             State = 1;
             OnStartEvent.Invoke();
             rb.isKinematic = false;
-            normalHillSkill = skiJumperDataController.GetNormalHillSkill();
-            Debug.Log("Od JumperController2 normal hill skill: " + normalHillSkill);
+
         }
 
         public void Jump()
