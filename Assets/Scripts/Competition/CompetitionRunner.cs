@@ -235,7 +235,7 @@ namespace OpenSkiJumping.Competition
             var id = resultsManager.Value.GetCurrentJumperId();
             onNewJumper.Invoke();
             skiJumperDataController.SetValues(_bibColors[id]);
-            Debug.Log("From HillSetup hillid:" + hillId + " storeHS: " + storeHS);
+           // Debug.Log("From HillSetup hillid:" + hillId + " storeHS: " + storeHS);
         }
 
         public void UpdateToBeat()

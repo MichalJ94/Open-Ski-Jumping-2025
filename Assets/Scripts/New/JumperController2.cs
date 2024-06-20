@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using OpenSkiJumping.Competition;
 using OpenSkiJumping.Competition.Persistent;
 using OpenSkiJumping.Competition.Runtime;
@@ -331,7 +332,7 @@ namespace OpenSkiJumping.New
                         rb.AddRelativeTorque(0, 0, 15, ForceMode.Acceleration); ;
                         WindThrustDeterminerTimesUsed++;
                     }
-                    // Debug.Log(WindThrustDeterminer);
+                    //Debug.Log(WindThrustDeterminer);
                    
                 
             }
@@ -350,9 +351,9 @@ namespace OpenSkiJumping.New
             if (State != 0) return;
             hillSize = competitionRunner.GetHS();
            skillForPresentHill = skiJumperDataController.GetSkill(hillSize);
-            Debug.Log("Od JumperController2 skill for present hill: " + skillForPresentHill + " HillSize: " + hillSize);
             State = 1;
             OnStartEvent.Invoke();
+            UnityEngine.Debug.Log("skillforpresenthill" + skillForPresentHill);
             rb.isKinematic = false;
 
         }
