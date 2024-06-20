@@ -14,6 +14,7 @@ namespace OpenSkiJumping.ScriptableObjects
         public RuntimeCompetitorsList competitors;
         public Material helmetMaterial;
         public JumperController2 jumperController;
+        public CompetitionRunner competitionRunner;
         public JumperModel jumperFemale;
         public JumperModel jumperMale;
         public RuntimeResultsManager resultsManager;
@@ -37,6 +38,22 @@ namespace OpenSkiJumping.ScriptableObjects
             var id = resultsManager.Value.GetCurrentJumperId();
             competitor = competitors.competitors[id];
             return competitor.normalHillSkill;
+        }
+
+        public int GetSkill(float hillsize)
+        {
+            var id = resultsManager.Value.GetCurrentJumperId();
+            competitor = competitors.competitors[id];
+            if (hillsize < 115)
+            {
+                return competitor.normalHillSkill;
+            }
+            if (hillsize >= 115 && hillsize < 160)
+            {
+                return competitor.largeHillSkill;
+            }
+            return competitor.skiFlyingHillSkill;
+                    
         }
 
         public void SetValues(Color bibColor)

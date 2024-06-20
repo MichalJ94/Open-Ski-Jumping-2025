@@ -63,7 +63,7 @@ namespace OpenSkiJumping.New
         public int totalSamples;
 
         private int skillForPresentHill;
-        private float HillSize;
+        private float hillSize;
 
 
         // public float mouseSensitivity = 2f; 
@@ -348,9 +348,9 @@ namespace OpenSkiJumping.New
         public void Gate()
         {
             if (State != 0) return;
-            HillSize = competitionRunner.GetHS();
-            skillForPresentHill = skiJumperDataController.GetSkill(HillSize);
-            Debug.Log("Od JumperController2 skill for present hill: " + skillForPresentHill + " HillSize: " + HillSize);
+            hillSize = competitionRunner.GetHS();
+           skillForPresentHill = skiJumperDataController.GetSkill(hillSize);
+            Debug.Log("Od JumperController2 skill for present hill: " + skillForPresentHill + " HillSize: " + hillSize);
             State = 1;
             OnStartEvent.Invoke();
             rb.isKinematic = false;

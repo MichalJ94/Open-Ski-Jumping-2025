@@ -12,6 +12,7 @@ namespace OpenSkiJumping.Hills
         public float w;
         public float h;
         public float n;
+        public float hS;
 
         public float gamma, alpha;
         public float gammaR, alphaR;
@@ -52,6 +53,7 @@ namespace OpenSkiJumping.Hills
             w = profileData.w;
             h = profileData.h;
             n = profileData.n;
+            hS = profileData.hS;
             gamma = profileData.gamma;
             alpha = profileData.alpha;
             gammaR = Mathf.Deg2Rad * gamma;
@@ -291,6 +293,12 @@ namespace OpenSkiJumping.Hills
         {
             return (A - B) * (nr - 1) / (gates - 1) + B;
         }
+
+        public float GetHSInCompetition()
+        {
+            return hS;
+        }
+
 
     }
 }
