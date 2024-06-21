@@ -23,6 +23,7 @@ namespace OpenSkiJumping.New
         [SerializeField] private int windThrustDelayCounter = 0;
         [SerializeField] private SkiJumperDataController skiJumperDataController;
         [SerializeField] private HillsRuntime hillsRepository;
+        [SerializeField] private int WindThrustDelayCap = 80;
         public CompetitionRunner competitionRunner;
         public RuntimeResultsManager resultsManager;
         private float torqueCoef = 0f;
@@ -39,6 +40,7 @@ namespace OpenSkiJumping.New
         private bool judged;
 
         public JudgesController judgesController;
+        public GameplayExtension gameplayExtension;
         public float jumperAngle;
 
         public JumperModel jumperModel;
@@ -189,6 +191,7 @@ namespace OpenSkiJumping.New
             rb.isKinematic = true;
             jumperModel.GetComponent<Transform>().localPosition = new Vector3();
             jumperAngle = 1;
+            inrunDrag = 0.0011f;
             button0 = button1 = false;
             rSkiClone.SetActive(false);
             lSkiClone.SetActive(false);
@@ -199,7 +202,7 @@ namespace OpenSkiJumping.New
             takeoff = false;
             goodSamples = 0;
             windThrustDelayCounter = 0;
-            torqueCoef = 0.2f;
+            torqueCoef = 0f;
             WindThrustDeterminerTimesUsed = 0;   
         }
 
@@ -304,14 +307,17 @@ namespace OpenSkiJumping.New
             if (State == 2 && !takeoff)
             {
 
-
+                // Torquecoef to zmienna która determinuje ile skoczek dostanie rotacji w tył w każdej klatce. Wartość początkowa to 0 po to, żeby skoczka zaraz na progu tak nie odchylało do tyłu,
+                // Potem wartość ta rośnie trochę każdą klatką.
 
                 if (torqueCoef < 0.5)
                 {
-                    torqueCoef += 0.01f;
+                    torqueCoef += 0.005f;
                 }
 
+
                 windThrustDelayCounter += 1;
+                
                 //Debug.Log(windThrustDelayCounter);
                     rb.AddForce(-vel.normalized * ((float)drag * vel.sqrMagnitude * forceScale));
                     rb.AddForce(liftVec * ((float)lift * vel.sqrMagnitude * forceScale));
@@ -324,8 +330,9 @@ namespace OpenSkiJumping.New
                     rb.AddRelativeTorque(torque, ForceMode.Acceleration);
 
 
-                if(windThrustDelayCounter > 80)
-                    WindThrustDeterminer = Random.Range(0, 100);
+                if(windThrustDelayCounter > WindThrustDelayCap)
+                 //   UnityEngine.Debug.Log("Wind thrust delay counter: " + windThrustDelayCounter + "torqueCoef" + torqueCoef);
+                WindThrustDeterminer = Random.Range(0, 100);
                     if (WindThrustDeterminer > 96)
                     {
 
@@ -351,6 +358,7 @@ namespace OpenSkiJumping.New
             if (State != 0) return;
             hillSize = competitionRunner.GetHS();
            skillForPresentHill = skiJumperDataController.GetSkill(hillSize);
+           inrunDrag += gameplayExtension.inrunDragModifier(skillForPresentHill);
             State = 1;
             OnStartEvent.Invoke();
             UnityEngine.Debug.Log("skillforpresenthill" + skillForPresentHill);

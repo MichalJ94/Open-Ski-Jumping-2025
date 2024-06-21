@@ -4,15 +4,16 @@ using UnityEngine;
 
 namespace OpenSkiJumping
 {
+    [CreateAssetMenu]
     public class GameplayExtension : ScriptableObject
     {
         // Start is called before the first frame update
 
         public float inrunDragModifier (int skill)
         {
-            float addition = 0.0005f;
-
-            return addition;
+            float modifier = 0.00001f;
+            return (80-skill)*modifier;
+             
         }
 
 
