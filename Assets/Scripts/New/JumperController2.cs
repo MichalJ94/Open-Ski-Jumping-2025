@@ -29,6 +29,7 @@ namespace OpenSkiJumping.New
         private float torqueCoef = 0f;
         private int WindThrustDeterminer;
         private int WindThrustDeterminerTimesUsed;
+        private float forceScaleModifier;
 
         bool button0, button1;
         private bool deductedforlanding;
@@ -47,7 +48,7 @@ namespace OpenSkiJumping.New
 
 
         [Space] [Header("Parameters")] public float jumpSpeed;
-        [SerializeField] private float forceScale = 1f;
+        [SerializeField] private float forceScale = 1.4f;
 
         private int landing;
         public double lift = 0.001d;
@@ -191,7 +192,7 @@ namespace OpenSkiJumping.New
             rb.isKinematic = true;
             jumperModel.GetComponent<Transform>().localPosition = new Vector3();
             jumperAngle = 1;
-            inrunDrag = 0.0011f;
+           // inrunDrag = 0.0011f;
             button0 = button1 = false;
             rSkiClone.SetActive(false);
             lSkiClone.SetActive(false);
@@ -203,6 +204,7 @@ namespace OpenSkiJumping.New
             goodSamples = 0;
             windThrustDelayCounter = 0;
             torqueCoef = 0f;
+            forceScale += forceScaleModifier;
             WindThrustDeterminerTimesUsed = 0;   
         }
 
@@ -358,10 +360,12 @@ namespace OpenSkiJumping.New
             if (State != 0) return;
             hillSize = competitionRunner.GetHS();
            skillForPresentHill = skiJumperDataController.GetSkill(hillSize);
-           inrunDrag += gameplayExtension.inrunDragModifier(skillForPresentHill);
+           // inrunDrag += gameplayExtension.inrunDragModifier(skillForPresentHill);
+            forceScaleModifier = gameplayExtension.forceScaleModifier(skillForPresentHill);
+            forceScale -= forceScaleModifier;
             State = 1;
             OnStartEvent.Invoke();
-            UnityEngine.Debug.Log("skillforpresenthill" + skillForPresentHill);
+            UnityEngine.Debug.Log("skillforpresenthill: " + skillForPresentHill + " force at gate: " + forceScale);
             rb.isKinematic = false;
 
         }

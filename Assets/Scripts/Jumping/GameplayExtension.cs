@@ -9,13 +9,20 @@ namespace OpenSkiJumping
     {
         // Start is called before the first frame update
 
-        public float inrunDragModifier (int skill)
+        /*public float inrunDragModifier (int skill)
         {
-            float modifier = 0.00001f;
+            float modifier = 0.000005f;
             return (80-skill)*modifier;
              
-        }
+        }*/
 
+
+        public float forceScaleModifier(int skill)
+        {
+            float modifier = 0.008f;
+            return (80 - skill) * modifier;
+
+        }
 
     }
 }
