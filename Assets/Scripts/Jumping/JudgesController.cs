@@ -182,7 +182,7 @@ namespace OpenSkiJumping.Jumping
         public void OnSpeedMeasurement(float speed)
         {
             jumpData.Speed = (decimal) speed * 3.6m;
-            Debug.Log("Od JudgesController jumpdata.Speed: " + jumpData.Speed);
+           //Debug.Log("Od JudgesController jumpdata.Speed: " + jumpData.Speed);
             onSpeedMeasurement.Invoke();
         }
 

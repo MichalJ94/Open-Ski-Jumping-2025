@@ -30,6 +30,7 @@ namespace OpenSkiJumping.New
         private int WindThrustDeterminer;
         private int WindThrustDeterminerTimesUsed;
         private float forceScaleModifier;
+        
 
         bool button0, button1;
         private bool deductedforlanding;
@@ -42,6 +43,7 @@ namespace OpenSkiJumping.New
 
         public JudgesController judgesController;
         public GameplayExtension gameplayExtension;
+        public RuntimeJumpData jumpData;
         public float jumperAngle;
 
         public JumperModel jumperModel;
@@ -78,6 +80,7 @@ namespace OpenSkiJumping.New
         private static readonly int DownForce = Animator.StringToHash("DownForce");
         private static readonly int JumperAngle = Animator.StringToHash("JumperAngle");
         private static readonly int Landing = Animator.StringToHash("Landing");
+        private static readonly int InitiateStruggleLanding = Animator.StringToHash("InitiateStruggleLanding");
 
         public int State
         {
@@ -108,6 +111,14 @@ namespace OpenSkiJumping.New
             {
                 judgesController.OnDistanceMeasurement((jumperModel.distCollider1.transform.position +
                                                         jumperModel.distCollider2.transform.position) / 2.0f);
+                UnityEngine.Debug.Log("Teraz pokazuję jumpData.distance od OnTriggerEnter: " + jumpData.Distance);
+
+                if(jumpData.Distance > 100)
+                {
+                    jumperModel.animator.SetInteger(InitiateStruggleLanding, 1);
+                    UnityEngine.Debug.Log("Teraz dałem InitStruggleLanding na 1");
+                }
+
 
                 if (!jumperModel.animator.GetCurrentAnimatorStateInfo(0).IsName("Pre-landing"))
                 {
@@ -116,6 +127,8 @@ namespace OpenSkiJumping.New
 
                 Landed = true;
                 State = 4;
+                UnityEngine.Debug.Log("A teraz Landing jest state 4");
+
             }
         }
 
@@ -129,6 +142,7 @@ namespace OpenSkiJumping.New
 
             if (other.CompareTag("LandingArea"))
             {
+                UnityEngine.Debug.Log("Teraz jestem na OnTriggerExit i LandingArea");
                 OnOutrun = false;
             }
         }
@@ -149,6 +163,7 @@ namespace OpenSkiJumping.New
                 //     Crash();
                 //     Landed = true;
                 // }
+
 
                 if (!jumperModel.animator.GetCurrentAnimatorStateInfo(0).IsName("Pre-landing"))
                 {
@@ -188,6 +203,7 @@ namespace OpenSkiJumping.New
             jumperModel.animator.SetBool(JumperCrash, false);
             jumperModel.animator.SetInteger(JumperState, State);
             jumperModel.animator.SetFloat(DownForce, 0f);
+            jumperModel.animator.SetInteger(InitiateStruggleLanding, 0);
             Landed = false;
             rb.isKinematic = true;
             jumperModel.GetComponent<Transform>().localPosition = new Vector3();
@@ -379,6 +395,7 @@ namespace OpenSkiJumping.New
 
         public void Land()
         {
+           // UnityEngine.Debug.Log("A teraz executowana jest funkcja Land()");
             var anglesZ = rb.transform.rotation.eulerAngles.z;
             anglesZ = (anglesZ + 180) % 360 - 180;
             if (Landed)
@@ -387,7 +404,10 @@ namespace OpenSkiJumping.New
             }
 
             State = 3;
+         
+           
             landing = 1;
+        
             jumperModel.animator.SetFloat(Landing, 1);
             if (button0 && button1)
             {
@@ -400,6 +420,7 @@ namespace OpenSkiJumping.New
                 judgesController.PointDeduction(1, 1m);
                 landing = -1;
             }
+            
         }
 
         public void Crash()
