@@ -115,8 +115,21 @@ namespace OpenSkiJumping.New
 
                 if(jumpData.Distance > 100)
                 {
-                    jumperModel.animator.SetInteger(InitiateStruggleLanding, 1);
-                    UnityEngine.Debug.Log("Teraz dałem InitStruggleLanding na 1");
+                    if (landing == 1)//jumper attempted telemark
+                    {
+                        jumperModel.animator.SetFloat(InitiateStruggleLanding, 1);
+                        UnityEngine.Debug.Log("Teraz dałem InitStruggleLanding na 2");
+                    }
+                    if (landing == -1)//if the jumper attempted to land on twolegs
+                    {
+                        jumperModel.animator.SetFloat(InitiateStruggleLanding, 2);
+                        UnityEngine.Debug.Log("Teraz dałem InitStruggleLanding na 1");
+                    }
+                }
+                else if(landing != -1)
+                {
+                    //Telemark finish//
+                    jumperModel.animator.SetFloat(Landing, 2f);
                 }
 
 
@@ -203,7 +216,8 @@ namespace OpenSkiJumping.New
             jumperModel.animator.SetBool(JumperCrash, false);
             jumperModel.animator.SetInteger(JumperState, State);
             jumperModel.animator.SetFloat(DownForce, 0f);
-            jumperModel.animator.SetInteger(InitiateStruggleLanding, 0);
+            jumperModel.animator.SetFloat(Landing, 0f);
+            jumperModel.animator.SetFloat(InitiateStruggleLanding, 0);
             Landed = false;
             rb.isKinematic = true;
             jumperModel.GetComponent<Transform>().localPosition = new Vector3();
@@ -241,7 +255,7 @@ namespace OpenSkiJumping.New
             }
 
             jumperModel.animator.SetInteger(JumperState, State);
-
+            UnityEngine.Debug.Log("Landing: " + landing + "InititiateStruggleLanding" + InitiateStruggleLanding);
             if (State == 1 && Input.GetMouseButtonDown(0))
             {
                 Jump();
