@@ -30,9 +30,10 @@ namespace OpenSkiJumping.New
         private int WindThrustDeterminer;
         private int WindThrustDeterminerTimesUsed;
         private float forceScaleModifier;
-        
+
 
         bool button0, button1;
+        public bool willFall;
         private bool deductedforlanding;
         public float dirChange;        
         public double drag = 0.001d;
@@ -114,7 +115,7 @@ namespace OpenSkiJumping.New
             {
                 judgesController.OnDistanceMeasurement((jumperModel.distCollider1.transform.position +
                                                         jumperModel.distCollider2.transform.position) / 2.0f);
-                UnityEngine.Debug.Log("Teraz pokazuję jumpData.distance od OnTriggerEnter: " + jumpData.Distance);
+               // UnityEngine.Debug.Log("Teraz pokazuję jumpData.distance od OnTriggerEnter: " + jumpData.Distance);
 
                 ProcessLanding();
 
@@ -128,7 +129,7 @@ namespace OpenSkiJumping.New
 
                 Landed = true;
                 State = 4;
-                UnityEngine.Debug.Log("A teraz Landing jest state 4");
+                //UnityEngine.Debug.Log("A teraz Landing jest state 4");
 
             }
         }
@@ -137,15 +138,118 @@ namespace OpenSkiJumping.New
         {
             if ((float)jumpData.Distance > hillSize)
             {
-                float distanceOverHS = (float)jumpData.Distance - hillSize;
-                float percentOfHS = ((float)jumpData.Distance/hillSize)*100;
-                UnityEngine.Debug.Log("percentOfHS: " + percentOfHS);
+                float ofHS = ((float)jumpData.Distance/hillSize);
+                UnityEngine.Debug.Log("ofHS: " + ofHS);
+
                 if (landing == 1)//jumper attempted telemark
+                {
+                    if (ofHS > 1.07f)
+                    {
+                        Crash();
+                    }
+                    else
+                    {
+                        float saveFromStruggle = Random.Range(1, 1.04f);
+                        float saveFromFall = Random.Range(1.04f, 1.07f);
+                        UnityEngine.Debug.Log("saveFromStruggle: " + saveFromStruggle + " saveFromFall: " + saveFromFall);
+
+                        if (ofHS > saveFromStruggle)
+                        {
+                            jumperModel.animator.SetFloat(InitiateStruggleLanding, 1);
+                            initiateStruggleLanding = 1;
+                            if(saveFromFall > ofHS)
+                            {
+                                judgesController.PointDeduction(1, 2);
+                                struggleToCrash = 0;
+                            }
+                            else
+                            {
+                                struggleToCrash = 1;
+                            }
+                        }
+                      /*  if(ofHS > saveFromFall && initiateStruggleLanding == 1)
+                        {
+                            struggleToCrash = 1;
+                            judgesController.PointDeduction(1, 2);
+                        }*/
+                    }
+
+                   /* jumperModel.animator.SetFloat(InitiateStruggleLanding, 1);
+                    initiateStruggleLanding = 1;
+                    //UnityEngine.Debug.Log("Teraz dałem InitStruggleLanding na 1");
+                    struggleToCrash = 1;
+                    judgesController.PointDeduction(1, 2);*/
+                }
+
+
+
+                if (landing == -1)//if the jumper attempted to land on twolegs
+                {
+                    if (ofHS > 1.1f)
+                    {
+                        Crash();
+                    }
+                    else { 
+
+                    float saveFromStruggle = Random.Range(1, 1.06f);
+                    float saveFromFall = Random.Range(1.06f, 1.10f);
+                    UnityEngine.Debug.Log("saveFromStruggle: " + saveFromStruggle + " saveFromFall: " + saveFromFall);
+
+                        if (ofHS > saveFromStruggle)
+                        {
+                            jumperModel.animator.SetFloat(InitiateStruggleLanding, 2);
+                            initiateStruggleLanding = 1;
+                            if (saveFromFall > ofHS)
+                            {
+                                judgesController.PointDeduction(1, 2);
+                                struggleToCrash = 0;
+                            }
+                            else
+                            {
+                                struggleToCrash = 2;
+                            }
+                        }
+
+
+                    }
+
+
+                }
+
+                /*
+
+                if (landing == -1)//if the jumper attempted to land on twolegs
+                {
+                    if (ofHS > 1.1f)
+                    {
+                        Crash();
+                    }
+                    else
+                    {
+                        float saveFromFalling = Random.Range(1, 1.1f);
+                        UnityEngine.Debug.Log("saveFromFalling: " + saveFromFalling);
+
+
+                    }
+                    jumperModel.animator.SetFloat(InitiateStruggleLanding, 2);
+                    initiateStruggleLanding = 2;
+                    // UnityEngine.Debug.Log("Teraz dałem InitStruggleLanding na 2");
+                    judgesController.PointDeduction(1, 3);
+
+                }
+
+                */
+
+
+
+
+
+             /*   if (landing == 1)//jumper attempted telemark
                 {
                     
                     jumperModel.animator.SetFloat(InitiateStruggleLanding, 1);
                     initiateStruggleLanding = 1;
-                    UnityEngine.Debug.Log("Teraz dałem InitStruggleLanding na 1");
+                    //UnityEngine.Debug.Log("Teraz dałem InitStruggleLanding na 1");
                     struggleToCrash = 1;
                     judgesController.PointDeduction(1, 2);
                 }
@@ -153,9 +257,9 @@ namespace OpenSkiJumping.New
                 {
                     jumperModel.animator.SetFloat(InitiateStruggleLanding, 2);
                     initiateStruggleLanding = 2;
-                    UnityEngine.Debug.Log("Teraz dałem InitStruggleLanding na 2");
+                   // UnityEngine.Debug.Log("Teraz dałem InitStruggleLanding na 2");
                     judgesController.PointDeduction(1, 3);
-                }
+                }*/
             }
             else if (landing != -1)
             {
@@ -174,7 +278,7 @@ namespace OpenSkiJumping.New
 
             if (other.CompareTag("LandingArea"))
             {
-                UnityEngine.Debug.Log("Teraz jestem na OnTriggerExit i LandingArea");
+               // UnityEngine.Debug.Log("Teraz jestem na OnTriggerExit i LandingArea");
                 OnOutrun = false;
             }
         }
@@ -238,6 +342,7 @@ namespace OpenSkiJumping.New
             jumperModel.animator.SetFloat(InitiateStruggleLanding, 0f);
             initiateStruggleLanding = 0;
             struggleToCrash = 0;
+            willFall = false;
             Landed = false;
             rb.isKinematic = true;
             jumperModel.GetComponent<Transform>().localPosition = new Vector3();
@@ -275,7 +380,7 @@ namespace OpenSkiJumping.New
             }
 
             jumperModel.animator.SetInteger(JumperState, State);
-            UnityEngine.Debug.Log( "InititiateStruggleLanding " + initiateStruggleLanding);
+           // UnityEngine.Debug.Log( "InititiateStruggleLanding " + initiateStruggleLanding);
             if (State == 1 && Input.GetMouseButtonDown(0))
             {
                 Jump();
@@ -493,12 +598,11 @@ namespace OpenSkiJumping.New
             rSkiClone.GetComponent<Transform>().position = jumperModel.skiRight.GetComponent<Transform>().position;
             rSkiClone.GetComponent<Transform>().rotation = jumperModel.skiRight.GetComponent<Transform>().rotation;
 
-            if (struggleToCrash != 0)
+            /*if (struggleToCrash != 0)
             {
                 lSkiClone.GetComponent<Rigidbody>().velocity = rb.velocity * 5f;
-                lSkiClone.GetComponent<Transform>().position = jumperModel.skiLeft.GetComponent<Transform>().position;
-                lSkiClone.GetComponent<Transform>().rotation = jumperModel.skiLeft.GetComponent<Transform>().rotation;
-            }
+                lSkiClone.GetComponent<Transform>().position += new Vector3(4, 4);          
+            }*/
 
             judgesController.PointDeduction(2, 7);
             if (!judged)
