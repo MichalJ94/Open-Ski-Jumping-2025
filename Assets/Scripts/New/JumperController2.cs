@@ -115,7 +115,10 @@ namespace OpenSkiJumping.New
             {
                 judgesController.OnDistanceMeasurement((jumperModel.distCollider1.transform.position +
                                                         jumperModel.distCollider2.transform.position) / 2.0f);
-               // UnityEngine.Debug.Log("Teraz pokazuję jumpData.distance od OnTriggerEnter: " + jumpData.Distance);
+                // UnityEngine.Debug.Log("Teraz pokazuję jumpData.distance od OnTriggerEnter: " + jumpData.Distance);
+
+
+                ReducePointsForShorterJump();
 
                 ProcessLanding();
 
@@ -131,6 +134,25 @@ namespace OpenSkiJumping.New
                 State = 4;
                 //UnityEngine.Debug.Log("A teraz Landing jest state 4");
 
+            }
+        }
+
+        private void ReducePointsForShorterJump()
+        {
+            if ((float)jumpData.Distance < hillSize * 0.95)
+            {
+                judgesController.PointDeduction(1, 0.5m);
+                UnityEngine.Debug.Log("Redukcja punktów za krótki skok 0.95");
+            }
+            if ((float)jumpData.Distance < hillSize * 0.85)
+            {
+                judgesController.PointDeduction(1, 0.5m);
+                UnityEngine.Debug.Log("Redukcja punktów za krótki skok 0.85");
+            }
+            if ((float)jumpData.Distance < hillSize * 0.75)
+            {
+                judgesController.PointDeduction(1, 1);
+                UnityEngine.Debug.Log("Redukcja punktów za krótki skok 0.75");
             }
         }
 
@@ -165,6 +187,7 @@ namespace OpenSkiJumping.New
                             else
                             {
                                 struggleToCrash = 1;
+                                jumperModel.animator.SetFloat(StruggleToCrash, 1);
                             }
                         }
                       /*  if(ofHS > saveFromFall && initiateStruggleLanding == 1)
@@ -207,11 +230,15 @@ namespace OpenSkiJumping.New
                             else
                             {
                                 struggleToCrash = 2;
+                                jumperModel.animator.SetFloat(StruggleToCrash, 2);
                             }
                         }
 
 
                     }
+
+
+
 
 
                 }
@@ -340,6 +367,7 @@ namespace OpenSkiJumping.New
             jumperModel.animator.SetInteger(JumperState, State);
             jumperModel.animator.SetFloat(DownForce, 0f);
             jumperModel.animator.SetFloat(InitiateStruggleLanding, 0f);
+            jumperModel.animator.SetFloat(StruggleToCrash, 0f);
             initiateStruggleLanding = 0;
             struggleToCrash = 0;
             willFall = false;
@@ -380,7 +408,7 @@ namespace OpenSkiJumping.New
             }
 
             jumperModel.animator.SetInteger(JumperState, State);
-           // UnityEngine.Debug.Log( "InititiateStruggleLanding " + initiateStruggleLanding);
+           //UnityEngine.Debug.Log( "State: " + state + " struggleToCrash: " + struggleToCrash);
             if (State == 1 && Input.GetMouseButtonDown(0))
             {
                 Jump();
@@ -565,7 +593,7 @@ namespace OpenSkiJumping.New
 
             if (landing == 0)
             {
-                judgesController.PointDeduction(1, 1m);
+                judgesController.PointDeduction(1, 1);
                 landing = -1;
             }
             
@@ -575,6 +603,18 @@ namespace OpenSkiJumping.New
         {
             if (State == 3)
             {
+                judgesController.PointDeduction(1, 5);
+            }
+            else
+            {
+                judgesController.PointDeduction(1, 5);
+                judgesController.PointDeduction(0, 5);
+            }
+
+
+            /*
+                         if (State == 3)
+            {
                 judgesController.PointDeduction(1, 3);
             }
             else
@@ -582,6 +622,7 @@ namespace OpenSkiJumping.New
                 judgesController.PointDeduction(1, 5);
                 judgesController.PointDeduction(0, 5);
             }
+*/
 
             //Na plecy i na brzuch
             //State = ;
@@ -604,7 +645,11 @@ namespace OpenSkiJumping.New
                 lSkiClone.GetComponent<Transform>().position += new Vector3(4, 4);          
             }*/
 
-            judgesController.PointDeduction(2, 7);
+            if (struggleToCrash == 0)
+            {
+                judgesController.PointDeduction(2, 4);
+            }
+
             if (!judged)
             {
                 judgesController.Judge();

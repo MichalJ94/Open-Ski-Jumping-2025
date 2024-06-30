@@ -15,11 +15,11 @@ E:/Unity Projects/OSJ
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-63173
+55838
 Successfully changed project path to: E:/Unity Projects/OSJ
 E:/Unity Projects/OSJ
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 81.22 ms, found 1 plugins.
+Refreshing native plugins compatible for Editor in 82.71 ms, found 1 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2020.3.2f1 (8fd9074bf66c)
 [Subsystems] Discovering subsystems at path E:/Unity/2020.3.2f1/Editor/Data/Resources/UnitySubsystems
@@ -36,121 +36,177 @@ Initialize mono
 Mono path[0] = 'E:/Unity/2020.3.2f1/Editor/Data/Managed'
 Mono path[1] = 'E:/Unity/2020.3.2f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'E:/Unity/2020.3.2f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56236
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56456
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: E:/Unity/2020.3.2f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.000814 seconds.
+Registered in 0.001042 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 83.42 ms, found 1 plugins.
+Refreshing native plugins compatible for Editor in 99.73 ms, found 1 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.810 seconds
+- Completed reload, in  0.829 seconds
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.004420 seconds.
+Registered in 0.004482 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 86.05 ms, found 1 plugins.
+Refreshing native plugins compatible for Editor in 101.92 ms, found 1 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.591 seconds
+- Completed reload, in  1.760 seconds
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
-Refreshing native plugins compatible for Editor in 1.10 ms, found 1 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.07 seconds
+Refreshing native plugins compatible for Editor in 1.16 ms, found 1 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 4017 Unused Serialized files (Serialized files now loaded: 0)
 System memory in use before: 197.3 MB.
 System memory in use after: 197.5 MB.
 
 Unloading 46 unused Assets to reduce memory usage. Loaded Objects now: 4446.
-Total: 3.792800 ms (FindLiveObjects: 0.568700 ms CreateObjectMapping: 0.282300 ms MarkObjects: 2.845000 ms  DeleteObjects: 0.095400 ms)
+Total: 4.138200 ms (FindLiveObjects: 0.838000 ms CreateObjectMapping: 0.289200 ms MarkObjects: 2.905700 ms  DeleteObjects: 0.102400 ms)
 
 ========================================================================
 Received Import Request.
   path: Assets/Scripts/New/JumperController2.cs
   artifactKey: Guid(8133b6b165698fd9f8e5d57843a8a16c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/New/JumperController2.cs using Guid(8133b6b165698fd9f8e5d57843a8a16c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '01d3a08051f3c9ebd96170aea888a716') in 0.020560 seconds
-  Import took 0.027109 seconds .
+Start importing Assets/Scripts/New/JumperController2.cs using Guid(8133b6b165698fd9f8e5d57843a8a16c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '389b4acf9686d929b153a450a81a6627') in 0.026299 seconds
+  Import took 0.034181 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 20.774635 seconds.
+  path: Assets/Scripts/New/JumperController2.cs
+  artifactKey: Guid(8133b6b165698fd9f8e5d57843a8a16c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/New/JumperController2.cs using Guid(8133b6b165698fd9f8e5d57843a8a16c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b4f0199eaf2063c2ca1502ee828da24c') in 0.001593 seconds
+  Import took 0.009358 seconds .
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.004442 seconds.
+Registered in 0.004326 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.00 ms, found 1 plugins.
+Refreshing native plugins compatible for Editor in 1.11 ms, found 1 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.895 seconds
+- Completed reload, in  0.997 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 1.08 ms, found 1 plugins.
+Refreshing native plugins compatible for Editor in 1.11 ms, found 1 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 3831 Unused Serialized files (Serialized files now loaded: 0)
 System memory in use before: 182.8 MB.
 System memory in use after: 183.1 MB.
 
 Unloading 37 unused Assets to reduce memory usage. Loaded Objects now: 4449.
-Total: 2.840300 ms (FindLiveObjects: 0.422800 ms CreateObjectMapping: 0.141100 ms MarkObjects: 2.250600 ms  DeleteObjects: 0.025000 ms)
+Total: 3.757100 ms (FindLiveObjects: 0.607100 ms CreateObjectMapping: 0.192600 ms MarkObjects: 2.920500 ms  DeleteObjects: 0.034000 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003825 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.21 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.172 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.24 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3831 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 182.9 MB.
+System memory in use after: 183.1 MB.
+
+Unloading 37 unused Assets to reduce memory usage. Loaded Objects now: 4452.
+Total: 3.824800 ms (FindLiveObjects: 0.460500 ms CreateObjectMapping: 0.229500 ms MarkObjects: 3.097100 ms  DeleteObjects: 0.036200 ms)
 
 ========================================================================
 Received Import Request.
-  Time since last request: 2628.303746 seconds.
-  path: Assets/Models/Characters/jumper.blend
-  artifactKey: Guid(ec88853131076a0b6becbfc9185550b6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/Characters/jumper.blend using Guid(ec88853131076a0b6becbfc9185550b6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '37952132627370a4ea5526552e07338e') in 0.335706 seconds
-  Import took 0.343595 seconds .
+  Time since last request: 161.265808 seconds.
+  path: Assets/Scripts/New/JumperController2.cs
+  artifactKey: Guid(8133b6b165698fd9f8e5d57843a8a16c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/New/JumperController2.cs using Guid(8133b6b165698fd9f8e5d57843a8a16c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dac1bf8ad8e6594db75ec7bc5cbd1205') in 0.006567 seconds
+  Import took 0.014932 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.006563 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.19 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.025 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.03 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3831 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 182.9 MB.
+System memory in use after: 183.2 MB.
+
+Unloading 37 unused Assets to reduce memory usage. Loaded Objects now: 4455.
+Total: 3.566100 ms (FindLiveObjects: 0.492000 ms CreateObjectMapping: 0.296200 ms MarkObjects: 2.743600 ms  DeleteObjects: 0.033000 ms)
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000252 seconds.
-  path: Assets/Models/Characters/jumper.fbx
-  artifactKey: Guid(f177184af19f72c8ca39a27549ba2472) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/Characters/jumper.fbx using Guid(f177184af19f72c8ca39a27549ba2472) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '708189faeac4c39bf3fce5d72bf26d78') in 0.078846 seconds
-  Import took 0.085601 seconds .
+  Time since last request: 11.058872 seconds.
+  path: Assets/Scripts/New/JumperController2.cs
+  artifactKey: Guid(8133b6b165698fd9f8e5d57843a8a16c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/New/JumperController2.cs using Guid(8133b6b165698fd9f8e5d57843a8a16c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ddebeb40ea58b9469f61d7d59fd865b6') in 0.006214 seconds
+  Import took 0.013111 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 74.674085 seconds.
-  path: Assets/Models/Characters/jumper.blend
-  artifactKey: Guid(ec88853131076a0b6becbfc9185550b6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/Characters/jumper.blend using Guid(ec88853131076a0b6becbfc9185550b6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e070d5f846cc2d18b7630452fe7f588a') in 0.098916 seconds
-  Import took 0.107302 seconds .
+  Time since last request: 0.024906 seconds.
+  path: Assets/Scripts/New/JumperController2.cs
+  artifactKey: Guid(8133b6b165698fd9f8e5d57843a8a16c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/New/JumperController2.cs using Guid(8133b6b165698fd9f8e5d57843a8a16c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ddebeb40ea58b9469f61d7d59fd865b6') in 0.001277 seconds
+  Import took 0.006937 seconds .
 
 ========================================================================
-Received Import Request.
-  Time since last request: 0.000200 seconds.
-  path: Assets/Models/Characters/jumper.fbx
-  artifactKey: Guid(f177184af19f72c8ca39a27549ba2472) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/Characters/jumper.fbx using Guid(f177184af19f72c8ca39a27549ba2472) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aefaaf081683a9b5d00faf8b63374fae') in 0.093146 seconds
-  Import took 0.101423 seconds .
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005437 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.63 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.104 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 0.97 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3831 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 183.0 MB.
+System memory in use after: 183.2 MB.
 
-========================================================================
-Received Import Request.
-  Time since last request: 5.129896 seconds.
-  path: Assets/Models/Characters/jumper.fbx
-  artifactKey: Guid(f177184af19f72c8ca39a27549ba2472) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/Characters/jumper.fbx using Guid(f177184af19f72c8ca39a27549ba2472) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1e21a7d326b3414a2b862259ddba8e11') in 0.087181 seconds
-  Import took 0.095033 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.001701 seconds.
-  path: Assets/Models/Characters/jumper.fbx
-  artifactKey: Guid(f177184af19f72c8ca39a27549ba2472) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/Characters/jumper.fbx using Guid(f177184af19f72c8ca39a27549ba2472) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1e21a7d326b3414a2b862259ddba8e11') in 0.084477 seconds
-  Import took 0.092140 seconds .
+Unloading 37 unused Assets to reduce memory usage. Loaded Objects now: 4458.
+Total: 3.258700 ms (FindLiveObjects: 0.429100 ms CreateObjectMapping: 0.146100 ms MarkObjects: 2.653300 ms  DeleteObjects: 0.029000 ms)
 

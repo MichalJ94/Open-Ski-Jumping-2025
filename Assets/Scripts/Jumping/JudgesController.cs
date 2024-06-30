@@ -64,6 +64,7 @@ namespace OpenSkiJumping.Jumping
         private decimal[] GetJudgesPoints()
         {
             decimal model = 20m - (deductions[0] + deductions[1] + deductions[2]) + Random.Range(0, 2) * 0.5m;
+            Debug.Log("Od GetJudgesPoints deductions [0]: " + deductions[0] + " deductions[1]: " + deductions[1] + " deductions[2]: " + deductions[2]);
             decimal bias = 0;
             if (model < 11.0m)
             {
