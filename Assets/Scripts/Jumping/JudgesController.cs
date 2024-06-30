@@ -204,6 +204,8 @@ namespace OpenSkiJumping.Jumping
             NewJump();
         }
 
+
+
         public void NewJump()
         {
             jumperController.ResetValues();

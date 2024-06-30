@@ -51,7 +51,7 @@ namespace OpenSkiJumping.New
 
 
         [Space] [Header("Parameters")] public float jumpSpeed;
-        [SerializeField] private float forceScale = 1.4f;
+        [SerializeField] private float forceScale;
 
         private int landing;
         private float initiateStruggleLanding = 0;
@@ -360,6 +360,13 @@ namespace OpenSkiJumping.New
 
         }
 
+
+        public void OffsetGateChange()
+
+        {
+            forceScale -= forceScaleModifier;
+        }
+
         public void ResetValues()
         {
             State = 0;
@@ -474,9 +481,10 @@ namespace OpenSkiJumping.New
                     0.00000018944d * angle * angle * angle + 0.00000000352d * angle * angle * angle * angle;
             }
 
-            if(angle == -110)
+            if(angle < 95 && angle > 90)
             {
-                Gate();
+                UnityEngine.Debug.Log("Wywala skoczka do tyłu");
+                rb.AddRelativeTorque(0, 0, -1000, ForceMode.Acceleration); ;
             }
 
             if (takeoff)
