@@ -474,6 +474,10 @@ namespace OpenSkiJumping.New
                     0.00000018944d * angle * angle * angle + 0.00000000352d * angle * angle * angle * angle;
             }
 
+            if(angle == -110)
+            {
+                Gate();
+            }
 
             if (takeoff)
             {
