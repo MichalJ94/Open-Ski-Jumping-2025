@@ -1271,7 +1271,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1578045289}
   - component: {fileID: 1578045291}
-  - component: {fileID: 1578045290}
   m_Layer: 5
   m_Name: TMP SubMeshUI [Roboto-Regular SDF Material + LiberationSans SDF Atlas]
   m_TagString: Untagged
@@ -1298,34 +1297,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
---- !u!114 &1578045290
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1578045288}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_spriteAsset: {fileID: 0}
-  m_material: {fileID: 0}
-  m_sharedMaterial: {fileID: 0}
-  m_isDefaultMaterial: 0
-  m_padding: 1.25
-  m_TextComponent: {fileID: 1919347063}
-  m_materialReferenceIndex: 1
 --- !u!222 &1578045291
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1444,18 +1415,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 5355728902004736256}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1919347063 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 420143513478361263, guid: fc3f1851c809c3589a86bfe74618c787,
-    type: 3}
-  m_PrefabInstance: {fileID: 5355728902004736256}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &419523873052491863
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3110,7 +3069,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_subTextObjects.Array.data[1]
       value: 
-      objectReference: {fileID: 1578045290}
+      objectReference: {fileID: 0}
     - target: {fileID: 420143514124574617, guid: fc3f1851c809c3589a86bfe74618c787,
         type: 3}
       propertyPath: m_textInfo.lineCount
@@ -3135,6 +3094,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1393780284357150710, guid: fc3f1851c809c3589a86bfe74618c787,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3672039118819545635, guid: fc3f1851c809c3589a86bfe74618c787,
         type: 3}
