@@ -22,12 +22,12 @@ MonoBehaviour:
     m_Value: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0.397
+    m_Value: 0.172
     min: 0
     max: 1
   clamp:
     m_OverrideState: 1
-    m_Value: 0.003
+    m_Value: 0.005
     min: 0
     max: 0.2
 --- !u!114 &11400000
@@ -60,35 +60,35 @@ MonoBehaviour:
   active: 1
   m_AdvancedMode: 0
   mode:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 2
   gaussianStart:
-    m_OverrideState: 0
-    m_Value: 10
+    m_OverrideState: 1
+    m_Value: 9.27
     min: 0
   gaussianEnd:
-    m_OverrideState: 0
-    m_Value: 30
+    m_OverrideState: 1
+    m_Value: 35.92
     min: 0
   gaussianMaxRadius:
-    m_OverrideState: 0
-    m_Value: 1
+    m_OverrideState: 1
+    m_Value: 0.967
     min: 0.5
     max: 1.5
   highQualitySampling:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
   focusDistance:
-    m_OverrideState: 0
-    m_Value: 10
+    m_OverrideState: 1
+    m_Value: 9.04
     min: 0.1
   aperture:
-    m_OverrideState: 0
-    m_Value: 5.6
+    m_OverrideState: 1
+    m_Value: 9.7
     min: 1
     max: 32
   focalLength:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 50
     min: 1
     max: 300

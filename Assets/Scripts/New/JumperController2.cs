@@ -18,6 +18,8 @@ namespace OpenSkiJumping.New
     {
         [Space] [Header("Flight")] public double angle;
         [SerializeField] private AudioSource audioSource;
+        public AudioSource src;
+        public AudioClip skisSound, landingSound;
         [SerializeField] private float brakeForce;
         [SerializeField] private float inrunDrag = 0.0011f;
         [SerializeField] private int windThrustDelayCounter = 0;
@@ -326,7 +328,8 @@ namespace OpenSkiJumping.New
                 //     Crash();
                 //     Landed = true;
                 // }
-
+                src.clip = landingSound;
+                src.PlayOneShot(src.clip);
 
                 if (!jumperModel.animator.GetCurrentAnimatorStateInfo(0).IsName("Pre-landing"))
                 {
