@@ -8,6 +8,7 @@ namespace OpenSkiJumping.Jumping
     {
         public CamerasController camerasController;
         public UnityEvent OnJumpRestart;
+        public UnityEvent OnJumpRestartWithSameJumper;
         public UnityEvent OnPauseMenu;
 
         void Start()
@@ -33,6 +34,11 @@ namespace OpenSkiJumping.Jumping
         public void RestartJump()
         {
             OnJumpRestart.Invoke();
+        }
+
+        public void RestartJumpWithSameJumper()
+        {
+            OnJumpRestartWithSameJumper.Invoke();
         }
 
         void Update()
