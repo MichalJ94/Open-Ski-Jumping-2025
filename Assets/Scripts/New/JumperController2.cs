@@ -41,6 +41,7 @@ namespace OpenSkiJumping.New
         public double drag = 0.001d;
         public float forceChange;
         private int goodSamples;
+        public double angleDebug;
 
         private bool judged;
 
@@ -63,6 +64,7 @@ namespace OpenSkiJumping.New
 
 
         public UnityEvent OnStartEvent;
+        public UnityEvent Backflip;
         private Rigidbody rb;
         public FloatVariable rotCoef;
         public GameObject rSkiClone, lSkiClone;
@@ -144,17 +146,17 @@ namespace OpenSkiJumping.New
             if ((float)jumpData.Distance < hillSize * 0.95)
             {
                 judgesController.PointDeduction(1, 0.5m);
-                UnityEngine.Debug.Log("Redukcja punktów za krótki skok 0.95");
+               // UnityEngine.Debug.Log("Redukcja punktów za krótki skok 0.95");
             }
             if ((float)jumpData.Distance < hillSize * 0.85)
             {
                 judgesController.PointDeduction(1, 0.5m);
-                UnityEngine.Debug.Log("Redukcja punktów za krótki skok 0.85");
+               // UnityEngine.Debug.Log("Redukcja punktów za krótki skok 0.85");
             }
             if ((float)jumpData.Distance < hillSize * 0.75)
             {
                 judgesController.PointDeduction(1, 1);
-                UnityEngine.Debug.Log("Redukcja punktów za krótki skok 0.75");
+                //UnityEngine.Debug.Log("Redukcja punktów za krótki skok 0.75");
             }
         }
 
@@ -163,7 +165,7 @@ namespace OpenSkiJumping.New
             if ((float)jumpData.Distance > hillSize)
             {
                 float ofHS = ((float)jumpData.Distance/hillSize);
-                UnityEngine.Debug.Log("ofHS: " + ofHS);
+                //UnityEngine.Debug.Log("ofHS: " + ofHS);
 
                 if (landing == 1)//jumper attempted telemark
                 {
@@ -175,7 +177,7 @@ namespace OpenSkiJumping.New
                     {
                         float saveFromStruggle = Random.Range(1, 1.04f);
                         float saveFromFall = Random.Range(1.04f, 1.07f);
-                        UnityEngine.Debug.Log("saveFromStruggle: " + saveFromStruggle + " saveFromFall: " + saveFromFall);
+                       // UnityEngine.Debug.Log("saveFromStruggle: " + saveFromStruggle + " saveFromFall: " + saveFromFall);
 
                         if (ofHS > saveFromStruggle)
                         {
@@ -484,10 +486,12 @@ namespace OpenSkiJumping.New
                     0.00000018944d * angle * angle * angle + 0.00000000352d * angle * angle * angle * angle;
             }
 
-            if(angle < 95 && angle > 90)
+            if(angle < 100 && angle > 85)
             {
-                UnityEngine.Debug.Log("Wywala skoczka do tyłu");
-                rb.AddRelativeTorque(0, 0, -1000, ForceMode.Acceleration); ;
+                
+                UnityEngine.Debug.Log("Wywala skoczka do tyłu. Zmiana angle przez fixedUpdate:");
+                Backflip.Invoke();
+               // angleDebug = angle;
             }
 
             if (takeoff)
