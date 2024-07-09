@@ -22,7 +22,9 @@ namespace OpenSkiJumping.New
         public AudioClip skisSound, landingSound;
         [SerializeField] private float brakeForce;
         [SerializeField] private float inrunDrag = 0.0011f;
-        [SerializeField] private int windThrustDelayCounter = 0;
+        private int windThrustDelayCounter = 0;
+        [SerializeField] private int crashAngle;
+        private int determineCrashAtAngle = 0;
         [SerializeField] private SkiJumperDataController skiJumperDataController;
         [SerializeField] private HillsRuntime hillsRepository;
         [SerializeField] private int WindThrustDelayCap = 80;
@@ -30,7 +32,7 @@ namespace OpenSkiJumping.New
         public RuntimeResultsManager resultsManager;
         private float torqueCoef = 0f;
         private int WindThrustDeterminer;
-        private int WindThrustDeterminerTimesUsed;
+        [SerializeField]  private int WindThrustDeterminerTimesUsed;
         private float forceScaleModifier;
 
 
@@ -334,11 +336,7 @@ namespace OpenSkiJumping.New
                 src.clip = landingSound;
                 src.PlayOneShot(src.clip);
 
-                UnityEngine.Debug.Log("Angle on landing: " + angle) ;
-                if (angle > 20)//usunięcie slide bugu
-                {
-                    rb.AddRelativeTorque(0, 0, 15, ForceMode.Acceleration);
-                }
+                LandingAngleHandler();
 
                 if (!jumperModel.animator.GetCurrentAnimatorStateInfo(0).IsName("Pre-landing"))
                 {
@@ -357,6 +355,40 @@ namespace OpenSkiJumping.New
                         Landed = true;
                     }
                 }
+            }
+        }
+
+        private void LandingAngleHandler()
+        {
+            //UnityEngine.Debug.Log("determineCrashatAngle: " + determineCrashAtAngle);
+            if (determineCrashAtAngle == 0)
+            {
+               if(angle < crashAngle)
+                {
+                    determineCrashAtAngle = 1;
+                }
+                else
+                {
+                    determineCrashAtAngle = 2;
+                }
+            }
+          //  UnityEngine.Debug.Log("Angle on landing: " + angle);
+            if (angle > 30 && determineCrashAtAngle == 1)//usunięcie slide bugu
+            {
+
+
+                rb.AddRelativeTorque(0, 0, (int)(angle * -0.5), ForceMode.Acceleration);
+
+            }
+
+            if (determineCrashAtAngle == 2)
+            {
+                judgesController.OnDistanceMeasurement(
+    (jumperModel.distCollider1.transform.position +
+     jumperModel.distCollider2.transform.position) / 2.0f);
+
+                Crash();
+                Landed = true;
             }
         }
 
@@ -404,6 +436,7 @@ namespace OpenSkiJumping.New
             judged = false;
             takeoff = false;
             goodSamples = 0;
+            determineCrashAtAngle = 0;
             windThrustDelayCounter = 0;
             torqueCoef = 0f;
             forceScale += forceScaleModifier;
