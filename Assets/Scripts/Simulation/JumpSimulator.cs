@@ -86,14 +86,14 @@ namespace OpenSkiJumping.Simulation
         {
             var winnerDist = hill.w + hill.l2 * 0.9f;
             int lo = 1, hi = hill.gates;
-            // Debug.Log($"Winner dist: {winnerDist}");
+           Debug.Log($"Winner dist: {winnerDist}");
 
             while (lo <= hi)
             {
                 var mid = lo + (hi - lo) / 2;
                 var inrunVelocity = GetInrunVelocity(mid);
                 var dist = SimulateJumpWithVelocity(inrunVelocity, windSpeed);
-                // Debug.Log($"{mid} | {inrunVelocity} | {dist}");
+                Debug.Log($" mid: {mid} | inrunVelocity: {inrunVelocity} | dist: {dist}");
                 if (dist < winnerDist - Eps)
                     lo = mid + 1;
                 else if (winnerDist + Eps < dist)
@@ -117,7 +117,7 @@ namespace OpenSkiJumping.Simulation
             var headWindFactor = (headWindDist - initDist) / 3.0f;
             var tailWindFactor = (initDist - tailWindDist) / 3.0f;
             var gateFactor = (initDist - lowerGateDist) / 3.0f;
-            Debug.Log($"{headWindFactor} | {tailWindFactor} | {gateFactor}");
+         //   Debug.Log($"{headWindFactor} | {tailWindFactor} | {gateFactor}");
 
             return (headWindFactor, tailWindFactor, gateFactor);
         }

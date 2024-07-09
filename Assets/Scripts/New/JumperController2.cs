@@ -64,7 +64,7 @@ namespace OpenSkiJumping.New
 
 
         public UnityEvent OnStartEvent;
-        public UnityEvent Backflip;
+        public UnityEvent BugOccured;
         private Rigidbody rb;
         public FloatVariable rotCoef;
         public GameObject rSkiClone, lSkiClone;
@@ -319,7 +319,8 @@ namespace OpenSkiJumping.New
             if (State >= 2 && !jumperModel.animator.GetCurrentAnimatorStateInfo(0).IsName("Take-off") &&
                 other.collider.CompareTag("Inrun"))
             {
-                Crash();
+                BugOccured.Invoke();
+                //Crash();
             }
 
             if (!Landed && other.collider.CompareTag("LandingArea"))
@@ -332,6 +333,12 @@ namespace OpenSkiJumping.New
                 // }
                 src.clip = landingSound;
                 src.PlayOneShot(src.clip);
+
+                UnityEngine.Debug.Log("Angle on landing: " + angle) ;
+                if (angle > 20)//usunięcie slide bugu
+                {
+                    rb.AddRelativeTorque(0, 0, 15, ForceMode.Acceleration);
+                }
 
                 if (!jumperModel.animator.GetCurrentAnimatorStateInfo(0).IsName("Pre-landing"))
                 {
@@ -486,11 +493,10 @@ namespace OpenSkiJumping.New
                     0.00000018944d * angle * angle * angle + 0.00000000352d * angle * angle * angle * angle;
             }
 
-            if(angle < 100 && angle > 85)
+            if(angle < -120 && angle > -130)
             {
                 
-                UnityEngine.Debug.Log("Wywala skoczka do tyłu. Zmiana angle przez fixedUpdate:");
-                Backflip.Invoke();
+                BugOccured.Invoke();
                // angleDebug = angle;
             }
 
@@ -500,7 +506,7 @@ namespace OpenSkiJumping.New
                     jumperModel.animator.IsInTransition(0))
                 {
                     takeoff = false;
-                   // Debug.Log("Total samples: " + totalSamples + ", good samples: " + goodSamples);
+                   UnityEngine.Debug.Log("Total samples: " + totalSamples + ", good samples: " + goodSamples);
                 }
 
                 if (OnInrun && goodSamples < totalSamples)
@@ -576,7 +582,7 @@ namespace OpenSkiJumping.New
             forceScale -= forceScaleModifier;
             State = 1;
             OnStartEvent.Invoke();
-            UnityEngine.Debug.Log("skillforpresenthill: " + skillForPresentHill + " force at gate: " + forceScale);
+            //UnityEngine.Debug.Log("skillforpresenthill: " + skillForPresentHill + " force at gate: " + forceScale);
             rb.isKinematic = false;
 
         }
