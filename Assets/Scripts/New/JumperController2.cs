@@ -67,6 +67,7 @@ namespace OpenSkiJumping.New
 
         public UnityEvent OnStartEvent;
         public UnityEvent BugOccured;
+        public UnityEvent CPUJumpPerformed;
         private Rigidbody rb;
         public FloatVariable rotCoef;
         public GameObject rSkiClone, lSkiClone;
@@ -459,6 +460,12 @@ namespace OpenSkiJumping.New
                 audioSource.mute = true;
             }
 
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                UnityEngine.Debug.Log("Klikam S.");
+                CPUJumpPerformed.Invoke();
+            }
+
             jumperModel.animator.SetInteger(JumperState, State);
            //UnityEngine.Debug.Log( "State: " + state + " struggleToCrash: " + struggleToCrash);
             if (State == 1 && Input.GetMouseButtonDown(0))
@@ -606,7 +613,12 @@ namespace OpenSkiJumping.New
         }
 
         public void Gate()
-        {
+        { 
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                UnityEngine.Debug.Log("Klikam S.");
+               // judgesController.OnPointsGiven.Invoke();
+            }
             if (State != 0) return;
             hillSize = competitionRunner.GetHS();
            skillForPresentHill = skiJumperDataController.GetSkill(hillSize);

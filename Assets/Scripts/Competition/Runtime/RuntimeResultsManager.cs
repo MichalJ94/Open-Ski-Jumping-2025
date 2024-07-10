@@ -25,6 +25,7 @@ namespace OpenSkiJumping.Competition.Runtime
         public bool SubroundFinish() => Value.SubroundFinish();
         public bool RoundFinish() => Value.RoundFinish();
 
+        public void RegisterCPUJump() => Value.RegisterCPUJump();
         public void RegisterJump() => Value.RegisterJump(jumpData);
     }
 }

@@ -136,6 +136,8 @@ namespace OpenSkiJumping.Jumping
             OnPointsGiven.Invoke();
         }
 
+
+
         public void FlightStability(float jumperAngle)
         {
             fl1 = jumperAngle;

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using OpenSkiJumping.Competition.Persistent;
 using OpenSkiJumping.Competition.Runtime;
@@ -16,6 +17,8 @@ namespace OpenSkiJumping.Competition
         int SubroundIndex { get; }
         int RoundIndex { get; }
         void RegisterJump(IJumpData jumpData);
+
+        void RegisterCPUJump();
         void SubroundInit();
         void RoundInit();
         bool SubroundFinish();
@@ -49,6 +52,7 @@ namespace OpenSkiJumping.Competition
         private int roundsCount;
         private int subRoundsCount;
 
+
         public ResultsManager(EventInfo eventInfo, List<Participant> orderedParticipants, IHillInfo hillInfo)
         {
             EventInfo = eventInfo;
@@ -58,6 +62,7 @@ namespace OpenSkiJumping.Competition
 
             InitializeValues();
         }
+
 
         private void InitializeValues()
         {
@@ -253,25 +258,45 @@ namespace OpenSkiJumping.Competition
 
         public void RegisterJump(IJumpData jumpData)
         {
-            // Handle disableJudgesMarks
-            var currentRoundInfo = EventInfo.roundInfos[RoundIndex];
-            if (currentRoundInfo.disableJudgesMarks)
-                for (var i = 0; i < jumpData.JudgesMarks.Length; i++)
-                    jumpData.JudgesMarks[i] = 0m;
+        
+                // Handle disableJudgesMarks
+                var currentRoundInfo = EventInfo.roundInfos[RoundIndex];
+                if (currentRoundInfo.disableJudgesMarks)
+                    for (var i = 0; i < jumpData.JudgesMarks.Length; i++)
+                        jumpData.JudgesMarks[i] = 0m;
 
-            //Set init gate for round
-            if (StartListIndex == 0 && SubroundIndex == 0)
-            {
-                initGates[RoundIndex] = jumpData.Gate;
-                jumpData.InitGate = jumpData.Gate;
-            }
+                //Set init gate for round
+                if (StartListIndex == 0 && SubroundIndex == 0)
+                {
+                    initGates[RoundIndex] = jumpData.Gate;
+                    jumpData.InitGate = jumpData.Gate;
+                }
 
-            var jump = EventProcessor.GetJumpResult(jumpData, hillInfo, currentRoundInfo.gateCompensation, currentRoundInfo.windCompensation);
-            if (RoundIndex > 0 || SubroundIndex > 0) RemoveFromAllRoundResults();
-
+                var jump = EventProcessor.GetJumpResult(jumpData, hillInfo, currentRoundInfo.gateCompensation, currentRoundInfo.windCompensation);
+                if (RoundIndex > 0 || SubroundIndex > 0) RemoveFromAllRoundResults();
+            
             AddResult(StartList[StartListIndex], SubroundIndex, jump);
             AddToAllRoundResults();
             AddToFinalResults();
+            
+        }
+
+        public void RegisterCPUJump()
+        {
+
+            // Handle disableJudgesMarks
+
+
+            JumpResult cpuJump = new JumpResult();
+            cpuJump.totalPoints = 69;
+
+
+            if (RoundIndex > 0 || SubroundIndex > 0) RemoveFromAllRoundResults();
+
+            AddResult(StartList[StartListIndex], SubroundIndex, cpuJump);
+            AddToAllRoundResults();
+            AddToFinalResults();
+
         }
 
         private void AddResult(int primaryIndex, int secondaryIndex, JumpResult jump)
@@ -279,7 +304,9 @@ namespace OpenSkiJumping.Competition
             Results[primaryIndex].Results[secondaryIndex].results.Add(jump);
             Results[primaryIndex].TotalResults[secondaryIndex] =
                 Results[primaryIndex].Results[secondaryIndex].results.Sum(item => item.totalPoints);
+            
             Results[primaryIndex].TotalPoints = Results[primaryIndex].TotalResults.Sum();
+//Results[primaryIndex].TotalResults[secondaryIndex] i Results[primaryIndex].TotalPoints) to wynik z obu rund. Jeœli jest to runda pierwsza - tylko z pierwszej;
         }
 
         public int CompetitorRank(int id)
