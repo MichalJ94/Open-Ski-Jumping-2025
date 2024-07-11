@@ -78,7 +78,7 @@ namespace OpenSkiJumping.New
         private bool takeoff;
         public int totalSamples;
 
-        private int skillForPresentHill;
+        public int skillForPresentHill;
         private float hillSize;
 
 
@@ -409,7 +409,7 @@ namespace OpenSkiJumping.New
         public void OffsetGateChange()
 
         {
-            forceScale -= forceScaleModifier;
+         forceScale -= forceScaleModifier;
         }
 
         public void ResetValues()
@@ -614,20 +614,18 @@ namespace OpenSkiJumping.New
 
         public void Gate()
         { 
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                UnityEngine.Debug.Log("Klikam S.");
-               // judgesController.OnPointsGiven.Invoke();
-            }
+
             if (State != 0) return;
             hillSize = competitionRunner.GetHS();
-           skillForPresentHill = skiJumperDataController.GetSkill(hillSize);
+            skillForPresentHill = skiJumperDataController.GetSkill(hillSize);
+            jumpData.JumperSkill = skillForPresentHill;
            // inrunDrag += gameplayExtension.inrunDragModifier(skillForPresentHill);
             forceScaleModifier = gameplayExtension.forceScaleModifier(skillForPresentHill);
             forceScale -= forceScaleModifier;
             State = 1;
             OnStartEvent.Invoke();
             //UnityEngine.Debug.Log("skillforpresenthill: " + skillForPresentHill + " force at gate: " + forceScale);
+            UnityEngine.Debug.Log("jumpdata.Gate: " + jumpData.Gate + "jumpdata.Wind " + jumpData.Wind);
             rb.isKinematic = false;
 
         }

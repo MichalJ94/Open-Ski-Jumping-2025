@@ -5,10 +5,14 @@ namespace OpenSkiJumping.Competition.Runtime
     public interface IJumpData
     {
         decimal Distance { get; set; }
+
+        decimal CPUDistance { get; set; }
+
         decimal[] JudgesMarks { get; set; }
         int GatesDiff { get; }
         int InitGate { set; }
         int Gate { get; set; }
+        int JumperSkill { get; set; }
         decimal Wind { get; set; }
         decimal Speed { get; set; }
     }
@@ -21,6 +25,7 @@ namespace OpenSkiJumping.Competition.Runtime
         [SerializeField] private decimal wind;
         [SerializeField] private decimal[] judgesMarks;
         [SerializeField] private int initGate;
+        [SerializeField] private int playerSkill;
 
         public decimal Distance
         {
@@ -38,7 +43,8 @@ namespace OpenSkiJumping.Competition.Runtime
 
         public int InitGate { get; set; }
         public int Gate { get; set; }
-
+        public int JumperSkill { get; set; }
+        public decimal CPUDistance { get; set; }
         public decimal Wind
         {
             get => wind;

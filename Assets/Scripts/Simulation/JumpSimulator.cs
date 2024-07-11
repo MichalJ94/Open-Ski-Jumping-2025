@@ -1,6 +1,8 @@
 using System;
 using OpenSkiJumping.Hills;
 using UnityEngine;
+using OpenSkiJumping.Competition.Runtime;
+using OpenSkiJumping.Competition.Persistent;
 
 namespace OpenSkiJumping.Simulation
 {
@@ -8,6 +10,7 @@ namespace OpenSkiJumping.Simulation
     public class JumpSimulator : ScriptableObject
     {
         [SerializeField] private Hill hill;
+        [SerializeField] private RuntimeJumpData jumpData;
         [SerializeField] private float takeOffSpeed;
         [SerializeField] private float timeDelta;
         [SerializeField] private float aeroForceScale;
@@ -86,14 +89,15 @@ namespace OpenSkiJumping.Simulation
         {
             var winnerDist = hill.w + hill.l2 * 0.9f;
             int lo = 1, hi = hill.gates;
-           Debug.Log($"Winner dist: {winnerDist}");
+           //Debug.Log($"Winner dist: {winnerDist}");
 
             while (lo <= hi)
             {
                 var mid = lo + (hi - lo) / 2;
                 var inrunVelocity = GetInrunVelocity(mid);
                 var dist = SimulateJumpWithVelocity(inrunVelocity, windSpeed);
-                Debug.Log($" mid: {mid} | inrunVelocity: {inrunVelocity} | dist: {dist}");
+               // jumpData.CPUDistance = (decimal)dist;
+                //  Debug.Log($" mid: {mid} | inrunVelocity: {inrunVelocity} | dist: {dist}");
                 if (dist < winnerDist - Eps)
                     lo = mid + 1;
                 else if (winnerDist + Eps < dist)
@@ -101,6 +105,7 @@ namespace OpenSkiJumping.Simulation
                 else
                     return mid;
             }
+            
 
             return lo;
         }

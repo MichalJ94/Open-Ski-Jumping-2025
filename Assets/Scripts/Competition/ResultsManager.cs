@@ -4,6 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using OpenSkiJumping.Competition.Persistent;
 using OpenSkiJumping.Competition.Runtime;
+using OpenSkiJumping.Jumping;
+using OpenSkiJumping.New;
+using UnityEngine;
 
 namespace OpenSkiJumping.Competition
 {
@@ -18,7 +21,7 @@ namespace OpenSkiJumping.Competition
         int RoundIndex { get; }
         void RegisterJump(IJumpData jumpData);
 
-        void RegisterCPUJump();
+        void RegisterCPUJump(IJumpData jumpData);
         void SubroundInit();
         void RoundInit();
         bool SubroundFinish();
@@ -281,14 +284,19 @@ namespace OpenSkiJumping.Competition
             
         }
 
-        public void RegisterCPUJump()
+        public void RegisterCPUJump(IJumpData jumpData)
         {
 
-            // Handle disableJudgesMarks
-
+            // Zrobic cos zeby skok CPU logowal distance
+            decimal winnerDist = 120;
 
             JumpResult cpuJump = new JumpResult();
+
+            UnityEngine.Debug.Log("Od ResultsManager jumpData.CPUDistance: " + jumpData.CPUDistance);
+            cpuJump.distance = 115; //wystarczy do loga 
             cpuJump.totalPoints = 69;
+
+          
 
 
             if (RoundIndex > 0 || SubroundIndex > 0) RemoveFromAllRoundResults();

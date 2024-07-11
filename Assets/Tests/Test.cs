@@ -12,10 +12,14 @@ namespace OpenSkiJumping.Tests
         private class MockJumpData : IJumpData
         {
             public decimal Distance { get; set; }
+
+            public decimal CPUDistance { get; set; }
             public decimal[] JudgesMarks { get; set; }
             public int GatesDiff { get; set; }
             public int InitGate { get; set; }
             public int Gate { get; set; }
+
+            public int JumperSkill { get; set; }    
             public decimal Wind { get; set; }
             public decimal Speed { get; set; }
         }
