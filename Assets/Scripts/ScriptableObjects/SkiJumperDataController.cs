@@ -56,6 +56,8 @@ namespace OpenSkiJumping.ScriptableObjects
                     
         }
 
+
+
         public void SetValues(Color bibColor)
         {
             jumperMale.gameObject.SetActive(competitor.gender == Gender.Male);

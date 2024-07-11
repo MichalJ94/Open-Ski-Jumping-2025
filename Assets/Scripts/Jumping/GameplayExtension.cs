@@ -24,5 +24,12 @@ namespace OpenSkiJumping
 
         }
 
+
+        public decimal CPUDistanceAfterGateWindChange(decimal distance)
+        {
+            return 4;
+
+        }
+
     }
 }

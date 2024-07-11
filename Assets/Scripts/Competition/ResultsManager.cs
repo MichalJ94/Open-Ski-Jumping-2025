@@ -288,15 +288,21 @@ namespace OpenSkiJumping.Competition
         {
 
             // Zrobic cos zeby skok CPU logowal distance
-            decimal winnerDist = 120;
+            
+
 
             JumpResult cpuJump = new JumpResult();
+            //CPUDistance z Jump Simulation:
 
-            UnityEngine.Debug.Log("Od ResultsManager jumpData.CPUDistance: " + jumpData.CPUDistance);
-            cpuJump.distance = 115; //wystarczy do loga 
+
+            cpuJump.distance = jumpData.CPUDistance;
+            UnityEngine.Debug.Log("Od ResultsManager jumpData.JumperSKill: " + jumpData.JumperSkill);
+            //Trzeba przeniesc przypisywanie jumperSkill na wczeœniejszy moment niz Gate() w jumperContorller
+            cpuJump.distance = CalculateFinalCPUDistance(jumpData.CPUDistance, jumpData.JumperSkill);
+            UnityEngine.Debug.Log("Od ResultsManager jumpData.CPUDistance po uwzglêdnieniu skilla: " + cpuJump.distance);
             cpuJump.totalPoints = 69;
+           
 
-          
 
 
             if (RoundIndex > 0 || SubroundIndex > 0) RemoveFromAllRoundResults();
@@ -306,6 +312,30 @@ namespace OpenSkiJumping.Competition
             AddToFinalResults();
 
         }
+
+        private decimal CalculateFinalCPUDistance(decimal distance, int skill)
+        {
+            float modifier = 1;
+            UnityEngine.Debug.Log("Od ResultsManager jumpData.CPUDistance przed zmiana skilla: " + distance);
+            if(skill == 90)
+            {
+                return distance;
+            }
+            else if(skill > 90)
+            {
+                modifier += ((skill - 90) / 100);
+
+            }
+            else
+            {
+                modifier += ((90 -skill) / 100);
+            }
+
+            UnityEngine.Debug.Log("Od ResultsManager CPU Distance modifeir: " + modifier);
+            return distance * (decimal)modifier;
+            
+        }
+
 
         private void AddResult(int primaryIndex, int secondaryIndex, JumpResult jump)
         {

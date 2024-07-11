@@ -244,6 +244,7 @@ namespace OpenSkiJumping.Competition
                 jumpData.InitGate = jumpData.Gate;
             toBeatLineController.CompensationPoints =
                 (float) (_hillInfo.GetGatePoints(jumpData.GatesDiff) + _hillInfo.GetWindPoints(jumpData.Wind));
+            Debug.Log(" toBeatLineController.CompensationPoints: " + toBeatLineController.CompensationPoints);
             onWindGateChanged.Invoke();
         }
     }

@@ -3,6 +3,8 @@ using OpenSkiJumping.Hills;
 using UnityEngine;
 using OpenSkiJumping.Competition.Runtime;
 using OpenSkiJumping.Competition.Persistent;
+using System.Collections.Generic;
+using System.Security.Cryptography;
 
 namespace OpenSkiJumping.Simulation
 {
@@ -75,7 +77,7 @@ namespace OpenSkiJumping.Simulation
                 velocity += (force + gravity) * timeDelta;
                 position += velocity * timeDelta;
             }
-
+            jumpData.CPUDistance = (decimal)Distance(position);
             return Distance(position);
         }
 
@@ -85,7 +87,15 @@ namespace OpenSkiJumping.Simulation
             return SimulateJumpWithVelocity(takeOffVelocity, windSpeed);
         }
 
-        public int GetGateForWind(float windSpeed)
+        public void CPUWinnerDistanceAfterGateChange(int gate, float windSpeed)
+        {
+            var inrunVelocity = GetInrunVelocity(gate);
+            jumpData.CPUDistance = (decimal)SimulateJumpWithVelocity(inrunVelocity, windSpeed);
+        }
+
+        
+
+            public int GetGateForWind(float windSpeed)
         {
             var winnerDist = hill.w + hill.l2 * 0.9f;
             int lo = 1, hi = hill.gates;
@@ -96,7 +106,6 @@ namespace OpenSkiJumping.Simulation
                 var mid = lo + (hi - lo) / 2;
                 var inrunVelocity = GetInrunVelocity(mid);
                 var dist = SimulateJumpWithVelocity(inrunVelocity, windSpeed);
-               // jumpData.CPUDistance = (decimal)dist;
                 //  Debug.Log($" mid: {mid} | inrunVelocity: {inrunVelocity} | dist: {dist}");
                 if (dist < winnerDist - Eps)
                     lo = mid + 1;

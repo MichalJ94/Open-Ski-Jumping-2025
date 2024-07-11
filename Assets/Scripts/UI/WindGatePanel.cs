@@ -21,7 +21,9 @@ namespace OpenSkiJumping.UI
         public void Awake()
         {
             gateSlider.onValueChanged.AddListener(UpdateGateText);
+            gateSlider.onValueChanged.AddListener(UpdateCPUWinDistanceAfterGateChange);
             windSlider.onValueChanged.AddListener(UpdateWindText);
+            windSlider.onValueChanged.AddListener(UpdateCPUWinDistanceAfterWindChange);
             autoGateButton.onClick.AddListener(SetAutoGate);
         }
 
@@ -31,6 +33,16 @@ namespace OpenSkiJumping.UI
         {
             windText.text = $"Wind: {val} m/s";
             autoGateButton.interactable = true;
+        }
+
+        private void UpdateCPUWinDistanceAfterGateChange(float val)
+        {
+            simulator.CPUWinnerDistanceAfterGateChange((int)val, windSlider.value);
+        }
+
+        private void UpdateCPUWinDistanceAfterWindChange(float val)
+        {
+            simulator.GetGateForWind(windSlider.value);
         }
 
         private void SetAutoGate()
