@@ -34,6 +34,7 @@ namespace OpenSkiJumping.TVGraphics
         public RuntimeResultsManager resultsManager;
         public RuntimeCompetitorsList competitors;
         public List<GraphicsData> graphicsData;
+        private bool sideResultsActive;
 
         private EventInfo currentEvent;
 
@@ -55,10 +56,21 @@ namespace OpenSkiJumping.TVGraphics
                 graphicsData[current].postJump.Hide();
             }
 
-            if (Input.GetKeyDown(KeyCode.Tab))
+           if (Input.GetKeyDown(KeyCode.Tab))
             {
-                graphicsData[current].sideResults.gameObject
-                    .SetActive(!graphicsData[current].sideResults.gameObject.activeSelf);
+                Debug.Log("graphicsData[current].sideResults.gameObject.transform.localScale = " + graphicsData[current].sideResults.gameObject.transform.localScale);
+                if (sideResultsActive == false)
+                    {
+                    graphicsData[current].sideResults.gameObject.transform.localScale = new Vector3(1, 1, 1);
+                    sideResultsActive = true;
+                        }
+                else
+                {
+                    graphicsData[current].sideResults.gameObject.transform.localScale = new Vector3(0, 0, 0);
+                    sideResultsActive = false;
+                };
+                //  graphicsData[current].sideResults.gameObject
+                //    .SetActive(!graphicsData[current].sideResults.gameObject.activeSelf);
             }
         }
 
