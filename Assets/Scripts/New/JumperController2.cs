@@ -57,6 +57,7 @@ namespace OpenSkiJumping.New
 
         [Space] [Header("Parameters")] public float jumpSpeed;
         [SerializeField] private float forceScale;
+        public float startForceScale;
 
         private int landing;
         private float initiateStruggleLanding = 0;
@@ -397,6 +398,7 @@ namespace OpenSkiJumping.New
         {
             State = 0;
             Landed = false;
+            startForceScale = forceScale;
 
             rb = GetComponent<Rigidbody>();
             rb.isKinematic = true;
@@ -624,7 +626,7 @@ namespace OpenSkiJumping.New
         { 
 
             if (State != 0) return;
-
+            forceScale = startForceScale;
             // inrunDrag += gameplayExtension.inrunDragModifier(skillForPresentHill);
             forceScaleModifier = gameplayExtension.forceScaleModifier(skillForPresentHill);
             forceScale -= forceScaleModifier;

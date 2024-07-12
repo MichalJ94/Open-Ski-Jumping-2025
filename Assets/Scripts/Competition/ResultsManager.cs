@@ -287,16 +287,8 @@ namespace OpenSkiJumping.Competition
         public void RegisterCPUJump(IJumpData jumpData)
         {
 
-            // Zrobic cos zeby skok CPU logowal distance
-            
-
-
-            JumpResult cpuJump = new JumpResult();
-            //CPUDistance z Jump Simulation:
-
-
+            JumpResult cpuJump = new JumpResult();           
             cpuJump.distance = jumpData.CPUDistance;
-            UnityEngine.Debug.Log("Od ResultsManager jumpData.JumperSKill: " + jumpData.JumperSkill);
             //Trzeba przeniesc przypisywanie jumperSkill na wczeœniejszy moment niz Gate() w jumperContorller
             cpuJump.distance = CalculateFinalCPUDistance(jumpData.CPUDistance, jumpData.JumperSkill);
             UnityEngine.Debug.Log("Od ResultsManager jumpData.CPUDistance po uwzglêdnieniu skilla: " + cpuJump.distance);
@@ -316,6 +308,7 @@ namespace OpenSkiJumping.Competition
         private decimal CalculateFinalCPUDistance(decimal distance, int skill)
         {
             float modifier = 1;
+            UnityEngine.Debug.Log("Od ResultsManager jumpData.JumperSKill: " + skill);
             UnityEngine.Debug.Log("Od ResultsManager jumpData.CPUDistance przed zmiana skilla: " + distance);
             if(skill == 90)
             {
@@ -323,15 +316,19 @@ namespace OpenSkiJumping.Competition
             }
             else if(skill > 90)
             {
-                modifier += ((skill - 90) / 100);
+                UnityEngine.Debug.Log("Gra widzi, ze skill jest wyzszy niz 90");
+                modifier += (((float)skill - 90f) / 100f);
+                UnityEngine.Debug.Log("Od ResultsManager CPU Distance modifeir: " + modifier);
 
             }
-            else
+            else if(skill < 90)
             {
-                modifier += ((90 -skill) / 100);
+                UnityEngine.Debug.Log("Gra widzi, ze skill jest nizszy niz 90");
+                modifier += ((90f - (float)skill) / 100f);
+                UnityEngine.Debug.Log("Od ResultsManager CPU Distance modifeir: " + modifier);
             }
 
-            UnityEngine.Debug.Log("Od ResultsManager CPU Distance modifeir: " + modifier);
+
             return distance * (decimal)modifier;
             
         }
