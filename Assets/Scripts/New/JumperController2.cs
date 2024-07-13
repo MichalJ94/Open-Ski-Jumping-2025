@@ -5,6 +5,7 @@ using OpenSkiJumping.Competition.Persistent;
 using OpenSkiJumping.Competition.Runtime;
 using OpenSkiJumping.Data;
 using OpenSkiJumping.Jumping;
+using OpenSkiJumping.Scripts2025;
 using OpenSkiJumping.ScriptableObjects;
 using OpenSkiJumping.ScriptableObjects.Variables;
 using UnityEngine;

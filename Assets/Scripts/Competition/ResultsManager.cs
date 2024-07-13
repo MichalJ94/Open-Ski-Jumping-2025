@@ -4,9 +4,11 @@ using System.Diagnostics;
 using System.Linq;
 using OpenSkiJumping.Competition.Persistent;
 using OpenSkiJumping.Competition.Runtime;
+
 using OpenSkiJumping.Jumping;
 using OpenSkiJumping.New;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace OpenSkiJumping.Competition
 {
@@ -287,13 +289,13 @@ namespace OpenSkiJumping.Competition
         public void RegisterCPUJump(IJumpData jumpData)
         {
 
-            JumpResult cpuJump = new JumpResult();           
+            JumpResult cpuJump = new JumpResult();
             cpuJump.distance = jumpData.CPUDistance;
+
             //Trzeba przeniesc przypisywanie jumperSkill na wczeœniejszy moment niz Gate() w jumperContorller
             cpuJump.distance = CalculateFinalCPUDistance(jumpData.CPUDistance, jumpData.JumperSkill);
             UnityEngine.Debug.Log("Od ResultsManager jumpData.CPUDistance po uwzglêdnieniu skilla: " + cpuJump.distance);
-            cpuJump.totalPoints = 69;
-           
+            cpuJump.totalPoints = cpuJump.distance;
 
 
 
@@ -305,33 +307,34 @@ namespace OpenSkiJumping.Competition
 
         }
 
-        private decimal CalculateFinalCPUDistance(decimal distance, int skill)
+
+        public decimal CalculateFinalCPUDistance(decimal distance, int skill)
         {
             float modifier = 1;
-            UnityEngine.Debug.Log("Od ResultsManager jumpData.JumperSKill: " + skill);
-            UnityEngine.Debug.Log("Od ResultsManager jumpData.CPUDistance przed zmiana skilla: " + distance);
-            if(skill == 90)
+           //UnityEngine.Debug.Log("Od ResultsManager jumpData.JumperSKill: " + skill);
+            //UnityEngine.Debug.Log("Od ResultsManager jumpData.CPUDistance przed zmiana skilla: " + distance);
+           
+            if (skill > 90)
             {
-                return distance;
-            }
-            else if(skill > 90)
-            {
-                UnityEngine.Debug.Log("Gra widzi, ze skill jest wyzszy niz 90");
-                modifier += (((float)skill - 90f) / 100f);
-                UnityEngine.Debug.Log("Od ResultsManager CPU Distance modifeir: " + modifier);
+              //  UnityEngine.Debug.Log("Gra widzi, ze skill jest wyzszy niz 90");
+                modifier += (((float)skill - 90f) / 110f);
+                //UnityEngine.Debug.Log("Od ResultsManager CPU Distance modifeir: " + modifier);
 
             }
-            else if(skill < 90)
+            else if (skill < 90)
             {
-                UnityEngine.Debug.Log("Gra widzi, ze skill jest nizszy niz 90");
-                modifier += ((90f - (float)skill) / 100f);
-                UnityEngine.Debug.Log("Od ResultsManager CPU Distance modifeir: " + modifier);
+                //UnityEngine.Debug.Log("Gra widzi, ze skill jest nizszy niz 90");
+                modifier -= ((90f - (float)skill) / 110f);
+                //UnityEngine.Debug.Log("Od ResultsManager CPU Distance modifeir: " + modifier);
             }
+            UnityEngine.Debug.Log("Od ResultsManager Distance BEFORE RANDOM: " + distance * (decimal)modifier);
+            modifier += Random.Range(-0.04f, 0.02f);
+            UnityEngine.Debug.Log("Od ResultsManager Distance AFTER RANDOM: " + distance * (decimal)modifier);
 
-
-            return distance * (decimal)modifier;
-            
+            return Math.Round((distance * (decimal)modifier) * 2, MidpointRounding.AwayFromZero) / 2;
         }
+
+
 
 
         private void AddResult(int primaryIndex, int secondaryIndex, JumpResult jump)

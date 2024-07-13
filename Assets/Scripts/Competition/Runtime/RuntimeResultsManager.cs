@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenSkiJumping.Competition.Persistent;
+using OpenSkiJumping.Scripts2025;
 using UnityEngine;
 
 namespace OpenSkiJumping.Competition.Runtime
@@ -12,6 +13,7 @@ namespace OpenSkiJumping.Competition.Runtime
         public IResultsManager Value { get; private set; }
 
         [SerializeField] private RuntimeJumpData jumpData;
+
 
         public void Initialize(EventInfo eventInfo, List<Participant> orderedParticipants,
             IHillInfo hillInfo)

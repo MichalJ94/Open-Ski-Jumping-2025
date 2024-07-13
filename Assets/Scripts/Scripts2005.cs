@@ -5,27 +5,9 @@ using UnityEngine;
 
 namespace OpenSkiJumping.Scripts2025
 {
-    [CreateAssetMenu]
-    public class GameplayExtension : ScriptableObject
+    public class Scripts2005
     {
         // Start is called before the first frame update
-
-        /*public float inrunDragModifier (int skill)
-        {
-            float modifier = 0.000005f;
-            return (80-skill)*modifier;
-             
-        }*/
-
-
-        public float forceScaleModifier(int skill)
-        {
-            float modifier = 0.008f;
-            return (80 - skill) * modifier;
-
-        }
-
-
         public decimal CalculateFinalCPUDistance(decimal distance, int skill)
         {
             float modifier = 1;
@@ -50,9 +32,8 @@ namespace OpenSkiJumping.Scripts2025
             }
 
 
-          //  return distance * (decimal)modifier;
-          return (decimal)Math.Round(distance * (decimal)modifier, MidpointRounding.AwayFromZero) / 2;
+            //  return distance * (decimal)modifier;
+            return (decimal)Math.Round(distance * (decimal)modifier, MidpointRounding.AwayFromZero) / 2;
         }
-
     }
 }
