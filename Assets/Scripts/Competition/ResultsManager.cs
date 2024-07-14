@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using ICSharpCode.NRefactory.Ast;
 using OpenSkiJumping.Competition.Persistent;
 using OpenSkiJumping.Competition.Runtime;
-
 using OpenSkiJumping.Jumping;
 using OpenSkiJumping.New;
 using UnityEngine;
@@ -289,13 +289,34 @@ namespace OpenSkiJumping.Competition
         public void RegisterCPUJump(IJumpData jumpData)
         {
 
+            var currentRoundInfo = EventInfo.roundInfos[RoundIndex];
+            if (currentRoundInfo.disableJudgesMarks)
+                for (var i = 0; i < jumpData.JudgesMarks.Length; i++)
+                    jumpData.JudgesMarks[i] = 0m;
+
+            //Set init gate for round
+            if (StartListIndex == 0 && SubroundIndex == 0)
+            {
+                initGates[RoundIndex] = jumpData.Gate;
+                jumpData.InitGate = jumpData.Gate;
+            }
+
             JumpResult cpuJump = new JumpResult();
             cpuJump.distance = jumpData.CPUDistance;
-
             //Trzeba przeniesc przypisywanie jumperSkill na wczeœniejszy moment niz Gate() w jumperContorller
             cpuJump.distance = CalculateFinalCPUDistance(jumpData.CPUDistance, jumpData.JumperSkill);
-            UnityEngine.Debug.Log("Od ResultsManager jumpData.CPUDistance po uwzglêdnieniu skilla: " + cpuJump.distance);
-            cpuJump.totalPoints = cpuJump.distance;
+            jumpData.Distance = cpuJump.distance;
+            // cpuJump.judgesMarks = CalculateJudgesMarks(cpuJump.judgesMarks, cpuJump.distance, hillInfo, jumpData.JumperSkill);
+
+            decimal[] points = { 0, 0, 0, 0, 0 };
+            points = CalculateCPUJudgesMarks(points, jumpData.Distance, hillInfo, jumpData.JumperSkill); 
+            cpuJump.judgesMarks = points;
+            for (int i = 0; i < 5; i++)
+            {
+                UnityEngine.Debug.Log(" cpuJump.judgesMarks " + i + " " + cpuJump.judgesMarks[i]);
+            }
+            cpuJump.totalPoints = jumpData.Distance;
+            // cpuJump = EventProcessor.GetJumpResult(jumpData, hillInfo, currentRoundInfo.gateCompensation, currentRoundInfo.windCompensation);
 
 
 
@@ -307,6 +328,66 @@ namespace OpenSkiJumping.Competition
 
         }
 
+        public decimal[] CalculateCPUJudgesMarks(decimal [] marks, decimal distance, IHillInfo hillInfo, int skill)
+        {
+            bool crashed = false;
+
+            if (Random.Range(0, 100) > 99)
+            {
+                crashed = true;
+                UnityEngine.Debug.Log("CRASHED TRUE!");
+            }
+
+
+            float skillModifier = 1;
+            UnityEngine.Debug.Log("CalculateJudgesMark skillModifier: " + skillModifier + " skill: " + skill + " distance " + distance + " hillinfo.GetHS() " + hillInfo.GetHS());
+            if (skill != 1)
+                {
+                    skillModifier = (101 - (float)skill) / 100;
+                }
+            UnityEngine.Debug.Log("CalculateJudgesMark skillModifier: " + skillModifier);
+
+            for (int i = 0; i < marks.Length; i++)
+              {
+
+                if (!crashed)
+                {
+                    float singleMark;
+
+                    if (distance > (decimal)hillInfo.GetHS() * 0.95m)
+                    {
+
+                        singleMark = Random.Range(18f, 20f);
+                    }
+                    else if (distance > (decimal)hillInfo.GetHS() * 0.85m)
+                    {
+
+                        singleMark = Random.Range(17f, 19f);
+                    }
+                    else if (distance > (decimal)hillInfo.GetHS() * 0.75m)
+                    {
+
+                        singleMark = Random.Range(16f, 18f);
+                    }
+                    else
+                    {
+
+                        singleMark = Random.Range(15f, 17f);
+                    }
+                    
+                    singleMark -= skillModifier;
+                    UnityEngine.Debug.Log("singleMark przed rounding" + singleMark);
+                    marks[i] = Math.Round((decimal)singleMark * 2, MidpointRounding.AwayFromZero) / 2;
+                }
+                else
+                {
+                    marks[i] = 11;
+                }
+                
+              }
+
+            return marks;
+        }
 
         public decimal CalculateFinalCPUDistance(decimal distance, int skill)
         {
@@ -321,7 +402,8 @@ namespace OpenSkiJumping.Competition
                 //UnityEngine.Debug.Log("Od ResultsManager CPU Distance modifeir: " + modifier);
 
             }
-            else if (skill < 90)
+            
+            if (skill < 90)
             {
                 //UnityEngine.Debug.Log("Gra widzi, ze skill jest nizszy niz 90");
                 modifier -= ((90f - (float)skill) / 110f);

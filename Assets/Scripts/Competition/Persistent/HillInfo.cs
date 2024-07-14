@@ -9,6 +9,7 @@ namespace OpenSkiJumping.Competition.Persistent
         decimal GetDistancePoints(decimal distance);
         decimal GetWindPoints(decimal wind);
         decimal GetGatePoints(int gatesDiff);
+        float GetHS();
     }
 
     [Serializable]
@@ -99,5 +100,7 @@ namespace OpenSkiJumping.Competition.Persistent
 
         public decimal GetGatePoints(int gatesDiff) =>
             Math.Round(-gatesDiff * GatesSpacing * GateFactor * PointsPerMeter, 1);
+
+        public float GetHS() => hs;
     }
 }
