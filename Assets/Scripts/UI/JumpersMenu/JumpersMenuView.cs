@@ -79,6 +79,7 @@ namespace OpenSkiJumping.UI.JumpersMenu
             countryCodeInput.onEndEdit.AddListener(x => OnValueChanged());
             imagePathInput.onEndEdit.AddListener(x => OnValueChanged());
             genderSelect.onValueChanged.AddListener(x => OnValueChanged());
+            controlSelect.onValueChanged.AddListener(x => OnValueChanged());
             helmetColorPicker.OnColorChange += OnValueChanged;
             suitTopFrontColorPicker.OnColorChange += OnValueChanged;
             suitTopBackColorPicker.OnColorChange += OnValueChanged;

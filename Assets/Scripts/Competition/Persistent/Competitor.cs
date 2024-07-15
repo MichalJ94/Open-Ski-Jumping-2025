@@ -14,6 +14,8 @@ namespace OpenSkiJumping.Competition.Persistent
 
         [JsonConverter(typeof(StringEnumConverter))]
         public Gender gender;
+
+        [JsonConverter(typeof(StringEnumConverter))]
         public Control control;
 
         public DateTime birthdate = new DateTime(1999, 8, 22);
