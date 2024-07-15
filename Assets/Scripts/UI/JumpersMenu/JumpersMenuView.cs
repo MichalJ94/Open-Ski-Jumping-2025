@@ -133,6 +133,7 @@ namespace OpenSkiJumping.UI.JumpersMenu
         [SerializeField] private TMP_InputField lastNameInput;
         [SerializeField] private TMP_InputField countryCodeInput;
         [SerializeField] private SegmentedControl genderSelect;
+        [SerializeField] private SegmentedControl controlSelect;
         [SerializeField] private SimpleColorPicker helmetColorPicker;
         [SerializeField] private SimpleColorPicker suitTopFrontColorPicker;
         [SerializeField] private SimpleColorPicker suitTopBackColorPicker;
@@ -173,6 +174,12 @@ namespace OpenSkiJumping.UI.JumpersMenu
         {
             get => genderSelect.selectedSegmentIndex;
             set => genderSelect.SetSelectedSegmentWithoutNotify(value);
+        }
+
+        public int Control
+        {
+            get => controlSelect.selectedSegmentIndex;
+            set => controlSelect.SetSelectedSegmentWithoutNotify(value);
         }
 
         public string SuitTopFront

@@ -38,6 +38,12 @@ namespace OpenSkiJumping.Competition
         Female
     }
 
+    public enum Control
+    {
+        Player,
+        CPU
+    }
+
     public enum LimitType
     {
         None,
