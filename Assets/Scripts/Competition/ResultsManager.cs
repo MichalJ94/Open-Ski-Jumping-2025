@@ -311,12 +311,8 @@ namespace OpenSkiJumping.Competition
             decimal[] points = { 0, 0, 0, 0, 0 };
             points = CalculateCPUJudgesMarks(points, jumpData.Distance, hillInfo, jumpData.JumperSkill); 
             cpuJump.judgesMarks = points;
-            for (int i = 0; i < 5; i++)
-            {
-                UnityEngine.Debug.Log(" cpuJump.judgesMarks " + i + " " + cpuJump.judgesMarks[i]);
-            }
-            cpuJump.totalPoints = jumpData.Distance;
-            // cpuJump = EventProcessor.GetJumpResult(jumpData, hillInfo, currentRoundInfo.gateCompensation, currentRoundInfo.windCompensation);
+            jumpData.JudgesMarks = points;
+            cpuJump = EventProcessor.GetJumpResult(jumpData, hillInfo, currentRoundInfo.gateCompensation, currentRoundInfo.windCompensation);
 
 
 
