@@ -69,6 +69,7 @@ namespace OpenSkiJumping.UI.JumpersMenu
             view.LastName = jumper.lastName;
             view.CountryCode = jumper.countryCode;
             view.Gender = (int) jumper.gender;
+            view.Control = (int) jumper.control;
             view.SuitTopFront = jumper.suitTopFrontColor;
             view.SuitTopBack = jumper.suitTopBackColor;
             view.SuitBottomFront = jumper.suitBottomFrontColor;
@@ -94,6 +95,7 @@ namespace OpenSkiJumping.UI.JumpersMenu
             jumper.lastName = view.LastName;
             jumper.countryCode = view.CountryCode;
             jumper.gender = (Gender) view.Gender;
+            jumper.control = (Control) view.Control;
             jumper.suitTopFrontColor = view.SuitTopFront;
             jumper.suitTopBackColor = view.SuitTopBack;
             jumper.suitBottomFrontColor = view.SuitBottomFront;

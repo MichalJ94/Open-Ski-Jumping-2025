@@ -13,6 +13,8 @@ namespace OpenSkiJumping.UI.JumpersMenu
         string LastName { get; set; }
         string CountryCode { get; set; }
         int Gender { get; set; }
+
+        int Control { get; set; }
         string SuitTopFront { get; set; }
         string SuitTopBack { get; set; }
         string SuitBottomFront { get; set; }
