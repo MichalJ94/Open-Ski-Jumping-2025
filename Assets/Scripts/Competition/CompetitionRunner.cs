@@ -38,6 +38,7 @@ namespace OpenSkiJumping.Competition
         public UnityEvent onSubroundFinish;
         public UnityEvent onSubroundStart;
         public UnityEvent onWindGateChanged;
+        public UnityEvent cpuJumpPerformed;
         [SerializeField] private RuntimeResultsManager resultsManager;
         [SerializeField] private SavesRuntime savesRepository;
         [SerializeField] private MainMenuController menuController;
@@ -234,6 +235,10 @@ namespace OpenSkiJumping.Competition
         {
             var id = resultsManager.Value.GetCurrentJumperId();
             onNewJumper.Invoke();
+            /*if (skiJumperDataController.GetControl() == 1)
+            {
+                cpuJumpPerformed.Invoke();
+            }*/
             skiJumperDataController.SetValues(_bibColors[id]);
            // Debug.Log("From HillSetup hillid:" + hillId + " storeHS: " + storeHS);
         }

@@ -146,6 +146,9 @@ namespace OpenSkiJumping.New
             }
         }
 
+      
+
+
         private void ReducePointsForShorterJump()
         {
             if ((float)jumpData.Distance < hillSize * 0.95)
@@ -453,6 +456,15 @@ namespace OpenSkiJumping.New
 
         private void Update()
         {
+
+
+                if (skiJumperDataController.GetControl() == 1)
+                {
+                    CPUJumpPerformed.Invoke();
+                }
+            
+
+
             if (OnInrun || OnOutrun)
             {
                 audioSource.mute = false;
