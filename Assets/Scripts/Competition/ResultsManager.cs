@@ -328,7 +328,7 @@ namespace OpenSkiJumping.Competition
         {
             bool crashed = false;
 
-            if (Random.Range(0, 100) > 99)
+            if (Random.Range(0, 100) > 97)
             {
                 crashed = true;
                 UnityEngine.Debug.Log("CRASHED TRUE!");
@@ -406,7 +406,7 @@ namespace OpenSkiJumping.Competition
                 //UnityEngine.Debug.Log("Od ResultsManager CPU Distance modifeir: " + modifier);
             }
             UnityEngine.Debug.Log("Od ResultsManager Distance BEFORE RANDOM: " + distance * (decimal)modifier);
-            modifier += Random.Range(-0.04f, 0.02f);
+            modifier += Random.Range(-0.06f, 0.02f);
             UnityEngine.Debug.Log("Od ResultsManager Distance AFTER RANDOM: " + distance * (decimal)modifier);
 
             return Math.Round((distance * (decimal)modifier) * 2, MidpointRounding.AwayFromZero) / 2;

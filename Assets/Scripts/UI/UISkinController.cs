@@ -31,6 +31,7 @@ namespace OpenSkiJumping.UI
         {
             foreach (var it in selectables.Where(it => it.graphic && it.skinData))
             {
+
                 it.graphic.colors = it.skinData.colors;
             }
 

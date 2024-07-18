@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using JetBrains.Annotations;
 using OpenSkiJumping.Competition.Persistent;
 using OpenSkiJumping.Data;
 using OpenSkiJumping.ScriptableObjects;
@@ -22,6 +24,8 @@ namespace OpenSkiJumping.UI.JumpersMenu
         [SerializeField] private CompetitorsRuntime jumpersRuntime;
 
         [SerializeField] private JumpersListView listView;
+        [SerializeField] private Toggle toggle;
+
         private JumpersMenuPresenter presenter;
 
         public Competitor SelectedJumper
@@ -124,7 +128,16 @@ namespace OpenSkiJumping.UI.JumpersMenu
             item.nameText.text = $"{jumper.firstName} {jumper.lastName.ToUpper()}";
             item.countryFlagText.text = jumper.countryCode;
             item.countryFlagImage.sprite = flagsData.GetFlag(jumper.countryCode);
-            item.genderIconImage.sprite = genderIcons[(int) jumper.gender];
+            item.genderIconImage.sprite = genderIcons[(int)jumper.gender];
+            item.control = jumper.control;
+           if ((int)item.control == 1)
+            {
+                item.cpuOverlay.enabled= true;
+            }
+            else
+            {
+                item.cpuOverlay.enabled = false;
+            }
         }
 
         #region JumperInfoUI

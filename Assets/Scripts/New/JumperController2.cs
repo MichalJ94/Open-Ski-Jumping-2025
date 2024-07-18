@@ -404,11 +404,27 @@ namespace OpenSkiJumping.New
             Landed = false;
             startForceScale = forceScale;
 
+
             rb = GetComponent<Rigidbody>();
             rb.isKinematic = true;
 
             ResetValues();
 
+        }
+
+
+        public void AdjustForceScaleToHillSize()
+        {
+            float hS = hillSize = competitionRunner.GetHS();
+            if (hS > 140) 
+            
+            {
+                startForceScale += (hS-140)*0.0004f;
+            }
+            if(hS < 140)
+            {
+                startForceScale -= (140 - hS) * 0.0004f;
+            }
         }
 
 
