@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1802834, g: 0.22571349, b: 0.30692235, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0.99999905, b: 0.99999905, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4773,11 +4773,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selection: {fileID: 446454415}
   selectionType: 0
+  selectableSkinData: {fileID: 0}
   toggleExtension: {fileID: 446454414}
   nameText: {fileID: 863263043}
   countryFlagText: {fileID: 2058280654}
   countryFlagImage: {fileID: 2091042132}
   genderIconImage: {fileID: 1984921828}
+  cpuOverlay: {fileID: 0}
+  control: 0
 --- !u!114 &446454414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9171,7 +9174,7 @@ PrefabInstance:
     - target: {fileID: 5545498616043676177, guid: c43e61fc9a066adce903e683a3572ed4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5545498616043676177, guid: c43e61fc9a066adce903e683a3572ed4,
         type: 3}
@@ -14581,7 +14584,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Teams
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3959785db0d300d89980b9125d513a0b, type: 2}
+  m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: -546944290218708629, guid: 3959785db0d300d89980b9125d513a0b,
     type: 2}
   m_fontSharedMaterials: []
@@ -19123,6 +19126,8 @@ MonoBehaviour:
   countryFlagText: {fileID: 1935949248}
   countryFlagImage: {fileID: 1892333361}
   resultText: {fileID: 182197609}
+  distanceText: {fileID: 0}
+  previousRoundDistanceText: {fileID: 0}
 --- !u!114 &1729412805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22596,6 +22601,8 @@ MonoBehaviour:
   countryFlagText: {fileID: 1757230790}
   countryFlagImage: {fileID: 1174279051}
   resultText: {fileID: 162993677}
+  distanceText: {fileID: 0}
+  previousRoundDistanceText: {fileID: 0}
 --- !u!114 &1978271234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24712,7 +24719,7 @@ PrefabInstance:
     - target: {fileID: 5545498616043676177, guid: c43e61fc9a066adce903e683a3572ed4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5545498616043676177, guid: c43e61fc9a066adce903e683a3572ed4,
         type: 3}

@@ -177,14 +177,14 @@ namespace OpenSkiJumping.New
 
                 if (landing == 1)//jumper attempted telemark
                 {
-                    if (ofHS > 1.07f)
+                    if (ofHS > 1.06f)
                     {
                         Crash();
                     }
                     else
                     {
-                        float saveFromStruggle = Random.Range(1, 1.04f);
-                        float saveFromFall = Random.Range(1.04f, 1.07f);
+                        float saveFromStruggle = Random.Range(1, 1.03f);
+                        float saveFromFall = Random.Range(1.03f, 1.06f);
                        // UnityEngine.Debug.Log("saveFromStruggle: " + saveFromStruggle + " saveFromFall: " + saveFromFall);
 
                         if (ofHS > saveFromStruggle)
@@ -220,14 +220,14 @@ namespace OpenSkiJumping.New
 
                 if (landing == -1)//if the jumper attempted to land on twolegs
                 {
-                    if (ofHS > 1.1f)
+                    if (ofHS > 1.08f)
                     {
                         Crash();
                     }
                     else { 
 
-                    float saveFromStruggle = Random.Range(1, 1.06f);
-                    float saveFromFall = Random.Range(1.06f, 1.10f);
+                    float saveFromStruggle = Random.Range(1, 1.05f);
+                    float saveFromFall = Random.Range(1.05f, 1.08f);
                     UnityEngine.Debug.Log("saveFromStruggle: " + saveFromStruggle + " saveFromFall: " + saveFromFall);
 
                         if (ofHS > saveFromStruggle)
@@ -419,11 +419,11 @@ namespace OpenSkiJumping.New
             if (hS > 140) 
             
             {
-                startForceScale += (hS-140)*0.0004f;
+                startForceScale += (hS-140)*0.0017f;
             }
             if(hS < 140)
             {
-                startForceScale -= (140 - hS) * 0.0004f;
+                startForceScale -= (140 - hS) * 0.0017f;
             }
         }
 

@@ -25,6 +25,11 @@ namespace OpenSkiJumping.Competition.Persistent
         private int rank;
         [SerializeField]
         private float totalPoints;
+        [SerializeField]
+        private float distance;
+        [SerializeField]
+        private float previousRoundDistance;
+
 
         public JumpResults[] Results { get => results; set => results = value; }
         public decimal QualRankPoints { get => (decimal)qualRankPoints; set => qualRankPoints = (float)value; }
@@ -32,5 +37,9 @@ namespace OpenSkiJumping.Competition.Persistent
         public int[] Bibs { get => bibs; set => bibs = value; }
         public int Rank { get => rank; set => rank = value; }
         public decimal TotalPoints { get => (decimal)totalPoints; set => totalPoints = (float)value; }
+
+        public decimal Distance { get => (decimal)distance; set => distance = (float)value; }
+
+        public decimal PreviousRoundDistance { get => (decimal)previousRoundDistance; set => previousRoundDistance = (float)value; }
     }
 }

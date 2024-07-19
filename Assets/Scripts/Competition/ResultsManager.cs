@@ -35,6 +35,8 @@ namespace OpenSkiJumping.Competition
         int GetCurrentCompetitorId();
         int GetCurrentCompetitorLocalId();
         int GetCurrentJumperId();
+
+        int GetRoundNumber();
         int CompetitorRank(int id);
         IEnumerable<(int, decimal)> GetPoints(ClassificationInfo classificationInfo);
         EventInfo EventInfo { get; }
@@ -336,12 +338,12 @@ namespace OpenSkiJumping.Competition
 
 
             float skillModifier = 1;
-            UnityEngine.Debug.Log("CalculateJudgesMark skillModifier: " + skillModifier + " skill: " + skill + " distance " + distance + " hillinfo.GetHS() " + hillInfo.GetHS());
+           // UnityEngine.Debug.Log("CalculateJudgesMark skillModifier: " + skillModifier + " skill: " + skill + " distance " + distance + " hillinfo.GetHS() " + hillInfo.GetHS());
             if (skill != 1)
                 {
                     skillModifier = (101 - (float)skill) / 100;
                 }
-            UnityEngine.Debug.Log("CalculateJudgesMark skillModifier: " + skillModifier);
+          //  UnityEngine.Debug.Log("CalculateJudgesMark skillModifier: " + skillModifier);
 
             for (int i = 0; i < marks.Length; i++)
               {
@@ -349,8 +351,30 @@ namespace OpenSkiJumping.Competition
                 if (!crashed)
                 {
                     float singleMark;
+                    if (distance > (decimal)hillInfo.GetHS() * 1.04m)
+                    {
+                        if (Random.Range(0, 100) > 70)
+                        {
+                            singleMark = 11f;
+                        }
+                        else
+                        {
+                            singleMark = Random.Range(15f, 19f);
+                        }
+                    }
+                    else if (distance > (decimal)hillInfo.GetHS() * 1.02m)
+                    { 
 
-                    if (distance > (decimal)hillInfo.GetHS() * 0.95m)
+                        if (Random.Range(0, 100) > 85)
+                        {
+                            singleMark = 11f;
+                        }
+                        else
+                        {
+                            singleMark = Random.Range(16f, 19f);
+                        }
+                    }
+                    else if (distance > (decimal)hillInfo.GetHS() * 0.95m)
                     {
 
                         singleMark = Random.Range(18f, 20f);
@@ -372,7 +396,7 @@ namespace OpenSkiJumping.Competition
                     }
                     
                     singleMark -= skillModifier;
-                    UnityEngine.Debug.Log("singleMark przed rounding" + singleMark);
+                    //UnityEngine.Debug.Log("singleMark przed rounding" + singleMark);
                     marks[i] = Math.Round((decimal)singleMark * 2, MidpointRounding.AwayFromZero) / 2;
                 }
                 else
@@ -405,9 +429,14 @@ namespace OpenSkiJumping.Competition
                 modifier -= ((90f - (float)skill) / 110f);
                 //UnityEngine.Debug.Log("Od ResultsManager CPU Distance modifeir: " + modifier);
             }
-            UnityEngine.Debug.Log("Od ResultsManager Distance BEFORE RANDOM: " + distance * (decimal)modifier);
+            UnityEngine.Debug.Log("Od ResultsManager Distance BEFORE Random: " + distance * (decimal)modifier);
             modifier += Random.Range(-0.06f, 0.02f);
-            UnityEngine.Debug.Log("Od ResultsManager Distance AFTER RANDOM: " + distance * (decimal)modifier);
+            if (Random.Range(0, 100) > 80)
+            {
+                modifier += Random.Range(-0.08f, 0.03f);
+                UnityEngine.Debug.Log("Od ResultsManager EXTRA RANDOM FACTOR! New modifier: " + modifier);
+            }
+            UnityEngine.Debug.Log("Od ResultsManager Distance AFTER Random: " + distance * (decimal)modifier);
 
             return Math.Round((distance * (decimal)modifier) * 2, MidpointRounding.AwayFromZero) / 2;
         }
@@ -419,7 +448,10 @@ namespace OpenSkiJumping.Competition
         {
             Results[primaryIndex].Results[secondaryIndex].results.Add(jump);
             Results[primaryIndex].TotalResults[secondaryIndex] =
-                Results[primaryIndex].Results[secondaryIndex].results.Sum(item => item.totalPoints);
+            Results[primaryIndex].Results[secondaryIndex].results.Sum(item => item.totalPoints);
+            Results[primaryIndex].Distance = jump.distance;
+
+
             
             Results[primaryIndex].TotalPoints = Results[primaryIndex].TotalResults.Sum();
 //Results[primaryIndex].TotalResults[secondaryIndex] i Results[primaryIndex].TotalPoints) to wynik z obu rund. Jeœli jest to runda pierwsza - tylko z pierwszej;
@@ -456,12 +488,26 @@ namespace OpenSkiJumping.Competition
             }
         }
 
+        public int roundNumber = 0;
+
+        public int GetRoundNumber()
+        {
+            return roundNumber;
+        }
+
+
         private void AddToAllRoundResults()
         {
             var competitorId = StartList[StartListIndex];
             var subroundNum = RoundIndex * subRoundsCount + SubroundIndex;
+            roundNumber = subroundNum;
             var bibCode = GetBibCode(Results[competitorId].Bibs[RoundIndex]);
+            var jumpResults = GetResultById(competitorId, SubroundIndex);
+
+            UnityEngine.Debug.Log("allRoundResults.Add((Results[competitorId].TotalPoints: " + Results[competitorId].TotalPoints + " bibCode: " + bibCode + " subroundNum " + subroundNum + " subround index " + SubroundIndex + " competitorID: " + competitorId + "Results[competitorId].TotalPoints" + Results[competitorId].TotalResults);
             allRoundResults.Add((Results[competitorId].TotalPoints, bibCode, subroundNum), competitorId);
+            // Write down the distance that will be display as previous round distance
+            if (subroundNum != 0) { Results[competitorId].PreviousRoundDistance = jumpResults.results[RoundIndex - 1].distance; }
 
             // Update rank
             for (var i = 0; i < Math.Min(competitorsCount, allRoundResults.Count); i++)

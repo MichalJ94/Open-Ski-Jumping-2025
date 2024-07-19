@@ -11,5 +11,7 @@ namespace OpenSkiJumping.TVGraphics.SideResults
         public TMP_Text countryFlagText;
         public Image countryFlagImage;
         public TMP_Text resultText;
+        public TMP_Text distanceText;
+        public TMP_Text previousRoundDistanceText;
     }
 }
