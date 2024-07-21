@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using OpenSkiJumping.Competition;
 using OpenSkiJumping.Competition.Persistent;
@@ -71,6 +72,7 @@ namespace OpenSkiJumping
                 resultsContainer.classificationResults[i].rank = Enumerable.Repeat(1, cnt).ToList();
                 resultsContainer.classificationResults[i].totalResults = Enumerable.Repeat(0m, cnt).ToList();
                 resultsContainer.classificationResults[i].totalSortedResults = Enumerable.Range(0, cnt).ToList();
+
             }
         }
     }

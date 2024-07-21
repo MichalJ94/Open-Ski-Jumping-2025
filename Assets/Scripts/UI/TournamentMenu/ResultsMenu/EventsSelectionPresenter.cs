@@ -38,9 +38,12 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
                 name = competitors[eventResults.competitorIds[it]].name,
                 countryCode = competitors[eventResults.competitorIds[it]]
                     .countryCode,
-                value = eventResults.results[it].TotalPoints
+                value = eventResults.results[it].TotalPoints,
+                distance = eventResults.results[it].Distance,
+                previousRoundDistance = eventResults.results[it].PreviousRoundDistance,
             }).ToList();
             view.ResultsListController.Results = tmp;
+            UnityEngine.Debug.Log("Od EventsSelectionPresenter index: " + index);
         }
 
 

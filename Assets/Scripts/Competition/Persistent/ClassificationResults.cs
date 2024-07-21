@@ -42,5 +42,6 @@ namespace OpenSkiJumping.Competition.Persistent
         public List<int> rank = new List<int>();
         public List<int> totalSortedResults = new List<int>();
         public List<Podiums> podiums = new List<Podiums>();
+        public List<decimal> distance = new List<decimal>();
     }
 }
