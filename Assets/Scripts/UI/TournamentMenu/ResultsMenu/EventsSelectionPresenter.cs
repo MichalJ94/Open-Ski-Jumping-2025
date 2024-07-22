@@ -39,10 +39,9 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
                 countryCode = competitors[eventResults.competitorIds[it]]
                     .countryCode,
                 value = eventResults.results[it].TotalPoints,
-
-
-
                 distance = eventResults.results[it].Results[0].results[eventResults.results[it].Results[0].results.Count - 1].distance,
+                style = eventResults.results[it].Results[0].results[eventResults.results[it].Results[0].results.Count - 1].judgesTotalPoints,
+                previousRoundStyle = eventResults.results[it].Results[0].results[eventResults.results[it].Results[0].results.Count - 2].judgesTotalPoints,
                 //distance = eventResults.results[it].Distance,
                 // distance = eventResults.results[it].Results[0].results[eventResults.results[it].Results[index].results.Count-1].distance,
 

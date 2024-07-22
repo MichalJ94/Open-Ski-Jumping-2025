@@ -29,6 +29,10 @@ namespace OpenSkiJumping.Competition.Persistent
         private float distance;
         [SerializeField]
         private float previousRoundDistance;
+        [SerializeField]
+        private float style;
+        [SerializeField]
+        private float previousRoundStyle;
 
 
         public JumpResults[] Results { get => results; set => results = value; }
@@ -41,5 +45,9 @@ namespace OpenSkiJumping.Competition.Persistent
         public decimal Distance { get => (decimal)distance; set => distance = (float)value; }
 
         public decimal PreviousRoundDistance { get => (decimal)previousRoundDistance; set => previousRoundDistance = (float)value; }
+
+        public decimal Style { get => (decimal)style; set => style = (float)value; }
+
+        public decimal PreviousRoundStyle { get => (decimal)previousRoundStyle; set => previousRoundStyle = (float)value; }
     }
 }
