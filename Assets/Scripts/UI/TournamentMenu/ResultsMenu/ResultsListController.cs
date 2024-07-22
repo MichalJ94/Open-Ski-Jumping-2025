@@ -59,9 +59,22 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
             listItem.countryFlagImage.sprite = flagsData.GetFlag(item.countryCode);
             listItem.resultText.text = $"{item.value.ToString("F1", CultureInfo.InvariantCulture)}";
             listItem.distanceText.text = $"{item.distance.ToString("F1", CultureInfo.InvariantCulture)} m";
+            if(item.previousRoundDistance > 0 && item.previousRoundDistance < 1000) { 
             listItem.previousRoundDistanceText.text = $"{item.previousRoundDistance.ToString("F1", CultureInfo.InvariantCulture)} m";
+            }
+            else
+            {
+                listItem.previousRoundDistanceText.text = "";
+            }
             listItem.styleText.text = $"{item.style.ToString("F1", CultureInfo.InvariantCulture)}";
-            listItem.previousRoundStyleText.text = $"{item.previousRoundStyle.ToString("F1", CultureInfo.InvariantCulture)}";
+            if (item.previousRoundStyle > 0 && item.previousRoundStyle <= 60)
+            {
+                listItem.previousRoundStyleText.text = $"{item.previousRoundStyle.ToString("F1", CultureInfo.InvariantCulture)}";
+            }
+            else
+            {
+                listItem.previousRoundStyleText.text = "";
+            }
             /*listItem.distanceText.text = $"{item.lastRoundDistance.ToString("F1", CultureInfo.InvariantCulture)} m";
             listItem.previousRoundDistanceText.text = $"{item.previousRoundDistance.ToString("F1", CultureInfo.InvariantCulture)} m";
             /*if (roundNumber == 0)

@@ -507,7 +507,9 @@ namespace OpenSkiJumping.Competition
             UnityEngine.Debug.Log("allRoundResults.Add((Results[competitorId].TotalPoints: " + Results[competitorId].TotalPoints + " bibCode: " + bibCode + " subroundNum " + subroundNum + " subround index " + SubroundIndex + " competitorID: " + competitorId + "Results[competitorId].TotalPoints" + Results[competitorId].TotalResults);
             allRoundResults.Add((Results[competitorId].TotalPoints, bibCode, subroundNum), competitorId);
             // Write down the distance that will be display as previous round distance
-            if (subroundNum != 0) { Results[competitorId].PreviousRoundDistance = jumpResults.results[RoundIndex - 1].distance; }
+            if (subroundNum != 0) { Results[competitorId].PreviousRoundDistance = jumpResults.results[RoundIndex - 1].distance;
+                Results[competitorId].PreviousRoundStyle = jumpResults.results[RoundIndex - 1].judgesTotalPoints;
+            }
 
             // Update rank
             for (var i = 0; i < Math.Min(competitorsCount, allRoundResults.Count); i++)
