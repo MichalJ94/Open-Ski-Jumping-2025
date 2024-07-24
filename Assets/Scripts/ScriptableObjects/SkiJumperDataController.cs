@@ -42,7 +42,7 @@ namespace OpenSkiJumping.ScriptableObjects
 
         public int GetControl()
         {
-            var id = resultsManager.Value.GetCurrentJumperId();
+            var id = resultsManager.Value.GetCurrentJumperId(); 
             competitor = competitors.competitors[id];
             return (int)competitor.control;
         }

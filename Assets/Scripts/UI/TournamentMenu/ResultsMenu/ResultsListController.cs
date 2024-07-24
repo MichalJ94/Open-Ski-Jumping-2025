@@ -66,7 +66,18 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
             {
                 listItem.previousRoundDistanceText.text = "";
             }
-            listItem.styleText.text = $"{item.style.ToString("F1", CultureInfo.InvariantCulture)}";
+
+            if(item.style > 0)
+            {
+                listItem.styleText.text = $"{item.style.ToString("F1", CultureInfo.InvariantCulture)}";
+            }
+            else
+            {
+                listItem.styleText.text = "";
+            }
+
+
+
             if (item.previousRoundStyle > 0 && item.previousRoundStyle <= 60)
             {
                 listItem.previousRoundStyleText.text = $"{item.previousRoundStyle.ToString("F1", CultureInfo.InvariantCulture)}";

@@ -478,6 +478,7 @@ namespace OpenSkiJumping.New
                 {
                     CPUJumpPerformed.Invoke();
                 }
+               
             
 
 

@@ -292,9 +292,11 @@ namespace OpenSkiJumping.Competition
         {
 
             var currentRoundInfo = EventInfo.roundInfos[RoundIndex];
-            if (currentRoundInfo.disableJudgesMarks)
+            /*if (currentRoundInfo.disableJudgesMarks)
+            {
                 for (var i = 0; i < jumpData.JudgesMarks.Length; i++)
                     jumpData.JudgesMarks[i] = 0m;
+            }*/
 
             //Set init gate for round
             if (StartListIndex == 0 && SubroundIndex == 0)
@@ -314,6 +316,11 @@ namespace OpenSkiJumping.Competition
             points = CalculateCPUJudgesMarks(points, jumpData.Distance, hillInfo, jumpData.JumperSkill); 
             cpuJump.judgesMarks = points;
             jumpData.JudgesMarks = points;
+            if (currentRoundInfo.disableJudgesMarks)
+            {
+                for (var i = 0; i < jumpData.JudgesMarks.Length; i++)
+                    jumpData.JudgesMarks[i] = 0m;
+            }
             cpuJump = EventProcessor.GetJumpResult(jumpData, hillInfo, currentRoundInfo.gateCompensation, currentRoundInfo.windCompensation);
 
 
@@ -418,7 +425,7 @@ namespace OpenSkiJumping.Competition
             if (skill > 90)
             {
               //  UnityEngine.Debug.Log("Gra widzi, ze skill jest wyzszy niz 90");
-                modifier += (((float)skill - 90f) / 110f);
+                modifier += (((float)skill - 90f) / 180f);
                 //UnityEngine.Debug.Log("Od ResultsManager CPU Distance modifeir: " + modifier);
 
             }
@@ -426,7 +433,7 @@ namespace OpenSkiJumping.Competition
             if (skill < 90)
             {
                 //UnityEngine.Debug.Log("Gra widzi, ze skill jest nizszy niz 90");
-                modifier -= ((90f - (float)skill) / 110f);
+                modifier -= ((90f - (float)skill) / 180f);
                 //UnityEngine.Debug.Log("Od ResultsManager CPU Distance modifeir: " + modifier);
             }
             UnityEngine.Debug.Log("Od ResultsManager Distance BEFORE Random: " + distance * (decimal)modifier);
