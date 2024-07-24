@@ -47,6 +47,7 @@ namespace OpenSkiJumping.ScriptableObjects
             return (int)competitor.control;
         }
 
+
         public int GetSkill(float hillsize)
         {
             var id = resultsManager.Value.GetCurrentJumperId();

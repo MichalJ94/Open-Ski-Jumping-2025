@@ -424,7 +424,7 @@ namespace OpenSkiJumping.Competition
            
             if (skill > 90)
             {
-              //  UnityEngine.Debug.Log("Gra widzi, ze skill jest wyzszy niz 90");
+
                 modifier += (((float)skill - 90f) / 180f);
                 //UnityEngine.Debug.Log("Od ResultsManager CPU Distance modifeir: " + modifier);
 
@@ -432,18 +432,18 @@ namespace OpenSkiJumping.Competition
             
             if (skill < 90)
             {
-                //UnityEngine.Debug.Log("Gra widzi, ze skill jest nizszy niz 90");
+
                 modifier -= ((90f - (float)skill) / 180f);
                 //UnityEngine.Debug.Log("Od ResultsManager CPU Distance modifeir: " + modifier);
             }
-            UnityEngine.Debug.Log("Od ResultsManager Distance BEFORE Random: " + distance * (decimal)modifier);
+           // UnityEngine.Debug.Log("Od ResultsManager Distance BEFORE Random: " + distance * (decimal)modifier);
             modifier += Random.Range(-0.06f, 0.02f);
             if (Random.Range(0, 100) > 80)
             {
                 modifier += Random.Range(-0.08f, 0.03f);
-                UnityEngine.Debug.Log("Od ResultsManager EXTRA RANDOM FACTOR! New modifier: " + modifier);
+             //   UnityEngine.Debug.Log("Od ResultsManager EXTRA RANDOM FACTOR! New modifier: " + modifier);
             }
-            UnityEngine.Debug.Log("Od ResultsManager Distance AFTER Random: " + distance * (decimal)modifier);
+            //UnityEngine.Debug.Log("Od ResultsManager Distance AFTER Random: " + distance * (decimal)modifier);
 
             return Math.Round((distance * (decimal)modifier) * 2, MidpointRounding.AwayFromZero) / 2;
         }
@@ -511,19 +511,41 @@ namespace OpenSkiJumping.Competition
             var bibCode = GetBibCode(Results[competitorId].Bibs[RoundIndex]);
             var jumpResults = GetResultById(competitorId, SubroundIndex);
 
-            UnityEngine.Debug.Log("allRoundResults.Add((Results[competitorId].TotalPoints: " + Results[competitorId].TotalPoints + " bibCode: " + bibCode + " subroundNum " + subroundNum + " subround index " + SubroundIndex + " competitorID: " + competitorId + "Results[competitorId].TotalPoints" + Results[competitorId].TotalResults);
+          //  UnityEngine.Debug.Log("allRoundResults.Add((Results[competitorId].TotalPoints: " + Results[competitorId].TotalPoints + " bibCode: " + bibCode + " subroundNum " + subroundNum + " subround index " + SubroundIndex + " competitorID: " + competitorId + "Results[competitorId].TotalPoints" + Results[competitorId].TotalResults);
             allRoundResults.Add((Results[competitorId].TotalPoints, bibCode, subroundNum), competitorId);
+
+
+
             // Write down the distance that will be display as previous round distance
-            if (subroundNum != 0) { Results[competitorId].PreviousRoundDistance = jumpResults.results[RoundIndex - 1].distance;
+            if (subroundNum != 0 && subRoundsCount == 1)
+            {
+                Results[competitorId].PreviousRoundDistance = jumpResults.results[RoundIndex - 1].distance;
                 Results[competitorId].PreviousRoundStyle = jumpResults.results[RoundIndex - 1].judgesTotalPoints;
             }
 
+
+
             // Update rank
             for (var i = 0; i < Math.Min(competitorsCount, allRoundResults.Count); i++)
-                if (i > 0 && allRoundResults.Keys[i].points == allRoundResults.Keys[i - 1].points)
-                    Results[allRoundResults.Values[i]].Rank = Results[allRoundResults.Values[i - 1]].Rank;
-                else
-                    Results[allRoundResults.Values[i]].Rank = i + 1;
+            {
+
+
+                    UnityEngine.Debug.Log("Debugging ResultsManager i: " + i + " competitorCount " + competitorsCount + " allRoundResults.Count " + allRoundResults.Count);
+                    if (i > 0 && allRoundResults.Keys[i].points == allRoundResults.Keys[i - 1].points)
+                        Results[allRoundResults.Values[i]].Rank = Results[allRoundResults.Values[i - 1]].Rank;
+                    else
+                        Results[allRoundResults.Values[i]].Rank = i + 1;
+                
+
+
+            }
+            ;
+
+
+
+
+
+
         }
 
         private void RemoveFromAllRoundResults()

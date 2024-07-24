@@ -412,7 +412,18 @@ namespace OpenSkiJumping.New
 
         }
 
+        public void ProcessControl()
+        {
+            if (skiJumperDataController.GetControl() == 1)
+            {
+                CPUJumpPerformed.Invoke();
+            }
+            else
+            {
+                Gate();
+            }
 
+        }
         public void AdjustForceScaleToHillSize()
         {
             float hS = hillSize = competitionRunner.GetHS();
@@ -474,7 +485,7 @@ namespace OpenSkiJumping.New
         {
 
 
-                if (skiJumperDataController.GetControl() == 1)
+            if (skiJumperDataController.GetControl() == 1)
                 {
                     CPUJumpPerformed.Invoke();
                 }
