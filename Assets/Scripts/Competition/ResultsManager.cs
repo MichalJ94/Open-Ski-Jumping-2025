@@ -530,7 +530,7 @@ namespace OpenSkiJumping.Competition
             {
 
 
-                    UnityEngine.Debug.Log("Debugging ResultsManager i: " + i + " competitorCount " + competitorsCount + " allRoundResults.Count " + allRoundResults.Count);
+                    //UnityEngine.Debug.Log("Debugging ResultsManager i: " + i + " competitorCount " + competitorsCount + " allRoundResults.Count " + allRoundResults.Count);
                     if (i > 0 && allRoundResults.Keys[i].points == allRoundResults.Keys[i - 1].points)
                         Results[allRoundResults.Values[i]].Rank = Results[allRoundResults.Values[i - 1]].Rank;
                     else

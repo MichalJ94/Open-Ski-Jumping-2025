@@ -7,6 +7,8 @@ using OpenSkiJumping.UI.CalendarEditor.Events;
 using OpenSkiJumping.UI.ListView;
 using UnityEngine;
 
+
+
 namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
 {
     public class EventsSelectionView : MonoBehaviour, IEventsSelectionView
@@ -21,6 +23,8 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
         [SerializeField] private ResultsListController resultsListController;
 
         [SerializeField] private TournamentMenuData tournamentMenuData;
+
+        [SerializeField] private EventResultsHeader eventResultsHeader;
 
         public EventInfo SelectedEvent
         {
@@ -54,6 +58,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
             listView.ClampSelectedIndex();
             listView.ScrollToIndex(listView.SelectedIndex);
             listView.RefreshShownValue();
+          //  eventResultsHeader.UpdateAccordingToSelectedEvent(item);
         }
 
 
@@ -80,13 +85,35 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
             listView.Initialize(BindListViewItem);
         }
 
+
+        public void OnNewEventSelected()
+        {
+
+                eventResultsHeader.UpdateAccordingToSelectedEvent(SelectedEvent);
+
+        }
+
         private void BindListViewItem(int index, EventsListItem listItem)
         {
             var item = events[index];
 
             listItem.idText.text = $"{index + 1}";
-            listItem.nameText.text = $"{item.hillId}";
+
+            if (item.roundInfos.name[0] == 'Q')
+            {
+                listItem.nameText.text = $"{item.hillId} ({item.roundInfos.name[0]})";
+                
+            }
+            else if (item.roundInfos.name.Contains("Trial"))
+            {
+                listItem.nameText.text = $"{item.hillId} Trial";
+            }
+                else
+            {
+                listItem.nameText.text = $"{item.hillId}";
+            }
             listItem.eventTypeImage.sprite = iconsData.GetEventTypeIcon(item.eventType);
+            listItem.preset.text = $"{item.roundInfos.name[0]}";
         }
     }
 }

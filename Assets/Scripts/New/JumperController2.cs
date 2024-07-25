@@ -34,6 +34,7 @@ namespace OpenSkiJumping.New
         private float torqueCoef = 0f;
         private int WindThrustDeterminer;
         [SerializeField]  private int WindThrustDeterminerTimesUsed;
+        [SerializeField] private float fixedUpdateTorqueReference;
         private float forceScaleModifier;
 
 
@@ -625,8 +626,9 @@ namespace OpenSkiJumping.New
                     rb.AddForce(liftVec * ((float)lift * vel.sqrMagnitude * forceScale));
                     var torque = new Vector3(0.0f, 0.0f,
                         (90 - (float)angle) * Time.fixedDeltaTime * torqueCoef);
+                fixedUpdateTorqueReference = (90 - ((float)angle)) * Time.fixedDeltaTime * torqueCoef;
 
-                    //Debug.Log("Torque: " + torque.z + " angle: " + angle + " 90 - angle: " + (90 - (float)angle));
+                    //UnityEngine.Debug.Log("Torque: " + torque.z + " angle: " + angle + " 90 - angle: " + (90 - (float)angle));
 
 
                     rb.AddRelativeTorque(torque, ForceMode.Acceleration);
