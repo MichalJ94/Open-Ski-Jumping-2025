@@ -54,6 +54,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
         private void BindListViewItem(int index, SideResultsListItem listItem)
         {
             var item = results[index];
+
             listItem.rankText.text = $"{item.rank}";
             listItem.nameText.text = item.name;
             listItem.countryFlagText.text = item.countryCode;
@@ -88,11 +89,9 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
                 listItem.previousRoundStyleText.text = "";
             }
 
-
-
             for (int i = 0; i < flagsData.data.countryList.Count; i++)
             {
-                if(item.name.Contains(flagsData.data.countryList[i].en))
+                if (listItem.nameText.text.Contains(flagsData.data.countryList[i].en))
                 {
 
                     listItem.distanceText.enabled = false;
@@ -111,7 +110,9 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
                 }
 
             }
-            }
+
+
+        }
 
                /* if (name == )
                 {

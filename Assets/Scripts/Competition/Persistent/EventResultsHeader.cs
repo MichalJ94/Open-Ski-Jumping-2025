@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Odbc;
 using OpenSkiJumping.Competition;
 using OpenSkiJumping.Competition.Persistent;
+using OpenSkiJumping.ScriptableObjects;
 using TMPro;
 using UnityEngine;
 
@@ -15,12 +16,18 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
         public TMP_Text secondDistance;
         public TMP_Text firstStyle;
         public TMP_Text firstDistance;
-
+        public TranslatablePhrase result;
+        public TranslatablePhrase dist;
+        public TranslatablePhrase styl;
+        public TranslatablePhrase firstDist;
+        public TranslatablePhrase secondDist;
+        public TranslatablePhrase firstStyl;
+        public TranslatablePhrase secondStyl;
 
 
 
         private void Start()
-        { 
+        {
             eventsSelectionView.OnSelectionChanged += eventsSelectionView.OnNewEventSelected;
         }
 
@@ -59,7 +66,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
                 firstDistance.enabled = true;
                 firstStyle.enabled = true;
                 secondDistance.enabled = true;
-                secondDistance.text = "2nd Dist";
+                secondDistance.text = secondDist.CurrentValue;
                 secondStyle.enabled = true;
                 secondStyle.text = "2nd Style";
             }
