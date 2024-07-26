@@ -31,6 +31,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
     {
         [SerializeField] private FlagsData flagsData;
         [SerializeField] private ResultsListView listView;
+        [SerializeField] private EventsSelectionView eventsSelectionView;
         private List<ResultsListItem> results;
 
 
@@ -86,6 +87,49 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
             {
                 listItem.previousRoundStyleText.text = "";
             }
+
+
+
+            for (int i = 0; i < flagsData.data.countryList.Count; i++)
+            {
+                if(item.name.Contains(flagsData.data.countryList[i].en))
+                {
+
+                    listItem.distanceText.enabled = false;
+                    listItem.previousRoundDistanceText.enabled = false;
+                    listItem.styleText.enabled = false;
+                    listItem.previousRoundStyleText.enabled = false;
+                    return;
+                }
+                else
+                {
+                    listItem.distanceText.enabled = true;
+                    listItem.previousRoundDistanceText.enabled = true;
+                    listItem.styleText.enabled = true;
+                    listItem.previousRoundStyleText.enabled = true;
+
+                }
+
+            }
+            }
+
+               /* if (name == )
+                {
+                    Debug.Log("Teraz .");
+                    /*              listItem.distanceText.enabled = false;
+                                  listItem.previousRoundDistanceText.enabled = false;
+                                  listItem.styleText.enabled = false;
+                                  listItem.previousRoundStyleText.enabled = false;
+                              }
+                              else
+                              {
+                                  listItem.distanceText.enabled = true;
+                                  listItem.previousRoundDistanceText.enabled = true;
+                                  listItem.styleText.enabled = true;
+                                  listItem.previousRoundStyleText.enabled = true;
+
+                }*/
+            
             /*listItem.distanceText.text = $"{item.lastRoundDistance.ToString("F1", CultureInfo.InvariantCulture)} m";
             listItem.previousRoundDistanceText.text = $"{item.previousRoundDistance.ToString("F1", CultureInfo.InvariantCulture)} m";
             /*if (roundNumber == 0)
@@ -98,4 +142,3 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
             }*/
         }
     }
-}

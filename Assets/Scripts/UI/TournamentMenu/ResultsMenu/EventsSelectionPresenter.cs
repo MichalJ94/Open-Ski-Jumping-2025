@@ -26,7 +26,6 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
         private void SetResults()
         {
             var index = view.CurrentEventIndex;
-            UnityEngine.Debug.Log("Od EventsSelectionPresenter index: " + index);
             if (index == -1) return;
             var competitors = (view.SelectedEvent.eventType == EventType.Individual
                 ? model.GameSave.competitors.Select(it =>
