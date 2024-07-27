@@ -36,7 +36,7 @@ namespace OpenSkiJumping.New
         [SerializeField]  private int WindThrustDeterminerTimesUsed;
         [SerializeField] private float fixedUpdateTorqueReference;
         private float forceScaleModifier;
-
+        //                                                                                          BUG Z ROTACJĄ LEŻY W WINDTHRUSTDETERMINERTIMESUSED.
 
         bool button0, button1;
         public bool willFall;
