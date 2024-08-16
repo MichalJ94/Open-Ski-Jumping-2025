@@ -16,6 +16,8 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
         public TMP_Text secondDistance;
         public TMP_Text firstStyle;
         public TMP_Text firstDistance;
+
+
         public TranslatablePhrase result;
         public TranslatablePhrase dist;
         public TranslatablePhrase styl;
@@ -42,7 +44,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
                 firstDistance.enabled = false;
                 firstStyle.enabled = false;
                 secondDistance.enabled = true;
-                secondDistance.text = "Dist";
+                secondDistance.text = dist.CurrentValue;
                 secondStyle.enabled = false;
             }
             else if (item.roundInfos.name.Contains("Qual"))
@@ -50,9 +52,10 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
                 firstDistance.enabled = false;
                 firstStyle.enabled = false;
                 secondDistance.enabled = true;
-                secondDistance.text = "Dist";
+                secondDistance.text = dist.CurrentValue;
                 secondStyle.enabled = true;
-                secondStyle.text = "Style";
+                secondStyle.text = styl.CurrentValue;
+                
             }
             else if (item.eventType == Competition.EventType.Team)
             {
@@ -64,11 +67,13 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
             else
             {
                 firstDistance.enabled = true;
+                firstDistance.text = firstDist.CurrentValue;
                 firstStyle.enabled = true;
+                firstStyle.text = firstStyl.CurrentValue;
                 secondDistance.enabled = true;
                 secondDistance.text = secondDist.CurrentValue;
                 secondStyle.enabled = true;
-                secondStyle.text = "2nd Style";
+                secondStyle.text = secondStyl.CurrentValue;
             }
 
         }
