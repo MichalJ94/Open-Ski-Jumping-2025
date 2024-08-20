@@ -15,6 +15,5 @@ namespace OpenSkiJumping.TVGraphics.SideResults
         public TMP_Text previousRoundDistanceText;
         public TMP_Text styleText;
         public TMP_Text previousRoundStyleText;
-        public TMP_Text firstPlacesText;
     }
 }

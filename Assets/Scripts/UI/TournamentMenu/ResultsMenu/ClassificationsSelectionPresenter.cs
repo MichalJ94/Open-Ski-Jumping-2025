@@ -42,7 +42,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
                     name = competitors[it].name,
                     countryCode = competitors[it].countryCode,
                     value = model.GameSave.resultsContainer.classificationResults[index].totalResults[it],
-                    firstPlaces = CountFirstPlaces(index, it)
+                    style = CountFirstPlaces(index, it)
                 }); ;
           //  UnityEngine.Debug.Log("Od ClassificationPresenter index: " + index);
         }
