@@ -68,6 +68,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
             resultsListController.Initialize();
             presenter = new EventsSelectionPresenter(this, tournamentMenuData);
             initialized = true;
+            eventResultsHeader.UpdateAccordingToSelectedEvent(SelectedEvent);
         }
 
         private void OnEnable()

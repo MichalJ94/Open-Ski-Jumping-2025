@@ -20,6 +20,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
         public decimal previousRoundDistance;
         public decimal style;
         public decimal previousRoundStyle;
+        public int firstPlaces;
     }
 
     public interface IResultsListController
@@ -78,6 +79,13 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
                 listItem.styleText.text = "";
             }
 
+            // Number of third places in Classifications view
+            if (item.distance == null)
+            {
+
+                listItem.distanceText.text = $" 1 ";
+            }
+
 
 
             if (item.previousRoundStyle > 0 && item.previousRoundStyle <= 60)
@@ -111,6 +119,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
 
             }
 
+            listItem.firstPlacesText.text = item.firstPlaces.ToString();
 
         }
 

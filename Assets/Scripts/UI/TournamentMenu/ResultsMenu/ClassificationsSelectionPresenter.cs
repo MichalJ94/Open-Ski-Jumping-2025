@@ -1,5 +1,8 @@
+using System;
+using System.Diagnostics;
 using System.Linq;
 using OpenSkiJumping.Competition;
+using OpenSkiJumping.Data;
 
 namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
 {
@@ -7,6 +10,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
     {
         private readonly TournamentMenuData model;
         private readonly IClassificationsSelectionView view;
+        private readonly SavesRuntime savesRuntime;
 
         public ClassificationsSelectionPresenter(IClassificationsSelectionView view, TournamentMenuData model)
         {
@@ -30,16 +34,17 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
                     (name: $"{it.competitor.firstName} {it.competitor.lastName.ToUpper()}", it.competitor.countryCode))
                 : model.GameSave.teams.Select(it => (name: it.team.teamName, it.team.countryCode))).ToList();
 
+
             view.ResultsListController.Results = model.GameSave.resultsContainer.classificationResults[index]
                 .totalSortedResults.Select(it => new ResultsListItem
                 {
                     rank = model.GameSave.resultsContainer.classificationResults[index].rank[it],
                     name = competitors[it].name,
                     countryCode = competitors[it].countryCode,
-                    value = model.GameSave.resultsContainer.classificationResults[index].totalResults[it]
-
-                });
-            UnityEngine.Debug.Log("Od ClassificationPresenter index: " + index);
+                    value = model.GameSave.resultsContainer.classificationResults[index].totalResults[it],
+                    firstPlaces = CountFirstPlaces(index, it)
+                }); ;
+          //  UnityEngine.Debug.Log("Od ClassificationPresenter index: " + index);
         }
 
 
@@ -53,7 +58,19 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
         {
             PresentList();
             view.SelectedClassification = model.GameSave.calendar.classifications.FirstOrDefault();
+           // CountFirstPlaces();
             SetResults();
+        }
+
+        private int CountFirstPlaces(int classificationIndex, int jumper)
+        {
+            var index = view.CurrentClassificationIndex;
+            var eventCount = model.GameSave.resultsContainer.eventIndex;
+            UnityEngine.Debug.Log("Od CountFirstPLaces eventCount:" + eventCount);
+            var eventResults = model.GameSave.resultsContainer.eventResults;
+            return eventCount;
+            /*for (int i = 0, i < save.)
+                return 1;*/
         }
     }
 }

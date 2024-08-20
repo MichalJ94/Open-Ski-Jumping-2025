@@ -361,7 +361,7 @@ namespace OpenSkiJumping.Competition
                     {
                         if (Random.Range(0, 100) > 70)
                         {
-                            singleMark = 11f;
+                            singleMark = Random.Range(10, 12);
                         }
                         else
                         {
@@ -373,7 +373,7 @@ namespace OpenSkiJumping.Competition
 
                         if (Random.Range(0, 100) > 85)
                         {
-                            singleMark = 11f;
+                            singleMark = Random.Range(10, 12);
                         }
                         else
                         {
@@ -407,7 +407,7 @@ namespace OpenSkiJumping.Competition
                 }
                 else
                 {
-                    marks[i] = 11;
+                    marks[i] = Random.Range(10, 12);
                 }
                 
               }
@@ -669,8 +669,11 @@ namespace OpenSkiJumping.Competition
 
             if (EventInfo.eventType == EventType.Individual)
             {
+                UnityEngine.Debug.Log("   if (EventInfo.eventType == EventType.Individual) GetIndividualPoints running");
+
                 return Results.Select((val, index) =>
                     (OrderedParticipants[index].id, pointsGiver.GetPoints(classificationInfo, val, 0)));
+
             }
             
             //EventInfo.eventType == EventType.Team
@@ -679,6 +682,7 @@ namespace OpenSkiJumping.Competition
             for (var i = 0; i < Results.Length; i++)
             {
                 res.AddRange(Results[i].TotalResults.Select((t, j) => (OrderedParticipants[i].competitors[j], t)));
+                UnityEngine.Debug.Log("for (var i = 0; i < Results.Length; i++) running. i: " + i);
             }
 
             if (classificationInfo.classificationType == ClassificationType.Points)
@@ -695,6 +699,7 @@ namespace OpenSkiJumping.Competition
                 else indRank[i] = i + 1;
             }
 
+            UnityEngine.Debug.Log("            return res.Select((it, ind) => (it.Item1, PointsUtils.GetPlacePoints(classificationInfo, ind, 0)));");
             return res.Select((it, ind) => (it.Item1, PointsUtils.GetPlacePoints(classificationInfo, ind, 0)));
                 // 0 < indRank[ind] && indRank[ind] < classificationInfo.pointsTables[0].value.Length
                 //     ? classificationInfo.pointsTables[0].value[indRank[ind] - 1]

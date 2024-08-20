@@ -30,7 +30,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
 
         private void Start()
         {
-            eventsSelectionView.OnSelectionChanged += eventsSelectionView.OnNewEventSelected;
+           eventsSelectionView.OnSelectionChanged += eventsSelectionView.OnNewEventSelected;
         }
 
 
