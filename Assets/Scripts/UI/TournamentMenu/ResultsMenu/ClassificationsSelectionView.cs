@@ -22,6 +22,8 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
 
         [SerializeField] private TournamentMenuData tournamentMenuData;
 
+        [SerializeField] private ClassificationResultsHeader classificationResultsHeader;
+
         public ClassificationInfo SelectedClassification
         {
             get => listView.SelectedIndex < 0 ? null : classifications[listView.SelectedIndex];
@@ -72,6 +74,12 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
             listView.Reset();
         }
 
+        public void OnNewClasificationSelected()
+        {
+
+            classificationResultsHeader.UpdateAccordingToSelectedEvent(SelectedClassification);
+
+        }
 
         private void ListViewSetup()
         {

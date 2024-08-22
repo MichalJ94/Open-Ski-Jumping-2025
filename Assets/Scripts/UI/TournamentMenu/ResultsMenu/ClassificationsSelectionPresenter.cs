@@ -42,7 +42,9 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
                     name = competitors[it].name,
                     countryCode = competitors[it].countryCode,
                     value = model.GameSave.resultsContainer.classificationResults[index].totalResults[it],
-                    style = CountFirstPlaces(index, it)
+                    style = CountFirstPlaces(index, it),
+                    previousRoundStyle = CountSecondPlaces(index, it),
+                    previousRoundDistance = CountThirdPlaces(index, it)
                 }); ;
             //  UnityEngine.Debug.Log("Od ClassificationPresenter index: " + index);
         }
@@ -71,39 +73,47 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
             int actualIDofWinner;
             int firstPlacesCount = 0;
 
-
-            for (int i = 0; i < model.GameSave.calendar.events.Count; i++)
+            for (int i = 0; i < eventCount; i++)
             {
                 for (int j = 0; j < model.GameSave.calendar.events[i].classifications.Count; j++)
                 {
-                    if (j == classificationIndex)
+                    
+                    if (j == classificationIndex && model.GameSave.calendar.classifications[classificationIndex].eventType != EventType.Team && model.GameSave.calendar.events[i].eventType != EventType.Team)
                     {
                         competitorIDsofWinner = eventResults[i].finalResults[0];
                         actualIDofWinner = eventResults[i].competitorIds[competitorIDsofWinner];
-                        UnityEngine.Debug.Log("firstPlacesCounter eventResults[i] " + i + " classificationIndex: " + j + " competitorIDsofWinner: " + competitorIDsofWinner + " actualIDofWinner " + actualIDofWinner);
-                    }
+                        //UnityEngine.Debug.Log("firstPlacesCounter eventResults[i] " + i + " classificationIndex: " + j + " competitorIDsofWinner: " + competitorIDsofWinner + " actualIDofWinner " + actualIDofWinner);
 
-
-
-                    /*for (int k = 0; k < eventResults[i].competitorIds.Count; k++)
-                    {
-                        if (eventResults[i].finalResults[0] == 0)
+                        if (actualIDofWinner == jumper)
                         {
-                            UnityEngine.Debug.Log("Dla konkursu eventResults[i] gdzie i to: " + i + "finalResults rowne 0 dla competitorIds" + eventResults[i].competitorIds[k]);
-                            /*  if (eventResults[i].competitorIds[k] == jumper)
-                              {
-                                  UnityEngine.Debug.Log("Zwyciezca konkursu o id " + i + " jest zawodnik o ID" + k);
-                              }
+                           
+                            firstPlacesCount++;
+                        }
 
-                        }                        
+
                     }
-                    // UnityEngine.Debug.Log("firstPlacesCounter do tej klasyfikacji bierzemy info z konkursu numer o id" + i + " a id klasyfikacji to: " + j);
-                    /*if (model.GameSave.resultsContainer.classificationResults[classificationIndex].rank[jumper] == 1)
-                    {
-                        UnityEngine.Debug.Log("Zwyciêzc¹ konkursu ");
-                    }*/
+
                 }
             }
+           
+
+            /*for (int k = 0; k < eventResults[i].competitorIds.Count; k++)
+            {
+                if (eventResults[i].finalResults[0] == 0)
+                {
+                    UnityEngine.Debug.Log("Dla konkursu eventResults[i] gdzie i to: " + i + "finalResults rowne 0 dla competitorIds" + eventResults[i].competitorIds[k]);
+                    /*  if (eventResults[i].competitorIds[k] == jumper)
+                      {
+                          UnityEngine.Debug.Log("Zwyciezca konkursu o id " + i + " jest zawodnik o ID" + k);
+                      }
+
+                }                        
+            }
+            // UnityEngine.Debug.Log("firstPlacesCounter do tej klasyfikacji bierzemy info z konkursu numer o id" + i + " a id klasyfikacji to: " + j);
+            /*if (model.GameSave.resultsContainer.classificationResults[classificationIndex].rank[jumper] == 1)
+            {
+                UnityEngine.Debug.Log("Zwyciêzc¹ konkursu ");
+            }*/
 
 
             /*for (int i = 0; i < eventCount; i++)
@@ -118,7 +128,77 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
 
 
 
-            return eventCount;
+            return firstPlacesCount;
         }
+
+
+
+        private int CountSecondPlaces(int classificationIndex, int jumper)
+        {
+            var index = view.CurrentClassificationIndex;
+            var eventCount = model.GameSave.resultsContainer.eventIndex;
+            var eventResults = model.GameSave.resultsContainer.eventResults;
+            int competitorIDsof2ndPlace;
+            int actualIDof2ndPlace;
+            int secondPlacesCount = 0;
+
+
+            for (int i = 0; i < eventCount; i++)
+            {
+                for (int j = 0; j < model.GameSave.calendar.events[i].classifications.Count; j++)
+                {
+                    if (j == classificationIndex && model.GameSave.calendar.events[i].eventType != EventType.Team && model.GameSave.calendar.classifications[j].eventType != EventType.Team )
+                    {
+                        competitorIDsof2ndPlace = eventResults[i].finalResults[1];
+                        actualIDof2ndPlace = eventResults[i].competitorIds[competitorIDsof2ndPlace];
+                       // UnityEngine.Debug.Log("secondPlacesCounter eventResults[i] " + i + " classificationIndex: " + j + " competitorIDsofWinner: " + competitorIDsof2ndPlace + " actualIDofWinner " + actualIDof2ndPlace);
+
+                        if (actualIDof2ndPlace == jumper)
+                        {
+                            secondPlacesCount++;
+                        }
+
+
+                    }
+
+                }
+            }
+            return secondPlacesCount;
+        }
+
+        private int CountThirdPlaces(int classificationIndex, int jumper)
+        {
+            var index = view.CurrentClassificationIndex;
+            var eventCount = model.GameSave.resultsContainer.eventIndex;
+            var eventResults = model.GameSave.resultsContainer.eventResults;
+            int competitorIDsof3rdPlace;
+            int actualIDof3rdPlace;
+            int thirdPlacesCount = 0;
+
+
+            for (int i = 0; i < eventCount; i++)
+            {
+                for (int j = 0; j < model.GameSave.calendar.events[i].classifications.Count; j++)
+                {
+                    if (j == classificationIndex && model.GameSave.calendar.events[i].eventType != EventType.Team && model.GameSave.calendar.classifications[j].eventType != EventType.Team)
+                    {
+                        competitorIDsof3rdPlace = eventResults[i].finalResults[2];
+                        actualIDof3rdPlace = eventResults[i].competitorIds[competitorIDsof3rdPlace];
+                        //UnityEngine.Debug.Log("thirdPlacesCounter eventResults[i] " + i + " classificationIndex: " + j + " competitorIDsofWinner: " + competitorIDsof3rdPlace + " actualIDofWinner " + actualIDof3rdPlace);
+
+                        if (actualIDof3rdPlace == jumper)
+                        {
+                            thirdPlacesCount++;
+                        }
+
+
+                    }
+
+                }
+            }
+            return thirdPlacesCount;
+        }
+
+
     }
 }

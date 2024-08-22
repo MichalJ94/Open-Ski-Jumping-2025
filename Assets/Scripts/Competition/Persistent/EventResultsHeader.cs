@@ -47,7 +47,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
                 secondDistance.text = dist.CurrentValue;
                 secondStyle.enabled = false;
             }
-            else if (item.roundInfos.name.Contains("Qual"))
+            if (item.roundInfos.name.Contains("Qual"))
             {
                 firstDistance.enabled = false;
                 firstStyle.enabled = false;

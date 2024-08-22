@@ -79,13 +79,6 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
                 listItem.styleText.text = "";
             }
 
-            // Number of third places in Classifications view
-            if (item.distance < 1)
-            {
-
-                listItem.distanceText.text = $" 1 ";
-                listItem.styleText.text = item.style.ToString();
-            }
 
 
 
@@ -100,7 +93,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
 
             for (int i = 0; i < flagsData.data.countryList.Count; i++)
             {
-                if (listItem.nameText.text.Contains(flagsData.data.countryList[i].en))
+                if (listItem.nameText.text.Contains(flagsData.data.countryList[i].en) && flagsData.data.countryList[i].en != "France")
                 {
 
                     listItem.distanceText.enabled = false;
@@ -120,36 +113,47 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
 
             }
 
-
-
-        }
-
-               /* if (name == )
-                {
-                    Debug.Log("Teraz .");
-                    /*              listItem.distanceText.enabled = false;
-                                  listItem.previousRoundDistanceText.enabled = false;
-                                  listItem.styleText.enabled = false;
-                                  listItem.previousRoundStyleText.enabled = false;
-                              }
-                              else
-                              {
-                                  listItem.distanceText.enabled = true;
-                                  listItem.previousRoundDistanceText.enabled = true;
-                                  listItem.styleText.enabled = true;
-                                  listItem.previousRoundStyleText.enabled = true;
-
-                }*/
-            
-            /*listItem.distanceText.text = $"{item.lastRoundDistance.ToString("F1", CultureInfo.InvariantCulture)} m";
-            listItem.previousRoundDistanceText.text = $"{item.previousRoundDistance.ToString("F1", CultureInfo.InvariantCulture)} m";
-            /*if (roundNumber == 0)
+            // Number of third places in Classifications view
+            if (item.distance < 1)
             {
-                listItem.previousRoundDistanceText.enabled = false;
+
+                listItem.distanceText.text = $" dupa ";
+                listItem.styleText.text = item.style.ToString();
+                listItem.previousRoundStyleText.text = item.previousRoundStyle.ToString();
+                listItem.previousRoundDistanceText.text = item.previousRoundDistance.ToString();
             }
-            else
-            {
-                listItem.previousRoundDistanceText.enabled = true;
-            }*/
+
+
+
+
         }
+
+        /* if (name == )
+         {
+             Debug.Log("Teraz .");
+             /*              listItem.distanceText.enabled = false;
+                           listItem.previousRoundDistanceText.enabled = false;
+                           listItem.styleText.enabled = false;
+                           listItem.previousRoundStyleText.enabled = false;
+                       }
+                       else
+                       {
+                           listItem.distanceText.enabled = true;
+                           listItem.previousRoundDistanceText.enabled = true;
+                           listItem.styleText.enabled = true;
+                           listItem.previousRoundStyleText.enabled = true;
+
+         }*/
+
+        /*listItem.distanceText.text = $"{item.lastRoundDistance.ToString("F1", CultureInfo.InvariantCulture)} m";
+        listItem.previousRoundDistanceText.text = $"{item.previousRoundDistance.ToString("F1", CultureInfo.InvariantCulture)} m";
+        /*if (roundNumber == 0)
+        {
+            listItem.previousRoundDistanceText.enabled = false;
+        }
+        else
+        {
+            listItem.previousRoundDistanceText.enabled = true;
+        }*/
+    }
     }
