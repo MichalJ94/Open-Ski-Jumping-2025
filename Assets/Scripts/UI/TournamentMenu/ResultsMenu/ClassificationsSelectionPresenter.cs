@@ -77,8 +77,8 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
             {
                 for (int j = 0; j < model.GameSave.calendar.events[i].classifications.Count; j++)
                 {
-                    
-                    if (j == classificationIndex && model.GameSave.calendar.classifications[classificationIndex].eventType != EventType.Team && model.GameSave.calendar.events[i].eventType != EventType.Team)
+                    //Ogarnac dlaczego zlicza podia do Ski Flying Cup a nie do TCS
+                    if (model.GameSave.calendar.events[i].classifications[j] == classificationIndex && model.GameSave.calendar.classifications[classificationIndex].eventType != EventType.Team && model.GameSave.calendar.events[i].eventType != EventType.Team )
                     {
                         competitorIDsofWinner = eventResults[i].finalResults[0];
                         actualIDofWinner = eventResults[i].competitorIds[competitorIDsofWinner];
@@ -86,7 +86,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
 
                         if (actualIDofWinner == jumper)
                         {
-                           
+                            UnityEngine.Debug.Log("firstPlacesCounter FIRST PLACE COUNTING NOW!! eventResults[i] " + i + " classificationIndex: " + classificationIndex + " j " + j + " classifications count for this event: " + model.GameSave.calendar.events[i].classifications.Count);
                             firstPlacesCount++;
                         }
 
@@ -147,7 +147,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
             {
                 for (int j = 0; j < model.GameSave.calendar.events[i].classifications.Count; j++)
                 {
-                    if (j == classificationIndex && model.GameSave.calendar.events[i].eventType != EventType.Team && model.GameSave.calendar.classifications[j].eventType != EventType.Team )
+                    if (model.GameSave.calendar.events[i].classifications[j] == classificationIndex && model.GameSave.calendar.events[i].eventType != EventType.Team && model.GameSave.calendar.classifications[j].eventType != EventType.Team )
                     {
                         competitorIDsof2ndPlace = eventResults[i].finalResults[1];
                         actualIDof2ndPlace = eventResults[i].competitorIds[competitorIDsof2ndPlace];
@@ -180,7 +180,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
             {
                 for (int j = 0; j < model.GameSave.calendar.events[i].classifications.Count; j++)
                 {
-                    if (j == classificationIndex && model.GameSave.calendar.events[i].eventType != EventType.Team && model.GameSave.calendar.classifications[j].eventType != EventType.Team)
+                    if (model.GameSave.calendar.events[i].classifications[j] == classificationIndex && model.GameSave.calendar.events[i].eventType != EventType.Team && model.GameSave.calendar.classifications[j].eventType != EventType.Team)
                     {
                         competitorIDsof3rdPlace = eventResults[i].finalResults[2];
                         actualIDof3rdPlace = eventResults[i].competitorIds[competitorIDsof3rdPlace];

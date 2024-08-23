@@ -93,7 +93,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
 
             for (int i = 0; i < flagsData.data.countryList.Count; i++)
             {
-                if (listItem.nameText.text.Contains(flagsData.data.countryList[i].en) && flagsData.data.countryList[i].en != "France")
+                if (listItem.nameText.text == flagsData.data.countryList[i].en)
                 {
 
                     listItem.distanceText.enabled = false;

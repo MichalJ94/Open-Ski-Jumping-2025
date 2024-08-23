@@ -32,7 +32,7 @@ namespace OpenSkiJumping.New
         public CompetitionRunner competitionRunner;
         public RuntimeResultsManager resultsManager;
         private float torqueCoef = 0f;
-        private int WindThrustDeterminer;
+        [SerializeField] private int WindThrustDeterminer;
         [SerializeField]  private int WindThrustDeterminerTimesUsed;
         [SerializeField] private float fixedUpdateTorqueReference;
         private float forceScaleModifier;
@@ -521,7 +521,7 @@ namespace OpenSkiJumping.New
             {
                 button0 |= Input.GetMouseButtonDown(0);
                 button1 |= Input.GetMouseButtonDown(1);
-                //Debug.Log("Wind Thrust used " + WindThrustDeterminerTimesUsed + " times.");
+                
                 Land();
 
             }
