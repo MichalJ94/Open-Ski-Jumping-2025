@@ -152,7 +152,16 @@ namespace OpenSkiJumping.New
 
         private void ReducePointsForShorterJump()
         {
-            if ((float)jumpData.Distance < hillSize * 0.95)
+            decimal distanceAwayFromHS = 0;
+            decimal pointsToDeduct = 0;
+
+            if ((float)jumpData.Distance < hillSize)
+            {
+                distanceAwayFromHS = ((decimal)hillSize - jumpData.Distance)/(decimal)hillSize;
+                pointsToDeduct = Math.Round(distanceAwayFromHS * 25, MidpointRounding.AwayFromZero) / 2;
+                judgesController.PointDeduction(1, pointsToDeduct);
+            }
+            /*if ((float)jumpData.Distance < hillSize * 0.95)
             {
                 judgesController.PointDeduction(1, 0.5m);
                // UnityEngine.Debug.Log("Redukcja punktów za krótki skok 0.95");
@@ -166,7 +175,7 @@ namespace OpenSkiJumping.New
             {
                 judgesController.PointDeduction(1, 1);
                 //UnityEngine.Debug.Log("Redukcja punktów za krótki skok 0.75");
-            }
+            }*/
         }
 
         private void ProcessLanding()
@@ -428,14 +437,14 @@ namespace OpenSkiJumping.New
         public void AdjustForceScaleToHillSize()
         {
             float hS = hillSize = competitionRunner.GetHS();
-            if (hS > 140) 
+            if (hS > 130) 
             
             {
-                startForceScale += (hS-140)*0.0017f;
+                startForceScale += (hS-130)*0.0017f;
             }
-            if(hS < 140)
+            if(hS < 130)
             {
-                startForceScale -= (140 - hS) * 0.0017f;
+                startForceScale -= (130 - hS) * 0.002f;
             }
         }
 
