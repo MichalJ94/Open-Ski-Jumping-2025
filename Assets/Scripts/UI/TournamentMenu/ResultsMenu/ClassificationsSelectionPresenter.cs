@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using OpenSkiJumping.Competition;
@@ -11,7 +12,8 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
         private readonly TournamentMenuData model;
         private readonly IClassificationsSelectionView view;
         private readonly SavesRuntime savesRuntime;
-
+        int firstPlacesCount, secondPlacesCount, thirdPlacesCount;
+        List<(string,string)> competitorsFetch;
         public ClassificationsSelectionPresenter(IClassificationsSelectionView view, TournamentMenuData model)
         {
             this.model = model;
@@ -33,7 +35,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
                 ? model.GameSave.competitors.Select(it =>
                     (name: $"{it.competitor.firstName} {it.competitor.lastName.ToUpper()}", it.competitor.countryCode))
                 : model.GameSave.teams.Select(it => (name: it.team.teamName, it.team.countryCode))).ToList();
-
+            competitorsFetch = competitors;
 
             view.ResultsListController.Results = model.GameSave.resultsContainer.classificationResults[index]
                 .totalSortedResults.Select(it => new ResultsListItem
@@ -71,7 +73,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
             var eventResults = model.GameSave.resultsContainer.eventResults;
             int competitorIDsofWinner;
             int actualIDofWinner;
-            int firstPlacesCount = 0;
+            firstPlacesCount = 0;
 
             for (int i = 0; i < eventCount; i++)
             {
@@ -140,7 +142,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
             var eventResults = model.GameSave.resultsContainer.eventResults;
             int competitorIDsof2ndPlace;
             int actualIDof2ndPlace;
-            int secondPlacesCount = 0;
+            secondPlacesCount = 0;
 
 
             for (int i = 0; i < eventCount; i++)
@@ -155,7 +157,13 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
 
                         if (actualIDof2ndPlace == jumper)
                         {
+
                             secondPlacesCount++;
+                           if (model.GameSave.resultsContainer.classificationResults[classificationIndex].rank[jumper] == 1)
+                            {
+                                UnityEngine.Debug.Log("OD CountSecondPlace WIDZI ZE RANK = 1!!! Aktualny firstPlaceCount = " + firstPlacesCount + " competitorsFetch name: " + competitorsFetch[jumper].Item1 + " eventID i: " +i);
+                            }
+
                         }
 
 
@@ -173,7 +181,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
             var eventResults = model.GameSave.resultsContainer.eventResults;
             int competitorIDsof3rdPlace;
             int actualIDof3rdPlace;
-            int thirdPlacesCount = 0;
+            thirdPlacesCount = 0;
 
 
             for (int i = 0; i < eventCount; i++)
