@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using OpenSkiJumping.Competition;
 using OpenSkiJumping.Data;
+using static UnityEditor.Progress;
 
 namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
 {
@@ -215,6 +216,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
             var eventResults = model.GameSave.resultsContainer.eventResults;
             var eventCount = model.GameSave.resultsContainer.eventIndex;
             var list = new List<Tuple<int, decimal, decimal, decimal, decimal>>();
+            var samePlaces = new List<Tuple<int, int>>();
             //var podiumPlaces = model.GameSave.resultsContainer.eventResults.Select(it => (it.results.));
             for (int i = 0; i < eventCount; i++)
             {
@@ -228,12 +230,20 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
                 list.Add(new Tuple<int, decimal, decimal, decimal, decimal>(i, dupaGowno.OrderByDescending(r => r).Take(1).LastOrDefault(), dupaGowno.OrderByDescending(r => r).Take(2).LastOrDefault(), dupaGowno.OrderByDescending(r => r).Take(3).LastOrDefault(), dupaGowno.OrderByDescending(r => r).Take(4).LastOrDefault()));
             }
             
-            foreach (Tuple<int, decimal, decimal, decimal, decimal> item in list)
+            for (int j = 0; j < eventCount; j++)
             {
-                UnityEngine.Debug.Log($"Event index: {item.Item1} highest value: {item.Item2} 2nd highest value {item.Item3}");
-            }
-                return 0;
+                if (list[j].Item2 == list[j].Item3)
+                {
+                    UnityEngine.Debug.Log($"W zawodach o indeksie " + j + "by³o dwóch zwyciêzców!");
+                    samePlaces.Add(new Tuple<int, int>(j, 1));
+                }
 
+            }
+            foreach (Tuple<int, int> item in samePlaces)
+            {
+                UnityEngine.Debug.Log($"samePlaces item1: {item.Item1} item2: {item.Item2}");
+            }
+            return 0;
         }
 
 
