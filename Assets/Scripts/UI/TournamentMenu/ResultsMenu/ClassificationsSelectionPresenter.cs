@@ -21,6 +21,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
 
             InitEvents();
             SetInitValues();
+            CheckForMultipleJumpersWhoTookSamePodiumPlace();
         }
 
         private void PresentList()
@@ -88,7 +89,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
 
                         if (actualIDofWinner == jumper)
                         {
-                            UnityEngine.Debug.Log("firstPlacesCounter FIRST PLACE COUNTING NOW!! eventResults[i] " + i + " classificationIndex: " + classificationIndex + " j " + j + " classifications count for this event: " + model.GameSave.calendar.events[i].classifications.Count);
+                            //UnityEngine.Debug.Log("firstPlacesCounter FIRST PLACE COUNTING NOW!! eventResults[i] " + i + " classificationIndex: " + classificationIndex + " j " + j + " classifications count for this event: " + model.GameSave.calendar.events[i].classifications.Count);
                             firstPlacesCount++;
                         }
 
@@ -159,9 +160,10 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
                         {
 
                             secondPlacesCount++;
-                           if (model.GameSave.resultsContainer.classificationResults[classificationIndex].rank[jumper] == 1)
+                            UnityEngine.Debug.Log("OD CountSecondPlace just added second place! eventID i:" + i + " competitorsFetch name " + competitorsFetch[jumper].Item1 + " actualIDof2ndPlace " + actualIDof2ndPlace + " eventResults[i].results[jumper].Rank:  " + eventResults[i].results[jumper].Rank);
+                            if (eventResults[i].results[jumper].Rank != 2)
                             {
-                                UnityEngine.Debug.Log("OD CountSecondPlace WIDZI ZE RANK = 1!!! Aktualny firstPlaceCount = " + firstPlacesCount + " competitorsFetch name: " + competitorsFetch[jumper].Item1 + " eventID i: " +i);
+                               //UnityEngine.Debug.Log("OD CountSecondPlace WIDZI ZE RANK != 2!!! Aktualny firstPlaceCount = " + firstPlacesCount + " competitorsFetch name: " + competitorsFetch[jumper].Item1 + " eventID i: " +i);
                             }
 
                         }
@@ -205,6 +207,33 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
                 }
             }
             return thirdPlacesCount;
+        }
+
+
+        private int CheckForMultipleJumpersWhoTookSamePodiumPlace()
+        {
+            var eventResults = model.GameSave.resultsContainer.eventResults;
+            var eventCount = model.GameSave.resultsContainer.eventIndex;
+            var list = new List<Tuple<int, decimal, decimal, decimal, decimal>>();
+            //var podiumPlaces = model.GameSave.resultsContainer.eventResults.Select(it => (it.results.));
+            for (int i = 0; i < eventCount; i++)
+            {
+                var allTotalPointsForThisCompetition = new List<KeyValuePair<int, decimal>>();
+                var dupaGowno = new List<decimal>();
+                for (int j = 0; j < eventResults[i].results.Count; j++)
+                {
+                    allTotalPointsForThisCompetition.Add(new KeyValuePair<int, decimal>(j, eventResults[i].results[j].TotalPoints));
+                    dupaGowno.Add(eventResults[i].results[j].TotalPoints);
+                }
+                list.Add(new Tuple<int, decimal, decimal, decimal, decimal>(i, dupaGowno.OrderByDescending(r => r).Take(1).LastOrDefault(), dupaGowno.OrderByDescending(r => r).Take(2).LastOrDefault(), dupaGowno.OrderByDescending(r => r).Take(3).LastOrDefault(), dupaGowno.OrderByDescending(r => r).Take(4).LastOrDefault()));
+            }
+            
+            foreach (Tuple<int, decimal, decimal, decimal, decimal> item in list)
+            {
+                UnityEngine.Debug.Log($"Event index: {item.Item1} highest value: {item.Item2} 2nd highest value {item.Item3}");
+            }
+                return 0;
+
         }
 
 
