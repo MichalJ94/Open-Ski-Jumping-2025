@@ -15,6 +15,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
         private readonly SavesRuntime savesRuntime;
         int firstPlacesCount, secondPlacesCount, thirdPlacesCount;
         List<(string,string)> competitorsFetch;
+        List<Tuple<int, int>> samePodiumPlacesList;
         public ClassificationsSelectionPresenter(IClassificationsSelectionView view, TournamentMenuData model)
         {
             this.model = model;
@@ -22,7 +23,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
 
             InitEvents();
             SetInitValues();
-            CheckForMultipleJumpersWhoTookSamePodiumPlace();
+            samePodiumPlacesList = CheckForMultipleJumpersWhoTookSamePodiumPlace();
         }
 
         private void PresentList()
@@ -161,7 +162,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
                         {
 
                             secondPlacesCount++;
-                            UnityEngine.Debug.Log("OD CountSecondPlace just added second place! eventID i:" + i + " competitorsFetch name " + competitorsFetch[jumper].Item1 + " actualIDof2ndPlace " + actualIDof2ndPlace + " eventResults[i].results[jumper].Rank:  " + eventResults[i].results[jumper].Rank);
+                           // UnityEngine.Debug.Log("OD CountSecondPlace just added second place! eventID i:" + i + " competitorsFetch name " + competitorsFetch[jumper].Item1 + " actualIDof2ndPlace " + actualIDof2ndPlace + " eventResults[i].results[jumper].Rank:  " + eventResults[i].results[jumper].Rank);
                             if (eventResults[i].results[jumper].Rank != 2)
                             {
                                //UnityEngine.Debug.Log("OD CountSecondPlace WIDZI ZE RANK != 2!!! Aktualny firstPlaceCount = " + firstPlacesCount + " competitorsFetch name: " + competitorsFetch[jumper].Item1 + " eventID i: " +i);
@@ -211,7 +212,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
         }
 
 
-        private int CheckForMultipleJumpersWhoTookSamePodiumPlace()
+        private List<Tuple<int, int>> CheckForMultipleJumpersWhoTookSamePodiumPlace()
         {
             var eventResults = model.GameSave.resultsContainer.eventResults;
             var eventCount = model.GameSave.resultsContainer.eventIndex;
@@ -237,13 +238,22 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
                     UnityEngine.Debug.Log($"W zawodach o indeksie " + j + "by³o dwóch zwyciêzców!");
                     samePlaces.Add(new Tuple<int, int>(j, 1));
                 }
+                else if(list[j].Item3 == list[j].Item4)
+                {
+                    samePlaces.Add(new Tuple<int, int>(j, 2));
+                }
+                else if (list[j].Item4 == list[j].Item5)
+                {
+                    samePlaces.Add(new Tuple<int, int>(j, 3));
+                }
+
 
             }
             foreach (Tuple<int, int> item in samePlaces)
             {
                 UnityEngine.Debug.Log($"samePlaces item1: {item.Item1} item2: {item.Item2}");
             }
-            return 0;
+            return samePlaces;
         }
 
 
