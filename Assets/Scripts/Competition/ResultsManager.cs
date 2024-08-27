@@ -522,7 +522,8 @@ namespace OpenSkiJumping.Competition
                 Results[competitorId].PreviousRoundStyle = jumpResults.results[RoundIndex - 1].judgesTotalPoints;
             }
 
-
+            //Write down the name of the jumper
+            Results[competitorId].CurrentCompetitorId = OrderedParticipants[competitorId].id;
 
             // Update rank
             for (var i = 0; i < Math.Min(competitorsCount, allRoundResults.Count); i++)

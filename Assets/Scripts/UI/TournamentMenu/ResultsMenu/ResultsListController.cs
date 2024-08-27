@@ -25,7 +25,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
 
     public interface IResultsListController
     {
-        IEnumerable<ResultsListItem> Results { set; }
+        IEnumerable<ResultsListItem> Results { get; set; }
     }
 
     public class ResultsListController : MonoBehaviour, IResultsListController
@@ -38,6 +38,10 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
 
         public IEnumerable<ResultsListItem> Results
         {
+            get
+            {
+                return results;
+            }
             set
             {
                 results = value.ToList();

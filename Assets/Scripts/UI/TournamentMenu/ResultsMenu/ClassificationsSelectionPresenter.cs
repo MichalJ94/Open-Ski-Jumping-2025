@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.AccessControl;
 using OpenSkiJumping.Competition;
 using OpenSkiJumping.Data;
 using static UnityEditor.Progress;
@@ -13,9 +14,10 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
         private readonly TournamentMenuData model;
         private readonly IClassificationsSelectionView view;
         private readonly SavesRuntime savesRuntime;
+        private readonly ResultsManager resultsManager;
         int firstPlacesCount, secondPlacesCount, thirdPlacesCount;
-        List<(string,string)> competitorsFetch;
-        List<Tuple<int, int, string>> samePodiumPlacesList;
+        List<(string, string)> competitorsFetch;
+        public List<UpdatePodiumsItem> samePodiumPlacesList;
         public ClassificationsSelectionPresenter(IClassificationsSelectionView view, TournamentMenuData model)
         {
             this.model = model;
@@ -24,7 +26,24 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
             InitEvents();
             samePodiumPlacesList = CheckForMultipleJumpersWhoTookSamePodiumPlace();
             SetInitValues();
-            
+
+        }
+
+        public class UpdatePodiumsItem
+        {
+            public int EventIndex { get; set; }
+            public int PositionInQuestion { get; set; }
+            public int ClassificationIndex { get; set; }
+            public string JumperName { get; set; }
+
+            public UpdatePodiumsItem(int eventIndex, int positionInQuestion, int classificationIndex, string jumperName)
+            {
+                EventIndex = eventIndex;
+                PositionInQuestion = positionInQuestion;
+                ClassificationIndex = classificationIndex;
+                JumperName = jumperName;
+            }
+
         }
 
         private void PresentList()
@@ -56,13 +75,14 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
 
 
             //TO MOZE TUTAJ ZROBIC CHECK POZYCJI EX EQUEO??
-            
+
         }
 
 
         private void InitEvents()
         {
             view.OnSelectionChanged += SetResults;
+            view.OnSelectionChanged += UpdateResults;
             view.OnDataReload += SetInitValues;
         }
 
@@ -72,6 +92,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
             view.SelectedClassification = model.GameSave.calendar.classifications.FirstOrDefault();
             // CountFirstPlaces();
             SetResults();
+            UpdateResults();
         }
 
         private int CountFirstPlaces(int classificationIndex, int jumper)
@@ -87,8 +108,8 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
             {
                 for (int j = 0; j < model.GameSave.calendar.events[i].classifications.Count; j++)
                 {
-                    
-                    if (model.GameSave.calendar.events[i].classifications[j] == classificationIndex && model.GameSave.calendar.classifications[classificationIndex].eventType != EventType.Team && model.GameSave.calendar.events[i].eventType != EventType.Team )
+
+                    if (model.GameSave.calendar.events[i].classifications[j] == classificationIndex && model.GameSave.calendar.classifications[classificationIndex].eventType != EventType.Team && model.GameSave.calendar.events[i].eventType != EventType.Team)
                     {
                         competitorIDsofWinner = eventResults[i].finalResults[0];
                         actualIDofWinner = eventResults[i].competitorIds[competitorIDsofWinner];
@@ -107,7 +128,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
 
                 }
             }
-           
+
 
             /*for (int k = 0; k < eventResults[i].competitorIds.Count; k++)
             {
@@ -159,24 +180,27 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
             {
                 for (int j = 0; j < model.GameSave.calendar.events[i].classifications.Count; j++)
                 {
-                    if (model.GameSave.calendar.events[i].classifications[j] == classificationIndex && model.GameSave.calendar.events[i].eventType != EventType.Team && model.GameSave.calendar.classifications[j].eventType != EventType.Team )
+                    if (model.GameSave.calendar.events[i].classifications[j] == classificationIndex && model.GameSave.calendar.events[i].eventType != EventType.Team && model.GameSave.calendar.classifications[j].eventType != EventType.Team)
                     {
                         competitorIDsof2ndPlace = eventResults[i].finalResults[1];
                         actualIDof2ndPlace = eventResults[i].competitorIds[competitorIDsof2ndPlace];
-                       // UnityEngine.Debug.Log("secondPlacesCounter eventResults[i] " + i + " classificationIndex: " + j + " competitorIDsofWinner: " + competitorIDsof2ndPlace + " actualIDofWinner " + actualIDof2ndPlace);
+                        // UnityEngine.Debug.Log("secondPlacesCounter eventResults[i] " + i + " classificationIndex: " + j + " competitorIDsofWinner: " + competitorIDsof2ndPlace + " actualIDofWinner " + actualIDof2ndPlace);
 
                         if (actualIDof2ndPlace == jumper)
                         {
 
                             secondPlacesCount++;
                             // UnityEngine.Debug.Log("OD CountSecondPlace just added second place! eventID i:" + i + " competitorsFetch name " + competitorsFetch[jumper].Item1 + " actualIDof2ndPlace " + actualIDof2ndPlace + " eventResults[i].results[jumper].Rank:  " + eventResults[i].results[jumper].Rank);
-                           foreach (Tuple<int, int, string> item in samePodiumPlacesList)
+
+                            for (int k = 0; k < samePodiumPlacesList.Count; k++)
                             {
-                                if (item.Item1 == i && item.Item2 == 1)
+                                if (samePodiumPlacesList[k].EventIndex == i && samePodiumPlacesList[k].PositionInQuestion == 1)
                                 {
                                     secondPlacesCount--;
-                                    firstPlacesCount++;
-                                    UnityEngine.Debug.Log("item.Item1 == i && item.Item2 == 1 FIRED!!!!" + competitorsFetch[jumper].Item1);
+                                    //firstPlacesCount++;
+                                    samePodiumPlacesList[k].JumperName = competitorsFetch[jumper].Item1;
+                                    samePodiumPlacesList[k].ClassificationIndex = j;
+                                    UnityEngine.Debug.Log("item.Item1 == i && item.Item2 == 1 FIRED!!!!" + competitorsFetch[jumper].Item1 + " ID : " + jumper);
                                 }
                             }
 
@@ -213,6 +237,20 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
                         if (actualIDof3rdPlace == jumper)
                         {
                             thirdPlacesCount++;
+
+                            for (int k = 0; k < samePodiumPlacesList.Count; k++)
+                            {
+                                if (samePodiumPlacesList[k].EventIndex == i && samePodiumPlacesList[k].PositionInQuestion == 2)
+                                {
+                                    thirdPlacesCount--;
+                                    //firstPlacesCount++;
+                                    samePodiumPlacesList[k].JumperName = competitorsFetch[jumper].Item1;
+                                    samePodiumPlacesList[k].ClassificationIndex = j;
+                                    UnityEngine.Debug.Log("item.Item2 == i && item.Item3 == 1 FIRED!!!!" + competitorsFetch[jumper].Item1 + " ID : " + jumper);
+                                }
+                            }
+
+
                         }
 
 
@@ -224,12 +262,61 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
         }
 
 
-        private List<Tuple<int, int, string>> CheckForMultipleJumpersWhoTookSamePodiumPlace()
+
+        private void CountFourthPlaces()
+        {
+            int fourthPlacesCount;
+            var index = view.CurrentClassificationIndex;
+            var eventCount = model.GameSave.resultsContainer.eventIndex;
+            var eventResults = model.GameSave.resultsContainer.eventResults;
+            int competitorIDsof4thPlace;
+            int actualIDof4thPlace;
+            thirdPlacesCount = 0;
+
+            for (int h = 0; h<competitorsFetch.Count;h++) { 
+            for (int i = 0; i < eventCount; i++)
+            {
+                for (int j = 0; j < model.GameSave.calendar.events[i].classifications.Count; j++)
+                {
+                    if (model.GameSave.calendar.events[i].eventType != EventType.Team && model.GameSave.calendar.classifications[j].eventType != EventType.Team)
+                    {
+                        competitorIDsof4thPlace = eventResults[i].finalResults[3];
+                        actualIDof4thPlace = eventResults[i].competitorIds[competitorIDsof4thPlace];
+                        //UnityEngine.Debug.Log("thirdPlacesCounter eventResults[i] " + i + " classificationIndex: " + j + " competitorIDsofWinner: " + competitorIDsof3rdPlace + " actualIDofWinner " + actualIDof3rdPlace);
+
+                        if (actualIDof4thPlace == h)
+                        {
+
+                            for (int k = 0; k < samePodiumPlacesList.Count; k++)
+                            {
+                                if (samePodiumPlacesList[k].EventIndex == i && samePodiumPlacesList[k].PositionInQuestion == 3)
+                                {
+                                    //firstPlacesCount++;
+                                    samePodiumPlacesList[k].JumperName = competitorsFetch[h].Item1;
+                                    samePodiumPlacesList[k].ClassificationIndex = j;
+                                    UnityEngine.Debug.Log("item.Item3 == i && item.Item4 == 1 FIRED!!!!" + competitorsFetch[h].Item1 + " ID : " + h);
+                                }
+                            }
+
+
+                        }}
+
+
+                    }
+
+                }
+            }
+        }
+
+
+
+        private List<UpdatePodiumsItem> CheckForMultipleJumpersWhoTookSamePodiumPlace()
         {
             var eventResults = model.GameSave.resultsContainer.eventResults;
             var eventCount = model.GameSave.resultsContainer.eventIndex;
             var list = new List<Tuple<int, decimal, decimal, decimal, decimal>>();
-            var samePlaces = new List<Tuple<int, int, string>>();
+            //Kolejne pozycje to numer konkurs
+            var samePlaces = new List<UpdatePodiumsItem>();
             //var podiumPlaces = model.GameSave.resultsContainer.eventResults.Select(it => (it.results.));
             for (int i = 0; i < eventCount; i++)
             {
@@ -242,32 +329,58 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
                 }
                 list.Add(new Tuple<int, decimal, decimal, decimal, decimal>(i, dupaGowno.OrderByDescending(r => r).Take(1).LastOrDefault(), dupaGowno.OrderByDescending(r => r).Take(2).LastOrDefault(), dupaGowno.OrderByDescending(r => r).Take(3).LastOrDefault(), dupaGowno.OrderByDescending(r => r).Take(4).LastOrDefault()));
             }
-            
+
             for (int j = 0; j < eventCount; j++)
             {
                 if (list[j].Item2 == list[j].Item3)
                 {
                     UnityEngine.Debug.Log($"W zawodach o indeksie " + j + "by³o dwóch zwyciêzców!");
-                    samePlaces.Add(new Tuple<int, int, string>(j, 1, "A"));
+                    samePlaces.Add(new UpdatePodiumsItem(j, 1, 999, null));
                 }
-                else if(list[j].Item3 == list[j].Item4)
+                else if (list[j].Item3 == list[j].Item4)
                 {
-                    samePlaces.Add(new Tuple<int, int, string>(j, 2, "A"));
+                    samePlaces.Add(new UpdatePodiumsItem(j, 2, 999, null));
                 }
                 else if (list[j].Item4 == list[j].Item5)
                 {
-                    samePlaces.Add(new Tuple<int, int, string>(j, 3, "A"));
+                    samePlaces.Add(new UpdatePodiumsItem(j, 3, 999, null));
                 }
 
 
             }
-            foreach (Tuple<int, int, string> item in samePlaces)
-            {
-                UnityEngine.Debug.Log($"samePlaces item1: {item.Item1} item2: {item.Item2}");
-            }
+            /* foreach (UpdatePodiumsItem item in samePlaces)
+             {
+                 UnityEngine.Debug.Log($"samePlaces item1: {item.it} item2: {item.Item2}");
+             }*/
             return samePlaces;
         }
 
+        public void UpdateResults()
+        {
+            CountFourthPlaces();
+            for (int i = 0; i < samePodiumPlacesList.Count; i++)
+            {
+                {
+                    UnityEngine.Debug.Log(samePodiumPlacesList[i].JumperName);
+                    UnityEngine.Debug.Log("ClassificationIndex: " + samePodiumPlacesList[i].ClassificationIndex);
+                    UnityEngine.Debug.Log("EventIndex: " + samePodiumPlacesList[i].EventIndex);
+                }
+            }
+            foreach (ResultsListItem item in view.ResultsListController.Results)
+            {
+                for (int i = 0; i < samePodiumPlacesList.Count; i++)
+                {
+                    {
+                        if(item.name == samePodiumPlacesList[i].JumperName && samePodiumPlacesList[i].PositionInQuestion == 1 && view.CurrentClassificationIndex == samePodiumPlacesList[i].ClassificationIndex)
+                        {
+                            UnityEngine.Debug.Log("SUKCES KUR£A!!!!!!!!!!!!");
+                            item.style++;
+                        }
+                    }
+                }
+                view.ResultsListController.Results = view.ResultsListController.Results.ToList();
+            }
 
+        }
     }
 }

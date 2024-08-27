@@ -33,6 +33,8 @@ namespace OpenSkiJumping.Competition.Persistent
         private float style;
         [SerializeField]
         private float previousRoundStyle;
+        [SerializeField]
+        private int currentCompetitorId;
 
 
         public JumpResults[] Results { get => results; set => results = value; }
@@ -49,5 +51,7 @@ namespace OpenSkiJumping.Competition.Persistent
         public decimal Style { get => (decimal)style; set => style = (float)value; }
 
         public decimal PreviousRoundStyle { get => (decimal)previousRoundStyle; set => previousRoundStyle = (float)value; }
+
+        public int CurrentCompetitorId { get => currentCompetitorId; set => currentCompetitorId = value; }
     }
 }
