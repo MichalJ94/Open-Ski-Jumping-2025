@@ -373,8 +373,20 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
                     {
                         if(item.name == samePodiumPlacesList[i].JumperName && samePodiumPlacesList[i].PositionInQuestion == 1 && view.CurrentClassificationIndex == samePodiumPlacesList[i].ClassificationIndex)
                         {
-                            UnityEngine.Debug.Log("SUKCES KUR£A!!!!!!!!!!!!");
+                            
                             item.style++;
+                        }
+
+                        if (item.name == samePodiumPlacesList[i].JumperName && samePodiumPlacesList[i].PositionInQuestion == 2 && view.CurrentClassificationIndex == samePodiumPlacesList[i].ClassificationIndex)
+                        {
+                            UnityEngine.Debug.Log("SUKCES KUR£A!!!!!!!!!!!!");
+                            item.previousRoundStyle++;
+                        }
+
+                        if (item.name == samePodiumPlacesList[i].JumperName && samePodiumPlacesList[i].PositionInQuestion == 3 && view.CurrentClassificationIndex == samePodiumPlacesList[i].ClassificationIndex)
+                        {
+                            UnityEngine.Debug.Log("SUKCES KUR£A!!!!!!!!!!!!");
+                            item.previousRoundDistance++;
                         }
                     }
                 }
