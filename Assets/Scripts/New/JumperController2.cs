@@ -436,15 +436,17 @@ namespace OpenSkiJumping.New
         }
         public void AdjustForceScaleToHillSize()
         {
+            float modifier = 1;
             float hS = hillSize = competitionRunner.GetHS();
             if (hS > 130) 
-            
             {
-                startForceScale += (hS-130)*0.0017f;
+                modifier += (hS - 130) / 10;
+                startForceScale += (hS-130)*(0.0001f*modifier);
             }
             if(hS < 130)
             {
-                startForceScale -= (130 - hS) * 0.002f;
+                modifier += (130 - hS) / 12;
+                startForceScale -= (130 - hS) * (0.001f*modifier);
             }
         }
 
