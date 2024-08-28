@@ -18,6 +18,8 @@ namespace OpenSkiJumping.Data
 
         public float mouseSensitivity;
 
+        public float randomnessLevelCPU;
+
         [JsonConverter(typeof(StringEnumConverter))]
         public Language currentLanguage;
     }

@@ -2,8 +2,10 @@
 using System.Globalization;
 using System.Linq;
 using OpenSkiJumping.Data;
+using OpenSkiJumping.Scripts2025;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.UI.Extensions;
 
 namespace OpenSkiJumping.UI
@@ -17,6 +19,8 @@ namespace OpenSkiJumping.UI
         [SerializeField] private TMP_Dropdown resolutionDropdown;
         [SerializeField] private TMP_Dropdown qualityDropdown;
         [SerializeField] private SegmentedControl fullScreenSelect;
+        [SerializeField] private Slider randomnessSlider;
+        [SerializeField] private GameplayExtension gameplayExtension;
 
         private List<Resolution> _resolutions;
 
@@ -47,6 +51,9 @@ namespace OpenSkiJumping.UI
 
             fullScreenSelect.SetSelectedSegmentWithoutNotify(Screen.fullScreen == false ? 0 : 1);
             fullScreenSelect.onValueChanged.AddListener(UpdateFullScreen);
+
+            randomnessSlider.value = gameConfig.Config.randomnessLevelCPU;
+            randomnessSlider.onValueChanged.AddListener(UpdateRandomnessSlider);
         }
 
         private void UpdateQuality(int arg)
@@ -62,6 +69,11 @@ namespace OpenSkiJumping.UI
         private void UpdateFullScreen(int arg)
         {
             Screen.fullScreen = arg != 0;
+        }
+
+        private void UpdateRandomnessSlider(float arg)
+        {
+            gameConfig.Config.randomnessLevelCPU = randomnessSlider.value;
         }
 
         private void UpdateSensitivity(string val)

@@ -357,11 +357,18 @@ namespace OpenSkiJumping.Competition
                 if (!crashed)
                 {
                     float singleMark;
-                    if (distance > (decimal)hillInfo.GetHS() * 1.04m)
+                    if (distance > (decimal)hillInfo.GetHS() * 1.06m)
+                    {
+                            singleMark = Random.Range(10f, 12f);
+                        crashed = true;
+                        UnityEngine.Debug.Log("CRASHED CAUSE OVER 1.06!!");
+
+                    }
+                    else if (distance > (decimal)hillInfo.GetHS() * 1.04m)
                     {
                         if (Random.Range(0, 100) > 70)
                         {
-                            singleMark = Random.Range(10, 12);
+                            singleMark = Random.Range(10f, 12f);
                         }
                         else
                         {
