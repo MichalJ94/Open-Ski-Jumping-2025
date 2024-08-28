@@ -21,6 +21,10 @@ namespace OpenSkiJumping.Scripts2025
         public float forceScaleModifier(int skill)
         {
             float modifier = 0.008f;
+            if(skill > 80)
+            {
+                modifier = 0.009f;
+            }
             return (80 - skill) * modifier;
 
         }
