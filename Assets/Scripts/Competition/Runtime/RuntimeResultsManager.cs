@@ -13,7 +13,7 @@ namespace OpenSkiJumping.Competition.Runtime
         public IResultsManager Value { get; private set; }
 
         [SerializeField] private RuntimeJumpData jumpData;
-
+        [SerializeField] private GameplayExtension gameplayExtension;
 
         public void Initialize(EventInfo eventInfo, List<Participant> orderedParticipants,
             IHillInfo hillInfo)
@@ -27,7 +27,7 @@ namespace OpenSkiJumping.Competition.Runtime
         public bool SubroundFinish() => Value.SubroundFinish();
         public bool RoundFinish() => Value.RoundFinish();
 
-        public void RegisterCPUJump() => Value.RegisterCPUJump(jumpData);
+        public void RegisterCPUJump() => Value.RegisterCPUJump(jumpData, gameplayExtension);
         public void RegisterJump() => Value.RegisterJump(jumpData);
     }
 }

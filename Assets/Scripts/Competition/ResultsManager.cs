@@ -5,6 +5,7 @@ using System.Linq;
 using OpenSkiJumping.Competition.Persistent;
 using OpenSkiJumping.Competition.Runtime;
 using OpenSkiJumping.Jumping;
+using OpenSkiJumping.Scripts2025;
 using OpenSkiJumping.New;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -22,7 +23,7 @@ namespace OpenSkiJumping.Competition
         int RoundIndex { get; }
         void RegisterJump(IJumpData jumpData);
 
-        void RegisterCPUJump(IJumpData jumpData);
+        void RegisterCPUJump(IJumpData jumpData, GameplayExtension gameplayExtension);
         void SubroundInit();
         void RoundInit();
         bool SubroundFinish();
@@ -287,7 +288,7 @@ namespace OpenSkiJumping.Competition
             
         }
 
-        public void RegisterCPUJump(IJumpData jumpData)
+        public void RegisterCPUJump(IJumpData jumpData, GameplayExtension gameplayExtension)
         {
 
             var currentRoundInfo = EventInfo.roundInfos[RoundIndex];
@@ -307,7 +308,7 @@ namespace OpenSkiJumping.Competition
             JumpResult cpuJump = new JumpResult();
             cpuJump.distance = jumpData.CPUDistance;
             //Trzeba przeniesc przypisywanie jumperSkill na wczeœniejszy moment niz Gate() w jumperContorller
-            cpuJump.distance = CalculateFinalCPUDistance(jumpData.CPUDistance, jumpData.JumperSkill);
+            cpuJump.distance = CalculateFinalCPUDistance(jumpData.CPUDistance, jumpData.JumperSkill, gameplayExtension.modifierCPURandomnessLevel);
             jumpData.Distance = cpuJump.distance;
             // cpuJump.judgesMarks = CalculateJudgesMarks(cpuJump.judgesMarks, cpuJump.distance, hillInfo, jumpData.JumperSkill);
 
@@ -422,12 +423,15 @@ namespace OpenSkiJumping.Competition
             return marks;
         }
 
-        public decimal CalculateFinalCPUDistance(decimal distance, int skill)
+        public decimal CalculateFinalCPUDistance(decimal distance, int skill, float sliderRandomnessModifier)
         {
             float modifier = 1;
-           //UnityEngine.Debug.Log("Od ResultsManager jumpData.JumperSKill: " + skill);
+
+            UnityEngine.Debug.Log("sliderRandomnessModifier " + sliderRandomnessModifier);
+
+            //UnityEngine.Debug.Log("Od ResultsManager jumpData.JumperSKill: " + skill);
             //UnityEngine.Debug.Log("Od ResultsManager jumpData.CPUDistance przed zmiana skilla: " + distance);
-           
+
             if (skill > 90)
             {
 
@@ -435,24 +439,43 @@ namespace OpenSkiJumping.Competition
                 //UnityEngine.Debug.Log("Od ResultsManager CPU Distance modifeir: " + modifier);
 
             }
-            
+
             if (skill < 90)
             {
 
                 modifier -= ((90f - (float)skill) / 180f);
                 //UnityEngine.Debug.Log("Od ResultsManager CPU Distance modifeir: " + modifier);
             }
-           // UnityEngine.Debug.Log("Od ResultsManager Distance BEFORE Random: " + distance * (decimal)modifier);
-            modifier += Random.Range(-0.06f, 0.02f);
-            if (Random.Range(0, 100) > 80)
+            // UnityEngine.Debug.Log("Od ResultsManager Distance BEFORE Random: " + distance * (decimal)modifier);
+
+            //Pierwotnie 0,06f, 0,02f
+            modifier += Random.Range(-0.03f * (sliderRandomnessModifier / 20f), 0.01f * (sliderRandomnessModifier / 20f));
+            if (Random.Range(0, 100) > 100 - (sliderRandomnessModifier / 20f))
             {
-                modifier += Random.Range(-0.08f, 0.03f);
-             //   UnityEngine.Debug.Log("Od ResultsManager EXTRA RANDOM FACTOR! New modifier: " + modifier);
+
+
+                //pierwotnie 0,08f, 0,03f
+                modifier += Random.Range(-0.04f * (sliderRandomnessModifier / 20f), 0.15f * (sliderRandomnessModifier / 20f));
+                //   UnityEngine.Debug.Log("Od ResultsManager EXTRA RANDOM FACTOR! New modifier: " + modifier);
             }
             //UnityEngine.Debug.Log("Od ResultsManager Distance AFTER Random: " + distance * (decimal)modifier);
 
+            if (skill * modifier > 95)
+            {
+                UnityEngine.Debug.Log("UWAGA! Po modiefierze baardzo d³ugi skok CPU. Skill: " + skill + "modifier: " + modifier);
+                if (skill > 90)
+                {
+                    while (skill * modifier > 95)
+                    {
+                        modifier *= 0.95f;
+                    }
+                }
+                UnityEngine.Debug.Log("Po naprawie skill * modifier: " + skill * modifier + " sam modifier: " + modifier);
+            }
+
             return Math.Round((distance * (decimal)modifier) * 2, MidpointRounding.AwayFromZero) / 2;
         }
+
 
 
 

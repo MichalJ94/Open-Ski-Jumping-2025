@@ -16,6 +16,7 @@ namespace OpenSkiJumping.Scripts2025
             return (80-skill)*modifier;
              
         }*/
+        public float modifierCPURandomnessLevel;
 
 
         public float forceScaleModifier(int skill)

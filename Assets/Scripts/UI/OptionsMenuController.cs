@@ -52,7 +52,16 @@ namespace OpenSkiJumping.UI
             fullScreenSelect.SetSelectedSegmentWithoutNotify(Screen.fullScreen == false ? 0 : 1);
             fullScreenSelect.onValueChanged.AddListener(UpdateFullScreen);
 
-            randomnessSlider.value = gameConfig.Config.randomnessLevelCPU;
+            if (gameConfig.Config.randomnessLevelCPU != 0)
+            {
+                randomnessSlider.value = gameConfig.Config.randomnessLevelCPU;
+                gameplayExtension.modifierCPURandomnessLevel = randomnessSlider.value;
+            }
+            else
+            {
+                randomnessSlider.value = 40f;
+                gameplayExtension.modifierCPURandomnessLevel = 40f;
+            }
             randomnessSlider.onValueChanged.AddListener(UpdateRandomnessSlider);
         }
 
@@ -74,6 +83,7 @@ namespace OpenSkiJumping.UI
         private void UpdateRandomnessSlider(float arg)
         {
             gameConfig.Config.randomnessLevelCPU = randomnessSlider.value;
+            gameplayExtension.modifierCPURandomnessLevel = randomnessSlider.value;
         }
 
         private void UpdateSensitivity(string val)
