@@ -426,6 +426,10 @@ namespace OpenSkiJumping.Competition
         public decimal CalculateFinalCPUDistance(decimal distance, int skill, float sliderRandomnessModifier)
         {
             float modifier = 1;
+            if (sliderRandomnessModifier == 0)
+            {
+                sliderRandomnessModifier = 20;
+            }
 
             UnityEngine.Debug.Log("sliderRandomnessModifier " + sliderRandomnessModifier);
 
@@ -449,20 +453,20 @@ namespace OpenSkiJumping.Competition
             // UnityEngine.Debug.Log("Od ResultsManager Distance BEFORE Random: " + distance * (decimal)modifier);
 
             //Pierwotnie 0,06f, 0,02f
-            modifier += Random.Range(-0.03f * (sliderRandomnessModifier / 20f), 0.01f * (sliderRandomnessModifier / 20f));
+            modifier += Random.Range(-0.03f * (sliderRandomnessModifier / 10f), 0.01f * (sliderRandomnessModifier / 10f));
             if (Random.Range(0, 100) > 100 - (sliderRandomnessModifier / 20f))
             {
 
 
                 //pierwotnie 0,08f, 0,03f
-                modifier += Random.Range(-0.04f * (sliderRandomnessModifier / 20f), 0.15f * (sliderRandomnessModifier / 20f));
+                modifier += Random.Range(-0.04f * (sliderRandomnessModifier / 10f), 0.15f * (sliderRandomnessModifier / 10f));
                 //   UnityEngine.Debug.Log("Od ResultsManager EXTRA RANDOM FACTOR! New modifier: " + modifier);
             }
             //UnityEngine.Debug.Log("Od ResultsManager Distance AFTER Random: " + distance * (decimal)modifier);
 
             if (skill * modifier > 95)
             {
-                UnityEngine.Debug.Log("UWAGA! Po modiefierze baardzo d³ugi skok CPU. Skill: " + skill + "modifier: " + modifier);
+                UnityEngine.Debug.Log("UWAGA! Po modiefierze baardzo d³ugi skok CPU. Skill: " + skill + "skill * modifier: " + skill*modifier);
                 if (skill > 90)
                 {
                     while (skill * modifier > 95)
@@ -470,6 +474,14 @@ namespace OpenSkiJumping.Competition
                         modifier *= 0.95f;
                     }
                 }
+                else
+                {
+                    while (skill * modifier > 90)
+                    {
+                        modifier *= 0.95f;
+                    }
+                }
+
                 UnityEngine.Debug.Log("Po naprawie skill * modifier: " + skill * modifier + " sam modifier: " + modifier);
             }
 
