@@ -471,7 +471,7 @@ namespace OpenSkiJumping.Competition
                 {
                     while (skill * modifier > 95)
                     {
-                        modifier *= 0.95f;
+                        modifier *= Random.Range(0.9f,0.95f);
                     }
                 }
                 else
@@ -483,6 +483,11 @@ namespace OpenSkiJumping.Competition
                 }
 
                 UnityEngine.Debug.Log("Po naprawie skill * modifier: " + skill * modifier + " sam modifier: " + modifier);
+            }
+
+            if ((float)distance * modifier > hillInfo.GetHS() * 1.08)
+            {
+                UnityEngine.Debug.Log("COS SIE JEEEEEBLO! Bardzo dlugi skok!" + (float)distance * modifier);
             }
 
             return Math.Round((distance * (decimal)modifier) * 2, MidpointRounding.AwayFromZero) / 2;
