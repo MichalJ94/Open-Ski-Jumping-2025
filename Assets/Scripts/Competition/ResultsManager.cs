@@ -431,7 +431,7 @@ namespace OpenSkiJumping.Competition
                 sliderRandomnessModifier = 20;
             }
 
-            UnityEngine.Debug.Log("sliderRandomnessModifier " + sliderRandomnessModifier);
+            //UnityEngine.Debug.Log("sliderRandomnessModifier " + sliderRandomnessModifier);
 
             //UnityEngine.Debug.Log("Od ResultsManager jumpData.JumperSKill: " + skill);
             //UnityEngine.Debug.Log("Od ResultsManager jumpData.CPUDistance przed zmiana skilla: " + distance);
@@ -453,20 +453,20 @@ namespace OpenSkiJumping.Competition
             // UnityEngine.Debug.Log("Od ResultsManager Distance BEFORE Random: " + distance * (decimal)modifier);
 
             //Pierwotnie 0,06f, 0,02f
-            modifier += Random.Range(-0.03f * (sliderRandomnessModifier / 10f), 0.01f * (sliderRandomnessModifier / 10f));
+            modifier += Random.Range(-0.03f * (sliderRandomnessModifier / 10f), 0.015f * (sliderRandomnessModifier / 10f));
             if (Random.Range(0, 100) > 100 - (sliderRandomnessModifier / 20f))
             {
 
 
                 //pierwotnie 0,08f, 0,03f
-                modifier += Random.Range(-0.04f * (sliderRandomnessModifier / 10f), 0.15f * (sliderRandomnessModifier / 10f));
+                modifier += Random.Range(-0.04f * (sliderRandomnessModifier / 10f), 0.2f * (sliderRandomnessModifier / 10f));
                 //   UnityEngine.Debug.Log("Od ResultsManager EXTRA RANDOM FACTOR! New modifier: " + modifier);
             }
             //UnityEngine.Debug.Log("Od ResultsManager Distance AFTER Random: " + distance * (decimal)modifier);
 
             if (skill * modifier > 95)
             {
-                UnityEngine.Debug.Log("UWAGA! Po modiefierze baardzo d³ugi skok CPU. Skill: " + skill + "skill * modifier: " + skill*modifier);
+                //UnityEngine.Debug.Log("UWAGA! Po modiefierze baardzo d³ugi skok CPU. Skill: " + skill + "skill * modifier: " + skill*modifier);
                 if (skill > 90)
                 {
                     while (skill * modifier > 95)
@@ -482,13 +482,21 @@ namespace OpenSkiJumping.Competition
                     }
                 }
 
-                UnityEngine.Debug.Log("Po naprawie skill * modifier: " + skill * modifier + " sam modifier: " + modifier);
+              // UnityEngine.Debug.Log("Po naprawie skill * modifier: " + skill * modifier + " sam modifier: " + modifier);
             }
 
-            if ((float)distance * modifier > hillInfo.GetHS() * 1.08)
+
+            while (((float)distance * modifier) > (hillInfo.GetHS() * 1.1f))
             {
-                UnityEngine.Debug.Log("COS SIE JEEEEEBLO! Bardzo dlugi skok!" + (float)distance * modifier);
+                UnityEngine.Debug.Log("COS SIE JEEEEEBLO! Bardzo dlugi skok!: " + (float)distance + " skill: " + skill + " modifier " + modifier + " hillsize " + hillInfo.GetHS());
+                modifier *= Random.Range(0.85f, 0.95f);
             }
+            /*
+            if (((float)distance * modifier) > (hillInfo.GetHS() * 1.08f))
+            {
+                UnityEngine.Debug.Log("COS SIE JEEEEEBLO! Bardzo dlugi skok!: " + (float)distance + " skill: " + skill + " modifier " + modifier + " hillsize " + hillInfo.GetHS());
+                distance = 999m;
+            }*/
 
             return Math.Round((distance * (decimal)modifier) * 2, MidpointRounding.AwayFromZero) / 2;
         }

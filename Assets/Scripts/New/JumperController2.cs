@@ -486,7 +486,8 @@ namespace OpenSkiJumping.New
             windThrustDelayCounter = 0;
             torqueCoef = 0f;
             forceScale += forceScaleModifier;
-            WindThrustDeterminerTimesUsed = 0;   
+            WindThrustDeterminerTimesUsed = 0;
+            WindThrustDeterminer = 0;
         }
 
         private bool shouldStart;

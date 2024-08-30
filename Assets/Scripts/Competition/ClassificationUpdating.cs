@@ -33,9 +33,9 @@ namespace OpenSkiJumping.Competition
         {
             foreach (var (id, result) in resultsUpdate)
             {
-                UnityEngine.Debug.Log("UpdateClassificationResults id =" + id + " result : " + result + " totalResults before " + classificationResults.totalResults[id]);
+                //UnityEngine.Debug.Log("UpdateClassificationResults id =" + id + " result : " + result + " totalResults before " + classificationResults.totalResults[id]);
                 classificationResults.totalResults[id] += result;
-                UnityEngine.Debug.Log("UpdateClassificationResults id =" + id + " totalResults after: " + classificationResults.totalResults[id]);
+                //UnityEngine.Debug.Log("UpdateClassificationResults id =" + id + " totalResults after: " + classificationResults.totalResults[id]);
             }
 
             classificationResults.totalSortedResults = classificationResults.totalResults

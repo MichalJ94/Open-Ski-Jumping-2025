@@ -60,8 +60,8 @@ namespace OpenSkiJumping.UI
             }
             else
             {
-                randomnessSlider.value = 40f;
-                gameplayExtension.modifierCPURandomnessLevel = 40f;
+                randomnessSlider.value = 20f;
+                gameplayExtension.modifierCPURandomnessLevel = 20f;
             }
             randomnessSlider.onValueChanged.AddListener(UpdateRandomnessSlider);
         }

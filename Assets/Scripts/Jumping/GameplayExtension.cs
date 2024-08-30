@@ -1,3 +1,4 @@
+using OpenSkiJumping.Data;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,7 +17,21 @@ namespace OpenSkiJumping.Scripts2025
             return (80-skill)*modifier;
              
         }*/
+        [SerializeField] private GameConfigRuntime gameConfig;
         public float modifierCPURandomnessLevel;
+
+        private void OnEnable()
+        {
+            if (gameConfig != null && gameConfig.Config != null)
+            {
+                modifierCPURandomnessLevel = gameConfig.Config.randomnessLevelCPU;
+            }
+            else
+            {
+                Debug.LogWarning("gameConfig or gameConfig.Config is null.");
+            }
+        }
+
 
 
         public float forceScaleModifier(int skill)
