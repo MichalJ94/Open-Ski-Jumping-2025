@@ -54,6 +54,7 @@ namespace OpenSkiJumping.UI
 
             if (gameConfig.Config.randomnessLevelCPU != 0)
             {
+                
                 randomnessSlider.value = gameConfig.Config.randomnessLevelCPU;
                 gameplayExtension.modifierCPURandomnessLevel = randomnessSlider.value;
             }
