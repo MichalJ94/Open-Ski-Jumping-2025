@@ -44,7 +44,7 @@ namespace OpenSkiJumping.ScriptableObjects
             yield return www.SendWebRequest();
             if (www.isNetworkError || www.isHttpError)
             {
-                Debug.Log(www.error);
+               // Debug.Log(www.error);
                 callback?.Invoke(null, false);
             }
             else

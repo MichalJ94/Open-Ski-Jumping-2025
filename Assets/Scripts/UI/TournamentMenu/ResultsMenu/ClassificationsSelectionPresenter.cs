@@ -5,7 +5,7 @@ using System.Linq;
 using System.Security.AccessControl;
 using OpenSkiJumping.Competition;
 using OpenSkiJumping.Data;
-using static UnityEditor.Progress;
+
 
 namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
 {
