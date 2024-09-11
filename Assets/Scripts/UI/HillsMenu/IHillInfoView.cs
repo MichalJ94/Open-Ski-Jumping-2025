@@ -41,7 +41,8 @@ namespace OpenSkiJumping.UI.HillsMenu
         float BU { get; set; }
         float D { get; set; }
         float Q { get; set; }
-        float DistancePlatesColor { get; set; }
+        string InrunConstructionTexture { get; set; }
+        string DistancePlatesColor { get; set; }
 
         bool GateStairsLeft { get; set; }
         bool GateStairsRight { get; set; }

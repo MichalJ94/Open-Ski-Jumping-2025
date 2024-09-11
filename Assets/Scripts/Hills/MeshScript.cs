@@ -9,6 +9,7 @@ using OpenSkiJumping.ScriptableObjects.Variables;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI.Extensions.ColorPicker;
 
 namespace OpenSkiJumping.Hills
 {
@@ -321,6 +322,38 @@ namespace OpenSkiJumping.Hills
 
             gameObject.GetComponent<MeshFilter>().mesh = mesh;
             gameObject.GetComponent<MeshRenderer>().material = material;
+            
+            
+            if(gameObject.name == "Marks Object")
+            {
+                Color distancePlatesColor;
+                if(ColorUtility.TryParseHtmlString(hill.distancePlatesColor, out distancePlatesColor))
+                {
+                    material.color = distancePlatesColor;
+                }
+                else
+                {
+                    material.color = Color.white;
+                }
+
+            }
+
+            if (gameObject.name == "Inrun Construction")
+            {
+                Color distancePlatesColor;
+                if (ColorUtility.TryParseHtmlString(hill.distancePlatesColor, out distancePlatesColor))
+                {
+                    material.color = distancePlatesColor;
+                }
+                else
+                {
+                    material.color = Color.white;
+                }
+
+            }
+
+            
+
             if (hasCollider)
             {
                 gameObject.GetComponent<MeshCollider>().sharedMesh = mesh;

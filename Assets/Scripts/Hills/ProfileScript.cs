@@ -83,7 +83,8 @@ namespace OpenSkiJumping.Hills
         public float bU;
         public float d;
         public float q;
-        public float distancePlatesColor;
+        public float inrunConstructionTexture;
+        public string distancePlatesColor = "#FFFFFF";
 
         public bool gateStairsLeft = true;
         public bool gateStairsRight = true;
