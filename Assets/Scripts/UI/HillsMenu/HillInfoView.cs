@@ -47,6 +47,7 @@ namespace OpenSkiJumping.UI.HillsMenu
         [SerializeField] private TMP_InputField bUInput;
         [SerializeField] private TMP_InputField dInput;
         [SerializeField] private TMP_InputField qInput;
+        [SerializeField] private TMP_InputField dpcInput;
         [SerializeField] private TMP_InputField inrunStairsAngleInput;
         [SerializeField] private Toggle gateStairsLeftToggle;
         [SerializeField] private Toggle gateStairsRightToggle;
@@ -119,6 +120,7 @@ namespace OpenSkiJumping.UI.HillsMenu
             RegisterInputFieldCallbacks(bUInput);
             RegisterInputFieldCallbacks(dInput);
             RegisterInputFieldCallbacks(qInput);
+            RegisterInputFieldCallbacks(dpcInput);
             RegisterInputFieldCallbacks(inrunStairsAngleInput);
             RegisterToggleCallbacks(gateStairsLeftToggle);
             RegisterToggleCallbacks(gateStairsRightToggle);
@@ -324,6 +326,12 @@ namespace OpenSkiJumping.UI.HillsMenu
         {
             get => float.Parse(qInput.text);
             set => qInput.SetTextWithoutNotify(value.ToString(CultureInfo.InvariantCulture));
+        }
+
+        public float DistancePlatesColor
+        {
+            get => float.Parse(dpcInput.text);
+            set => dpcInput.SetTextWithoutNotify(value.ToString(CultureInfo.InvariantCulture));
         }
 
         public float InrunStairsAngle
