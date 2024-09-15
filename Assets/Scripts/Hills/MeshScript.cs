@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using OpenSkiJumping.Hills.Guardrails;
@@ -9,6 +10,7 @@ using OpenSkiJumping.ScriptableObjects.Variables;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.Networking;
 using UnityEngine.UI.Extensions.ColorPicker;
 
 namespace OpenSkiJumping.Hills
@@ -58,6 +60,19 @@ namespace OpenSkiJumping.Hills
         flat
     }
 
+    public enum InrunGuardrailTexture
+    {
+        Default,
+        LightYellowPlanks,
+        DarkBrownPlanks
+    }
+    public enum LandingAreaGuardrailTexture
+    {
+        Default,
+        LightYellowPlanks,
+        DarkBrownPlanks
+    }
+
     public class MeshScript : MonoBehaviour
     {
         public Material daySkybox;
@@ -65,7 +80,7 @@ namespace OpenSkiJumping.Hills
 
 
         /* Stairs */
-        [Space] [Header("Stairs")] public ModelData gateStairsL;
+        [Space][Header("Stairs")] public ModelData gateStairsL;
 
         public ModelData gateStairsR;
         public GateStairs gateStairsSO;
@@ -77,18 +92,18 @@ namespace OpenSkiJumping.Hills
         public bool generateLandingAreaGuardrailR;
 
         /* Settings */
-        [Space] [Header("Settings")] public bool generateTerrain;
+        [Space][Header("Settings")] public bool generateTerrain;
 
         public Hill hill;
 
         /* Hill profile */
-        [Space] [Header("Hill profile")] public HillModel[] hills;
+        [Space][Header("Hill profile")] public HillModel[] hills;
 
         public ModelData inrun;
         public ModelData inrunConstruction;
 
         /* Guardrails */
-        [Space] [Header("Guardrails")] public ModelData inrunGuardrailL;
+        [Space][Header("Guardrails")] public ModelData inrunGuardrailL;
 
         public ModelData inrunGuardrailR;
         public Guardrail inrunGuardrailSO;
@@ -102,7 +117,7 @@ namespace OpenSkiJumping.Hills
         public ModelData inrunStairsL;
         public ModelData inrunStairsR;
 
-        [FormerlySerializedAs("inrunStairsStepHeigth")] [Range(0.01f, 1)]
+        [FormerlySerializedAs("inrunStairsStepHeigth")][Range(0.01f, 1)]
         public float inrunStairsStepHeight;
 
 
@@ -127,7 +142,7 @@ namespace OpenSkiJumping.Hills
         [Header("Hill data")] public bool saveMesh;
 
         /* Hill construction */
-        [Space] [Header("Hill construction")] public GameObject startGate;
+        [Space][Header("Hill construction")] public GameObject startGate;
 
         //Lighting
 
@@ -137,7 +152,7 @@ namespace OpenSkiJumping.Hills
         public TerrainBase terrainBase;
 
         /* Terrain */
-        [Space] [Header("Terrain")] public GameObject terrainObject;
+        [Space][Header("Terrain")] public GameObject terrainObject;
 
         private Terrain[] terrains;
         public int time;
@@ -207,9 +222,9 @@ namespace OpenSkiJumping.Hills
                     {
                         for (var j = 0; j < terr.terrainData.heightmapResolution; j++)
                         {
-                            var x = (float) (j) / (terr.terrainData.heightmapResolution - 1) *
+                            var x = (float)(j) / (terr.terrainData.heightmapResolution - 1) *
                                 (terr.terrainData.size.x) + center.x;
-                            var z = (float) (i) / (terr.terrainData.heightmapResolution - 1) *
+                            var z = (float)(i) / (terr.terrainData.heightmapResolution - 1) *
                                 (terr.terrainData.size.z) + center.z;
 
 
@@ -288,6 +303,7 @@ namespace OpenSkiJumping.Hills
                 SaveMesh(inrunStairsR.gObj, "InrunStairsR");
                 SaveMesh(landingAreaGuardrailL.gObj, "LandingAreaGuardrailL");
                 SaveMesh(landingAreaGuardrailR.gObj, "LandingAreaGuardrailR");
+                SaveMesh(inrunGuardrailL.gObj, "InrunGuardrailL");
                 SaveMesh(inrunConstruction.gObj, "InrunConstruction");
                 SaveMesh(digitsMarks.gObj, "DigitsMarks");
             }
@@ -322,23 +338,9 @@ namespace OpenSkiJumping.Hills
 
             gameObject.GetComponent<MeshFilter>().mesh = mesh;
             gameObject.GetComponent<MeshRenderer>().material = material;
-            
-            
-            if(gameObject.name == "Marks Object")
-            {
-                Color distancePlatesColor;
-                if(ColorUtility.TryParseHtmlString(hill.distancePlatesColor, out distancePlatesColor))
-                {
-                    material.color = distancePlatesColor;
-                }
-                else
-                {
-                    material.color = Color.white;
-                }
 
-            }
 
-            if (gameObject.name == "Inrun Construction")
+            if (gameObject.name == "Marks Object")
             {
                 Color distancePlatesColor;
                 if (ColorUtility.TryParseHtmlString(hill.distancePlatesColor, out distancePlatesColor))
@@ -352,15 +354,63 @@ namespace OpenSkiJumping.Hills
 
             }
 
-            
 
+
+            if (gameObject.name == "Inrun Construction")
+            {
+                // Start the coroutine to load and apply the texture
+                if (hill.inrunConstructionTexture != "Default")
+                {
+                    StartCoroutine(LoadTextureForObject(gameObject, hill.inrunConstructionTexture));
+                }
+
+            }
+
+
+
+            // Add a MeshCollider if specified
             if (hasCollider)
             {
                 gameObject.GetComponent<MeshCollider>().sharedMesh = mesh;
             }
         }
 
-        public int[] FacesToTriangles(List<(int, int, int, int)> facesList)
+        // Coroutine to load and apply a texture from the user-provided path
+        private IEnumerator LoadTextureForObject(GameObject gameObject, string filePath)
+        {
+            // Format the file path for local file access
+            string fileUri = $"file:///{filePath}";
+
+            // Create a UnityWebRequest to load the texture from the file path
+            UnityWebRequest request = UnityWebRequestTexture.GetTexture(fileUri);
+            yield return request.SendWebRequest();
+
+            // Check if the request succeeded
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                // Get the loaded texture
+                Texture2D texture = DownloadHandlerTexture.GetContent(request);
+
+                // Apply the texture to the MeshRenderer of the "Inrun Construction" object
+                MeshRenderer meshRenderer = gameObject.GetComponent<MeshRenderer>();
+                if (meshRenderer != null && texture != null)
+                {
+                    meshRenderer.material.mainTexture = texture;
+                }
+                else
+                {
+                    Debug.LogError("MeshRenderer or texture is null.");
+                    
+                }
+            }
+            else
+            {
+                Debug.LogError($"Failed to load texture from {filePath}. Error: {request.error}");
+            }
+        }
+    
+
+    public int[] FacesToTriangles(List<(int, int, int, int)> facesList)
         {
             var triangles = new List<int>();
             foreach (var face in facesList)
@@ -803,7 +853,39 @@ namespace OpenSkiJumping.Hills
 
             var mesh = LandingAreaGuardrailSO.Generate(points, side);
             guardrail.gObj.GetComponent<MeshFilter>().mesh = mesh;
-            guardrail.gObj.GetComponent<MeshRenderer>().material = LandingAreaGuardrailSO.GetMaterial();
+            //guardrail.gObj.GetComponent<MeshRenderer>().material = LandingAreaGuardrailSO.GetMaterial();
+
+            if (System.Enum.TryParse(hill.landingAreaGuardrailTexture, out LandingAreaGuardrailTexture textureEnum))
+            {
+                // Get the integer value of the enum (this will correspond to the index)
+                int materialIndex = (int)textureEnum;
+
+                // Ensure the index is within bounds of the materials array
+                if (materialIndex >= 0 && materialIndex < landingAreaGuardrailL.materials.Length)
+                {
+                    // Assign the material based on the enum value
+                    guardrail.gObj.GetComponent<MeshRenderer>().material = landingAreaGuardrailL.materials[materialIndex];
+                }
+                else
+                {
+                    Debug.LogError("Material index out of bounds.");
+                }
+            }
+            else
+            {
+                Debug.LogError("Invalid texture string from JSON: " + hill.landingAreaGuardrailTexture);
+            }
+            // guardrail.gObj.GetComponent<MeshRenderer>().material = LandingAreaGuardrailSO.GetMaterial();
+
+            /* if (hill.landingAreaGuardrailTexture != "Default")
+             {
+                 guardrail.gObj.GetComponent<MeshRenderer>().material.color = Color.white;
+                 StartCoroutine(LoadTextureForObject(guardrail.gObj, hill.landingAreaGuardrailTexture));
+             }
+             else
+             {
+                 guardrail.gObj.GetComponent<MeshRenderer>().material = LandingAreaGuardrailSO.GetMaterial();
+             }*/
         }
 
         public void GenerateInrunGuardrail(ModelData guardrail, int side, bool generate)
@@ -823,6 +905,29 @@ namespace OpenSkiJumping.Hills
             var mesh = inrunGuardrailSO.Generate(points, side);
             guardrail.gObj.GetComponent<MeshFilter>().mesh = mesh;
             guardrail.gObj.GetComponent<MeshRenderer>().material = inrunGuardrailSO.GetMaterial();
+
+            
+            if (System.Enum.TryParse(hill.inrunGuardrailTexture, out InrunGuardrailTexture textureEnum))
+            {
+                // Get the integer value of the enum (this will correspond to the index)
+                int materialIndex = (int)textureEnum;
+
+                // Ensure the index is within bounds of the materials array
+                if (materialIndex >= 0 && materialIndex < inrunGuardrailL.materials.Length)
+                {
+                    // Assign the material based on the enum value
+                    guardrail.gObj.GetComponent<MeshRenderer>().material = inrunGuardrailL.materials[1];
+                }
+                else
+                {
+                    Debug.LogError("Material index out of bounds.");
+                }
+            }
+            else
+            {
+                Debug.LogError("Invalid texture string from JSON: " + hill.landingAreaGuardrailTexture);
+            }
+
         }
 
         public void GenerateInrunOuterGuardrail(ModelData guardrail, int side, bool generate, bool generate2)

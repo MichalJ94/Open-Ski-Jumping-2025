@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using OpenSkiJumping.Competition.Persistent;
 using OpenSkiJumping.Hills;
+using UnityEngine;
 
 namespace OpenSkiJumping.UI.HillsMenu
 {
@@ -41,7 +42,12 @@ namespace OpenSkiJumping.UI.HillsMenu
         float BU { get; set; }
         float D { get; set; }
         float Q { get; set; }
+
+
+        
+        string InrunGuardrailTexture { get; set; }
         string InrunConstructionTexture { get; set; }
+        string LandingAreaGuardrailTexture { get; set; }
         string DistancePlatesColor { get; set; }
 
         bool GateStairsLeft { get; set; }

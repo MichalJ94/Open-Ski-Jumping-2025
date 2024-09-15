@@ -47,7 +47,9 @@ namespace OpenSkiJumping.UI.HillsMenu
         [SerializeField] private TMP_InputField bUInput;
         [SerializeField] private TMP_InputField dInput;
         [SerializeField] private TMP_InputField qInput;
+        [SerializeField] private TMP_InputField igtInput;
         [SerializeField] private TMP_InputField ictInput;
+        [SerializeField] private TMP_InputField lagInput;
         [SerializeField] private TMP_InputField dpcInput;
         [SerializeField] private TMP_InputField inrunStairsAngleInput;
         [SerializeField] private Toggle gateStairsLeftToggle;
@@ -119,6 +121,7 @@ namespace OpenSkiJumping.UI.HillsMenu
             RegisterInputFieldCallbacks(b2Input);
             RegisterInputFieldCallbacks(bKInput);
             RegisterInputFieldCallbacks(bUInput);
+            RegisterInputFieldCallbacks(igtInput);
             RegisterInputFieldCallbacks(dInput);
             RegisterInputFieldCallbacks(qInput);
             RegisterInputFieldCallbacks(dpcInput);
@@ -329,10 +332,22 @@ namespace OpenSkiJumping.UI.HillsMenu
             set => qInput.SetTextWithoutNotify(value.ToString(CultureInfo.InvariantCulture));
         }
 
+        public string InrunGuardrailTexture
+        {
+            get => igtInput.text;
+            set => igtInput.SetTextWithoutNotify(value);
+        }
+
         public string InrunConstructionTexture
         {
             get => ictInput.text;
             set => ictInput.SetTextWithoutNotify(value);
+        }
+
+        public string LandingAreaGuardrailTexture
+        {
+            get => lagInput.text;
+            set => lagInput.SetTextWithoutNotify(value);
         }
 
         public string DistancePlatesColor
