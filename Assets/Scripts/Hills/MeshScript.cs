@@ -839,7 +839,7 @@ namespace OpenSkiJumping.Hills
             if (!generate)
             {
                 guardrail.gObj.GetComponent<MeshFilter>().mesh = null;
-                guardrail.gObj.GetComponent<MeshRenderer>().material = null;
+                guardrail.gObj.GetComponent<MeshRenderer>().materials = null;
                 return;
             }
 
@@ -853,18 +853,29 @@ namespace OpenSkiJumping.Hills
 
             var mesh = LandingAreaGuardrailSO.Generate(points, side);
             guardrail.gObj.GetComponent<MeshFilter>().mesh = mesh;
-            //guardrail.gObj.GetComponent<MeshRenderer>().material = LandingAreaGuardrailSO.GetMaterial();
 
+            // Get the enum value corresponding to the texture string
             if (System.Enum.TryParse(hill.landingAreaGuardrailTexture, out LandingAreaGuardrailTexture textureEnum))
             {
-                // Get the integer value of the enum (this will correspond to the index)
                 int materialIndex = (int)textureEnum;
 
-                // Ensure the index is within bounds of the materials array
+                // Ensure the index is within bounds
                 if (materialIndex >= 0 && materialIndex < landingAreaGuardrailL.materials.Length)
                 {
-                    // Assign the material based on the enum value
-                    guardrail.gObj.GetComponent<MeshRenderer>().material = landingAreaGuardrailL.materials[materialIndex];
+                    // Get the current array of materials assigned to the MeshRenderer
+                    var materials = guardrail.gObj.GetComponent<MeshRenderer>().materials;
+
+                    // Ensure we're not out of bounds when assigning the material
+                    if (materials.Length > 0)
+                    {
+                        materials[0] = landingAreaGuardrailL.materials[materialIndex]; // Replace the first material in the array
+                        guardrail.gObj.GetComponent<MeshRenderer>().materials = materials; // Apply the modified array back
+                        Debug.Log("Assigned material with index: " + materialIndex + " landingAreaGuardrailL.materials.Length " + landingAreaGuardrailL.materials.Length);
+                    }
+                    else
+                    {
+                        Debug.LogError("No materials found in MeshRenderer.");
+                    }
                 }
                 else
                 {
@@ -875,17 +886,6 @@ namespace OpenSkiJumping.Hills
             {
                 Debug.LogError("Invalid texture string from JSON: " + hill.landingAreaGuardrailTexture);
             }
-            // guardrail.gObj.GetComponent<MeshRenderer>().material = LandingAreaGuardrailSO.GetMaterial();
-
-            /* if (hill.landingAreaGuardrailTexture != "Default")
-             {
-                 guardrail.gObj.GetComponent<MeshRenderer>().material.color = Color.white;
-                 StartCoroutine(LoadTextureForObject(guardrail.gObj, hill.landingAreaGuardrailTexture));
-             }
-             else
-             {
-                 guardrail.gObj.GetComponent<MeshRenderer>().material = LandingAreaGuardrailSO.GetMaterial();
-             }*/
         }
 
         public void GenerateInrunGuardrail(ModelData guardrail, int side, bool generate)
@@ -907,7 +907,7 @@ namespace OpenSkiJumping.Hills
             guardrail.gObj.GetComponent<MeshRenderer>().material = inrunGuardrailSO.GetMaterial();
 
             
-            if (System.Enum.TryParse(hill.inrunGuardrailTexture, out InrunGuardrailTexture textureEnum))
+           /* if (System.Enum.TryParse(hill.inrunGuardrailTexture, out InrunGuardrailTexture textureEnum))
             {
                 // Get the integer value of the enum (this will correspond to the index)
                 int materialIndex = (int)textureEnum;
@@ -927,7 +927,7 @@ namespace OpenSkiJumping.Hills
             {
                 Debug.LogError("Invalid texture string from JSON: " + hill.landingAreaGuardrailTexture);
             }
-
+           */
         }
 
         public void GenerateInrunOuterGuardrail(ModelData guardrail, int side, bool generate, bool generate2)
