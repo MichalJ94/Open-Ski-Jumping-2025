@@ -36,6 +36,8 @@ namespace OpenSkiJumping.New
         [SerializeField]  private int WindThrustDeterminerTimesUsed;
         [SerializeField] private float fixedUpdateTorqueReference;
         private float forceScaleModifier;
+
+
         //                                                                                          BUG Z ROTACJĄ LEŻY W WINDTHRUSTDETERMINERTIMESUSED.
 
         bool button0, button1;
@@ -418,9 +420,14 @@ namespace OpenSkiJumping.New
             rb = GetComponent<Rigidbody>();
             rb.isKinematic = true;
 
+
             ResetValues();
 
         }
+
+
+
+
 
         public void ProcessControl()
         {
@@ -441,12 +448,12 @@ namespace OpenSkiJumping.New
             if (hS > 130) 
             {
                 modifier += (hS - 130) / 10;
-                startForceScale += (hS-130)*(0.0001f*modifier);
+                startForceScale += (hS-130)*(0.00015f*modifier);
             }
             if(hS < 130)
             {
                 modifier += (130 - hS) / 10;
-                startForceScale -= (130 - hS) * (0.0006f*modifier);
+                startForceScale -= (130 - hS) * (0.00065f*modifier);
             }
         }
 
