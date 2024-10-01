@@ -69,8 +69,10 @@ namespace OpenSkiJumping.Hills
     public enum LandingAreaGuardrailTexture
     {
         Default,
+        DefaultPlanks,
         LightYellowPlanks,
-        DarkBrownPlanks
+        DarkBrownPlanks,
+        Glass,
     }
 
     public class MeshScript : MonoBehaviour
@@ -855,6 +857,10 @@ namespace OpenSkiJumping.Hills
             var mesh = LandingAreaGuardrailSO.Generate(points, side);
             guardrail.gObj.GetComponent<MeshFilter>().mesh = mesh;
 
+            // Ensure previous materials are cleared
+            var meshRenderer = guardrail.gObj.GetComponent<MeshRenderer>();
+            meshRenderer.materials = new Material[0]; // Clear all previously assigned materials
+
             // Get the enum value corresponding to the texture string
             if (System.Enum.TryParse(hill.landingAreaGuardrailTexture, out LandingAreaGuardrailTexture textureEnum))
             {
@@ -863,20 +869,9 @@ namespace OpenSkiJumping.Hills
                 // Ensure the index is within bounds
                 if (materialIndex >= 0 && materialIndex < landingAreaGuardrailL.materials.Length)
                 {
-                    // Get the current array of materials assigned to the MeshRenderer
-                    var materials = guardrail.gObj.GetComponent<MeshRenderer>().materials;
-
-                    // Ensure we're not out of bounds when assigning the material
-                    if (materials.Length > 0)
-                    {
-                        materials[0] = landingAreaGuardrailL.materials[materialIndex]; // Replace the first material in the array
-                        guardrail.gObj.GetComponent<MeshRenderer>().materials = materials; // Apply the modified array back
-                       // Debug.Log("Assigned material with index: " + materialIndex + " landingAreaGuardrailL.materials.Length " + landingAreaGuardrailL.materials.Length);
-                    }
-                    else
-                    {
-                        Debug.LogError("No materials found in MeshRenderer.");
-                    }
+                    // Assign the correct material
+                    var material = landingAreaGuardrailL.materials[materialIndex];
+                    meshRenderer.material = material; // Assign only one material
                 }
                 else
                 {
