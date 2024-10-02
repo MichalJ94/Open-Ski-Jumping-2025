@@ -70,8 +70,7 @@ namespace OpenSkiJumping.Hills
     {
         Default,
         DefaultPlanks,
-        LightYellowPlanks,
-        DarkBrownPlanks,
+        WhitePlanks,
         Glass,
     }
 
@@ -872,6 +871,17 @@ namespace OpenSkiJumping.Hills
                     // Assign the correct material
                     var material = landingAreaGuardrailL.materials[materialIndex];
                     meshRenderer.material = material; // Assign only one material
+
+                    // Try to parse the hex color string and apply it to the material's base color
+                    if (ColorUtility.TryParseHtmlString(hill.landingAreaGuardrailColor, out Color guardrailColor))
+                    {
+                        // Set the base map color (typically "_BaseColor" in Unity's standard shader)
+                        material.SetColor("_BaseColor", guardrailColor);
+                    }
+                    else
+                    {
+                        Debug.LogError("Invalid hex color string: " + hill.landingAreaGuardrailColor);
+                    }
                 }
                 else
                 {
