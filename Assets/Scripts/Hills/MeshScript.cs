@@ -66,12 +66,22 @@ namespace OpenSkiJumping.Hills
         LightYellowPlanks,
         DarkBrownPlanks
     }
+
+    public enum InrunConstructionTexture
+    {
+        Default,
+        DefaultWhite,
+        Tex3
+    }
     public enum LandingAreaGuardrailTexture
     {
         Default,
         DefaultPlanks,
         WhitePlanks,
         Glass,
+        ThickGlass,
+        SuperThickGlass,
+        Transparent
     }
 
     public class MeshScript : MonoBehaviour
@@ -158,6 +168,8 @@ namespace OpenSkiJumping.Hills
 
         private Terrain[] terrains;
         public int time;
+
+        private Dictionary<Material, Color> originalMaterialColors = new Dictionary<Material, Color>();
 
         public void SetGate(Hill hill, int nr)
         {
@@ -330,8 +342,7 @@ namespace OpenSkiJumping.Hills
             terrains = terrainObject.GetComponentsInChildren<Terrain>();
         }
 
-        public void ObjectUpdate(GameObject gameObject, Mesh mesh, Material material, Vector3[] vertices,
-            int[] triangles, Vector2[] uvs, bool hasCollider)
+        public void ObjectUpdate(GameObject gameObject, Mesh mesh, Material material, Vector3[] vertices, int[] triangles, Vector2[] uvs, bool hasCollider)
         {
             mesh.vertices = vertices;
             mesh.triangles = triangles;
@@ -340,7 +351,6 @@ namespace OpenSkiJumping.Hills
 
             gameObject.GetComponent<MeshFilter>().mesh = mesh;
             gameObject.GetComponent<MeshRenderer>().material = material;
-
 
             if (gameObject.name == "Marks Object")
             {
@@ -353,22 +363,53 @@ namespace OpenSkiJumping.Hills
                 {
                     material.color = Color.white;
                 }
-
             }
-
-
 
             if (gameObject.name == "Inrun Construction")
             {
-                // Start the coroutine to load and apply the texture
+                // Compare texture name with enum and load the corresponding texture and color
                 if (hill.inrunConstructionTexture != "Default")
                 {
-                    StartCoroutine(LoadTextureForObject(gameObject, hill.inrunConstructionTexture));
+                    if (System.Enum.TryParse(hill.inrunConstructionTexture, out InrunConstructionTexture textureEnum))
+                    {
+                        int materialIndex = (int)textureEnum;
+
+                        // Ensure the index is within bounds
+                        if (materialIndex >= 0 && materialIndex < inrunConstruction.materials.Length)
+                        {
+                            var newMaterial = inrunConstruction.materials[materialIndex];
+
+                            // Store the original base color (if not already stored)
+                            if (!originalMaterialColors.ContainsKey(newMaterial))
+                            {
+                                originalMaterialColors[newMaterial] = newMaterial.GetColor("_BaseColor");
+                            }
+
+                            // Try to parse and apply the color
+                            if (ColorUtility.TryParseHtmlString(hill.inrunConstructionColor, out Color inrunColor))
+                            {
+                                Color originalColor = newMaterial.GetColor("_BaseColor");
+                                inrunColor.a = originalColor.a;  // Preserve alpha channel
+                                newMaterial.SetColor("_BaseColor", inrunColor);
+                            }
+                            else
+                            {
+                                Debug.LogError("Invalid hex color string: " + hill.inrunConstructionColor);
+                            }
+
+                            gameObject.GetComponent<MeshRenderer>().material = newMaterial; // Assign the new material
+                        }
+                        else
+                        {
+                            Debug.LogError("Material index out of bounds.");
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogError("Invalid texture string: " + hill.inrunConstructionTexture);
+                    }
                 }
-
             }
-
-
 
             // Add a MeshCollider if specified
             if (hasCollider)
@@ -516,19 +557,16 @@ namespace OpenSkiJumping.Hills
             var uvsList = new List<Vector2>();
             var facesList = new List<(int, int, int, int)>();
 
-            // const float width = 5f;
-            // Func<float, float> width = (xx => 5f);
+            // Define the width of the inrun using a function.
+            Func<float, float> width = (xx => 0.5f / hill.A.y / hill.A.y * (xx - hill.A.x) * (xx - hill.A.x) * (xx - hill.A.x) + 3f);
 
-            Func<float, float> width = (xx =>
-                0.5f / hill.A.y / hill.A.y * (xx - hill.A.x) * (xx - hill.A.x) * (xx - hill.A.x) + 3f);
-
+            // Calculate the critical point on the inrun based on its X value.
             var criticalPointX = Mathf.Lerp(hill.GatePoint(-1).x, hill.T.x, inrunStairsAngle);
             var p1 = hill.inrunPoints.Last(it => it.x > criticalPointX);
             var p2 = hill.inrunPoints.First(it => it.x <= criticalPointX);
             var criticalPoint = Vector2.Lerp(p1, p2, (criticalPointX - p1.x) / (p2.x - p1.x));
 
-
-            var x = 0;
+            // Create a list of points to define the inrun's shape.
             var tmpList = new List<Vector2>();
             tmpList.AddRange(hill.inrunPoints.Where(it => it.x > criticalPoint.x));
             tmpList.Add(criticalPoint);
@@ -536,7 +574,7 @@ namespace OpenSkiJumping.Hills
             tmpList.Add(hill.GatePoint(-1));
             tmpList.AddRange(hill.inrunPoints.Where(it => it.x <= hill.GatePoint(-1).x));
 
-            var len = new float[tmpList.Count];
+            // Prepare the bounds for the left and right sides of the inrun.
             var b0 = (!generateGateStairsL
                 ? tmpList.Select(it => -(hill.b1 / 2 + 0.7f)).ToArray()
                 : tmpList.Select(it => -(it.x > hill.GatePoint(-1).x
@@ -545,6 +583,7 @@ namespace OpenSkiJumping.Hills
                         : Mathf.Lerp(hill.b1 / 2 + 0.7f, hill.b1 / 2 + gateStairsSO.StepWidth,
                             (it.x - criticalPointX) / (criticalPointX - hill.GatePoint(-1).x)))
                     : (hill.b1 / 2 + gateStairsSO.StepWidth))).ToArray());
+
             var b1 = (!generateGateStairsR
                 ? tmpList.Select(it => hill.b1 / 2 + 0.7f).ToArray()
                 : tmpList.Select(it => (it.x > hill.GatePoint(-1).x
@@ -554,11 +593,14 @@ namespace OpenSkiJumping.Hills
                             (it.x - criticalPointX) / (criticalPointX - hill.GatePoint(-1).x)))
                     : (hill.b1 / 2 + gateStairsSO.StepWidth))).ToArray());
 
+            // Calculate the length of the inrun.
+            var len = new float[tmpList.Count];
             for (var i = 1; i < tmpList.Count; i++)
             {
                 len[i] = len[i - 1] + (tmpList[i] - tmpList[i - 1]).magnitude;
             }
 
+            // Generate vertices and UVs for the mesh.
             for (var i = 0; i < tmpList.Count; i++)
             {
                 var tmp = verticesList.Count;
@@ -585,7 +627,7 @@ namespace OpenSkiJumping.Hills
                 tmp = verticesList.Count - tmp;
                 if (i > 0)
                 {
-                    x = verticesList.Count;
+                    int x = verticesList.Count;
                     facesList.Add((x - 4, x - 6, x - (tmp + 4), x - (tmp + 6)));
                     facesList.Add((x - 5, x - 3, x - (tmp + 5), x - (tmp + 3)));
                     facesList.Add((x - 1, x - 2, x - (tmp + 1), x - (tmp + 2)));
@@ -593,7 +635,7 @@ namespace OpenSkiJumping.Hills
                 }
             }
 
-            // take-off table
+            // Create the take-off table.
             verticesList.Add(new Vector3(0, 0, b0[0]));
             uvsList.Add(new Vector2(-2, 0));
             verticesList.Add(new Vector3(0, 0, b1[0]));
@@ -602,7 +644,8 @@ namespace OpenSkiJumping.Hills
             uvsList.Add(new Vector2(-2, -width(0)));
             verticesList.Add(new Vector3(0, -width(0), b1[0]));
             uvsList.Add(new Vector2(2, -width(0)));
-            //top of the hill
+
+            // Create the top of the hill.
             verticesList.Add(new Vector3(hill.A.x, hill.A.y, b0[b0.Length - 1]));
             uvsList.Add(new Vector2(-2, 0));
             verticesList.Add(new Vector3(hill.A.x, hill.A.y, b1[b1.Length - 1]));
@@ -611,13 +654,18 @@ namespace OpenSkiJumping.Hills
             uvsList.Add(new Vector2(-2, -width(hill.A.x)));
             verticesList.Add(new Vector3(hill.A.x, hill.A.y - width(hill.A.x), b1[b1.Length - 1]));
             uvsList.Add(new Vector2(2, -width(hill.A.x)));
-            x = verticesList.Count;
-            facesList.Add((x - 8, x - 7, x - 6, x - 5));
-            facesList.Add((x - 3, x - 4, x - 1, x - 2));
 
+            // Add the final face connections.
+            int finalX = verticesList.Count;
+            facesList.Add((finalX - 8, finalX - 7, finalX - 6, finalX - 5));
+            facesList.Add((finalX - 3, finalX - 4, finalX - 1, finalX - 2));
+
+            // Convert the faces to triangles.
             var vertices = verticesList.ToArray();
             var uvs = uvsList.ToArray();
             var triangles = FacesToTriangles(facesList);
+
+            // Apply the changes to the object using the ObjectUpdate method.
             ObjectUpdate(inrunConstruction.gObj, mesh, inrunConstruction.materials[0], vertices, triangles, uvs, false);
         }
 
@@ -854,11 +902,22 @@ namespace OpenSkiJumping.Hills
                     ((profileData.Value.bU - profileData.Value.bK) / 2)))).ToArray();
 
             var mesh = LandingAreaGuardrailSO.Generate(points, side);
-            guardrail.gObj.GetComponent<MeshFilter>().mesh = mesh;
+            var meshFilter = guardrail.gObj.GetComponent<MeshFilter>();
+            if (meshFilter != null)
+            {
+                meshFilter.mesh = mesh;
+            }
+            else
+            {
+                Debug.LogError("No MeshFilter component found on guardrail object.");
+                return;
+            }
+
+            var meshRenderer = guardrail.gObj.GetComponent<MeshRenderer>();
 
             // Ensure previous materials are cleared
-            var meshRenderer = guardrail.gObj.GetComponent<MeshRenderer>();
             meshRenderer.materials = new Material[0]; // Clear all previously assigned materials
+
 
             // Get the enum value corresponding to the texture string
             if (System.Enum.TryParse(hill.landingAreaGuardrailTexture, out LandingAreaGuardrailTexture textureEnum))
@@ -868,14 +927,23 @@ namespace OpenSkiJumping.Hills
                 // Ensure the index is within bounds
                 if (materialIndex >= 0 && materialIndex < landingAreaGuardrailL.materials.Length)
                 {
-                    // Assign the correct material
                     var material = landingAreaGuardrailL.materials[materialIndex];
                     meshRenderer.material = material; // Assign only one material
 
-                    // Try to parse the hex color string and apply it to the material's base color
+                    // Store the original base color (including alpha) if it hasn't been stored already
+                    if (!originalMaterialColors.ContainsKey(material))
+                    {
+                        originalMaterialColors[material] = material.GetColor("_BaseColor");
+                    }
+
+                    // Try to parse the hex color string for the guardrail color
                     if (ColorUtility.TryParseHtmlString(hill.landingAreaGuardrailColor, out Color guardrailColor))
                     {
-                        // Set the base map color (typically "_BaseColor" in Unity's standard shader)
+                        // Preserve the original alpha value
+                        Color originalColor = material.GetColor("_BaseColor");
+                        guardrailColor.a = originalColor.a;
+
+                        // Apply only the RGB values (preserve alpha)
                         material.SetColor("_BaseColor", guardrailColor);
                     }
                     else
@@ -894,7 +962,28 @@ namespace OpenSkiJumping.Hills
             }
         }
 
-        public void GenerateInrunGuardrail(ModelData guardrail, int side, bool generate)
+        // Method to revert the material colors (including alpha) when the game stops
+        private void OnDisable()
+        {
+            RestoreOriginalMaterialColors();
+        }
+
+        // Method to restore original base map colors (including alpha) of materials
+        private void RestoreOriginalMaterialColors()
+        {
+            foreach (var entry in originalMaterialColors)
+            {
+                Material material = entry.Key;
+                Color originalColor = entry.Value;
+                material.SetColor("_BaseColor", originalColor);
+            }
+
+            // Clear the dictionary after restoration
+            originalMaterialColors.Clear();
+        }
+    
+
+    public void GenerateInrunGuardrail(ModelData guardrail, int side, bool generate)
         {
             if (!generate)
             {

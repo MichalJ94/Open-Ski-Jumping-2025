@@ -85,6 +85,7 @@ namespace OpenSkiJumping.Hills
         public float q;
         public string inrunGuardrailTexture = "Default";
         public string inrunConstructionTexture = "Default";
+        public string inrunConstructionColor = "Default";
         public string landingAreaGuardrailTexture = "Default";
         public string landingAreaGuardrailColor = "Default";
         public string distancePlatesColor = "#FFFFFF";

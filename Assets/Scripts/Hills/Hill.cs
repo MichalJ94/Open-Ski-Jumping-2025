@@ -32,7 +32,7 @@ namespace OpenSkiJumping.Hills
 
         public float a, rA, betaA, betaAR; //Outrun
 
-        public string distancePlatesColor, inrunConstructionTexture, landingAreaGuardrailTexture, landingAreaGuardrailColor, inrunGuardrailTexture; //Visual
+        public string distancePlatesColor, inrunConstructionTexture, inrunConstructionColor, landingAreaGuardrailTexture, landingAreaGuardrailColor, inrunGuardrailTexture; //Visual
 
         public float b1, b2, bK, bU;
 
@@ -88,6 +88,7 @@ namespace OpenSkiJumping.Hills
             bU = profileData.bU;
             inrunGuardrailTexture = profileData.inrunGuardrailTexture;
             inrunConstructionTexture = profileData.inrunConstructionTexture;
+            inrunConstructionColor = profileData.inrunConstructionColor;
             landingAreaGuardrailTexture = profileData.landingAreaGuardrailTexture;
             landingAreaGuardrailColor = profileData.landingAreaGuardrailColor;
             distancePlatesColor = profileData.distancePlatesColor;
