@@ -71,7 +71,9 @@ namespace OpenSkiJumping.Hills
     {
         Default,
         DefaultWhite,
-        Tex3
+        WhitePlanks,
+        MetalPlate,
+        PlainWhite
     }
     public enum LandingAreaGuardrailTexture
     {
