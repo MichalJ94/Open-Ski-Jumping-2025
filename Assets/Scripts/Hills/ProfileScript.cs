@@ -83,6 +83,7 @@ namespace OpenSkiJumping.Hills
         public float bU;
         public float d;
         public float q;
+        public string inrunStairsColor = "Default";
         public string inrunOuterGuardrailTexture = "Default";
         public string inrunOuterGuardrailColor = "#FFFFFF";
         public string inrunGuardrailTexture = "Default";
