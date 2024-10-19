@@ -60,11 +60,21 @@ namespace OpenSkiJumping.Hills
         flat
     }
 
+    public enum InrunOuterGuardrailTexture
+    {
+        Default,
+        Transparent,
+        WhitePlanks,
+        PlainWhite
+    }
+
     public enum InrunGuardrailTexture
     {
         Default,
         LightYellowPlanks,
-        DarkBrownPlanks
+        DarkBrownPlanks,
+        Transparent,
+        WhitePlanks
     }
 
     public enum InrunConstructionTexture
@@ -1051,14 +1061,17 @@ namespace OpenSkiJumping.Hills
             var p1 = hill.inrunPoints.Last(it => it.x > criticalPointX);
             var p2 = hill.inrunPoints.First(it => it.x <= criticalPointX);
             var criticalPoint = Vector2.Lerp(p1, p2, (criticalPointX - p1.x) / (p2.x - p1.x));
+
             var tmpList = new List<Vector2>();
             tmpList.AddRange(hill.inrunPoints.Where(it => it.x > criticalPoint.x));
             tmpList.Add(criticalPoint);
             tmpList.AddRange(hill.inrunPoints.Where(it => it.x <= criticalPoint.x && it.x > hill.GatePoint(-1).x));
             tmpList.Add(hill.GatePoint(-1));
             tmpList.AddRange(hill.inrunPoints.Where(it => it.x <= hill.GatePoint(-1).x));
+
             var len = new float[tmpList.Count];
             float[] b;
+
             if (generate2)
             {
                 b = tmpList.Select(it =>
@@ -1075,12 +1088,63 @@ namespace OpenSkiJumping.Hills
             }
 
             var sgn = (side == 0 ? -1 : 1);
-            var points = tmpList.Select((val, ind) => new Vector3(val.x, val.y, sgn * b[ind])).Reverse()
-                .ToArray();
+            var points = tmpList.Select((val, ind) => new Vector3(val.x, val.y, sgn * b[ind])).Reverse().ToArray();
 
             var mesh = InrunOuterGuardrailSO.Generate(points, side);
-            guardrail.gObj.GetComponent<MeshFilter>().mesh = mesh;
-            guardrail.gObj.GetComponent<MeshRenderer>().material = InrunOuterGuardrailSO.GetMaterial();
+            var meshFilter = guardrail.gObj.GetComponent<MeshFilter>();
+            meshFilter.mesh = mesh;
+
+            var meshRenderer = guardrail.gObj.GetComponent<MeshRenderer>();
+
+            // Ensure the previous materials are cleared
+            meshRenderer.materials = new Material[0]; // Clear all previously assigned materials
+
+            // Get the enum value corresponding to the texture string
+            if (System.Enum.TryParse(hill.inrunOuterGuardrailTexture, out InrunOuterGuardrailTexture textureEnum))
+            {
+                int materialIndex = (int)textureEnum;
+
+                // Ensure the index is within bounds
+                if (materialIndex >= 0 && materialIndex < inrunOuterGuardrailL.materials.Length)
+                {
+                    var material = inrunOuterGuardrailL.materials[materialIndex];
+                    meshRenderer.material = material; // Assign only one material
+
+                    // Store the original base color if not already stored
+                    if (!originalMaterialColors.ContainsKey(material))
+                    {
+                        originalMaterialColors[material] = material.GetColor("_BaseColor");
+                    }
+
+                    // Handle the "Default" case or other invalid color strings
+                    if (hill.inrunOuterGuardrailColor == "Default")
+                    {
+                        // Set a default color manually (white in this case)
+                        material.SetColor("_BaseColor", Color.white);
+                    }
+                    else if (ColorUtility.TryParseHtmlString(hill.inrunOuterGuardrailColor, out Color guardrailColor))
+                    {
+                        // Preserve original alpha
+                        Color originalColor = material.GetColor("_BaseColor");
+                        guardrailColor.a = originalColor.a;
+
+                        // Apply RGB values only (preserving alpha)
+                        material.SetColor("_BaseColor", guardrailColor);
+                    }
+                    else
+                    {
+                        Debug.LogError("Invalid hex color string: " + hill.inrunOuterGuardrailColor);
+                    }
+                }
+                else
+                {
+                    Debug.LogError("Material index out of bounds.");
+                }
+            }
+            else
+            {
+                Debug.LogError("Invalid texture string from JSON: " + hill.inrunOuterGuardrailTexture);
+            }
         }
 
         public void DestroyLamps()
