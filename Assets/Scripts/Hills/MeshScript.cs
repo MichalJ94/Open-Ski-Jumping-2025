@@ -60,6 +60,13 @@ namespace OpenSkiJumping.Hills
         flat
     }
 
+    public enum InrunStairsTexture
+    {
+        Default,
+        Plain,
+        WhitePlanks,
+    }
+
     public enum InrunOuterGuardrailTexture
     {
         Default,
@@ -363,6 +370,21 @@ namespace OpenSkiJumping.Hills
 
             gameObject.GetComponent<MeshFilter>().mesh = mesh;
             gameObject.GetComponent<MeshRenderer>().material = material;
+
+
+            if (gameObject.name == "Inrun Stairs L")
+            {
+                Color inrunStairsColor;
+                if (ColorUtility.TryParseHtmlString(hill.distancePlatesColor, out inrunStairsColor))
+                {
+                    material.color = inrunStairsColor;
+                }
+                else
+                {
+                    material.color = Color.white;
+                }
+            }
+
 
             if (gameObject.name == "Marks Object")
             {
