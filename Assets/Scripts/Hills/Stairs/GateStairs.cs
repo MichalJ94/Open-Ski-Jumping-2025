@@ -10,7 +10,7 @@ namespace OpenSkiJumping.Hills.Stairs
 
         [SerializeField] float stepWidth;
 
-        [SerializeField] private Material material;
+        [SerializeField] public Material[] materials;
 
         public float StepWidth
         {
@@ -110,9 +110,9 @@ namespace OpenSkiJumping.Hills.Stairs
             return mesh;
         }
 
-        public Material GetMaterial()
+        public Material GetMaterial(int textureIndex)
         {
-            return material;
+            return materials[textureIndex];  // Assume the materials array is correctly indexed
         }
     }
 }
