@@ -11,6 +11,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.Networking;
+using System.Linq;
 using UnityEngine.UI.Extensions.ColorPicker;
 
 namespace OpenSkiJumping.Hills
@@ -691,15 +692,28 @@ namespace OpenSkiJumping.Hills
                 verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y, b1[i]));
                 uvsList.Add(new Vector2(tmpList[i].x, tmpList[i].y));
 
-                verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - width(tmpList[i].x), b0[i]));
+
+                // zrobic cos zeby sie nie robilo nagle tak chudo
+                verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - Math.Max((tmpList[i].y) * 0.09f,1.5f), b0[i]));
                 uvsList.Add(new Vector2(tmpList[i].x, tmpList[i].y - width(tmpList[i].x)));
-                verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - width(tmpList[i].x), b1[i]));
+                verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - Math.Max((tmpList[i].y) * 0.09f,1.5f), b1[i]));
                 uvsList.Add(new Vector2(tmpList[i].x, tmpList[i].y - width(tmpList[i].x)));
 
                 verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - width(tmpList[i].x), b0[i]));
                 uvsList.Add(new Vector2(tmpList[i].x, -2));
                 verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - width(tmpList[i].x), b1[i]));
                 uvsList.Add(new Vector2(tmpList[i].x, 2));
+
+
+                /*                verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - (tmpList[i].y)*0.09f, b0[i]));
+                uvsList.Add(new Vector2(tmpList[i].x, tmpList[i].y - width(tmpList[i].x)));
+                verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - (tmpList[i].y) * 0.09f, b1[i]));
+                uvsList.Add(new Vector2(tmpList[i].x, tmpList[i].y - width(tmpList[i].x)));
+
+                verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - width(tmpList[i].x), b0[i]));
+                uvsList.Add(new Vector2(tmpList[i].x, -2));
+                verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - width(tmpList[i].x), b1[i]));
+                uvsList.Add(new Vector2(tmpList[i].x, 2));*/
 
                 tmp = verticesList.Count - tmp;
                 if (i > 0)
@@ -746,6 +760,8 @@ namespace OpenSkiJumping.Hills
             ObjectUpdate(inrunConstruction.gObj, mesh, inrunConstruction.materials[0], vertices, triangles, uvs, false);
         }
 
+
+
         public void GenerateInrunTrack()
         {
             var mesh = inrunTrackSO.Generate(profileData.Value.b1, hill.inrunPoints);
@@ -756,7 +772,7 @@ namespace OpenSkiJumping.Hills
         public void GenerateGateStairs(ModelData gateStairs, int side, bool generate)
         {
             /* 0 - Left, 1 - Right */
-            if (!generate)
+                if (!generate)
             {
                 gateStairs.gObj.GetComponent<MeshFilter>().mesh = null;
                 gateStairs.gObj.GetComponent<MeshRenderer>().material = null;

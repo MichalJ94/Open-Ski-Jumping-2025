@@ -298,7 +298,14 @@ namespace OpenSkiJumping.Hills
 
             points.Add(B);
             points.Add(A);
+
+            /*for (int j = 0; j < points.Count; j++)
+            {
+                Debug.Log($"inrunPoint {j}: {points[j]}");
+            }*/
+
             return points.ToArray();
+
         }
 
         public Vector2 GatePoint(int nr)
