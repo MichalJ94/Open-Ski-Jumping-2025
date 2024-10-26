@@ -810,14 +810,14 @@ namespace OpenSkiJumping.Hills
                 if (poleSegments.Contains(i) && i > 0)
                 {
                     Debug.Log("The pole method was called when i = " + i);
-                    verticesList.Add(new Vector3(tmpListPoles[i].x, tmpListPoles[i].y - 0.1f, b2[i]));
+                    verticesList.Add(new Vector3(tmpListPoles[i].x, tmpListPoles[i].y - inrunMinHeight - 0.1f, b2[i]));
                     uvsList.Add(new Vector2(tmpListPoles[i].x, tmpListPoles[i].y));
-                    verticesList.Add(new Vector3(tmpListPoles[i].x, tmpListPoles[i].y - 0.1f, b3[i]));
+                    verticesList.Add(new Vector3(tmpListPoles[i].x, tmpListPoles[i].y - inrunMinHeight - 0.1f, b3[i]));
                     uvsList.Add(new Vector2(tmpListPoles[i].x, tmpListPoles[i].y));
 
-                    verticesList.Add(new Vector3(tmpListPoles[i].x, tmpListPoles[i].y, b2[i]));
+                    verticesList.Add(new Vector3(tmpListPoles[i].x, tmpListPoles[i].y - inrunMinHeight, b2[i]));
                     uvsList.Add(new Vector2(tmpListPoles[i].x, tmpListPoles[i].y));
-                    verticesList.Add(new Vector3(tmpListPoles[i].x, tmpListPoles[i].y, b3[i]));
+                    verticesList.Add(new Vector3(tmpListPoles[i].x, tmpListPoles[i].y - inrunMinHeight, b3[i]));
                     uvsList.Add(new Vector2(tmpListPoles[i].x, tmpListPoles[i].y));
 
                     verticesList.Add(new Vector3(tmpListPoles[i].x, tmpListPoles[i].y - 50f, b2[i]));
