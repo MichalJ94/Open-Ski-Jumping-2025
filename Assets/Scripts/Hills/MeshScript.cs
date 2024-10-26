@@ -654,6 +654,8 @@ namespace OpenSkiJumping.Hills
             tmpList.Add(hill.GatePoint(-1));
             tmpList.AddRange(hill.inrunPoints.Where(it => it.x <= hill.GatePoint(-1).x));
 
+            tmpListPoles.AddRange(hill.inrunPolePoints);
+
             // Prepare the bounds for the left and right sides of the inrun.
             var b0 = (!generateGateStairsL
                 ? tmpList.Select(it => -(hill.b1 / 2 + 0.7f)).ToArray()
@@ -667,6 +669,24 @@ namespace OpenSkiJumping.Hills
             var b1 = (!generateGateStairsR
                 ? tmpList.Select(it => hill.b1 / 2 + 0.7f).ToArray()
                 : tmpList.Select(it => (it.x > hill.GatePoint(-1).x
+                    ? (it.x > criticalPoint.x
+                        ? hill.b1 / 2 + 0.7f
+                        : Mathf.Lerp(hill.b1 / 2 + 0.7f, hill.b1 / 2 + gateStairsSO.StepWidth,
+                            (it.x - criticalPointX) / (criticalPointX - hill.GatePoint(-1).x)))
+                    : (hill.b1 / 2 + gateStairsSO.StepWidth))).ToArray());
+
+            var b2 = (!generateGateStairsL
+                ? tmpListPoles.Select(it => -(hill.b1 / 2 + 0.7f)).ToArray()
+                : tmpListPoles.Select(it => -(it.x > hill.GatePoint(-1).x
+                    ? (it.x > criticalPoint.x
+                        ? hill.b1 / 2 + 0.7f
+                        : Mathf.Lerp(hill.b1 / 2 + 0.7f, hill.b1 / 2 + gateStairsSO.StepWidth,
+                            (it.x - criticalPointX) / (criticalPointX - hill.GatePoint(-1).x)))
+                    : (hill.b1 / 2 + gateStairsSO.StepWidth))).ToArray());
+
+            var b3 = b1 = (!generateGateStairsR
+                ? tmpListPoles.Select(it => hill.b1 / 2 + 0.7f).ToArray()
+                : tmpListPoles.Select(it => (it.x > hill.GatePoint(-1).x
                     ? (it.x > criticalPoint.x
                         ? hill.b1 / 2 + 0.7f
                         : Mathf.Lerp(hill.b1 / 2 + 0.7f, hill.b1 / 2 + gateStairsSO.StepWidth,
@@ -751,11 +771,6 @@ namespace OpenSkiJumping.Hills
             int numberOfPoles = 4; //Mathf.FloorToInt(tmpList.Count / 5f);
             */
 
-            tmpListPoles.AddRange(hill.inrunPoints.Where(it => it.x > criticalPoint.x));
-            tmpListPoles.Add(criticalPoint);
-            tmpListPoles.AddRange(hill.inrunPoints.Where(it => it.x <= criticalPoint.x && it.x > hill.GatePoint(-1).x));
-            tmpListPoles.Add(hill.GatePoint(-1));
-            tmpListPoles.AddRange(hill.inrunPoints.Where(it => it.x <= hill.B.x));
 
 
             int poleSpacing = 7;
@@ -780,34 +795,40 @@ namespace OpenSkiJumping.Hills
                 Debug.Log("Valid pole segment = " + poleSegments[i]);
             }
 
+            for (int i = 0; i < tmpListPoles.Count; i++)
+            {
+                Debug.Log("tmpListPoles b3 dla i = " + i + " = " + b3[i]);
+            }
 
-                //Generate the poles the high is resting on
-                for (int i = 0; i < tmpListPoles.Count; i++)
+            Debug.Log($"tmpList count {tmpList.Count} tmpListPoles count {hill.inrunPolePoints.Length}");
+
+            //Generate the poles the high is resting on
+            for (int i = 0; i < tmpListPoles.Count; i++)
             {
                 var tmp = verticesList.Count;
                 //if(i > 0 && ((i+1) % 5 == 0 || i % 5 == 0) && (i+1) < tmpList.Count-1)
                 if (poleSegments.Contains(i) && i > 0)
                 {
                     Debug.Log("The pole method was called when i = " + i);
-                    verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - 0.1f, b0[i]));
-                    uvsList.Add(new Vector2(tmpList[i].x, tmpList[i].y));
-                    verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - 0.1f, b1[i]));
-                    uvsList.Add(new Vector2(tmpList[i].x, tmpList[i].y));
+                    verticesList.Add(new Vector3(tmpListPoles[i].x, tmpListPoles[i].y - 0.1f, b2[i]));
+                    uvsList.Add(new Vector2(tmpListPoles[i].x, tmpListPoles[i].y));
+                    verticesList.Add(new Vector3(tmpListPoles[i].x, tmpListPoles[i].y - 0.1f, b3[i]));
+                    uvsList.Add(new Vector2(tmpListPoles[i].x, tmpListPoles[i].y));
 
-                    verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y, b0[i]));
-                    uvsList.Add(new Vector2(tmpList[i].x, tmpList[i].y));
-                    verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y, b1[i]));
-                    uvsList.Add(new Vector2(tmpList[i].x, tmpList[i].y));
+                    verticesList.Add(new Vector3(tmpListPoles[i].x, tmpListPoles[i].y, b2[i]));
+                    uvsList.Add(new Vector2(tmpListPoles[i].x, tmpListPoles[i].y));
+                    verticesList.Add(new Vector3(tmpListPoles[i].x, tmpListPoles[i].y, b3[i]));
+                    uvsList.Add(new Vector2(tmpListPoles[i].x, tmpListPoles[i].y));
 
-                    verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - 50f, b0[i]));
-                    uvsList.Add(new Vector2(tmpList[i].x, tmpList[i].y - width(tmpList[i].x)));
-                    verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - 50f, b1[i]));
-                    uvsList.Add(new Vector2(tmpList[i].x, tmpList[i].y - width(tmpList[i].x)));
+                    verticesList.Add(new Vector3(tmpListPoles[i].x, tmpListPoles[i].y - 50f, b2[i]));
+                    uvsList.Add(new Vector2(tmpListPoles[i].x, tmpListPoles[i].y - width(tmpListPoles[i].x)));
+                    verticesList.Add(new Vector3(tmpListPoles[i].x, tmpListPoles[i].y - 50f, b3[i]));
+                    uvsList.Add(new Vector2(tmpListPoles[i].x, tmpListPoles[i].y - width(tmpListPoles[i].x)));
 
-                    verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - width(tmpList[i].x), b0[i]));
-                    uvsList.Add(new Vector2(tmpList[i].x, -2));
-                    verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - width(tmpList[i].x), b1[i]));
-                    uvsList.Add(new Vector2(tmpList[i].x, 2));
+                    verticesList.Add(new Vector3(tmpListPoles[i].x, tmpListPoles[i].y - width(tmpListPoles[i].x), b2[i]));
+                    uvsList.Add(new Vector2(tmpListPoles[i].x, -2));
+                    verticesList.Add(new Vector3(tmpListPoles[i].x, tmpListPoles[i].y - width(tmpListPoles[i].x), b3[i]));
+                    uvsList.Add(new Vector2(tmpListPoles[i].x, 2));
                 }
 
                 tmp = verticesList.Count - tmp;
@@ -914,6 +935,9 @@ namespace OpenSkiJumping.Hills
             var vertices = verticesList.ToArray();
             var uvs = uvsList.ToArray();
             var triangles = FacesToTriangles(facesList);
+
+
+
 
             // Apply the changes to the object using the ObjectUpdate method.
             ObjectUpdate(inrunConstruction.gObj, mesh, inrunConstruction.materials[0], vertices, triangles, uvs, false);

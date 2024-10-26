@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
+using UnityEngine.UI.Extensions;
 
 namespace OpenSkiJumping.Hills
 {
@@ -39,6 +41,7 @@ namespace OpenSkiJumping.Hills
         public Vector2 A, B, C1, C2, CL, CV, E1, E2, T, F, P, K, L, U, V, X;
         public Vector2[] landingAreaPoints;
         public Vector2[] inrunPoints;
+        public Vector2[] inrunPolePoints;
 
         public InrunData inrunData;
         public LandingAreaData landingAreaData;
@@ -98,6 +101,7 @@ namespace OpenSkiJumping.Hills
             distancePlatesColor = profileData.distancePlatesColor;
             Calculate();
             inrunPoints = GenerateInrunPoints();
+            inrunPolePoints = GenerateInrunPolePoints();
             landingAreaPoints = GenerateLandingAreaPoints();
             inrunData = profileData.inrunData;
             landingAreaData = profileData.landingAreaData;
@@ -291,6 +295,7 @@ namespace OpenSkiJumping.Hills
             //add points between E2 and E1 (inclusive)
             var delta = E1.x - E2.x;
             var segments = (int)(l);
+            Debug.Log($"Inrun points segments: {segments} delta: {delta}");
             for (var i = 0; i <= segments; i++)
             {
                 points.Add(new Vector2(i * delta / segments + E2.x, Inrun(i * delta / segments + E2.x)));
@@ -306,6 +311,28 @@ namespace OpenSkiJumping.Hills
 
             return points.ToArray();
 
+        }
+
+
+        public Vector2[] GenerateInrunPolePoints()
+        {
+            var points = new List<Vector2> { T };
+
+            // Calculate total x distance from T to B
+            var totalXDistance = B.x - T.x;
+
+            // Define the number of segments or intervals for the entire range T to B
+            int totalSegments = (int)(totalXDistance / -1.01) ; // Use deltaX for desired x-spacing
+            Debug.Log($"InrunPolepoints segments: {totalSegments} delta: {totalXDistance}");
+            for (int i = 1; i <= totalSegments; i++)
+            {
+                float x = i * (totalXDistance / totalSegments) + T.x;
+                float y = Inrun(x); // Call Inrun function to get y-coordinate based on x
+                points.Add(new Vector2(x, y));
+                Debug.Log($"Pole segment {i} = {points[i]}");
+            }
+
+            return points.ToArray();
         }
 
         public Vector2 GatePoint(int nr)
