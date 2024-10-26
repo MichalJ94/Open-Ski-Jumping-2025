@@ -840,6 +840,7 @@ namespace OpenSkiJumping.Hills
                     facesList.Add((x - 5, x - 3, x - (tmp + 5), x - (tmp + 3)));
                     facesList.Add((x - 1, x - 2, x - (tmp + 1), x - (tmp + 2)));
                     facesList.Add((x - 8, x - 7, x - (tmp + 8), x - (tmp + 7)));
+                    facesList.Add((x-8,x-7,x-3,x-4));
                 }
                 /*
                 Vector3 polePosition = new Vector3(tmpList[i].x, tmpList[i].y - Math.Max((tmpList[i].y) * 0.09f, 3.5f), 0);
