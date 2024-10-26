@@ -13,6 +13,7 @@ using UnityEngine.Serialization;
 using UnityEngine.Networking;
 using System.Linq;
 using UnityEngine.UI.Extensions.ColorPicker;
+using Microsoft.SqlServer.Server;
 
 namespace OpenSkiJumping.Hills
 {
@@ -646,6 +647,7 @@ namespace OpenSkiJumping.Hills
 
             // Create a list of points to define the inrun's shape.
             var tmpList = new List<Vector2>();
+            var tmpListPoles = new List<Vector2>();
             tmpList.AddRange(hill.inrunPoints.Where(it => it.x > criticalPoint.x));
             tmpList.Add(criticalPoint);
             tmpList.AddRange(hill.inrunPoints.Where(it => it.x <= criticalPoint.x && it.x > hill.GatePoint(-1).x));
@@ -678,6 +680,10 @@ namespace OpenSkiJumping.Hills
                 len[i] = len[i - 1] + (tmpList[i] - tmpList[i - 1]).magnitude;
             }
 
+            float inrunMinHeight = 1.5f;
+            Debug.Log("tmpList.Count: " + tmpList.Count + " verticesList.Count: " + verticesList.Count);
+
+
             // Generate vertices and UVs for the mesh.
             for (var i = 0; i < tmpList.Count; i++)
             {
@@ -692,11 +698,10 @@ namespace OpenSkiJumping.Hills
                 verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y, b1[i]));
                 uvsList.Add(new Vector2(tmpList[i].x, tmpList[i].y));
 
-
-                // zrobic cos zeby sie nie robilo nagle tak chudo
-                verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - Math.Max((tmpList[i].y) * 0.09f,1.5f), b0[i]));
+                //change 3,5f to a variable loaded from hill/the json file later on
+                verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - Math.Max((tmpList[i].y) * 0.09f, inrunMinHeight), b0[i]));
                 uvsList.Add(new Vector2(tmpList[i].x, tmpList[i].y - width(tmpList[i].x)));
-                verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - Math.Max((tmpList[i].y) * 0.09f,1.5f), b1[i]));
+                verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - Math.Max((tmpList[i].y) * 0.09f, inrunMinHeight), b1[i]));
                 uvsList.Add(new Vector2(tmpList[i].x, tmpList[i].y - width(tmpList[i].x)));
 
                 verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - width(tmpList[i].x), b0[i]));
@@ -704,16 +709,17 @@ namespace OpenSkiJumping.Hills
                 verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - width(tmpList[i].x), b1[i]));
                 uvsList.Add(new Vector2(tmpList[i].x, 2));
 
+               /* if (i == 5)
+                {
+                    Debug.Log($"Before running faceadding i = {i} verticesList.Count = {verticesList.Count} tmp: {tmp}");
+                    for (int j = 16; j > 0; j--)
+                    {
+                        Debug.Log($"VerticeList postion {48 - j} = {verticesList[48 - j]}");
+                    }
 
-                /*                verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - (tmpList[i].y)*0.09f, b0[i]));
-                uvsList.Add(new Vector2(tmpList[i].x, tmpList[i].y - width(tmpList[i].x)));
-                verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - (tmpList[i].y) * 0.09f, b1[i]));
-                uvsList.Add(new Vector2(tmpList[i].x, tmpList[i].y - width(tmpList[i].x)));
+                }
+               */
 
-                verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - width(tmpList[i].x), b0[i]));
-                uvsList.Add(new Vector2(tmpList[i].x, -2));
-                verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - width(tmpList[i].x), b1[i]));
-                uvsList.Add(new Vector2(tmpList[i].x, 2));*/
 
                 tmp = verticesList.Count - tmp;
                 if (i > 0)
@@ -724,20 +730,171 @@ namespace OpenSkiJumping.Hills
                     facesList.Add((x - 1, x - 2, x - (tmp + 1), x - (tmp + 2)));
                     facesList.Add((x - 8, x - 7, x - (tmp + 8), x - (tmp + 7)));
                 }
+
+
+            /*    if (i == 5)
+                {
+                    Debug.Log($"After faceadding i = {i} verticesList.Count = {verticesList.Count} tmp: {tmp}");
+                    for (int j = facesList.Count; j > facesList.Count - 8; j--)
+                    {
+                        Debug.Log($"FacesList[{j-1}]:  = {facesList[j-1]}");
+                    }
+                }
+            */
+
             }
+
+
+            /*
+            float zWidthCoefficient = 1.0f; // Adjust as necessary or load from hill/json
+            float poleXWidth = 2;
+            int numberOfPoles = 4; //Mathf.FloorToInt(tmpList.Count / 5f);
+            */
+
+            tmpListPoles.AddRange(hill.inrunPoints.Where(it => it.x > criticalPoint.x));
+            tmpListPoles.Add(criticalPoint);
+            tmpListPoles.AddRange(hill.inrunPoints.Where(it => it.x <= criticalPoint.x && it.x > hill.GatePoint(-1).x));
+            tmpListPoles.Add(hill.GatePoint(-1));
+            tmpListPoles.AddRange(hill.inrunPoints.Where(it => it.x <= hill.B.x));
+
+
+            int poleSpacing = 7;
+            int poleThickness = 2;
+            var poleSegments = new List<int>();
+
+            for(int i = 0; i < tmpListPoles.Count; i++)
+            {
+                if (i % poleSpacing == 0)
+                {
+                    poleSegments.Add(i);
+                    for (int j = 1; j <= poleThickness; j++)
+                    {
+                        poleSegments.Add(i - j);
+                    }
+                }
+
+            }
+
+            for (int i = 0; i < poleSegments.Count; i++)
+            {
+                Debug.Log("Valid pole segment = " + poleSegments[i]);
+            }
+
+
+                //Generate the poles the high is resting on
+                for (int i = 0; i < tmpListPoles.Count; i++)
+            {
+                var tmp = verticesList.Count;
+                //if(i > 0 && ((i+1) % 5 == 0 || i % 5 == 0) && (i+1) < tmpList.Count-1)
+                if (poleSegments.Contains(i) && i > 0)
+                {
+                    Debug.Log("The pole method was called when i = " + i);
+                    verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - 0.1f, b0[i]));
+                    uvsList.Add(new Vector2(tmpList[i].x, tmpList[i].y));
+                    verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - 0.1f, b1[i]));
+                    uvsList.Add(new Vector2(tmpList[i].x, tmpList[i].y));
+
+                    verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y, b0[i]));
+                    uvsList.Add(new Vector2(tmpList[i].x, tmpList[i].y));
+                    verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y, b1[i]));
+                    uvsList.Add(new Vector2(tmpList[i].x, tmpList[i].y));
+
+                    verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - 50f, b0[i]));
+                    uvsList.Add(new Vector2(tmpList[i].x, tmpList[i].y - width(tmpList[i].x)));
+                    verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - 50f, b1[i]));
+                    uvsList.Add(new Vector2(tmpList[i].x, tmpList[i].y - width(tmpList[i].x)));
+
+                    verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - width(tmpList[i].x), b0[i]));
+                    uvsList.Add(new Vector2(tmpList[i].x, -2));
+                    verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - width(tmpList[i].x), b1[i]));
+                    uvsList.Add(new Vector2(tmpList[i].x, 2));
+                }
+
+                tmp = verticesList.Count - tmp;
+                if (poleSegments.Contains(i-1) && i > 0)
+                {
+                    Debug.Log("The faces were created when i = " + i);
+                    int x = verticesList.Count;
+                    facesList.Add((x - 4, x - 6, x - (tmp + 4), x - (tmp + 6)));
+                    facesList.Add((x - 5, x - 3, x - (tmp + 5), x - (tmp + 3)));
+                    facesList.Add((x - 1, x - 2, x - (tmp + 1), x - (tmp + 2)));
+                    facesList.Add((x - 8, x - 7, x - (tmp + 8), x - (tmp + 7)));
+                }
+                /*
+                Vector3 polePosition = new Vector3(tmpList[i].x, tmpList[i].y - Math.Max((tmpList[i].y) * 0.09f, 3.5f), 0);
+
+                // Calculate pole height based on tmpList[i] values
+                float upperPoint = tmpList[i].y - tmpList[i].y - Math.Max((tmpList[i].y) * 0.09f, 3.5f); // Upper point just below tmpList[i].y
+                float lowerPoint = tmpList[i].y - width(tmpList[i].x * 2); // Lower point at tmpList[i].y - width(tmpList[i].x)
+                float poleHeight = Mathf.Abs(upperPoint - lowerPoint);
+
+                // Width along z-axis between b0 and b1, adjusted with coefficient
+                float poleZWidth = Mathf.Abs(b1[i] - b0[i]) * zWidthCoefficient;*/
+            }
+
+
 
             // Create the take-off table.
             verticesList.Add(new Vector3(0, 0, b0[0]));
             uvsList.Add(new Vector2(-2, 0));
             verticesList.Add(new Vector3(0, 0, b1[0]));
             uvsList.Add(new Vector2(2, 0));
-            verticesList.Add(new Vector3(0, -width(0), b0[0]));
+            verticesList.Add(new Vector3(0, -inrunMinHeight, b0[0]));
             uvsList.Add(new Vector2(-2, -width(0)));
-            verticesList.Add(new Vector3(0, -width(0), b1[0]));
+            verticesList.Add(new Vector3(0, -inrunMinHeight, b1[0]));
             uvsList.Add(new Vector2(2, -width(0)));
 
-            // Create the top of the hill.
-            verticesList.Add(new Vector3(hill.A.x, hill.A.y, b0[b0.Length - 1]));
+
+
+            
+
+
+
+
+
+
+
+                /*
+
+                // Create poles at defined intervals
+
+                float poleWidth = 10.2f; // Pole width, adjust as necessary
+                Vector3 inrunDirection = (hill.E2 - hill.E1).normalized; // Direction from E1 to E2
+                float inrunLength = Vector3.Distance(hill.E1, hill.E2);
+                int numberOfPoles = Mathf.FloorToInt(inrunLength / 5f); // Adjust for pole spacing
+                                                                        // Adjustable coefficient for pole width along the z-axis
+                float zWidthCoefficient = 1.0f; // Adjust as necessary or load from hill/json
+
+                // Create poles along the inrun
+                for (int i = 0; i < tmpList.Count; i++)
+                {
+                    Vector3 polePosition = new Vector3(tmpList[i].x, tmpList[i].y - Math.Max((tmpList[i].y) * 0.09f, 3.5f), 0);
+
+                    // Calculate pole height based on tmpList[i] values
+                    float upperPoint = tmpList[i].y - tmpList[i].y - Math.Max((tmpList[i].y) * 0.09f,3.5f); // Upper point just below tmpList[i].y
+                    float lowerPoint = tmpList[i].y - width(tmpList[i].x*2); // Lower point at tmpList[i].y - width(tmpList[i].x)
+                    float poleHeight = Mathf.Abs(upperPoint - lowerPoint);
+
+                    // Width along z-axis between b0 and b1, adjusted with coefficient
+                    float poleZWidth = Mathf.Abs(b1[i] - b0[i]) * zWidthCoefficient;
+
+                    // Convert texture string to enum safely
+                    if (Enum.TryParse(hill.inrunConstructionTexture, out InrunConstructionTexture textureEnum))
+                    {
+                        Color poleColor = ColorUtility.TryParseHtmlString(hill.inrunConstructionColor, out var color) ? color : Color.white;
+                        CreatePole(polePosition, poleHeight, poleZWidth, textureEnum, poleColor);
+                    }
+                    else
+                    {
+                        Debug.LogError("Invalid texture string: " + hill.inrunConstructionTexture);
+                    }
+                }
+                */
+
+
+
+                // Create the top of the hill.
+                verticesList.Add(new Vector3(hill.A.x, hill.A.y, b0[b0.Length - 1]));
             uvsList.Add(new Vector2(-2, 0));
             verticesList.Add(new Vector3(hill.A.x, hill.A.y, b1[b1.Length - 1]));
             uvsList.Add(new Vector2(2, 0));
@@ -745,6 +902,8 @@ namespace OpenSkiJumping.Hills
             uvsList.Add(new Vector2(-2, -width(hill.A.x)));
             verticesList.Add(new Vector3(hill.A.x, hill.A.y - width(hill.A.x), b1[b1.Length - 1]));
             uvsList.Add(new Vector2(2, -width(hill.A.x)));
+
+
 
             // Add the final face connections.
             int finalX = verticesList.Count;
@@ -760,7 +919,28 @@ namespace OpenSkiJumping.Hills
             ObjectUpdate(inrunConstruction.gObj, mesh, inrunConstruction.materials[0], vertices, triangles, uvs, false);
         }
 
+        private void CreatePole(Vector3 position, float height, float zWidth, InrunConstructionTexture texture, Color color)
+        {
+            // Create the pole GameObject
+            GameObject pole = GameObject.CreatePrimitive(PrimitiveType.Cube);
 
+            // Positioning the pole to start from the given position (just below tmpList[i].y)
+            pole.transform.position = position - new Vector3(0, height / 2, 0); // Adjust to center vertically based on height
+            pole.transform.localScale = new Vector3(1.0f, height, zWidth); // Set zWidth as width along z-axis
+
+            // Assign the material and color
+            Material poleMaterial = new Material(Shader.Find("Standard"));
+
+            // Load material based on the texture enum
+            int materialIndex = (int)texture;
+            if (materialIndex >= 0 && materialIndex < inrunConstruction.materials.Length)
+            {
+                poleMaterial = inrunConstruction.materials[materialIndex];
+            }
+
+            poleMaterial.color = color; // Set the pole color
+            pole.GetComponent<Renderer>().material = poleMaterial; // Apply the material to the pole
+        }
 
         public void GenerateInrunTrack()
         {
