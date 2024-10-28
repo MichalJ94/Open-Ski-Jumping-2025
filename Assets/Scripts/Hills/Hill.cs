@@ -329,7 +329,7 @@ namespace OpenSkiJumping.Hills
                 float x = i * (totalXDistance / totalSegments) + T.x;
                 float y = Inrun(x); // Call Inrun function to get y-coordinate based on x
                 points.Add(new Vector2(x, y));
-                Debug.Log($"Pole segment {i} = {points[i]}");
+               // Debug.Log($"Pole segment {i} = {points[i]}");
             }
 
             return points.ToArray();

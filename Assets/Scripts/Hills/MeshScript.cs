@@ -775,6 +775,7 @@ namespace OpenSkiJumping.Hills
 
             int poleSpacing = 7;
             int poleThickness = 2;
+            float poleHeight = 30;
             var poleSegments = new List<int>();
 
             for(int i = 0; i < tmpListPoles.Count; i++)
@@ -820,9 +821,9 @@ namespace OpenSkiJumping.Hills
                     verticesList.Add(new Vector3(tmpListPoles[i].x, tmpListPoles[i].y - inrunMinHeight, b3[i]));
                     uvsList.Add(new Vector2(tmpListPoles[i].x, tmpListPoles[i].y));
 
-                    verticesList.Add(new Vector3(tmpListPoles[i].x, tmpListPoles[i].y - 50f, b2[i]));
+                    verticesList.Add(new Vector3(tmpListPoles[i].x, tmpListPoles[i].y - poleHeight, b2[i]));
                     uvsList.Add(new Vector2(tmpListPoles[i].x, tmpListPoles[i].y - width(tmpListPoles[i].x)));
-                    verticesList.Add(new Vector3(tmpListPoles[i].x, tmpListPoles[i].y - 50f, b3[i]));
+                    verticesList.Add(new Vector3(tmpListPoles[i].x, tmpListPoles[i].y - poleHeight, b3[i]));
                     uvsList.Add(new Vector2(tmpListPoles[i].x, tmpListPoles[i].y - width(tmpListPoles[i].x)));
 
                     verticesList.Add(new Vector3(tmpListPoles[i].x, tmpListPoles[i].y - width(tmpListPoles[i].x), b2[i]));
@@ -832,16 +833,41 @@ namespace OpenSkiJumping.Hills
                 }
 
                 tmp = verticesList.Count - tmp;
-                if (poleSegments.Contains(i-1) && i > 0)
+                int x = verticesList.Count;
+                if (poleSegments.Contains(i - 1) && i > 0)
                 {
                     Debug.Log("The faces were created when i = " + i);
-                    int x = verticesList.Count;
                     facesList.Add((x - 4, x - 6, x - (tmp + 4), x - (tmp + 6)));
                     facesList.Add((x - 5, x - 3, x - (tmp + 5), x - (tmp + 3)));
                     facesList.Add((x - 1, x - 2, x - (tmp + 1), x - (tmp + 2)));
                     facesList.Add((x - 8, x - 7, x - (tmp + 8), x - (tmp + 7)));
-                    facesList.Add((x-8,x-7,x-3,x-4));
+
+
                 }
+
+                if (i % poleSpacing == 0) { 
+                facesList.Add((x - 6, x - 5, x - 3, x - 4));
+                facesList.Add((x - 8, x - 7, x - 3, x - 4));
+                facesList.Add((x - 8, x - 7, x - 1, x - 2));
+                facesList.Add((x - 6, x - 5, x - 1, x - 2));
+                }
+
+                if ((i + poleThickness + 1) % poleSpacing == 0)
+                {
+                    facesList.Add((x - 6, x - 5, x - 3, x - 4));
+                    facesList.Add((x - 8, x - 7, x - 3, x - 4));
+                    facesList.Add((x - 8, x - 7, x - 1, x - 2));
+                    facesList.Add((x - 6, x - 5, x - 1, x - 2));
+                }
+
+                /*if (poleSegments.Contains(i) && !poleSegments.Contains(i-2))
+                {
+                    Debug.Log("i % poleSpacing == poleThickness was run when i =  " + i);
+                    facesList.Add((x - 8, x - 7, x - 3, x - 4));
+                }*/
+
+
+
                 /*
                 Vector3 polePosition = new Vector3(tmpList[i].x, tmpList[i].y - Math.Max((tmpList[i].y) * 0.09f, 3.5f), 0);
 
