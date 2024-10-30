@@ -105,13 +105,18 @@ namespace OpenSkiJumping.Hills
         SuperThickGlass,
         Transparent
     }
-
+    public enum PoleTexture
+    {
+        Default,
+        PlainWhite
+    }
     public class MeshScript : MonoBehaviour
     {
         public Material daySkybox;
         public ModelData digitsMarks;
 
-
+        [SerializeField]
+        private GameObject polesObject;
         /* Stairs */
         [Space][Header("Stairs")] public ModelData gateStairsL;
 
@@ -978,39 +983,50 @@ namespace OpenSkiJumping.Hills
 
         private void GeneratePoles()
         {
-            // Define the uniform pole height and thickness (adjustable)
+            // Define pole dimensions and properties
             float poleThickness = hill.poleThickness;
-            float maxPoleHeight = 50f;  // Maximum pole height, adjustable
+            float maxPoleHeight = 50f;
             float inrunMinHeight = hill.inrunMinHeight;
-            float uvStretchFactor = 100f; // Adjustable UV stretch factor for texture elongation
-
-            // Define the spacing between poles
+            float uvStretchFactor = 100f;
             float poleSpacing = hill.poleSpacing;
 
-            // Reference "Inrun Construction" GameObject to get the shared material
-            GameObject inrunConstruction = GameObject.Find("Inrun Construction");
-            if (inrunConstruction == null)
+            // Get the shared materials list from Poles object
+            Renderer polesRenderer = polesObject.GetComponent<Renderer>();
+            if (polesRenderer == null)
             {
-                Debug.LogError("Inrun Construction GameObject not found.");
+                Debug.LogError("Renderer not found on Poles GameObject.");
                 return;
             }
 
-            Material sharedMaterial = inrunConstruction.GetComponent<Renderer>().material;
-            if (sharedMaterial == null)
+            Material[] materials = polesRenderer.sharedMaterials;
+            Material selectedMaterial = null;
+
+            // Select material based on hill.poleTexture enum-like string
+            if (hill.poleTexture == "Default")
             {
-                Debug.LogError("Material not found on Inrun Construction.");
+                selectedMaterial = materials[0];  // Default to the first material
+            }
+            else if (System.Enum.TryParse(hill.poleTexture, out InrunStairsTexture textureEnum))
+            {
+                int textureIndex = (int)textureEnum;
+                if (textureIndex >= 0 && textureIndex < materials.Length)
+                {
+                    selectedMaterial = materials[textureIndex];
+                    Debug.Log("Assigned material: " + hill.poleTexture);
+                }
+                else
+                {
+                    Debug.LogError("Texture index out of range for Poles materials.");
+                    return;
+                }
+            }
+            else
+            {
+                Debug.LogError("Invalid texture string: " + hill.poleTexture);
                 return;
             }
 
-           /* if (ColorUtility.TryParseHtmlString(hill.poleColor, out Color stairsColor))
-            {
-                Color originalColor = sharedMaterial.GetColor("_BaseColor"); // Preserve the original alpha channel
-                stairsColor.a = originalColor.a;  // Retain the original alpha transparency
-                sharedMaterial.SetColor("_BaseColor", stairsColor);  // Set the color to the material
-                Debug.Log("Assigned color: " + hill.inrunStairsColor);
-            }*/
-
-            // Calculate points along the inrun for pole placement based on spacing
+            // Define the pole positions
             List<int> poleSegments = new List<int>();
             for (int i = 0; i < hill.inrunPolePoints.Length; i++)
             {
@@ -1020,37 +1036,30 @@ namespace OpenSkiJumping.Hills
                 }
             }
 
-            // Generate poles at specified points
+            // Generate poles
             for (int i = 0; i < hill.inrunPolePoints.Length; i++)
             {
                 if (poleSegments.Contains(i) && i > poleThickness)
                 {
-                    // Set pole width based on calculated inrun boundaries (Z-axis)
                     float poleZWidth = Mathf.Abs(hill.b1 + 1.4f);
                     Vector2 position = hill.inrunPolePoints[i];
-
-                    // Calculate pole height dynamically, based on distance along the hill
                     float heightFactor = 1f - (float)i / (hill.inrunPolePoints.Length - 1);
                     float adjustedHeight = Mathf.Lerp(maxPoleHeight, maxPoleHeight * 0.2f, heightFactor);
                     float lowerPoint = position.y - adjustedHeight / 2;
 
-                    // Position the pole and assign the calculated height
                     Vector3 polePosition = new Vector3(position.x, lowerPoint, 0);
 
-                    // Create and configure the pole
                     GameObject pole = GameObject.CreatePrimitive(PrimitiveType.Cube);
                     pole.transform.position = polePosition;
-                    pole.transform.localScale = new Vector3(poleThickness, adjustedHeight - inrunMinHeight - 0.5f, poleZWidth);
+                    pole.transform.localScale = new Vector3(poleThickness, adjustedHeight - inrunMinHeight - 0.5f, poleZWidth - 0.1f);
 
-                    // Apply shared material and set UV stretching
-                    pole.GetComponent<Renderer>().material = sharedMaterial;
-                    float uvStretch = Mathf.Lerp(1, uvStretchFactor, heightFactor); // Calculate UV stretch based on height factor
+                    // Assign the selected material and adjust UV
+                    Renderer poleRenderer = pole.GetComponent<Renderer>();
+                    poleRenderer.material = selectedMaterial;
+                    float uvStretch = Mathf.Lerp(1, uvStretchFactor, heightFactor);
+                    poleRenderer.material.mainTextureScale = new Vector2(1, uvStretch);
 
-                    // Adjust the UV scale based on the stretch factor and height factor
-                    Material poleMaterial = pole.GetComponent<Renderer>().material;
-                    poleMaterial.mainTextureScale = new Vector2(1, uvStretch);
-
-                    // Ensure a clean appearance by making the base of poles near the bottom of the hill partially obscured
+                    // Obscure base of poles at bottom of hill
                     if (i > hill.inrunPolePoints.Length * 0.8f)
                     {
                         float partialHeight = adjustedHeight * heightFactor;
