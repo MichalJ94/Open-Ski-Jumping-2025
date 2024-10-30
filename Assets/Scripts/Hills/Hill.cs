@@ -36,7 +36,7 @@ namespace OpenSkiJumping.Hills
 
         public string inrunOuterGuardrailTexture, inrunStairsTexture, inrunStairsColor, inrunOuterGuardrailColor, distancePlatesColor, inrunConstructionTexture, inrunConstructionColor, landingAreaGuardrailTexture, landingAreaGuardrailColor, inrunGuardrailTexture; //Visual
 
-        public float b1, b2, bK, bU;
+        public float b1, b2, bK, bU, poleThickness, poleSpacing, inrunMinHeight;
 
         public Vector2 A, B, C1, C2, CL, CV, E1, E2, T, F, P, K, L, U, V, X;
         public Vector2[] landingAreaPoints;
@@ -89,6 +89,9 @@ namespace OpenSkiJumping.Hills
             b2 = profileData.b2;
             bK = profileData.bK;
             bU = profileData.bU;
+            inrunMinHeight= profileData.inrunMinHeight;
+            poleThickness= profileData.poleThickness;
+            poleSpacing= profileData.poleSpacing;
             inrunStairsTexture = profileData.inrunStairsTexture;
             inrunStairsColor = profileData.inrunStairsColor;
             inrunOuterGuardrailTexture = profileData.inrunOuterGuardrailTexture;
@@ -319,7 +322,7 @@ namespace OpenSkiJumping.Hills
             var points = new List<Vector2> { T };
 
             // Calculate total x distance from T to B
-            var totalXDistance = B.x - T.x;
+            var totalXDistance = A.x - T.x;
 
             // Define the number of segments or intervals for the entire range T to B
             int totalSegments = (int)(totalXDistance / -1.01) ; // Use deltaX for desired x-spacing

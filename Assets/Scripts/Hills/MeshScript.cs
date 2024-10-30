@@ -239,6 +239,7 @@ namespace OpenSkiJumping.Hills
             GenerateInrunOuterGuardrail(inrunOuterGuardrailL, 0, true, generateGateStairsL);
             GenerateInrunOuterGuardrail(inrunOuterGuardrailR, 1, true, generateGateStairsR);
             GenerateInrunConstruction();
+            GeneratePoles();
             GenerateMarks();
 
             if (generateTerrain)
@@ -684,7 +685,7 @@ namespace OpenSkiJumping.Hills
                             (it.x - criticalPointX) / (criticalPointX - hill.GatePoint(-1).x)))
                     : (hill.b1 / 2 + gateStairsSO.StepWidth))).ToArray());
 
-            var b3 = b1 = (!generateGateStairsR
+            var b3 = (!generateGateStairsR
                 ? tmpListPoles.Select(it => hill.b1 / 2 + 0.7f).ToArray()
                 : tmpListPoles.Select(it => (it.x > hill.GatePoint(-1).x
                     ? (it.x > criticalPoint.x
@@ -803,6 +804,10 @@ namespace OpenSkiJumping.Hills
 
             Debug.Log($"tmpList count {tmpList.Count} tmpListPoles count {hill.inrunPolePoints.Length}");
 
+
+
+
+            /*
             //Generate the poles the high is resting on
             for (int i = 0; i < tmpListPoles.Count; i++)
             {
@@ -877,8 +882,8 @@ namespace OpenSkiJumping.Hills
                 float poleHeight = Mathf.Abs(upperPoint - lowerPoint);
 
                 // Width along z-axis between b0 and b1, adjusted with coefficient
-                float poleZWidth = Mathf.Abs(b1[i] - b0[i]) * zWidthCoefficient;*/
-            }
+                float poleZWidth = Mathf.Abs(b1[i] - b0[i]) * zWidthCoefficient;
+            }*/
 
 
 
@@ -916,13 +921,13 @@ namespace OpenSkiJumping.Hills
                 // Create poles along the inrun
                 for (int i = 0; i < tmpList.Count; i++)
                 {
-                    Vector3 polePosition = new Vector3(tmpList[i].x, tmpList[i].y - Math.Max((tmpList[i].y) * 0.09f, 3.5f), 0);
+
 
                     // Calculate pole height based on tmpList[i] values
                     float upperPoint = tmpList[i].y - tmpList[i].y - Math.Max((tmpList[i].y) * 0.09f,3.5f); // Upper point just below tmpList[i].y
                     float lowerPoint = tmpList[i].y - width(tmpList[i].x*2); // Lower point at tmpList[i].y - width(tmpList[i].x)
                     float poleHeight = Mathf.Abs(upperPoint - lowerPoint);
-
+                                    Vector3 polePosition = new Vector3(tmpList[i].x, tmpList[i].y - Math.Max((tmpList[i].y) * 0.09f, 3.5f), 0);
                     // Width along z-axis between b0 and b1, adjusted with coefficient
                     float poleZWidth = Mathf.Abs(b1[i] - b0[i]) * zWidthCoefficient;
 
@@ -970,6 +975,83 @@ namespace OpenSkiJumping.Hills
             ObjectUpdate(inrunConstruction.gObj, mesh, inrunConstruction.materials[0], vertices, triangles, uvs, false);
         }
 
+
+        private void GeneratePoles()
+        {
+            // Define the uniform pole height and thickness (adjustable)
+            float poleThickness = 2f;
+            float maxPoleHeight = 30f;  // Maximum pole height, adjustable
+            float inrunMinHeight = 1.5f;
+            float uvStretchFactor = 100f; // Adjustable UV stretch factor for texture elongation
+
+            // Define the spacing between poles
+            int poleSpacing = 7;
+
+            // Reference "Inrun Construction" GameObject to get the shared material
+            GameObject inrunConstruction = GameObject.Find("Inrun Construction");
+            if (inrunConstruction == null)
+            {
+                Debug.LogError("Inrun Construction GameObject not found.");
+                return;
+            }
+
+            Material sharedMaterial = inrunConstruction.GetComponent<Renderer>().material;
+            if (sharedMaterial == null)
+            {
+                Debug.LogError("Material not found on Inrun Construction.");
+                return;
+            }
+
+            // Calculate points along the inrun for pole placement based on spacing
+            List<int> poleSegments = new List<int>();
+            for (int i = 0; i < hill.inrunPolePoints.Length; i++)
+            {
+                if (i % poleSpacing == 0)
+                {
+                    poleSegments.Add(i);
+                }
+            }
+
+            // Generate poles at specified points
+            for (int i = 0; i < hill.inrunPolePoints.Length; i++)
+            {
+                if (poleSegments.Contains(i) && i > poleThickness)
+                {
+                    // Set pole width based on calculated inrun boundaries (Z-axis)
+                    float poleZWidth = Mathf.Abs(hill.b1 + 1.4f);
+                    Vector2 position = hill.inrunPolePoints[i];
+
+                    // Calculate pole height dynamically, based on distance along the hill
+                    float heightFactor = 1f - (float)i / (hill.inrunPolePoints.Length - 1);
+                    float adjustedHeight = Mathf.Lerp(maxPoleHeight, maxPoleHeight * 0.2f, heightFactor);
+                    float lowerPoint = position.y - adjustedHeight / 2;
+
+                    // Position the pole and assign the calculated height
+                    Vector3 polePosition = new Vector3(position.x, lowerPoint, 0);
+
+                    // Create and configure the pole
+                    GameObject pole = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    pole.transform.position = polePosition;
+                    pole.transform.localScale = new Vector3(poleThickness, adjustedHeight - inrunMinHeight - 1, poleZWidth);
+
+                    // Apply shared material and set UV stretching
+                    pole.GetComponent<Renderer>().material = sharedMaterial;
+                    float uvStretch = Mathf.Lerp(1, uvStretchFactor, heightFactor); // Calculate UV stretch based on height factor
+
+                    // Adjust the UV scale based on the stretch factor and height factor
+                    Material poleMaterial = pole.GetComponent<Renderer>().material;
+                    poleMaterial.mainTextureScale = new Vector2(1, uvStretch);
+
+                    // Ensure a clean appearance by making the base of poles near the bottom of the hill partially obscured
+                    if (i > hill.inrunPolePoints.Length * 0.8f)
+                    {
+                        float partialHeight = adjustedHeight * heightFactor;
+                        pole.transform.localScale = new Vector3(poleThickness, partialHeight, poleZWidth);
+                        pole.transform.position = new Vector3(position.x, lowerPoint - (adjustedHeight - partialHeight) / 2, 0);
+                    }
+                }
+            }
+        }
         private void CreatePole(Vector3 position, float height, float zWidth, InrunConstructionTexture texture, Color color)
         {
             // Create the pole GameObject

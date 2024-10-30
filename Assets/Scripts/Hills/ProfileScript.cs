@@ -93,7 +93,9 @@ namespace OpenSkiJumping.Hills
         public string landingAreaGuardrailTexture = "Default";
         public string landingAreaGuardrailColor = "Default";
         public string distancePlatesColor = "#FFFFFF";
-
+        public float inrunMinHeight = 1.5f;
+        public float poleThickness = 1f;
+        public float poleSpacing = 2f;
         public bool gateStairsLeft = true;
         public bool gateStairsRight = true;
         public bool inrunStairsLeft = true;
