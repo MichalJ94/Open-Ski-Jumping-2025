@@ -701,7 +701,7 @@ namespace OpenSkiJumping.Hills
                 len[i] = len[i - 1] + (tmpList[i] - tmpList[i - 1]).magnitude;
             }
 
-            float inrunMinHeight = 1.5f;
+            float inrunMinHeight = hill.inrunMinHeight;
             Debug.Log("tmpList.Count: " + tmpList.Count + " verticesList.Count: " + verticesList.Count);
 
 
@@ -720,9 +720,9 @@ namespace OpenSkiJumping.Hills
                 uvsList.Add(new Vector2(tmpList[i].x, tmpList[i].y));
 
                 //change 3,5f to a variable loaded from hill/the json file later on
-                verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - Math.Max((tmpList[i].y) * 0.09f, inrunMinHeight), b0[i]));
+                verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - Math.Max((tmpList[i].y) * 0.1f, inrunMinHeight), b0[i]));
                 uvsList.Add(new Vector2(tmpList[i].x, tmpList[i].y - width(tmpList[i].x)));
-                verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - Math.Max((tmpList[i].y) * 0.09f, inrunMinHeight), b1[i]));
+                verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - Math.Max((tmpList[i].y) * 0.1f, inrunMinHeight), b1[i]));
                 uvsList.Add(new Vector2(tmpList[i].x, tmpList[i].y - width(tmpList[i].x)));
 
                 verticesList.Add(new Vector3(tmpList[i].x, tmpList[i].y - width(tmpList[i].x), b0[i]));
@@ -979,13 +979,13 @@ namespace OpenSkiJumping.Hills
         private void GeneratePoles()
         {
             // Define the uniform pole height and thickness (adjustable)
-            float poleThickness = 2f;
-            float maxPoleHeight = 30f;  // Maximum pole height, adjustable
-            float inrunMinHeight = 1.5f;
+            float poleThickness = hill.poleThickness;
+            float maxPoleHeight = 50f;  // Maximum pole height, adjustable
+            float inrunMinHeight = hill.inrunMinHeight;
             float uvStretchFactor = 100f; // Adjustable UV stretch factor for texture elongation
 
             // Define the spacing between poles
-            int poleSpacing = 7;
+            float poleSpacing = hill.poleSpacing;
 
             // Reference "Inrun Construction" GameObject to get the shared material
             GameObject inrunConstruction = GameObject.Find("Inrun Construction");
@@ -1001,6 +1001,14 @@ namespace OpenSkiJumping.Hills
                 Debug.LogError("Material not found on Inrun Construction.");
                 return;
             }
+
+           /* if (ColorUtility.TryParseHtmlString(hill.poleColor, out Color stairsColor))
+            {
+                Color originalColor = sharedMaterial.GetColor("_BaseColor"); // Preserve the original alpha channel
+                stairsColor.a = originalColor.a;  // Retain the original alpha transparency
+                sharedMaterial.SetColor("_BaseColor", stairsColor);  // Set the color to the material
+                Debug.Log("Assigned color: " + hill.inrunStairsColor);
+            }*/
 
             // Calculate points along the inrun for pole placement based on spacing
             List<int> poleSegments = new List<int>();
@@ -1032,7 +1040,7 @@ namespace OpenSkiJumping.Hills
                     // Create and configure the pole
                     GameObject pole = GameObject.CreatePrimitive(PrimitiveType.Cube);
                     pole.transform.position = polePosition;
-                    pole.transform.localScale = new Vector3(poleThickness, adjustedHeight - inrunMinHeight - 1, poleZWidth);
+                    pole.transform.localScale = new Vector3(poleThickness, adjustedHeight - inrunMinHeight - 0.5f, poleZWidth);
 
                     // Apply shared material and set UV stretching
                     pole.GetComponent<Renderer>().material = sharedMaterial;
