@@ -108,7 +108,8 @@ namespace OpenSkiJumping.Hills
     public enum PoleTexture
     {
         Default,
-        PlainWhite
+        PlainWhite,
+        Metal,
     }
     public class MeshScript : MonoBehaviour
     {
@@ -1002,13 +1003,16 @@ namespace OpenSkiJumping.Hills
             Material selectedMaterial = null;
 
             // Select material based on hill.poleTexture enum-like string
+            // Select material based on hill.poleTexture enum-like string
             if (hill.poleTexture == "Default")
             {
                 selectedMaterial = materials[0];  // Default to the first material
             }
-            else if (System.Enum.TryParse(hill.poleTexture, out InrunStairsTexture textureEnum))
+            else if (Enum.IsDefined(typeof(PoleTexture), hill.poleTexture))
             {
+                PoleTexture textureEnum = (PoleTexture)Enum.Parse(typeof(PoleTexture), hill.poleTexture);
                 int textureIndex = (int)textureEnum;
+
                 if (textureIndex >= 0 && textureIndex < materials.Length)
                 {
                     selectedMaterial = materials[textureIndex];
