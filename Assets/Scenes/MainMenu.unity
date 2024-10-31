@@ -436,6 +436,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 333875471}
   m_CullTransparentMesh: 0
+--- !u!1 &424326178 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1821305429400680095, guid: 003e9115129f5f276bdd9e63a899b00d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5117449479862024530}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &424326180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424326178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b409d3c910f4e02495f0c3cecc3f2e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texts:
+  - {fileID: 424326181}
+  label: {fileID: 11400000, guid: 34adf18f1db3dc746bb75dade512d666, type: 2}
+--- !u!114 &424326181 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7391404189852155351, guid: 003e9115129f5f276bdd9e63a899b00d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5117449479862024530}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424326178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &424326183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424326178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07329bfc749f2c70789e97123d2ac3e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 6cd3e9bbf41731dcbb11de2a48a924ba, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1004885645}
+        m_TargetAssemblyTypeName: OpenSkiJumping.ScriptableObjects.LabelController,
+          Main
+        m_MethodName: ReplaceText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &470575737
 GameObject:
   m_ObjectHideFlags: 0
@@ -1516,6 +1578,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 997781792}
   m_CullTransparentMesh: 0
+--- !u!114 &1004885645 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8799471991984492358, guid: 003e9115129f5f276bdd9e63a899b00d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5117449479862024530}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b409d3c910f4e02495f0c3cecc3f2e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1019801778 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5770915720380510265, guid: 1814e330fa37e74f7bde2a94a906b695,
@@ -2574,6 +2648,21 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 227055689190442842, guid: cc350d43d075ca0e8b355dc98a18d72e,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 227055689190442842, guid: cc350d43d075ca0e8b355dc98a18d72e,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 227055689190442842, guid: cc350d43d075ca0e8b355dc98a18d72e,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -17
+      objectReference: {fileID: 0}
     - target: {fileID: 227055689577429778, guid: cc350d43d075ca0e8b355dc98a18d72e,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -2659,6 +2748,26 @@ PrefabInstance:
       propertyPath: m_textInfo.characterCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4439693103498580280, guid: cc350d43d075ca0e8b355dc98a18d72e,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4439693103498580280, guid: cc350d43d075ca0e8b355dc98a18d72e,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4439693103498580280, guid: cc350d43d075ca0e8b355dc98a18d72e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 160
+      objectReference: {fileID: 0}
+    - target: {fileID: 4439693103498580280, guid: cc350d43d075ca0e8b355dc98a18d72e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -80
+      objectReference: {fileID: 0}
     - target: {fileID: 4758146211666558690, guid: cc350d43d075ca0e8b355dc98a18d72e,
         type: 3}
       propertyPath: m_textInfo.lineCount
@@ -2698,6 +2807,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.characterCount
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6163363792476227452, guid: cc350d43d075ca0e8b355dc98a18d72e,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6163363792476227452, guid: cc350d43d075ca0e8b355dc98a18d72e,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6163363792476227452, guid: cc350d43d075ca0e8b355dc98a18d72e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 6163363792476227452, guid: cc350d43d075ca0e8b355dc98a18d72e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -80
       objectReference: {fileID: 0}
     - target: {fileID: 6373722955120205599, guid: cc350d43d075ca0e8b355dc98a18d72e,
         type: 3}
@@ -3235,6 +3364,13 @@ PrefabInstance:
       propertyPath: transitionsList.Array.data[9].viewComponent
       value: 
       objectReference: {fileID: 546146253}
+    - target: {fileID: 908949615093445455, guid: 003e9115129f5f276bdd9e63a899b00d,
+        type: 3}
+      propertyPath: m_text
+      value: 'v1.0.0
+
+'
+      objectReference: {fileID: 0}
     - target: {fileID: 1092412024994280328, guid: 003e9115129f5f276bdd9e63a899b00d,
         type: 3}
       propertyPath: m_Colors.m_NormalColor.b
@@ -3438,7 +3574,7 @@ PrefabInstance:
     - target: {fileID: 3583761280480478612, guid: 003e9115129f5f276bdd9e63a899b00d,
         type: 3}
       propertyPath: m_text
-      value: OPEN SKI JUMPING 2025
+      value: OPEN SKI JUMPING <color=#C7DD00>2025</color>
       objectReference: {fileID: 0}
     - target: {fileID: 3796733324218319511, guid: 003e9115129f5f276bdd9e63a899b00d,
         type: 3}
@@ -4008,6 +4144,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 459.25
       objectReference: {fileID: 0}
+    - target: {fileID: 7391404189852155351, guid: 003e9115129f5f276bdd9e63a899b00d,
+        type: 3}
+      propertyPath: m_fontStyle
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 7478444142351972943, guid: 003e9115129f5f276bdd9e63a899b00d,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -4047,6 +4188,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.characterCount
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8066025268400085413, guid: 003e9115129f5f276bdd9e63a899b00d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8256968906534329281, guid: 003e9115129f5f276bdd9e63a899b00d,
         type: 3}
@@ -4127,6 +4273,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: Name
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057605092871100971, guid: 003e9115129f5f276bdd9e63a899b00d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9182365081300225367, guid: 003e9115129f5f276bdd9e63a899b00d,
         type: 3}
