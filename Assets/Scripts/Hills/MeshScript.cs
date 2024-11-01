@@ -798,7 +798,7 @@ namespace OpenSkiJumping.Hills
 
             }
 
-            for (int i = 0; i < poleSegments.Count; i++)
+          /*  for (int i = 0; i < poleSegments.Count; i++)
             {
                 Debug.Log("Valid pole segment = " + poleSegments[i]);
             }
@@ -809,7 +809,7 @@ namespace OpenSkiJumping.Hills
             }
 
             Debug.Log($"tmpList count {tmpList.Count} tmpListPoles count {hill.inrunPolePoints.Length}");
-
+          */
 
 
 

@@ -24,16 +24,25 @@ namespace OpenSkiJumping.Hills
 
         [SerializeField] private List<Terrain> terrains;
 
+        public Hill hill;
+        
         public void GenerateForests()
         {
-            foreach (var forest in forests)
-            {
-                GenerateForest(forest);
-            }
+
+                foreach (var forest in forests)
+                {
+                    GenerateForest(forest);
+                Debug.Log("FOREST JEDNAK WYGENEROWANY!!!");
+                }
+            
         }
 
         public void GenerateForest(Forest forest)
         {
+            if(hill.hS == 300)
+            {
+                Debug.Log("GENERATE FOREST WIDZI HS 300!!!");
+            }
             var n = forest.points.Count;
             var minX = forest.points[0].x;
             var minZ = forest.points[0].y;
