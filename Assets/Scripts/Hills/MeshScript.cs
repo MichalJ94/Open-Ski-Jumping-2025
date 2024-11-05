@@ -246,7 +246,10 @@ namespace OpenSkiJumping.Hills
             GenerateInrunOuterGuardrail(inrunOuterGuardrailR, 1, true, generateGateStairsR);
             GenerateInrunConstruction();
             GeneratePoles();
-            GenerateMarks();
+            if (hill.hS != 300)
+            {
+                GenerateMarks();
+            }
 
             if (generateTerrain)
             {
@@ -331,6 +334,10 @@ namespace OpenSkiJumping.Hills
                     }
 
                     terr.terrainData.SetHeights(0, 0, tab);
+                    if(hill.hS == 300)
+                    {
+                        terr.drawTreesAndFoliage = false;
+                    }
                 }
             }
 

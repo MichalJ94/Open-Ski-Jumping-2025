@@ -455,6 +455,10 @@ namespace OpenSkiJumping.New
                 modifier += (130 - hS) / 10;
                 startForceScale -= (130 - hS) * (0.00065f*modifier);
             }
+            if (hS > 250)
+            {
+                startForceScale -= (hS - 250) * (0.00007f * modifier);
+            }
         }
 
 
