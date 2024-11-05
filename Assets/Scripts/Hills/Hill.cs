@@ -34,7 +34,7 @@ namespace OpenSkiJumping.Hills
 
         public float a, rA, betaA, betaAR; //Outrun
 
-        public string poleTexture, inrunOuterGuardrailTexture, inrunStairsTexture, inrunStairsColor, inrunOuterGuardrailColor, distancePlatesColor, inrunConstructionTexture, inrunConstructionColor, landingAreaGuardrailTexture, landingAreaGuardrailColor, inrunGuardrailTexture, poleColor; //Visual
+        public string poleTexture, handRailColor, inrunOuterGuardrailTexture, inrunStairsTexture, inrunStairsColor, inrunOuterGuardrailColor, distancePlatesColor, inrunConstructionTexture, inrunConstructionColor, landingAreaGuardrailTexture, landingAreaGuardrailColor, inrunGuardrailTexture, poleColor; //Visual
 
         public float b1, b2, bK, bU, poleThickness, poleSpacing, inrunMinHeight;
 
@@ -101,6 +101,7 @@ namespace OpenSkiJumping.Hills
             inrunConstructionColor = profileData.inrunConstructionColor;
             landingAreaGuardrailTexture = profileData.landingAreaGuardrailTexture;
             landingAreaGuardrailColor = profileData.landingAreaGuardrailColor;
+            handRailColor = profileData.handRailColor;
             distancePlatesColor = profileData.distancePlatesColor;
             poleTexture = profileData.poleTexture;
             poleColor =     profileData.poleColor;

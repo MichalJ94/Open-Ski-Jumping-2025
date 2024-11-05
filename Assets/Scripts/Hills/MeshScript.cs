@@ -149,7 +149,10 @@ namespace OpenSkiJumping.Hills
         public GameObject inrunLampPrefab;
         public ModelData inrunOuterGuardrailL;
         public ModelData inrunOuterGuardrailR;
+        public ModelData handRailL;
+        public ModelData handRailR;
         public Guardrail InrunOuterGuardrailSO;
+        public Guardrail handrailSO;
 
         [Range(0.0001f, 1)] public float inrunStairsAngle;
 
@@ -244,6 +247,8 @@ namespace OpenSkiJumping.Hills
             GenerateInrunGuardrail(inrunGuardrailR, 1, true);
             GenerateInrunOuterGuardrail(inrunOuterGuardrailL, 0, true, generateGateStairsL);
             GenerateInrunOuterGuardrail(inrunOuterGuardrailR, 1, true, generateGateStairsR);
+            GenerateHandrail(handRailL, 0, true, generateGateStairsL);
+            GenerateHandrail(handRailR, 1, true, generateGateStairsR);
             GenerateInrunConstruction();
             GeneratePoles();
             if (hill.hS != 300)
@@ -1352,6 +1357,9 @@ namespace OpenSkiJumping.Hills
             ObjectUpdate(digitsMarks.gObj, mesh, digitsMarks.materials[0], vertices, triangles, uvs, false);
         }
 
+
+        
+
         public void GenerateLandingAreaGuardrail(ModelData guardrail, int side, bool generate)
         {
             if (!generate)
@@ -1503,6 +1511,98 @@ namespace OpenSkiJumping.Hills
             }
         
     }
+
+        public void GenerateHandrail(ModelData handrail, int side, bool generate, bool generate2)
+        {
+            if (!generate)
+            {
+                handrail.gObj.GetComponent<MeshFilter>().mesh = null;
+                handrail.gObj.GetComponent<MeshRenderer>().materials = null;
+                return;
+            }
+
+            // Determine the critical points as in GenerateInrunOuterGuardrail
+            var criticalPointX = Mathf.Lerp(hill.GatePoint(-1).x, hill.T.x, inrunStairsAngle);
+            var p1 = hill.inrunPoints.Last(it => it.x > criticalPointX);
+            var p2 = hill.inrunPoints.First(it => it.x <= criticalPointX);
+            var criticalPoint = Vector2.Lerp(p1, p2, (criticalPointX - p1.x) / (p2.x - p1.x));
+
+            var tmpList = new List<Vector2>();
+            tmpList.AddRange(hill.inrunPoints.Where(it => it.x > criticalPoint.x));
+            tmpList.Add(criticalPoint);
+            tmpList.AddRange(hill.inrunPoints.Where(it => it.x <= criticalPoint.x && it.x > hill.GatePoint(-1).x));
+            tmpList.Add(hill.GatePoint(-1));
+            tmpList.AddRange(hill.inrunPoints.Where(it => it.x <= hill.GatePoint(-1).x));
+
+            var len = new float[tmpList.Count];
+            float[] b = tmpList.Select(it => hill.b1 / 2 + 0.7f).ToArray(); // Adjust handrail offset as needed
+           
+            if (generate2)
+            {
+                b = tmpList.Select(it =>
+                    (it.x > hill.GatePoint(-1).x
+                        ? (it.x > criticalPoint.x
+                            ? hill.b1 / 2 + 0.7f
+                            : Mathf.Lerp(hill.b1 / 2 + 0.7f, hill.b1 / 2 + gateStairsSO.StepWidth,
+                                (it.x - criticalPointX) / (criticalPointX - hill.GatePoint(-1).x)))
+                        : (hill.b1 / 2 + gateStairsSO.StepWidth))).ToArray();
+            }
+            else
+            {
+                b = tmpList.Select(it => hill.b1 / 2 + 0.7f).ToArray();
+            }
+
+            var sgn = (side == 0 ? -1 : 1);
+            var points = tmpList.Select((val, ind) =>
+                            new Vector3(val.x, val.y + 1.1f, sgn * (b[ind]))) // Exaggerated height (Y-axis) and width (Z-axis)
+                            .Reverse().ToArray();
+
+            // Generate the mesh for the handrail
+            var mesh = handrailSO.GenerateHandrail(points, side, 0.05f, 0, -0.55f); // Assuming Generate works for handrails; otherwise, create a custom generator
+            var meshFilter = handrail.gObj.GetComponent<MeshFilter>();
+            meshFilter.mesh = mesh;
+
+            // Set up material
+            var meshRenderer = handrail.gObj.GetComponent<MeshRenderer>();
+            meshRenderer.materials = new Material[0]; // Clear previously assigned materials
+
+            // Apply texture and color based on handrail properties
+            if (System.Enum.TryParse(hill.inrunConstructionTexture, out InrunConstructionTexture textureEnum))
+            {
+                int materialIndex = (int)textureEnum;
+
+                if (materialIndex >= 0 && materialIndex < handrail.materials.Length)
+                {
+                    var material = handrail.materials[materialIndex];
+                    meshRenderer.material = material; // Assign material
+
+                    if (hill.inrunConstructionColor == "Default")
+                    {
+                        material.SetColor("_BaseColor", Color.white);
+                    }
+                    else if (ColorUtility.TryParseHtmlString(hill.handRailColor, out Color handrailColor))
+                    {
+                        Color originalColor = material.GetColor("_BaseColor");
+                        handrailColor.a = originalColor.a; // Preserve alpha
+                        material.SetColor("_BaseColor", handrailColor);
+                    }
+                    else
+                    {
+                        Debug.LogError("Invalid color string for handrail: " + hill.handRailColor);
+                    }
+                }
+                else
+                {
+                    Debug.LogError("Material index out of bounds for handrail.");
+                }
+            }
+            else
+            {
+                Debug.LogError("Invalid texture string for handrail: " + hill.inrunConstructionTexture);
+            }
+        }
+
+
 
         public void GenerateInrunOuterGuardrail(ModelData guardrail, int side, bool generate, bool generate2)
         {
