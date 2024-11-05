@@ -88,6 +88,7 @@ namespace OpenSkiJumping.Hills
         public string inrunOuterGuardrailTexture = "Default";
         public string inrunOuterGuardrailColor = "#FFFFFF";
         public string inrunGuardrailTexture = "Default";
+        public string handRailTexture = "Default";
         public string handRailColor = "Default";
         public string inrunConstructionTexture = "Default";
         public string inrunConstructionColor = "Default";
@@ -103,6 +104,7 @@ namespace OpenSkiJumping.Hills
         public bool gateStairsRight = true;
         public bool inrunStairsLeft = true;
         public bool inrunStairsRight = true;
+        public bool handRail = false;
         public float inrunStairsAngle = 0.001f;
         public InrunData inrunData;
         public LandingAreaData landingAreaData;

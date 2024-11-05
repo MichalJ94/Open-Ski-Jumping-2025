@@ -93,7 +93,14 @@ namespace OpenSkiJumping.Hills
         DefaultWhite,
         WhitePlanks,
         MetalPlate,
-        PlainWhite
+        PlainWhite,
+        PlainMetallic
+    }
+
+    public enum HandRailTexture
+    {
+        PlainWhite,
+        PlainMetallic
     }
     public enum LandingAreaGuardrailTexture
     {
@@ -129,6 +136,7 @@ namespace OpenSkiJumping.Hills
         public bool generateInrunStairsR;
         public bool generateLandingAreaGuardrailL;
         public bool generateLandingAreaGuardrailR;
+        public bool generateHandrail;
 
         /* Settings */
         [Space][Header("Settings")] public bool generateTerrain;
@@ -229,6 +237,7 @@ namespace OpenSkiJumping.Hills
             generateInrunStairsL = profileData.Value.inrunStairsLeft;
             generateInrunStairsR = profileData.Value.inrunStairsRight;
             inrunStairsAngle = profileData.Value.inrunStairsAngle;
+            generateHandrail = profileData.Value.handRail;
 
             GenerateInrunCollider();
             GenerateInrunTrack();
@@ -247,8 +256,8 @@ namespace OpenSkiJumping.Hills
             GenerateInrunGuardrail(inrunGuardrailR, 1, true);
             GenerateInrunOuterGuardrail(inrunOuterGuardrailL, 0, true, generateGateStairsL);
             GenerateInrunOuterGuardrail(inrunOuterGuardrailR, 1, true, generateGateStairsR);
-            GenerateHandrail(handRailL, 0, true, generateGateStairsL);
-            GenerateHandrail(handRailR, 1, true, generateGateStairsR);
+            GenerateHandrail(handRailL, 0, generateHandrail, generateGateStairsL);
+            GenerateHandrail(handRailR, 1, generateHandrail, generateGateStairsR);
             GenerateInrunConstruction();
             GeneratePoles();
             if (hill.hS != 300)
@@ -1516,8 +1525,6 @@ namespace OpenSkiJumping.Hills
         {
             if (!generate)
             {
-                handrail.gObj.GetComponent<MeshFilter>().mesh = null;
-                handrail.gObj.GetComponent<MeshRenderer>().materials = null;
                 return;
             }
 
@@ -1567,7 +1574,7 @@ namespace OpenSkiJumping.Hills
             meshRenderer.materials = new Material[0]; // Clear previously assigned materials
 
             // Apply texture and color based on handrail properties
-            if (System.Enum.TryParse(hill.inrunConstructionTexture, out InrunConstructionTexture textureEnum))
+            if (System.Enum.TryParse(hill.handRailTexture, out HandRailTexture textureEnum))
             {
                 int materialIndex = (int)textureEnum;
 
@@ -1576,7 +1583,7 @@ namespace OpenSkiJumping.Hills
                     var material = handrail.materials[materialIndex];
                     meshRenderer.material = material; // Assign material
 
-                    if (hill.inrunConstructionColor == "Default")
+                    if (hill.handRailTexture == "Default")
                     {
                         material.SetColor("_BaseColor", Color.white);
                     }
@@ -1598,8 +1605,10 @@ namespace OpenSkiJumping.Hills
             }
             else
             {
-                Debug.LogError("Invalid texture string for handrail: " + hill.inrunConstructionTexture);
+                Debug.LogError("Invalid texture string for handrail: " + hill.handRailTexture);
             }
+
+
         }
 
 
