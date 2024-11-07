@@ -107,7 +107,7 @@ namespace OpenSkiJumping.Competition
         public override IEnumerable<int> GetFinalResultsWithCompetitorsList(IEnumerable<int> competitors)
         {
             var competitorsList = competitors.ToList();
-            foreach (var it in competitorsList) Debug.Log($"{it}: {results.totalResults[it]}");
+          //  foreach (var it in competitorsList) Debug.Log($"{it}: {results.totalResults[it]}");
             return competitorsList.OrderByDescending(it => (results.totalResults[it], it));
         }
 

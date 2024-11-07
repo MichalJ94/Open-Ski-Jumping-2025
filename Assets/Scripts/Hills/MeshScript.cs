@@ -11,7 +11,6 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.Networking;
-using System.Linq;
 using UnityEngine.UI.Extensions.ColorPicker;
 using Microsoft.SqlServer.Server;
 
@@ -94,7 +93,8 @@ namespace OpenSkiJumping.Hills
         WhitePlanks,
         MetalPlate,
         PlainWhite,
-        PlainMetallic
+        PlainMetallic,
+        ConcreteWhite
     }
 
     public enum HandRailTexture
@@ -1051,21 +1051,35 @@ namespace OpenSkiJumping.Hills
                 return;
             }
 
+            // Try to parse the color for poles from hill.poleColor
+            Color poleColor = Color.white; // Default to white if parsing fails
+            if (!ColorUtility.TryParseHtmlString(hill.poleColor, out poleColor))
+            {
+                Debug.LogError("Invalid color string: " + hill.poleColor);
+            }
+
+
+
             // Define the pole positions
             List<int> poleSegments = new List<int>();
+
+
+            poleSegments.Add((int)poleThickness - 1);
             for (int i = 0; i < hill.inrunPolePoints.Length; i++)
             {
                 if (i % poleSpacing == 0)
                 {
-                    poleSegments.Add(i);
+                    poleSegments.Add(i + (int)poleThickness - 1);
                 }
             }
+
 
             // Generate poles
             for (int i = 0; i < hill.inrunPolePoints.Length; i++)
             {
-                if (poleSegments.Contains(i) && i > poleThickness)
+                if (poleSegments.Contains(i))
                 {
+                    Debug.Log("-------------- Pole created at i" + i);
                     float poleZWidth = Mathf.Abs(hill.b1 + 1.4f);
                     Vector2 position = hill.inrunPolePoints[i];
                     float heightFactor = 1f - (float)i / (hill.inrunPolePoints.Length - 1);
@@ -1081,6 +1095,7 @@ namespace OpenSkiJumping.Hills
                     // Assign the selected material and adjust UV
                     Renderer poleRenderer = pole.GetComponent<Renderer>();
                     poleRenderer.material = selectedMaterial;
+                    poleRenderer.material.color = poleColor;
                     float uvStretch = Mathf.Lerp(1, uvStretchFactor, heightFactor);
                     poleRenderer.material.mainTextureScale = new Vector2(1, uvStretch);
 
@@ -1094,28 +1109,7 @@ namespace OpenSkiJumping.Hills
                 }
             }
         }
-        private void CreatePole(Vector3 position, float height, float zWidth, InrunConstructionTexture texture, Color color)
-        {
-            // Create the pole GameObject
-            GameObject pole = GameObject.CreatePrimitive(PrimitiveType.Cube);
 
-            // Positioning the pole to start from the given position (just below tmpList[i].y)
-            pole.transform.position = position - new Vector3(0, height / 2, 0); // Adjust to center vertically based on height
-            pole.transform.localScale = new Vector3(1.0f, height, zWidth); // Set zWidth as width along z-axis
-
-            // Assign the material and color
-            Material poleMaterial = new Material(Shader.Find("Standard"));
-
-            // Load material based on the texture enum
-            int materialIndex = (int)texture;
-            if (materialIndex >= 0 && materialIndex < inrunConstruction.materials.Length)
-            {
-                poleMaterial = inrunConstruction.materials[materialIndex];
-            }
-
-            poleMaterial.color = color; // Set the pole color
-            pole.GetComponent<Renderer>().material = poleMaterial; // Apply the material to the pole
-        }
 
         public void GenerateInrunTrack()
         {
