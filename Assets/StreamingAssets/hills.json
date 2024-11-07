@@ -1873,7 +1873,7 @@
   },
   {
     "name": "Engelberg HS140",
-    "terrainSteepness": 1.0,
+    "terrainSteepness": 1.085,
     "type": 2,
     "gates": 32,
     "w": 125.0,
@@ -1919,9 +1919,9 @@
     "distancePlatesColor": "#fdde00",
     "poleTexture": "Default",
     "poleColor": "#FFFFFF",
-    "inrunMinHeight": 1.5,
+    "inrunMinHeight": 3.15,
     "poleThickness": 1.0,
-    "poleSpacing": 5.0,
+    "poleSpacing": 100.0,
     "gateStairsLeft": false,
     "gateStairsRight": true,
     "inrunStairsLeft": true,
@@ -5372,12 +5372,12 @@
     "inrunConstructionColor": "#FFFFFF",
     "landingAreaGuardrailTexture": "Default",
     "landingAreaGuardrailColor": "#FFFFFF",
-    "distancePlatesColor": "#FFFFFF",
+    "distancePlatesColor": "#fdde00",
     "poleTexture": "Default",
     "poleColor": "#FFFFFF",
     "inrunMinHeight": 1.5,
     "poleThickness": 1.0,
-    "poleSpacing": 5.0,
+    "poleSpacing": 50.0,
     "gateStairsLeft": true,
     "gateStairsRight": true,
     "inrunStairsLeft": true,
@@ -5386,7 +5386,7 @@
     "inrunStairsAngle": 0.001,
     "inrunData": {
       "summerTrack": "SingleTrackGreen",
-      "winterTrack": "SingleTrackGreen"
+      "winterTrack": "SnowTrack"
     },
     "landingAreaData": {
       "metersLow": 0,
@@ -5444,12 +5444,12 @@
     "inrunConstructionColor": "#FFFFFF",
     "landingAreaGuardrailTexture": "Default",
     "landingAreaGuardrailColor": "#FFFFFF",
-    "distancePlatesColor": "#FFFFFF",
+    "distancePlatesColor": "#fdde00",
     "poleTexture": "Default",
     "poleColor": "#FFFFFF",
     "inrunMinHeight": 1.5,
-    "poleThickness": 1.0,
-    "poleSpacing": 5.0,
+    "poleThickness": 2.0,
+    "poleSpacing": 70.0,
     "gateStairsLeft": true,
     "gateStairsRight": true,
     "inrunStairsLeft": true,
@@ -5458,7 +5458,7 @@
     "inrunStairsAngle": 0.001,
     "inrunData": {
       "summerTrack": "SingleTrackGreen",
-      "winterTrack": "SingleTrackGreen"
+      "winterTrack": "SnowTrackRubber"
     },
     "landingAreaData": {
       "metersLow": 0,
