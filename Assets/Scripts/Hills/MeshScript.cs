@@ -1062,16 +1062,27 @@ namespace OpenSkiJumping.Hills
 
             // Define the pole positions
             List<int> poleSegments = new List<int>();
+            
+            
+            int currentSegment = (int)poleThickness - 1;
+
+            poleSegments.Add(currentSegment);
 
 
-            poleSegments.Add((int)poleThickness - 1);
-            for (int i = 0; i < hill.inrunPolePoints.Length; i++)
+            while(currentSegment < hill.inrunPolePoints.Length)
+            {
+                currentSegment += (int)poleSpacing;
+                poleSegments.Add(currentSegment);
+
+            }
+
+            /*for (int i = 0; i < hill.inrunPolePoints.Length; i++)
             {
                 if (i % poleSpacing == 0)
                 {
                     poleSegments.Add(i + (int)poleThickness - 1);
                 }
-            }
+            }*/
 
 
             // Generate poles
@@ -1472,9 +1483,25 @@ namespace OpenSkiJumping.Hills
             }
 
             var sgn = (side == 0 ? -1 : 1);
+            float trimThreshold = 0.01f;  // Adjust this threshold to make the trim as subtle as you need
             var points = hill.inrunPoints.Where(it => it.x >= hill.B.x)
-                .Select(it => new Vector3(it.x, it.y, sgn * (hill.b1 / 2 - 2 * inrunGuardrailSO.Width))).Reverse()
+                .Select(it => new Vector3(it.x, it.y, sgn * (hill.b1 / 2 - 2 * inrunGuardrailSO.Width)))
+                .Reverse()
                 .ToArray();
+
+            // Interpolate the last two points for a slight offset at the start
+            if (points.Length > 1)
+            {
+                float startShortenFactor = 0.05f; // Adjust this factor to control the start offset
+                points[points.Length - 1] = Vector3.Lerp(points[points.Length - 1], points[points.Length - 2], startShortenFactor);
+            }
+
+            // Interpolate the first two points for a slight offset at the end
+            if (points.Length > 1)
+            {
+                float endShortenFactor = 0.05f; // Adjust this factor to control the end offset
+                points[0] = Vector3.Lerp(points[0], points[1], endShortenFactor);
+            }
 
             var mesh = inrunGuardrailSO.Generate(points, side);
             guardrail.gObj.GetComponent<MeshFilter>().mesh = mesh;
