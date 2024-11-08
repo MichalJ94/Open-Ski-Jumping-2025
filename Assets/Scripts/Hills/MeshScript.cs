@@ -1062,9 +1062,18 @@ namespace OpenSkiJumping.Hills
 
             // Define the pole positions
             List<int> poleSegments = new List<int>();
-            
-            
-            int currentSegment = (int)poleThickness - 1;
+
+
+            int currentSegment = 0;
+
+            if (poleThickness >= 1.5)
+            {
+                currentSegment = (int)poleThickness - 1;
+            }
+            else
+            {
+                currentSegment = (int)poleThickness;
+            }
 
             poleSegments.Add(currentSegment);
 
@@ -1483,7 +1492,6 @@ namespace OpenSkiJumping.Hills
             }
 
             var sgn = (side == 0 ? -1 : 1);
-            float trimThreshold = 0.01f;  // Adjust this threshold to make the trim as subtle as you need
             var points = hill.inrunPoints.Where(it => it.x >= hill.B.x)
                 .Select(it => new Vector3(it.x, it.y, sgn * (hill.b1 / 2 - 2 * inrunGuardrailSO.Width)))
                 .Reverse()
