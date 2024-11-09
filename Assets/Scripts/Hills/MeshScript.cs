@@ -118,6 +118,7 @@ namespace OpenSkiJumping.Hills
         Default,
         PlainWhite,
         Metal,
+        WhitePlanks
     }
     public class MeshScript : MonoBehaviour
     {
@@ -1065,7 +1066,7 @@ namespace OpenSkiJumping.Hills
             int currentSegment = 0;
             if (poleThickness >= 1.5)
             {
-                currentSegment = (int)poleThickness - 1;
+                currentSegment = (int)(poleThickness /2);
             }
             else
             {
@@ -1083,6 +1084,7 @@ namespace OpenSkiJumping.Hills
             {
                 if (poleSegments.Contains(i))
                 {
+                    Debug.Log("Pole segment created at i = " + i);
                     float poleZWidth = Mathf.Abs(hill.b1 + 1.4f);
                     Vector2 position = hill.inrunPolePoints[i];
                     float heightFactor = 1f - (float)i / (hill.inrunPolePoints.Length - 1);
