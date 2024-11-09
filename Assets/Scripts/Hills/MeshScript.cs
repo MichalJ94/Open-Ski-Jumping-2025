@@ -80,10 +80,10 @@ namespace OpenSkiJumping.Hills
     public enum InrunGuardrailTexture
     {
         Default,
-        LightYellowPlanks,
-        DarkBrownPlanks,
-        Transparent,
-        WhitePlanks
+        Glass,
+        WhitePlanks,
+        PlainWhite,
+        Transparent
     }
 
     public enum InrunConstructionTexture
@@ -1013,7 +1013,6 @@ namespace OpenSkiJumping.Hills
             float uvStretchFactor = 100f;
             float poleSpacing = hill.poleSpacing;
 
-            // Get the shared materials list from Poles object
             Renderer polesRenderer = polesObject.GetComponent<Renderer>();
             if (polesRenderer == null)
             {
@@ -1024,7 +1023,6 @@ namespace OpenSkiJumping.Hills
             Material[] materials = polesRenderer.sharedMaterials;
             Material selectedMaterial = null;
 
-            // Select material based on hill.poleTexture enum-like string
             // Select material based on hill.poleTexture enum-like string
             if (hill.poleTexture == "Default")
             {
@@ -1052,55 +1050,30 @@ namespace OpenSkiJumping.Hills
                 return;
             }
 
-            // Try to parse the color for poles from hill.poleColor
-            Color poleColor = Color.white; // Default to white if parsing fails
+            // Parse the color for poles from hill.poleColor
+            Color poleColor = Color.white;
             if (!ColorUtility.TryParseHtmlString(hill.poleColor, out poleColor))
             {
                 Debug.LogError("Invalid color string: " + hill.poleColor);
             }
 
+            // Store the original color to reset on disable
+            Color originalColor = selectedMaterial.color;
 
-
-            // Define the pole positions
             List<int> poleSegments = new List<int>();
-
-
-            int currentSegment = 0;
-
-            if (poleThickness >= 1.5)
-            {
-                currentSegment = (int)poleThickness - 1;
-            }
-            else
-            {
-                currentSegment = (int)poleThickness;
-            }
-
+            int currentSegment = (int)poleThickness - 1;
             poleSegments.Add(currentSegment);
 
-
-            while(currentSegment < hill.inrunPolePoints.Length)
+            while (currentSegment < hill.inrunPolePoints.Length)
             {
                 currentSegment += (int)poleSpacing;
                 poleSegments.Add(currentSegment);
-
             }
 
-            /*for (int i = 0; i < hill.inrunPolePoints.Length; i++)
-            {
-                if (i % poleSpacing == 0)
-                {
-                    poleSegments.Add(i + (int)poleThickness - 1);
-                }
-            }*/
-
-
-            // Generate poles
             for (int i = 0; i < hill.inrunPolePoints.Length; i++)
             {
                 if (poleSegments.Contains(i))
                 {
-                    //Debug.Log("-------------- Pole created at i" + i);
                     float poleZWidth = Mathf.Abs(hill.b1 + 1.4f);
                     Vector2 position = hill.inrunPolePoints[i];
                     float heightFactor = 1f - (float)i / (hill.inrunPolePoints.Length - 1);
@@ -1108,19 +1081,19 @@ namespace OpenSkiJumping.Hills
                     float lowerPoint = position.y - adjustedHeight / 2;
 
                     Vector3 polePosition = new Vector3(position.x, lowerPoint, 0);
-
                     GameObject pole = GameObject.CreatePrimitive(PrimitiveType.Cube);
                     pole.transform.position = polePosition;
                     pole.transform.localScale = new Vector3(poleThickness, adjustedHeight - inrunMinHeight - 0.5f, poleZWidth - 0.1f);
 
-                    // Assign the selected material and adjust UV
+                    // Assign material and set color
                     Renderer poleRenderer = pole.GetComponent<Renderer>();
                     poleRenderer.material = selectedMaterial;
                     poleRenderer.material.color = poleColor;
+
                     float uvStretch = Mathf.Lerp(1, uvStretchFactor, heightFactor);
                     poleRenderer.material.mainTextureScale = new Vector2(1, uvStretch);
 
-                    // Obscure base of poles at bottom of hill
+                    // Optional adjustment for base height
                     if (i > hill.inrunPolePoints.Length * 0.8f)
                     {
                         float partialHeight = adjustedHeight * heightFactor;
@@ -1130,6 +1103,7 @@ namespace OpenSkiJumping.Hills
                 }
             }
         }
+
 
 
         public void GenerateInrunTrack()
@@ -1481,62 +1455,69 @@ namespace OpenSkiJumping.Hills
             // Clear the dictionary after restoration
             originalMaterialColors.Clear();
         }
-    
 
-    public void GenerateInrunGuardrail(ModelData guardrail, int side, bool generate)
+
+        public void GenerateInrunGuardrail(ModelData guardrail, int side, bool generate)
         {
             if (!generate)
             {
                 guardrail.gObj.GetComponent<MeshFilter>().mesh = null;
-                guardrail.gObj.GetComponent<MeshRenderer>().material = null;
+                guardrail.gObj.GetComponent<MeshRenderer>().materials = null;
                 return;
             }
 
             var sgn = (side == 0 ? -1 : 1);
-            var points = hill.inrunPoints.Where(it => it.x >= hill.B.x)
+            var points = hill.inrunPoints
+                .Where(it => it.x >= hill.B.x)
                 .Select(it => new Vector3(it.x, it.y, sgn * (hill.b1 / 2 - 2 * inrunGuardrailSO.Width)))
                 .Reverse()
                 .ToArray();
 
-            // Interpolate the last two points for a slight offset at the start
+            // Offset start and end slightly, as previously configured
             if (points.Length > 1)
             {
-                float startShortenFactor = 0.05f; // Adjust this factor to control the start offset
-                points[points.Length - 1] = Vector3.Lerp(points[points.Length - 1], points[points.Length - 2], startShortenFactor);
-            }
-
-            // Interpolate the first two points for a slight offset at the end
-            if (points.Length > 1)
-            {
-                float endShortenFactor = 0.05f; // Adjust this factor to control the end offset
-                points[0] = Vector3.Lerp(points[0], points[1], endShortenFactor);
+                points[points.Length - 1] = Vector3.Lerp(points[points.Length - 1], points[points.Length - 2], 0.05f);
+                points[0] = Vector3.Lerp(points[0], points[1], 0.05f);
             }
 
             var mesh = inrunGuardrailSO.Generate(points, side);
-            guardrail.gObj.GetComponent<MeshFilter>().mesh = mesh;
-            guardrail.gObj.GetComponent<MeshRenderer>().material = inrunGuardrailSO.GetMaterial();
+            var meshFilter = guardrail.gObj.GetComponent<MeshFilter>();
+            if (meshFilter != null)
+            {
+                meshFilter.mesh = mesh;
+            }
+            else
+            {
+                Debug.LogError("No MeshFilter component found on guardrail object.");
+                return;
+            }
 
+            var meshRenderer = guardrail.gObj.GetComponent<MeshRenderer>();
+            meshRenderer.materials = new Material[0]; // Clear previous materials
 
             if (System.Enum.TryParse(hill.inrunGuardrailTexture, out InrunGuardrailTexture textureEnum))
             {
                 int materialIndex = (int)textureEnum;
 
-                // Ensure the index is within bounds
                 if (materialIndex >= 0 && materialIndex < inrunGuardrailL.materials.Length)
                 {
-                    // Get the current array of materials assigned to the MeshRenderer
-                    var materials = guardrail.gObj.GetComponent<MeshRenderer>().materials;
+                    var material = inrunGuardrailL.materials[materialIndex];
+                    meshRenderer.material = material;
 
-                    // Ensure we're not out of bounds when assigning the material
-                    if (materials.Length > 0)
+                    if (!originalMaterialColors.ContainsKey(material))
                     {
-                        materials[0] = inrunGuardrailL.materials[materialIndex]; // Replace the first material in the array
-                        guardrail.gObj.GetComponent<MeshRenderer>().materials = materials; // Apply the modified array back
-                        Debug.Log("Assigned material with index: " + materialIndex + " landingAreaGuardrailL.materials.Length " + inrunGuardrailL.materials.Length);
+                        originalMaterialColors[material] = material.GetColor("_BaseColor");
+                    }
+
+                    if (ColorUtility.TryParseHtmlString(hill.inrunGuardrailColor, out Color guardrailColor))
+                    {
+                        Color originalColor = material.GetColor("_BaseColor");
+                        guardrailColor.a = originalColor.a; // Preserve original alpha
+                        material.SetColor("_BaseColor", guardrailColor);
                     }
                     else
                     {
-                        Debug.LogError("No materials found in MeshRenderer.");
+                        Debug.LogError("Invalid hex color string: " + hill.inrunGuardrailColor);
                     }
                 }
                 else
@@ -1548,8 +1529,7 @@ namespace OpenSkiJumping.Hills
             {
                 Debug.LogError("Invalid texture string from JSON: " + hill.inrunGuardrailTexture);
             }
-        
-    }
+        }
 
         public void GenerateHandrail(ModelData handrail, int side, bool generate, bool generate2)
         {
