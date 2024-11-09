@@ -497,6 +497,7 @@ namespace OpenSkiJumping.Hills
                                 Color originalColor = newMaterial.GetColor("_BaseColor");
                                 inrunColor.a = originalColor.a; // Preserve alpha channel
                                 newMaterial.SetColor("_BaseColor", inrunColor);
+                                Debug.Log("Inrun construction color assigned: " + hill.inrunConstructionColor);
                             }
                             else
                             {
@@ -1099,7 +1100,7 @@ namespace OpenSkiJumping.Hills
             {
                 if (poleSegments.Contains(i))
                 {
-                    Debug.Log("-------------- Pole created at i" + i);
+                    //Debug.Log("-------------- Pole created at i" + i);
                     float poleZWidth = Mathf.Abs(hill.b1 + 1.4f);
                     Vector2 position = hill.inrunPolePoints[i];
                     float heightFactor = 1f - (float)i / (hill.inrunPolePoints.Length - 1);
