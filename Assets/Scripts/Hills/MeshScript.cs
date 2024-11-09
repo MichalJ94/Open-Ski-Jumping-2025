@@ -100,7 +100,8 @@ namespace OpenSkiJumping.Hills
     public enum HandRailTexture
     {
         PlainWhite,
-        PlainMetallic
+        PlainMetallic,
+        WhitePlanks
     }
     public enum LandingAreaGuardrailTexture
     {
@@ -1061,7 +1062,15 @@ namespace OpenSkiJumping.Hills
             Color originalColor = selectedMaterial.color;
 
             List<int> poleSegments = new List<int>();
-            int currentSegment = (int)poleThickness - 1;
+            int currentSegment = 0;
+            if (poleThickness >= 1.5)
+            {
+                currentSegment = (int)poleThickness - 1;
+            }
+            else
+            {
+                currentSegment = (int)poleThickness;
+            }
             poleSegments.Add(currentSegment);
 
             while (currentSegment < hill.inrunPolePoints.Length)
