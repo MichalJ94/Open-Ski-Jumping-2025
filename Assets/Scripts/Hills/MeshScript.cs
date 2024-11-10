@@ -95,7 +95,8 @@ namespace OpenSkiJumping.Hills
         MetalPlate,
         PlainWhite,
         PlainMetallic,
-        ConcreteWhite
+        ConcreteWhite,
+        MetalStrips
     }
 
     public enum HandRailTexture
