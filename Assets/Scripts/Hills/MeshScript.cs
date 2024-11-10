@@ -64,7 +64,8 @@ namespace OpenSkiJumping.Hills
     public enum InrunStairsTexture
     {
         Default,
-        Plain,
+        MetalPlate,
+        PlainWhite,
         WhitePlanks,
     }
 
