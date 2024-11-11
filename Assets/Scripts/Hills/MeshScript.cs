@@ -75,7 +75,8 @@ namespace OpenSkiJumping.Hills
         Transparent,
         WhitePlanks,
         PlainWhite,
-        Glass
+        Glass,
+        ThickGlass
     }
 
     public enum InrunGuardrailTexture
