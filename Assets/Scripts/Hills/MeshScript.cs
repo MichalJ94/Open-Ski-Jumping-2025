@@ -114,7 +114,8 @@ namespace OpenSkiJumping.Hills
         Glass,
         ThickGlass,
         SuperThickGlass,
-        Transparent
+        Transparent,
+        PlainWhite
     }
     public enum PoleTexture
     {
