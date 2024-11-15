@@ -5,10 +5,12 @@ using OpenSkiJumping.Competition.Runtime;
 using OpenSkiJumping.Data;
 using OpenSkiJumping.Hills;
 using OpenSkiJumping.ScriptableObjects;
+using OpenSkiJumping.Scripts2025;
 using OpenSkiJumping.Simulation;
 using OpenSkiJumping.UI;
 using UnityEngine;
 using UnityEngine.Events;
+
 
 namespace OpenSkiJumping.Competition
 {
@@ -24,8 +26,9 @@ namespace OpenSkiJumping.Competition
         [SerializeField] private JumpSimulator compensationsJumpSimulator;
         [SerializeField] private ToBeatLineController toBeatLineController;
         [SerializeField] private RuntimeJumpData jumpData;
+        [SerializeField] private GameplayExtension gameplayExtension;
+        [SerializeField] private GameObject snowParticles;
 
-      
 
         public UnityEvent onCompetitionFinish;
 
@@ -42,7 +45,7 @@ namespace OpenSkiJumping.Competition
         [SerializeField] private RuntimeResultsManager resultsManager;
         [SerializeField] private SavesRuntime savesRepository;
         [SerializeField] private MainMenuController menuController;
-
+        private System.Random random = new System.Random();
         private Dictionary<int, Color> _bibColors;
 
 
@@ -95,7 +98,9 @@ namespace OpenSkiJumping.Competition
             var save = savesRepository.GetCurrentSave();
             save.resultsContainer.eventIndex++;
             savesRepository.SaveData();
+            snowParticles.SetActive(false);
             menuController.LoadTournamentMenu();
+
         }
 
         private void UpdateClassifications()
@@ -134,6 +139,7 @@ namespace OpenSkiJumping.Competition
             resultsManager.Initialize(currentEventInfo, orderedParticipants, _hillInfo);
             SetDefaultJumpData();
             windGatePanel.Initialize(hill.profileData.Value.gates);
+            DetermineSnow();
             onCompetitionStart.Invoke();
             OnRoundStart();
             OnSubroundStart();
@@ -209,9 +215,27 @@ namespace OpenSkiJumping.Competition
             return storeHS;
         }
         
+
+
         public float GetKPoint()
         {
             return storeKPoint;
+        }
+
+        public void DetermineSnow()
+        {
+            int determiner = random.Next(0,100);
+            if(determiner <= gameplayExtension.snowChance)
+            {
+                snowParticles.SetActive(true);
+                Debug.Log("SNOW PARTICLES IS ACTIVE. Determiner: " + determiner);
+            }
+            else
+            {
+                snowParticles.SetActive(false);
+                Debug.Log("SNOW PARTICLES IS NOT ACTIVE. Determiner: " + determiner);
+            }
+
         }
 
 
