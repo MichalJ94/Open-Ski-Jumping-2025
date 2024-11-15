@@ -20,6 +20,8 @@ namespace OpenSkiJumping.Data
 
         public float randomnessLevelCPU;
 
+        public float snowChance;
+
         [JsonConverter(typeof(StringEnumConverter))]
         public Language currentLanguage;
     }
