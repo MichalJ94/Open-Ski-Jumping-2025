@@ -63,6 +63,9 @@ ModelImporter:
   - first:
       74: 5461673756822494301
     second: Pre-Telemark
+  - first:
+      74: 7365236311090132195
+    second: TelemarkToPassing
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -80,6 +83,11 @@ ModelImporter:
     animationImportErrors: 
     animationImportWarnings: "\nClip 'Pre-Landing' has import animation warnings
       that might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'Lower_Leg_L' has scale animation that will
+      be discarded.\n\t'Foot_L' has scale animation that will be discarded.\n\t'Lower_Leg_R'
+      has scale animation that will be discarded.\n\t'Foot_R' has scale animation
+      that will be discarded.\n\nClip 'StruggleL' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar
       to improve retargeting quality.\n\t'Lower_Leg_L' has scale animation that will
       be discarded.\n\t'Foot_L' has scale animation that will be discarded.\n\t'Lower_Leg_R'
       has scale animation that will be discarded.\n\t'Foot_R' has scale animation
@@ -129,11 +137,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Braking
-      takeName: Braking
+      name: TelemarkToPassing
+      takeName: TelemarkToPassing
       internalID: 0
       firstFrame: 0
-      lastFrame: 1
+      lastFrame: 23
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
