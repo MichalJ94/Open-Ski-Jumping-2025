@@ -61,7 +61,7 @@ namespace OpenSkiJumping.Hills
         flat
     }
 
-    public enum InrunStairsTexture
+    public enum GateStairsTexture
     {
         Default,
         MetalPlate,
@@ -413,9 +413,9 @@ namespace OpenSkiJumping.Hills
             if (gameObject.name.Contains("Inrun Stairs"))
             {
                 // Load material based on the texture in hill.inrunStairsTexture
-                if (hill.inrunStairsTexture != "Default")
+                if (hill.gateStairsTexture != "Default")
                 {
-                    if (System.Enum.TryParse(hill.inrunStairsTexture, out InrunStairsTexture stairsTextureEnum))
+                    if (System.Enum.TryParse(hill.gateStairsTexture, out GateStairsTexture stairsTextureEnum))
                     {
                         int materialIndex = (int)stairsTextureEnum;
 
@@ -431,7 +431,7 @@ namespace OpenSkiJumping.Hills
                             }
 
                             // Parse and apply color from hill.inrunStairsColor
-                            if (ColorUtility.TryParseHtmlString(hill.inrunStairsColor, out Color inrunStairsColor))
+                            if (ColorUtility.TryParseHtmlString(hill.gateStairsColor, out Color inrunStairsColor))
                             {
                                 Color originalColor = newMaterial.GetColor("_BaseColor");
                                 inrunStairsColor.a = originalColor.a; // Preserve alpha channel
@@ -439,7 +439,7 @@ namespace OpenSkiJumping.Hills
                             }
                             else
                             {
-                                Debug.LogError("Invalid hex color string: " + hill.inrunStairsColor);
+                                Debug.LogError("Invalid hex color string: " + hill.gateStairsColor);
                             }
 
                             // Assign the material to the renderer
@@ -452,7 +452,7 @@ namespace OpenSkiJumping.Hills
                     }
                     else
                     {
-                        Debug.LogError("Invalid texture string for inrun stairs: " + hill.inrunStairsTexture);
+                        Debug.LogError("Invalid texture string for inrun stairs: " + hill.gateStairsTexture);
                     }
                 }
                 else
@@ -1143,34 +1143,34 @@ namespace OpenSkiJumping.Hills
 
             // Load the material based on inrunStairsTexture
             Material material = null;
-            if (hill.inrunStairsTexture == "Default")
+            if (hill.gateStairsTexture == "Default")
             {
                 material = gateStairsSO.GetMaterial(0);  // Assume 0 is the index for the default material
                 Debug.Log("Assigned default material.");
             }
-            else if (System.Enum.TryParse(hill.inrunStairsTexture, out InrunStairsTexture textureEnum))
+            else if (System.Enum.TryParse(hill.gateStairsTexture, out GateStairsTexture textureEnum))
             {
                 int textureIndex = (int)textureEnum;
                 material = gateStairsSO.GetMaterial(textureIndex);
-                Debug.Log("Assigned material: " + hill.inrunStairsTexture);
+                Debug.Log("Assigned material: " + hill.gateStairsTexture);
             }
             else
             {
-                Debug.LogError("Invalid texture string: " + hill.inrunStairsTexture);
+                Debug.LogError("Invalid texture string: " + hill.gateStairsTexture);
                 return;  // Exit the method early if the texture string is invalid
             }
 
             // Now, handle the color from inrunStairsColor
-            if (ColorUtility.TryParseHtmlString(hill.inrunStairsColor, out Color stairsColor))
+            if (ColorUtility.TryParseHtmlString(hill.gateStairsColor, out Color stairsColor))
             {
                 Color originalColor = material.GetColor("_BaseColor"); // Preserve the original alpha channel
                 stairsColor.a = originalColor.a;  // Retain the original alpha transparency
                 material.SetColor("_BaseColor", stairsColor);  // Set the color to the material
-                Debug.Log("Assigned color: " + hill.inrunStairsColor);
+                Debug.Log("Assigned color: " + hill.gateStairsColor);
             }
             else
             {
-                Debug.LogError("Invalid color string: " + hill.inrunStairsColor);
+                Debug.LogError("Invalid color string: " + hill.gateStairsColor);
             }
 
             // Apply the material to the MeshRenderer
