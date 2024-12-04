@@ -413,9 +413,9 @@ namespace OpenSkiJumping.Hills
             if (gameObject.name.Contains("Inrun Stairs"))
             {
                 // Load material based on the texture in hill.inrunStairsTexture
-                if (hill.gateStairsTexture != "Default")
+                if (hill.inrunStairsTexture != "Default")
                 {
-                    if (System.Enum.TryParse(hill.gateStairsTexture, out GateStairsTexture stairsTextureEnum))
+                    if (System.Enum.TryParse(hill.inrunStairsTexture, out GateStairsTexture stairsTextureEnum))
                     {
                         int materialIndex = (int)stairsTextureEnum;
 
@@ -431,7 +431,7 @@ namespace OpenSkiJumping.Hills
                             }
 
                             // Parse and apply color from hill.inrunStairsColor
-                            if (ColorUtility.TryParseHtmlString(hill.gateStairsColor, out Color inrunStairsColor))
+                            if (ColorUtility.TryParseHtmlString(hill.inrunStairsColor, out Color inrunStairsColor))
                             {
                                 Color originalColor = newMaterial.GetColor("_BaseColor");
                                 inrunStairsColor.a = originalColor.a; // Preserve alpha channel
@@ -439,7 +439,7 @@ namespace OpenSkiJumping.Hills
                             }
                             else
                             {
-                                Debug.LogError("Invalid hex color string: " + hill.gateStairsColor);
+                                Debug.LogError("Invalid hex color string: " + hill.inrunStairsColor);
                             }
 
                             // Assign the material to the renderer
