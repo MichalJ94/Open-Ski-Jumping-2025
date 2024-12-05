@@ -67,6 +67,10 @@ namespace OpenSkiJumping.Hills
         MetalPlate,
         PlainWhite,
         WhitePlanks,
+        DefaultInrun,
+        MetalPlateInrun,
+        PlainWhiteInrun,
+        WhitePlanksInrun,
     }
 
     public enum InrunOuterGuardrailTexture
