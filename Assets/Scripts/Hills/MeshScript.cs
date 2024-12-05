@@ -413,7 +413,7 @@ namespace OpenSkiJumping.Hills
             if (gameObject.name.Contains("Inrun Stairs"))
             {
                 // Load material based on the texture in hill.inrunStairsTexture
-                if (hill.inrunStairsTexture != "Default")
+                if (hill.inrunStairsTexture != "REWORK")
                 {
                     if (System.Enum.TryParse(hill.inrunStairsTexture, out GateStairsTexture stairsTextureEnum))
                     {
@@ -480,7 +480,7 @@ namespace OpenSkiJumping.Hills
             if (gameObject.name == "Inrun Construction")
             {
                 // Load material based on the texture in hill.inrunConstructionTexture
-                if (hill.inrunConstructionTexture != "Default")
+                if (hill.inrunConstructionTexture != "Rework")
                 {
                     if (System.Enum.TryParse(hill.inrunConstructionTexture, out InrunConstructionTexture constructionTextureEnum))
                     {
@@ -1608,7 +1608,7 @@ namespace OpenSkiJumping.Hills
                     var material = handrail.materials[materialIndex];
                     meshRenderer.material = material; // Assign material
 
-                    if (hill.handRailTexture == "Default")
+                    if (hill.handRailColor == "FFFFFF")
                     {
                         material.SetColor("_BaseColor", Color.white);
                     }
