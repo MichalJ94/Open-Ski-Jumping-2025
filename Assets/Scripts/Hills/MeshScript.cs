@@ -66,11 +66,15 @@ namespace OpenSkiJumping.Hills
         Default,
         MetalPlate,
         PlainWhite,
+        WhitePlanks
+    }
+
+    public enum InrunStairsTexture
+    {
+        Default,
+        MetalPlate,
+        PlainWhite,
         WhitePlanks,
-        DefaultInrun,
-        MetalPlateInrun,
-        PlainWhiteInrun,
-        WhitePlanksInrun,
     }
 
     public enum InrunOuterGuardrailTexture
@@ -419,14 +423,14 @@ namespace OpenSkiJumping.Hills
                 // Load material based on the texture in hill.inrunStairsTexture
                 if (hill.inrunStairsTexture != "REWORK")
                 {
-                    if (System.Enum.TryParse(hill.inrunStairsTexture, out GateStairsTexture stairsTextureEnum))
+                    if (System.Enum.TryParse(hill.inrunStairsTexture, out InrunStairsTexture inrunStairsTextureEnum))
                     {
-                        int materialIndex = (int)stairsTextureEnum;
+                        int materialIndex = (int)inrunStairsTextureEnum;
 
                         // Ensure the index is within bounds
-                        if (materialIndex >= 0 && materialIndex < gateStairsSO.materials.Length)
+                        if (materialIndex >= 0 && materialIndex < inrunStairsR.materials.Length)
                         {
-                            var newMaterial = gateStairsSO.materials[materialIndex];
+                            var newMaterial = inrunStairsR.materials[materialIndex];
 
                             // Store original color if not already stored
                             if (!originalMaterialColors.ContainsKey(newMaterial))
@@ -464,7 +468,7 @@ namespace OpenSkiJumping.Hills
                     gameObject.GetComponent<MeshRenderer>().material = material;
                 }
             }
-
+            
             // Handle distance plates
             if (gameObject.name == "Marks Object")
             {
