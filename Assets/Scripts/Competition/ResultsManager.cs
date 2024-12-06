@@ -486,15 +486,18 @@ namespace OpenSkiJumping.Competition
             }
 
 
-            while (((float)distance * modifier) > (hillInfo.GetHS() * 1.1f))
+            while (((float)distance * modifier) > (hillInfo.GetHS() * 1.09f))
             {
-                UnityEngine.Debug.Log("COS SIE JEEEEEBLO! Bardzo dlugi skok!: " + (float)distance + " skill: " + skill + " modifier " + modifier + " hillsize " + hillInfo.GetHS());
-                modifier *= Random.Range(0.85f, 0.95f);
-                if((float)distance * modifier <= (hillInfo.GetHS() * 1.1f))
-                        {
-                    modifier *= (skill / 100f);
-                        UnityEngine.Debug.Log("D³ugoœæ zbugowanego skoku po wszystkich operacjach" + (float)distance * modifier + skill + " modifier " + modifier + " hillsize " + hillInfo.GetHS());
+                UnityEngine.Debug.Log("COS SIE JEEEEEBLO! Bardzo dlugi skok!: " + (float)distance*modifier + " skill: " + skill + " modifier " + modifier + " hillsize " + hillInfo.GetHS());
+                
+                modifier *= Random.Range(skill/100f, (skill/100f)+0.1f);
+                if(skill > 90)
+                {
+                    modifier *= 0.9f;
                 }
+
+                UnityEngine.Debug.Log("COS SIE JEEEEEBLO! D³ugoœæ zbugowanego skoku po zmianach: " + (float)distance * modifier + "skill: " + skill + " modifier " + modifier + " hillsize " + hillInfo.GetHS());
+
             }
             /*
             if (((float)distance * modifier) > (hillInfo.GetHS() * 1.08f))
