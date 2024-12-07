@@ -486,6 +486,20 @@ namespace OpenSkiJumping.Competition
             }
 
 
+
+            while(modifier > 1.1f)
+            {
+                UnityEngine.Debug.Log("COS SIE JEEEEBLO! Modifier wiekszy niz 1.1. Skok: " + (float)distance * modifier + " skill: " + skill + " modifier " + modifier + " hillsize " + hillInfo.GetHS());
+                modifier *= Random.Range(skill / 100f, (skill / 100f) + 0.1f);
+                if (skill > 90)
+                {
+                    modifier *= 0.9f;
+                }
+                UnityEngine.Debug.Log("COS SIE JEEEEBLO! Po zmianie modifiera wiekszego ni¿ 1.1. Skok: " + (float)distance * modifier + " skill: " + skill + " modifier " + modifier + " hillsize " + hillInfo.GetHS());
+            }
+
+            /*
+
             while (((float)distance * modifier) > (hillInfo.GetHS() * 1.09f))
             {
                 UnityEngine.Debug.Log("COS SIE JEEEEEBLO! Bardzo dlugi skok!: " + (float)distance*modifier + " skill: " + skill + " modifier " + modifier + " hillsize " + hillInfo.GetHS());
@@ -499,6 +513,18 @@ namespace OpenSkiJumping.Competition
                 UnityEngine.Debug.Log("COS SIE JEEEEEBLO! D³ugoœæ zbugowanego skoku po zmianach: " + (float)distance * modifier + "skill: " + skill + " modifier " + modifier + " hillsize " + hillInfo.GetHS());
 
             }
+
+            if(modifier > 1.1f)
+            {
+                UnityEngine.Debug.Log("COS SIE JEEEEBLO! Modifier wciaz wiekszy niz 1.1. Skok: " + (float)distance * modifier + " skill: " + skill + " modifier " + modifier + " hillsize " + hillInfo.GetHS());
+                modifier *= Random.Range(skill / 100f, 0.99f);
+                UnityEngine.Debug.Log("COS SIE JEEEEBLO! Po zmianie modifiera wiekszego ni¿ 1.1. Skok: " + (float)distance * modifier + " skill: " + skill + " modifier " + modifier + " hillsize " + hillInfo.GetHS());
+            }
+
+
+            */
+
+
             /*
             if (((float)distance * modifier) > (hillInfo.GetHS() * 1.08f))
             {
