@@ -21,6 +21,7 @@ namespace OpenSkiJumping.TVGraphics
         public ToBeatUIManager toBeat;
         public PostJumpUIManager postJump;
         public SideResultsController sideResults;
+        public RoundResultsController roundResults;
     }
 
     public class TvGraphicsController : MonoBehaviour
@@ -101,6 +102,7 @@ namespace OpenSkiJumping.TVGraphics
         public void UpdateListView()
         {
             graphicsData[current].sideResults.AddResult();
+            graphicsData[current].roundResults.AddResult();
             // int competitorId = resultsManager.Value.StartList[resultsManager.Value.StartListIndex];
             // int bib = resultsManager.Value.Results[competitorId].Bibs[resultsManager.Value.RoundIndex];
             // int rank = resultsManager.Value.Results[competitorId].Rank;
@@ -112,6 +114,7 @@ namespace OpenSkiJumping.TVGraphics
         public void ClearListView()
         {
             graphicsData[current].sideResults.Clear();
+            graphicsData[current].roundResults.Clear();
         }
 
         public void ShowPreJump()
