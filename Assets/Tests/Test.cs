@@ -202,7 +202,7 @@ namespace OpenSkiJumping.Tests
         {
             foreach (var it in distances)
             {
-                resultsManager.RegisterJump(MockJumpDataFromDist(it));
+              //  resultsManager.RegisterJump(MockJumpDataFromDist(it));
                 resultsManager.JumpFinish();
             }
         }

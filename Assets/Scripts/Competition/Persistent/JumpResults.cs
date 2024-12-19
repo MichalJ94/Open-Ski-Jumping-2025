@@ -12,6 +12,7 @@ namespace OpenSkiJumping.Competition.Persistent
         public bool[] judgesMask;
         public decimal judgesTotalPoints;
         public int gatesDiff;
+        public decimal actualGate;
         public decimal gatePoints;
         public decimal wind;
         public decimal windPoints;

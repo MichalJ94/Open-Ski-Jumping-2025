@@ -57,6 +57,12 @@ namespace OpenSkiJumping.Competition.Runtime
             set => speed = value;
         }
 
+        public decimal ActualGate
+        {
+            get => speed;
+            set => speed = value;
+        }
+
         public void ResetValues()
         {
             speed = 0;

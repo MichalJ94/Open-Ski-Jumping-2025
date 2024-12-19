@@ -21,7 +21,7 @@ namespace OpenSkiJumping.Competition
         int StartListIndex { get; }
         int SubroundIndex { get; }
         int RoundIndex { get; }
-        void RegisterJump(IJumpData jumpData);
+        void RegisterJump(IJumpData jumpData, GameplayExtension gameplayExtension);
 
         void RegisterCPUJump(IJumpData jumpData, GameplayExtension gameplayExtension);
         void SubroundInit();
@@ -263,7 +263,7 @@ namespace OpenSkiJumping.Competition
             return RoundIndex < roundsCount;
         }
 
-        public void RegisterJump(IJumpData jumpData)
+        public void RegisterJump(IJumpData jumpData, GameplayExtension gameplayExtension)
         {
         
                 // Handle disableJudgesMarks
@@ -281,6 +281,8 @@ namespace OpenSkiJumping.Competition
 
                 var jump = EventProcessor.GetJumpResult(jumpData, hillInfo, currentRoundInfo.gateCompensation, currentRoundInfo.windCompensation);
                 if (RoundIndex > 0 || SubroundIndex > 0) RemoveFromAllRoundResults();
+
+            jump.actualGate = (decimal)gameplayExtension.storeGate;
             
             AddResult(StartList[StartListIndex], SubroundIndex, jump);
             AddToAllRoundResults();
@@ -316,6 +318,7 @@ namespace OpenSkiJumping.Competition
             points = CalculateCPUJudgesMarks(points, jumpData.Distance, hillInfo, jumpData.JumperSkill); 
             cpuJump.judgesMarks = points;
             jumpData.JudgesMarks = points;
+            cpuJump.actualGate = (decimal)gameplayExtension.storeGate;
             if (currentRoundInfo.disableJudgesMarks)
             {
                 for (var i = 0; i < jumpData.JudgesMarks.Length; i++)
@@ -326,7 +329,7 @@ namespace OpenSkiJumping.Competition
 
 
             if (RoundIndex > 0 || SubroundIndex > 0) RemoveFromAllRoundResults();
-
+            cpuJump.actualGate = (decimal)gameplayExtension.storeGate;
             AddResult(StartList[StartListIndex], SubroundIndex, cpuJump);
             AddToAllRoundResults();
             AddToFinalResults();
@@ -609,7 +612,11 @@ namespace OpenSkiJumping.Competition
             {
                 Results[competitorId].PreviousRoundDistance = jumpResults.results[RoundIndex - 1].distance;
                 Results[competitorId].PreviousRoundStyle = jumpResults.results[RoundIndex - 1].judgesTotalPoints;
+                Results[competitorId].PreviousRoundGate = jumpResults.results[RoundIndex - 1].actualGate;
             }
+
+            Results[competitorId].Style = jumpResults.results[RoundIndex].judgesTotalPoints;
+            Results[competitorId].ActualGate = jumpResults.results[RoundIndex].actualGate;
 
             //Write down the name of the jumper
             Results[competitorId].CurrentCompetitorId = OrderedParticipants[competitorId].id;

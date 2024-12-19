@@ -15,7 +15,10 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
         public TMP_Text secondDistance;
         public TMP_Text firstStyle;
         public TMP_Text firstDistance;
-
+        public TMP_Text firstGateT;
+        public TMP_Text secondGateT;
+        public TMP_Text firstWindT;
+        public TMP_Text secondWindT;
 
         public TranslatablePhrase result;
         public TranslatablePhrase dist;
@@ -24,8 +27,10 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
         public TranslatablePhrase secondDist;
         public TranslatablePhrase firstStyl;
         public TranslatablePhrase secondStyl;
-
-
+        public TranslatablePhrase firstGate;
+        public TranslatablePhrase secondGate;
+        public TranslatablePhrase firstWind;
+        public TranslatablePhrase secondWind;
 
         private void Start()
         {

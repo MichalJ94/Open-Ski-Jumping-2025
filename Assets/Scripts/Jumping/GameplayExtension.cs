@@ -36,7 +36,7 @@ namespace OpenSkiJumping.Scripts2025
 
         }
 
-
+        public float storeGate;
 
         public float forceScaleModifier(int skill)
         {

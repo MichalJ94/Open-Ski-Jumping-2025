@@ -71,6 +71,7 @@ namespace OpenSkiJumping.Competition
             if (resultsManager.SubroundFinish())
             {
                 onSubroundFinish.Invoke();
+                Debug.Log("onSubroundFinish.Invoke();");
                 OnSubroundStart();
                 return;
             }
@@ -83,7 +84,7 @@ namespace OpenSkiJumping.Competition
             if (resultsManager.RoundFinish())
             {
                 onRoundFinish.Invoke();
-                OnRoundStart();
+                Debug.Log("onRoundFinish.Invoke();");
                 return;
             }
 

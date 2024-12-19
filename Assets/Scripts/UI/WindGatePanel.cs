@@ -1,4 +1,5 @@
 using System;
+using OpenSkiJumping.Scripts2025;
 using OpenSkiJumping.Simulation;
 using TMPro;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace OpenSkiJumping.UI
     public class WindGatePanel : MonoBehaviour
     {
         [SerializeField] private JumpSimulator simulator;
+        [SerializeField] private GameplayExtension gameplayExtension;
 
         [SerializeField] private TMP_Text gateText;
         [SerializeField] private Slider gateSlider;
@@ -22,6 +24,7 @@ namespace OpenSkiJumping.UI
         {
             gateSlider.onValueChanged.AddListener(UpdateGateText);
             gateSlider.onValueChanged.AddListener(UpdateCPUWinDistanceAfterGateChange);
+            gateSlider.onValueChanged.AddListener(StoreGate);
             windSlider.onValueChanged.AddListener(UpdateWindText);
             windSlider.onValueChanged.AddListener(UpdateCPUWinDistanceAfterWindChange);
             autoGateButton.onClick.AddListener(SetAutoGate);
@@ -52,6 +55,15 @@ namespace OpenSkiJumping.UI
             autoGateButton.interactable = false;
         }
 
+        public void StoreGate(float val)
+        {
+            gameplayExtension.storeGate = gateSlider.value;
+        }
+
+        public void StoreGate()
+        {
+            gameplayExtension.storeGate = gateSlider.value;
+        }
 
         public void Initialize(int gates)
         {
