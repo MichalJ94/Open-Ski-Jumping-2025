@@ -4,31 +4,49 @@ using OpenSkiJumping.Competition.Runtime;
 using OpenSkiJumping.ScriptableObjects;
 using OpenSkiJumping.UI.ListView;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Events;
 
 namespace OpenSkiJumping.TVGraphics.SideResults
 {
     public abstract class RoundResultsController : MonoBehaviour
     {
+        [SerializeField] private Button continueButton;
         [SerializeField] protected FlagsData flagsData;
         [SerializeField] protected RoundResultsListView listView;
         [SerializeField] protected RuntimeResultsManager resultsManager;
         [SerializeField] protected RuntimeCompetitorsList competitorsList;
         [SerializeField] protected List<int> listViewItems;
 
-        
+        private UnityAction onContinue;
+
         public void Start()
         {
             listViewItems = new List<int>();
             listView.SelectionType = SelectionType.None;
             listView.Items = listViewItems;
             listView.Initialize(BindListViewItem);
+
+            if (continueButton != null)
+            {
+                continueButton.onClick.AddListener(OnContinueClicked);
+            }
         }
 
-        public void Show()
+        public void Show(UnityAction onContinueAction)
         {
+            onContinue = onContinueAction;
             gameObject.transform.localScale = new Vector3(1, 1, 1);
             Time.timeScale = 0f;
             AudioListener.pause = true;
+        }
+
+        private void OnContinueClicked()
+        {
+            Time.timeScale = 1f;
+            AudioListener.pause = false;
+            gameObject.transform.localScale = new Vector3(0, 0, 0);
+            onContinue?.Invoke();
         }
 
         public void Hide()
@@ -52,7 +70,7 @@ namespace OpenSkiJumping.TVGraphics.SideResults
             listItem.distanceText.text = $"{item.Distance.ToString("F1", CultureInfo.InvariantCulture)} m";
             listItem.gateText.text = $"{item.ActualGate}";
             listItem.previousRoundDistanceText.text = $"{item.PreviousRoundDistance.ToString("F1", CultureInfo.InvariantCulture)} m";
-            if(roundNumber == 0)
+            if (roundNumber == 0)
             {
                 listItem.previousRoundDistanceText.enabled = false;
                 listItem.previousRoundStyleText.enabled = false;
@@ -72,7 +90,6 @@ namespace OpenSkiJumping.TVGraphics.SideResults
                 listItem.styleText.text = "";
             }
 
-
             if (item.PreviousRoundStyle > 0 && item.PreviousRoundStyle <= 60)
             {
                 listItem.previousRoundStyleText.text = $"{item.PreviousRoundStyle.ToString("F1", CultureInfo.InvariantCulture)}";
@@ -81,7 +98,6 @@ namespace OpenSkiJumping.TVGraphics.SideResults
             {
                 listItem.previousRoundStyleText.text = "";
             }
-
         }
 
         protected abstract string GetNameById(int id);

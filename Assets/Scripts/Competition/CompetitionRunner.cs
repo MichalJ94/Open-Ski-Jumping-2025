@@ -85,9 +85,10 @@ namespace OpenSkiJumping.Competition
             {
                 onRoundFinish.Invoke();
                 Debug.Log("onRoundFinish.Invoke();");
+                OnRoundStart();
                 return;
             }
-
+            onRoundFinish.Invoke();
             OnCompetitionFinish();
         }
 
