@@ -1,0 +1,11 @@
+            while (((float)distance * modifier) > (hillInfo.GetHS() * 1.1f * ((100 - skill)/300)));
+            {
+                UnityEngine.Debug.Log("COS SIE JEEEEEBLO! Bardzo dlugi skok!: " + (float)distance * modifier + " distance bez modifiera: " + (float)distance + " skill: " + skill + " modifier " + modifier + " hillsize " + hillInfo.GetHS());
+                modifier *= Random.Range(0.9f, 0.95f);
+                UnityEngine.Debug.Log("COS SIE JEEEEBLO! Distance z modifierem po pierwszej redukcji: " + (float)distance * modifier + " distance bez modifiera: " + (float)distance + " skill: " + skill + " modifier " + modifier + " hillsize " + hillInfo.GetHS()) ;
+              /*  if((float)distance * modifier <= (hillInfo.GetHS() * 1.1f))
+                        {
+                    modifier *= (skill / 100f);
+                        UnityEngine.Debug.Log("Długość zbugowanego skoku po wszystkich operacjach" + (float)distance * modifier + skill + " modifier " + modifier + " hillsize " + hillInfo.GetHS());
+                }*/
+            }

@@ -47,22 +47,35 @@ namespace OpenSkiJumping.Competition
         [SerializeField] private MainMenuController menuController;
         private System.Random random = new System.Random();
         private Dictionary<int, Color> _bibColors;
-
+        public int jumperCounter;
+        public bool jumperCounterReached;
 
         private void Start()
         {
             OnCompetitionStart();
         }
 
+        public void ResetJumperCounter()
+        {
+            jumperCounterReached = false;
+        }
+
         public void OnJumpFinish()
         {
             if (resultsManager.JumpFinish())
             {
+                jumperCounter++;
+              /*  if (jumperCounter == _bibColors.Count)
+                {
+                    jumperCounterReached = true;
+                    Debug.Log("jumperCounter == _bibColors.Count");
+                }*/
                 onJumpFinish.Invoke();
                 OnJumpStart();
                 return;
             }
 
+            jumperCounterReached = true;
             OnSubroundFinish();
         }
 

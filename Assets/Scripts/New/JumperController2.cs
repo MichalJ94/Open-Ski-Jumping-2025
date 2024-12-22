@@ -35,6 +35,7 @@ namespace OpenSkiJumping.New
         [SerializeField] private int WindThrustDeterminer;
         [SerializeField]  private int WindThrustDeterminerTimesUsed;
         [SerializeField] private float fixedUpdateTorqueReference;
+        public GameObject continueButton;
         private float forceScaleModifier;
 
 
@@ -73,6 +74,7 @@ namespace OpenSkiJumping.New
         public UnityEvent OnStartEvent;
         public UnityEvent BugOccured;
         public UnityEvent CPUJumpPerformed;
+        public UnityEvent OnRoundCompleted;
         private Rigidbody rb;
         public FloatVariable rotCoef;
         public GameObject rSkiClone, lSkiClone;
@@ -427,20 +429,6 @@ namespace OpenSkiJumping.New
 
 
 
-
-
-        public void ProcessControl()
-        {
-            if (skiJumperDataController.GetControl() == 1)
-            {
-                CPUJumpPerformed.Invoke();
-            }
-            else
-            {
-                Gate();
-            }
-
-        }
         public void AdjustForceScaleToHillSize()
         {
             float modifier = 1;
@@ -511,7 +499,15 @@ namespace OpenSkiJumping.New
 
             if (skiJumperDataController.GetControl() == 1)
                 {
+                if (competitionRunner.jumperCounterReached)
+                {
+                    competitionRunner.jumperCounter = 0;
+                    OnRoundCompleted.Invoke();
+                }
+                else
+                {
                     CPUJumpPerformed.Invoke();
+                }
                 }
                
             

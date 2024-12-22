@@ -114,8 +114,9 @@ namespace OpenSkiJumping.TVGraphics
         public void ClearListView()
         {
             graphicsData[current].sideResults.Clear();
-            graphicsData[current].roundResults.Clear();
+          //  graphicsData[current].roundResults.Clear();
         }
+
 
         public void ShowPreJump()
         {

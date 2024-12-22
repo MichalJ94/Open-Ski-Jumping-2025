@@ -33,9 +33,8 @@ namespace OpenSkiJumping.TVGraphics.SideResults
             }
         }
 
-        public void Show(UnityAction onContinueAction)
+        public void Show()
         {
-            onContinue = onContinueAction;
             gameObject.transform.localScale = new Vector3(1, 1, 1);
             Time.timeScale = 0f;
             AudioListener.pause = true;
