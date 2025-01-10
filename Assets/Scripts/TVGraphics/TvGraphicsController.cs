@@ -1,12 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using OpenSkiJumping.Competition;
 using OpenSkiJumping.Competition.Persistent;
 using OpenSkiJumping.Competition.Runtime;
 using OpenSkiJumping.Data;
 using OpenSkiJumping.TVGraphics.SideResults;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
+using UnityEngine.Events;
 using EventType = OpenSkiJumping.Competition.EventType;
 
 namespace OpenSkiJumping.TVGraphics
@@ -22,6 +25,7 @@ namespace OpenSkiJumping.TVGraphics
         public PostJumpUIManager postJump;
         public SideResultsController sideResults;
         public RoundResultsController roundResults;
+        public CompetitionRunner competitionRunner;
     }
 
     public class TvGraphicsController : MonoBehaviour
@@ -34,8 +38,11 @@ namespace OpenSkiJumping.TVGraphics
         public float postJumpGraphicsCooldown;
         public RuntimeResultsManager resultsManager;
         public RuntimeCompetitorsList competitors;
+        public RoundResultsController roundResultsController;
         public List<GraphicsData> graphicsData;
         private bool sideResultsActive;
+        public UnityEvent onRoundCompleted;
+
 
         private EventInfo currentEvent;
 
@@ -56,6 +63,12 @@ namespace OpenSkiJumping.TVGraphics
                 graphicsData[current].preJump.Hide();
                 graphicsData[current].postJump.Hide();
             }
+
+            if(roundResultsController.listViewAccessibleItems.Count == 50)
+            {
+                onRoundCompleted.Invoke();
+            }
+
 
            if (Input.GetKeyDown(KeyCode.Tab))
             {
@@ -113,8 +126,13 @@ namespace OpenSkiJumping.TVGraphics
 
         public void ClearListView()
         {
-            graphicsData[current].sideResults.Clear();
-          //  graphicsData[current].roundResults.Clear();
+
+    /*        graphicsData[current].roundResults.listViewItemsSnapshot =
+    new List<int>(graphicsData[current].roundResults.listViewAccessibleItems);*/
+            Debug.Log("ROUND RESULTS MISSION. Clear roundResults w TVGrphicsController.");
+           graphicsData[current].sideResults.Clear();
+           graphicsData[current].roundResults.Clear();
+            graphicsData[current].roundResults.ClearSnapshot();
         }
 
 

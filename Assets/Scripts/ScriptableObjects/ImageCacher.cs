@@ -49,7 +49,7 @@ namespace OpenSkiJumping.ScriptableObjects
             }
             else
             {
-                Debug.Log("Image succesfully loaded");
+              //  Debug.Log("Image succesfully loaded");
                 var t = ((DownloadHandlerTexture)www.downloadHandler).texture;
                 var sprite = Sprite.Create(t, new Rect(0, 0, t.width, t.height), new Vector2(0, 0));
                 RegisterSprite(imagePath, sprite);

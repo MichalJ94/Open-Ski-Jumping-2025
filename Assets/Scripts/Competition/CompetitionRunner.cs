@@ -7,6 +7,7 @@ using OpenSkiJumping.Hills;
 using OpenSkiJumping.ScriptableObjects;
 using OpenSkiJumping.Scripts2025;
 using OpenSkiJumping.Simulation;
+using OpenSkiJumping.TVGraphics.SideResults;
 using OpenSkiJumping.UI;
 using UnityEngine;
 using UnityEngine.Events;
@@ -25,6 +26,7 @@ namespace OpenSkiJumping.Competition
         [SerializeField] private WindGatePanel windGatePanel;
         [SerializeField] private JumpSimulator compensationsJumpSimulator;
         [SerializeField] private ToBeatLineController toBeatLineController;
+        [SerializeField] private RoundResultsController roundResultsController;
         [SerializeField] private RuntimeJumpData jumpData;
         [SerializeField] private GameplayExtension gameplayExtension;
         [SerializeField] private GameObject snowParticles;
@@ -36,6 +38,7 @@ namespace OpenSkiJumping.Competition
         public UnityEvent onJumpFinish;
         public UnityEvent onJumpStart;
         public UnityEvent onNewJumper;
+        public UnityEvent onRoundCompleted;
         public UnityEvent onRoundFinish;
         public UnityEvent onRoundStart;
         public UnityEvent onSubroundFinish;
@@ -47,8 +50,10 @@ namespace OpenSkiJumping.Competition
         [SerializeField] private MainMenuController menuController;
         private System.Random random = new System.Random();
         private Dictionary<int, Color> _bibColors;
+        public int bibColors;
         public int jumperCounter;
         public bool jumperCounterReached;
+        public bool permitCPUJumps = true;
 
         private void Start()
         {
@@ -65,31 +70,48 @@ namespace OpenSkiJumping.Competition
             if (resultsManager.JumpFinish())
             {
                 jumperCounter++;
-              /*  if (jumperCounter == _bibColors.Count)
-                {
-                    jumperCounterReached = true;
-                    Debug.Log("jumperCounter == _bibColors.Count");
-                }*/
+                /*  if (jumperCounter == _bibColors.Count)
+                  {
+                      jumperCounterReached = true;
+                      Debug.Log("jumperCounter == _bibColors.Count");
+                  }*/
                 onJumpFinish.Invoke();
                 OnJumpStart();
+               /*if (jumperCounter == bibColors - 1)
+                {
+                    Debug.Log("ROUND RESULTS MISSION. onJumpFinish.Invoke(); i jumperCounter == bibColors-1. Current jumperID: " + id);
+                    onRoundCompleted.Invoke();
+                    permitCPUJumps = false;
+                    return;
+                }*/
                 return;
             }
-
+            Debug.Log("ROUND RESULTS MISSION. jumperCounterReached = true;");
             jumperCounterReached = true;
             OnSubroundFinish();
         }
 
+        public void PermitCPUJumpsSetActive()
+        {
+            permitCPUJumps = true;
+        }
+
+        public void PermitCPUJumpsSetInactive()
+        {
+            permitCPUJumps = false;
+        }
         public void OnSubroundFinish()
         {
             if (resultsManager.SubroundFinish())
             {
                 onSubroundFinish.Invoke();
-                Debug.Log("onSubroundFinish.Invoke();");
+                Debug.Log("ROUND RESULTS MISSION. onSubroundFinish.Invoke();");
                 OnSubroundStart();
                 return;
             }
-
-            OnRoundFinish();
+            // W ty miejscu pojawia sie problem!
+            roundResultsController.PrintSortedSnapshotItems();
+            //OnRoundFinish();
         }
 
         public void OnRoundFinish()
@@ -97,7 +119,7 @@ namespace OpenSkiJumping.Competition
             if (resultsManager.RoundFinish())
             {
                 onRoundFinish.Invoke();
-                Debug.Log("onRoundFinish.Invoke();");
+                Debug.Log("ROUND RESULTS MISSION. onRoundFinish.Invoke();");
                 OnRoundStart();
                 return;
             }
@@ -182,7 +204,7 @@ namespace OpenSkiJumping.Competition
             _bibColors = orderedParticipants.SelectMany(it => it.competitors).ToDictionary(it => it, it => Color.white);
             var orderedClassifications = save.classificationsData.Where(it => it.useBib)
                 .Select(it => (it.calendarId, it.priority)).Reverse();
-
+            bibColors = _bibColors.Count;
             foreach (var (it, ind) in orderedClassifications)
             {
                 var classificationResults = save.resultsContainer.classificationResults[it];

@@ -3067,6 +3067,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: OpenSkiJumping.TVGraphics.SideResults.RoundResultsController,
+          Main
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3877784349378469544
 GameObject:
   m_ObjectHideFlags: 0
@@ -3991,11 +4004,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7ec6cbfe5f1d474a9a9fb432aa5ca6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  continueButton: {fileID: 0}
   flagsData: {fileID: 11400000, guid: 94f547efcb34a33049603d5e07a748ea, type: 2}
   listView: {fileID: 3877784350664592934}
+  listViewAccessible: {fileID: 0}
+  listViewAccessibleItems: 
   resultsManager: {fileID: 11400000, guid: 2263c123852116d44925a3188e8ded51, type: 2}
   competitorsList: {fileID: 11400000, guid: a37b188b5d0732ffda2e4a5f63ff3a24, type: 2}
   listViewItems: 
+  competitionRunner: {fileID: 0}
 --- !u!1 &3877784350497273755
 GameObject:
   m_ObjectHideFlags: 0

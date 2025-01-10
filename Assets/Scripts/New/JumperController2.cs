@@ -496,10 +496,10 @@ namespace OpenSkiJumping.New
         private void Update()
         {
 
-
-            if (skiJumperDataController.GetControl() == 1)
+            if (skiJumperDataController.GetControl() == 1 && competitionRunner.permitCPUJumps == true)
                 {
-                if (competitionRunner.jumperCounterReached)
+                CPUJumpPerformed.Invoke();
+                /*if (competitionRunner.jumperCounterReached)
                 {
                     competitionRunner.jumperCounter = 0;
                     OnRoundCompleted.Invoke();
@@ -507,8 +507,8 @@ namespace OpenSkiJumping.New
                 else
                 {
                     CPUJumpPerformed.Invoke();
-                }
-                }
+                }*/
+            }
                
             
 

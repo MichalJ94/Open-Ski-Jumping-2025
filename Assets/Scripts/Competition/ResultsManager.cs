@@ -9,6 +9,8 @@ using OpenSkiJumping.Scripts2025;
 using OpenSkiJumping.New;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using TMPro;
+using OpenSkiJumping.UI.ListView;
 
 namespace OpenSkiJumping.Competition
 {
@@ -49,7 +51,9 @@ namespace OpenSkiJumping.Competition
 
         private SortedList<(decimal points, int bib, int round), int> allRoundResults;
         private SortedList<(int state, decimal points, int bib), int> finalResults;
+        public SortedList<(int state, decimal points, int bib), int> finalResultsAccessible;
         private SortedList<(decimal points, int bib), int> losersResults;
+        private List<ResultData> resultsSnapshot;
         private int[] initGates;
 
         private int competitorsCount;
@@ -180,6 +184,9 @@ namespace OpenSkiJumping.Competition
             }
         }
 
+
+
+
         public bool JumpFinish()
         {
             StartListIndex++;
@@ -193,14 +200,23 @@ namespace OpenSkiJumping.Competition
 
         public int GetIdByRank(int rank)
         {
+            if (rank < 0 || rank >= finalResults.Count)
+            {
+                UnityEngine.Debug.LogError($"Invalid rank: {rank}. finalResults.Count: {finalResults.Count}");
+                return -1; // Or some other fallback value
+            }
+
+            // Create a copy of the SortedList
+            finalResultsAccessible = new SortedList<(int state, decimal points, int bib), int>(finalResults);
+
             return finalResults.Values[rank];
         }
 
-       /* public int GetNHS()
-        {
-            var id = GetCurrentJumperId();
+        /* public int GetNHS()
+         {
+             var id = GetCurrentJumperId();
 
-        }*/
+         }*/
 
         public JumpResults GetResultById(int primaryId, int secondaryId)
         {

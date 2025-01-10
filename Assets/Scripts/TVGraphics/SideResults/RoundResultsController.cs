@@ -6,6 +6,8 @@ using OpenSkiJumping.UI.ListView;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using OpenSkiJumping.Competition;
+using System.Linq;
 
 namespace OpenSkiJumping.TVGraphics.SideResults
 {
@@ -14,9 +16,14 @@ namespace OpenSkiJumping.TVGraphics.SideResults
         [SerializeField] private Button continueButton;
         [SerializeField] protected FlagsData flagsData;
         [SerializeField] protected RoundResultsListView listView;
+        public RoundResultsListView listViewAccessible;
+        public List<int> listViewAccessibleItems;
+        public List<RoundResultsItemData> listViewItemsSnapshot = new List<RoundResultsItemData>();
         [SerializeField] protected RuntimeResultsManager resultsManager;
         [SerializeField] protected RuntimeCompetitorsList competitorsList;
         [SerializeField] protected List<int> listViewItems;
+        [SerializeField] CompetitionRunner competitionRunner;
+
 
         private UnityAction onContinue;
 
@@ -61,6 +68,8 @@ namespace OpenSkiJumping.TVGraphics.SideResults
             var globalId = resultsManager.Value.OrderedParticipants[localId].id;
             var item = resultsManager.Value.Results[localId];
             var roundNumber = resultsManager.Value.GetRoundNumber();
+
+            // Fill in the listItem UI components
             listItem.rankText.text = $"{item.Rank}";
             listItem.nameText.text = $"{GetNameById(globalId)}";
             listItem.countryFlagText.text = $"{GetCountryCodeById(globalId)}";
@@ -68,7 +77,8 @@ namespace OpenSkiJumping.TVGraphics.SideResults
             listItem.resultText.text = $"{item.TotalPoints.ToString("F1", CultureInfo.InvariantCulture)}";
             listItem.distanceText.text = $"{item.Distance.ToString("F1", CultureInfo.InvariantCulture)} m";
             listItem.gateText.text = $"{item.ActualGate}";
-            listItem.previousRoundDistanceText.text = $"{item.PreviousRoundDistance.ToString("F1", CultureInfo.InvariantCulture)} m";
+            listItem.previousRoundDistanceText.text = $"{item.PreviousRoundDistance.ToString("F1", CultureInfo.InvariantCulture)}";
+
             if (roundNumber == 0)
             {
                 listItem.previousRoundDistanceText.enabled = false;
@@ -80,24 +90,114 @@ namespace OpenSkiJumping.TVGraphics.SideResults
                 listItem.previousRoundStyleText.enabled = true;
             }
 
-            if (item.Style > 0)
+            listItem.styleText.text = item.Style > 0
+                ? $"{item.Style.ToString("F1", CultureInfo.InvariantCulture)}"
+                : "";
+
+            listItem.previousRoundStyleText.text = item.PreviousRoundStyle > 0 && item.PreviousRoundStyle <= 60
+                ? $"{item.PreviousRoundStyle.ToString("F1", CultureInfo.InvariantCulture)}"
+                : "";
+
+            // Fill in the snapshot
+            var snapshotItem = new RoundResultsItemData
             {
-                listItem.styleText.text = $"{item.Style.ToString("F1", CultureInfo.InvariantCulture)}";
+                Rank = listItem.rankText.text,
+                Name = listItem.nameText.text,
+                CountryCode = listItem.countryFlagText.text,
+                CountryFlag = listItem.countryFlagImage.sprite,
+                TotalPoints = listItem.resultText.text,
+                Distance = listItem.distanceText.text,
+                Gate = listItem.gateText.text,
+                PreviousRoundDistance = listItem.previousRoundDistanceText.text,
+                Style = listItem.styleText.text,
+                PreviousRoundStyle = listItem.previousRoundStyleText.text,
+                ShowPreviousRoundDistance = listItem.previousRoundDistanceText.enabled,
+                ShowPreviousRoundStyle = listItem.previousRoundStyleText.enabled
+            };
+
+            // Add logging to debug snapshot addition
+            Debug.Log($"Checking snapshot: Rank={snapshotItem.Rank}, Name={snapshotItem.Name}");
+            if (!listViewItemsSnapshot.Any(snapshot => snapshot.Name == snapshotItem.Name))
+            {
+                listViewItemsSnapshot.Add(snapshotItem);
+                //Debug.Log($"Snapshot added: Rank={snapshotItem.Rank}, Name={snapshotItem.Name}");
             }
             else
             {
-                listItem.styleText.text = "";
+              Debug.LogWarning($"Duplicate or missing name detected: {snapshotItem.Name}");
             }
 
-            if (item.PreviousRoundStyle > 0 && item.PreviousRoundStyle <= 60)
+            if (listView.Items.Count == competitionRunner.bibColors)
             {
-                listItem.previousRoundStyleText.text = $"{item.PreviousRoundStyle.ToString("F1", CultureInfo.InvariantCulture)}";
-            }
-            else
-            {
-                listItem.previousRoundStyleText.text = "";
+                listViewAccessibleItems = new List<int>(listViewItems); // Creates a copy of the list.
+                Debug.Log("listViewAccessibleItems = listViewItems. listViewItems.Count: " + listViewItems.Count +
+                          " listView.Items.Count: " + listView.Items.Count +
+                          " listViewItemsSnapshot.Count: " + listViewItemsSnapshot.Count);
+                
             }
         }
+
+
+        private void PopulateSnapshotFromListViewItems()
+        {
+            // Clear the snapshot to avoid duplicates
+            listViewItemsSnapshot.Clear();
+
+            foreach (var index in listViewItems)
+            {
+                var localId = resultsManager.Value.GetIdByRank(index);
+                var globalId = resultsManager.Value.OrderedParticipants[localId].id;
+                var item = resultsManager.Value.Results[localId];
+
+                var snapshotItem = new RoundResultsItemData
+                {
+                    Rank = $"{item.Rank}",
+                    Name = $"{GetNameById(globalId)}",
+                    CountryCode = $"{GetCountryCodeById(globalId)}",
+                    CountryFlag = flagsData.GetFlag(GetCountryCodeById(globalId)),
+                    TotalPoints = $"{item.TotalPoints.ToString("F1", CultureInfo.InvariantCulture)}",
+                    Distance = $"{item.Distance.ToString("F1", CultureInfo.InvariantCulture)} m",
+                    Gate = $"{item.ActualGate}",
+                    PreviousRoundDistance = $"{item.PreviousRoundDistance.ToString("F1", CultureInfo.InvariantCulture)} m",
+                    Style = item.Style > 0 ? $"{item.Style.ToString("F1", CultureInfo.InvariantCulture)}" : "",
+                    PreviousRoundStyle = item.PreviousRoundStyle > 0 && item.PreviousRoundStyle <= 60
+                        ? $"{item.PreviousRoundStyle.ToString("F1", CultureInfo.InvariantCulture)}"
+                        : "",
+                    ShowPreviousRoundDistance = item.PreviousRoundDistance > 0,
+                    ShowPreviousRoundStyle = item.PreviousRoundStyle > 0 && item.PreviousRoundStyle <= 60
+                };
+
+                listViewItemsSnapshot.Add(snapshotItem);
+
+                Debug.Log($"Snapshot added: Rank={snapshotItem.Rank}, Name={snapshotItem.Name}");
+            }
+
+            Debug.Log($"Final snapshot count: {listViewItemsSnapshot.Count}");
+        }
+
+        public void PrintSortedSnapshotItems()
+        {
+            // Sort the snapshot items by TotalPoints in descending order
+            var sortedSnapshot = listViewItemsSnapshot
+                .OrderByDescending(snapshot =>
+                {
+                    if (float.TryParse(snapshot.TotalPoints, NumberStyles.Float, CultureInfo.InvariantCulture, out float totalPoints))
+                        return totalPoints;
+                    return 0f; // Default value if parsing fails
+                })
+                .ToList();
+
+            Debug.Log("===== Sorted Snapshot Items by Total Points =====");
+
+            // Print each item with its place
+            for (int place = 0; place < sortedSnapshot.Count; place++)
+            {
+                var item = sortedSnapshot[place];
+                Debug.Log($"Place: {place + 1}, Name: {item.Name}, Total Points: {item.TotalPoints}, Rank: {item.Rank}");
+            }
+            Debug.Log("=================================================");
+        }
+
 
         protected abstract string GetNameById(int id);
         protected abstract string GetCountryCodeById(int id);
@@ -108,10 +208,39 @@ namespace OpenSkiJumping.TVGraphics.SideResults
             listView.Refresh();
         }
 
+        public void ClearSnapshot()
+        {
+            listViewItemsSnapshot.Clear();
+            
+        }
+
+
         public void AddResult()
         {
             listViewItems.Add(0);
             listView.Refresh();
         }
+
+        public void PopulateList()
+        {
+            listView.Items = listViewAccessibleItems;
+            listView.Refresh();
+        }
+    }
+
+    public class RoundResultsItemData
+    {
+        public string Rank { get; set; }
+        public string Name { get; set; }
+        public string CountryCode { get; set; }
+        public Sprite CountryFlag { get; set; }
+        public string TotalPoints { get; set; }
+        public string Distance { get; set; }
+        public string Gate { get; set; }
+        public string PreviousRoundDistance { get; set; }
+        public string Style { get; set; }
+        public string PreviousRoundStyle { get; set; }
+        public bool ShowPreviousRoundDistance { get; set; }
+        public bool ShowPreviousRoundStyle { get; set; }
     }
 }
