@@ -53,6 +53,7 @@ namespace OpenSkiJumping.Competition
         public int bibColors;
         public int jumperCounter;
         public bool jumperCounterReached;
+        public int[] LastRankUsable;
         public bool permitCPUJumps = true;
 
         private void Start()
@@ -77,7 +78,7 @@ namespace OpenSkiJumping.Competition
                   }*/
                 onJumpFinish.Invoke();
                 OnJumpStart();
-               /*if (jumperCounter == bibColors - 1)
+               /*i (jumperCounter == bibColors - 1)
                 {
                     Debug.Log("ROUND RESULTS MISSION. onJumpFinish.Invoke(); i jumperCounter == bibColors-1. Current jumperID: " + id);
                     onRoundCompleted.Invoke();
@@ -110,8 +111,8 @@ namespace OpenSkiJumping.Competition
                 return;
             }
             // W ty miejscu pojawia sie problem!
-            roundResultsController.PrintSortedSnapshotItems();
-            //OnRoundFinish();
+
+            OnRoundFinish();
         }
 
         public void OnRoundFinish()
@@ -120,6 +121,7 @@ namespace OpenSkiJumping.Competition
             {
                 onRoundFinish.Invoke();
                 Debug.Log("ROUND RESULTS MISSION. onRoundFinish.Invoke();");
+              //  LastRankUsable = resultsManager.Value.LastRank.ToArray();
                 OnRoundStart();
                 return;
             }

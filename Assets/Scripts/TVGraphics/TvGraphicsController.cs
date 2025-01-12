@@ -66,11 +66,11 @@ namespace OpenSkiJumping.TVGraphics
 
             if(roundResultsController.listViewAccessibleItems.Count == 50)
             {
-                onRoundCompleted.Invoke();
+             //   onRoundCompleted.Invoke();
             }
 
 
-           if (Input.GetKeyDown(KeyCode.Tab))
+            if (Input.GetKeyDown(KeyCode.Tab))
             {
                 Debug.Log("graphicsData[current].sideResults.gameObject.transform.localScale = " + graphicsData[current].sideResults.gameObject.transform.localScale);
                 if (sideResultsActive == false)

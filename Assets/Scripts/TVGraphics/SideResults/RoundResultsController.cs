@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using OpenSkiJumping.Competition;
 using System.Linq;
+using UnityEngine.SocialPlatforms;
 
 namespace OpenSkiJumping.TVGraphics.SideResults
 {
@@ -18,6 +19,8 @@ namespace OpenSkiJumping.TVGraphics.SideResults
         [SerializeField] protected RoundResultsListView listView;
         public RoundResultsListView listViewAccessible;
         public List<int> listViewAccessibleItems;
+        private int[] LastRankInController;
+        private SortedList<(int state, decimal points, int bib), int> finalResultsGrabbed;
         public List<RoundResultsItemData> listViewItemsSnapshot = new List<RoundResultsItemData>();
         [SerializeField] protected RuntimeResultsManager resultsManager;
         [SerializeField] protected RuntimeCompetitorsList competitorsList;
@@ -116,29 +119,63 @@ namespace OpenSkiJumping.TVGraphics.SideResults
             };
 
             // Add logging to debug snapshot addition
-            Debug.Log($"Checking snapshot: Rank={snapshotItem.Rank}, Name={snapshotItem.Name}");
+          //  Debug.Log($"Checking snapshot: Rank={snapshotItem.Rank}, Name={snapshotItem.Name}");
             if (!listViewItemsSnapshot.Any(snapshot => snapshot.Name == snapshotItem.Name))
             {
-                listViewItemsSnapshot.Add(snapshotItem);
+               listViewItemsSnapshot.Add(snapshotItem);
                 //Debug.Log($"Snapshot added: Rank={snapshotItem.Rank}, Name={snapshotItem.Name}");
             }
             else
             {
-              Debug.LogWarning($"Duplicate or missing name detected: {snapshotItem.Name}");
+             // Debug.LogWarning($"Duplicate or missing name detected: {snapshotItem.Name}");
             }
 
-            if (listView.Items.Count == competitionRunner.bibColors)
+            /*
+            if (resultsManager.Value.LastRank[0] != 0)
             {
-                listViewAccessibleItems = new List<int>(listViewItems); // Creates a copy of the list.
-                Debug.Log("listViewAccessibleItems = listViewItems. listViewItems.Count: " + listViewItems.Count +
-                          " listView.Items.Count: " + listView.Items.Count +
-                          " listViewItemsSnapshot.Count: " + listViewItemsSnapshot.Count);
-                
-            }
+                listViewAccessibleItems = new List<int>(listViewItems);
+                LastRankInController = resultsManager.Value.LastRank.ToArray();
+                Debug.Log($"LastRankInController.Length: {LastRankInController.Length}");
+                if(LastRankInController.Length == competitionRunner.bibColors)
+                {
+                    PrintRoundResults();
+                }
+                // Creates a copy of the list.
+                /* Debug.Log("listViewAccessibleItems = listViewItems. listViewItems.Count: " + listViewItems.Count +
+                           " listView.Items.Count: " + listView.Items.Count +
+                           " listViewItemsSnapshot.Count: " + listViewItemsSnapshot.Count);
+                 */
+        
+    }
+
+        public void GrabRoundResults()
+        {
+            
+
+            finalResultsGrabbed = resultsManager.Value.GetFinalResultsAccessible();
+
+            Debug.Log($"Essa essa pobra³em wyniniki tej rundy. Spróbujmy je wydrukowaæ. Ale najpierw finalResultsGrabbed.Count: {finalResultsGrabbed.Count}");
+            // PrintRoundResults();
         }
 
+        public void PrintGrabbedFinalResults()
+        {
 
-        private void PopulateSnapshotFromListViewItems()
+        }
+        public void PrintRoundResults()
+        {
+            for(int i = 1; i <= LastRankInController.Length; i++)
+            {
+                Debug.Log($"PrintRoundResults i = {i}: wartosc i = {LastRankInController[i]}");
+                
+                var localId = resultsManager.Value.GetIdByRank(LastRankInController[i]);
+                var globalId = resultsManager.Value.OrderedParticipants[localId].id;
+                var item = resultsManager.Value.Results[localId];
+
+              //  Debug.Log($"PrintRoundResults pozycja = {i+1}: {GetNameById(globalId)} localID = {localId} globalID = {globalId}");
+            }
+        }
+        public void PopulateSnapshotFromListViewItems()
         {
             // Clear the snapshot to avoid duplicates
             listViewItemsSnapshot.Clear();
@@ -174,7 +211,6 @@ namespace OpenSkiJumping.TVGraphics.SideResults
 
             Debug.Log($"Final snapshot count: {listViewItemsSnapshot.Count}");
         }
-
         public void PrintSortedSnapshotItems()
         {
             // Sort the snapshot items by TotalPoints in descending order
@@ -198,6 +234,18 @@ namespace OpenSkiJumping.TVGraphics.SideResults
             Debug.Log("=================================================");
         }
 
+
+        public void LogSortedSnapshotByPoints()
+        {
+            var sortedSnapshot = listViewItemsSnapshot
+                .OrderByDescending(item => float.Parse(item.TotalPoints, CultureInfo.InvariantCulture))
+                .ToList();
+
+            for (int i = 0; i < sortedSnapshot.Count; i++)
+            {
+                Debug.Log($"Place {i + 1}: Name={sortedSnapshot[i].Name}, TotalPoints={sortedSnapshot[i].TotalPoints}");
+            }
+        }
 
         protected abstract string GetNameById(int id);
         protected abstract string GetCountryCodeById(int id);

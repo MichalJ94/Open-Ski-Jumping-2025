@@ -21,6 +21,7 @@ namespace OpenSkiJumping.Competition.Runtime
             Value = new ResultsManager(eventInfo, orderedParticipants, hillInfo);
         }
 
+
         public void SubroundInit() => Value.SubroundInit();
         public void RoundInit() => Value.RoundInit();
         public bool JumpFinish() => Value.JumpFinish();

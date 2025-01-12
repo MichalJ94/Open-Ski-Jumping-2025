@@ -11,6 +11,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 using TMPro;
 using OpenSkiJumping.UI.ListView;
+using System.Collections;
 
 namespace OpenSkiJumping.Competition
 {
@@ -31,6 +32,8 @@ namespace OpenSkiJumping.Competition
         bool SubroundFinish();
         bool RoundFinish();
         bool JumpFinish();
+
+        SortedList<(int state, decimal points, int bib), int> GetFinalResultsAccessible();
         Result GetResultByRank(int rank);
         int GetIdByRank(int rank);
         JumpResults GetResultById(int primaryId, int secondaryId);
@@ -104,6 +107,10 @@ namespace OpenSkiJumping.Competition
                 new SortedList<(decimal points, int bib), int>(
                     Comparer<(decimal points, int bib)>.Create(losersResultsComp));
 
+            foreach (var kvp in finalResults)
+            {
+                finalResultsAccessible.Add(kvp.Key, kvp.Value);
+            }
             koState = new int[competitorsCount];
         }
 
@@ -231,9 +238,24 @@ namespace OpenSkiJumping.Competition
         public bool SubroundFinish()
         {
             LastRank = Results.Select(item => item.Rank).ToArray();
+            UnityEngine.Debug.Log($"Subround {SubroundIndex} is being finished. LastRank[0] value: {LastRank[0]} FinalResults.count {finalResults.Count}");
+            /*for(int i = 0; i < LastRank.Length-1; i++)
+            {
+                UnityEngine.Debug.Log($"From public bool SubroundFinish() rank {i}: {LastRank[i]} ID: {GetIdByRank(LastRank[i])}");
+            }*/
+            finalResultsAccessible = new SortedList<(int state, decimal points, int bib), int>(finalResults.Comparer);
+            foreach (var kvp in finalResults)
+            {
+                finalResultsAccessible.Add(kvp.Key, kvp.Value);
+            }
             SubroundIndex++;
             StartListIndex = 0;
             return SubroundIndex < subRoundsCount;
+        }
+
+        public SortedList<(int state, decimal points, int bib), int> GetFinalResultsAccessible()
+        {
+            return finalResultsAccessible;
         }
 
         public bool RoundFinish()
