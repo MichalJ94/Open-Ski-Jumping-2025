@@ -11,6 +11,9 @@ namespace OpenSkiJumping.Competition.Persistent
     }
 
     [Serializable]
+
+
+
     public class Result
     {
         [SerializeField]
@@ -61,5 +64,9 @@ namespace OpenSkiJumping.Competition.Persistent
         public decimal PreviousRoundGate { get => (decimal)previousRoundGate; set => previousRoundGate = (float)value; }
 
         public int CurrentCompetitorId { get => currentCompetitorId; set => currentCompetitorId = value; }
+
+
+        
+
     }
 }

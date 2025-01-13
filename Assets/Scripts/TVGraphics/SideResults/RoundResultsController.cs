@@ -150,17 +150,21 @@ namespace OpenSkiJumping.TVGraphics.SideResults
 
         public void GrabRoundResults()
         {
-            
 
+           
             finalResultsGrabbed = resultsManager.Value.GetFinalResultsAccessible();
 
-            Debug.Log($"Essa essa pobra³em wyniniki tej rundy. Spróbujmy je wydrukowaæ. Ale najpierw finalResultsGrabbed.Count: {finalResultsGrabbed.Count}");
-            // PrintRoundResults();
+            Debug.Log($"Essa essa pobra³em wyniniki tej rundy. Spróbujmy je wydrukowaæ. Ale najpierw finalResultsGrabbed.Count: {finalResultsGrabbed.Count} resultsManager.Value.Results.Length: {resultsManager.Value.Results.Length}");
+            PrintGrabbedFinalResults();
         }
 
         public void PrintGrabbedFinalResults()
         {
-
+            for (int i = 0; i < finalResultsGrabbed.Count; i++)
+            {
+                var localId = resultsManager.Value.GetIdByRank(i+1);
+                Debug.Log($"PrintGrabbedFinalResults i = {i}: Keys = {finalResultsGrabbed.Keys[i]} Values: {finalResultsGrabbed.Values[i]} GetIdByRank(i+1): {localId}");
+            }
         }
         public void PrintRoundResults()
         {

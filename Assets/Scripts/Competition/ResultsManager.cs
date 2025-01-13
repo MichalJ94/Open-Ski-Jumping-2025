@@ -19,6 +19,8 @@ namespace OpenSkiJumping.Competition
     {
         List<Participant> OrderedParticipants { get; }
         Result[] Results { get; }
+
+        Result[] ResultsDeepCopy { get; }
         int[] LastRank { get; }
         List<int> StartList { get; }
         int StartListIndex { get; }
@@ -123,6 +125,7 @@ namespace OpenSkiJumping.Competition
 
         public Result[] Results { get; private set; }
 
+        public Result[] ResultsDeepCopy { get; private set; }
         public int[] LastRank { get; private set; }
 
         public void SubroundInit()
@@ -248,6 +251,7 @@ namespace OpenSkiJumping.Competition
             {
                 finalResultsAccessible.Add(kvp.Key, kvp.Value);
             }
+
             SubroundIndex++;
             StartListIndex = 0;
             return SubroundIndex < subRoundsCount;
