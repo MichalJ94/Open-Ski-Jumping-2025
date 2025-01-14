@@ -21,6 +21,8 @@ namespace OpenSkiJumping.Competition
         Result[] Results { get; }
 
         Result[] ResultsDeepCopy { get; }
+
+        Tuple<int, int>[] IDDeepCopy { get; }
         int[] LastRank { get; }
         List<int> StartList { get; }
         int StartListIndex { get; }
@@ -126,6 +128,7 @@ namespace OpenSkiJumping.Competition
         public Result[] Results { get; private set; }
 
         public Result[] ResultsDeepCopy { get; private set; }
+        public Tuple<int, int>[] IDDeepCopy { get; private set; }
         public int[] LastRank { get; private set; }
 
         public void SubroundInit()
@@ -242,20 +245,38 @@ namespace OpenSkiJumping.Competition
         {
             LastRank = Results.Select(item => item.Rank).ToArray();
             UnityEngine.Debug.Log($"Subround {SubroundIndex} is being finished. LastRank[0] value: {LastRank[0]} FinalResults.count {finalResults.Count}");
-            /*for(int i = 0; i < LastRank.Length-1; i++)
-            {
-                UnityEngine.Debug.Log($"From public bool SubroundFinish() rank {i}: {LastRank[i]} ID: {GetIdByRank(LastRank[i])}");
-            }*/
+
             finalResultsAccessible = new SortedList<(int state, decimal points, int bib), int>(finalResults.Comparer);
             foreach (var kvp in finalResults)
             {
                 finalResultsAccessible.Add(kvp.Key, kvp.Value);
             }
 
+            ResultsDeepCopy = Results
+                .Select(result => new Result(result))
+                .OrderByDescending(result => result.Rank)
+                .ToArray();
+
+            IDDeepCopy = new Tuple<int, int>[ResultsDeepCopy.Length];
+            for (int i = 0; i < ResultsDeepCopy.Length; i++)
+            {
+                try
+                {
+                    int localId = GetIdByRank((ResultsDeepCopy[i].Rank)-1);
+                    int globalId = OrderedParticipants[localId].id; // Assuming this is a method you have or need to implement
+                    IDDeepCopy[i] = Tuple.Create(localId, globalId);
+                }
+                catch (Exception e)
+                {
+                    UnityEngine.Debug.Log($"IDDeepCopy exception at i {i}: {e.Message}");
+                }
+            }
+
             SubroundIndex++;
             StartListIndex = 0;
             return SubroundIndex < subRoundsCount;
         }
+
 
         public SortedList<(int state, decimal points, int bib), int> GetFinalResultsAccessible()
         {

@@ -66,7 +66,55 @@ namespace OpenSkiJumping.Competition.Persistent
         public int CurrentCompetitorId { get => currentCompetitorId; set => currentCompetitorId = value; }
 
 
-        
+        public Result()
+        {
+            // Initialize fields with default values
+            results = null;
+            qualRankPoints = 0f;
+            totalResults = null;
+            bibs = null;
+            rank = 0;
+            totalPoints = 0f;
+            distance = 0f;
+            previousRoundDistance = 0f;
+            style = 0f;
+            previousRoundStyle = 0f;
+            actualGate = 0f;
+            previousRoundGate = 0f;
+            currentCompetitorId = 0;
+        }
+
+        public Result(Result other)
+        {
+            // Copy simple value types directly
+            qualRankPoints = other.qualRankPoints;
+            totalPoints = other.totalPoints;
+            distance = other.distance;
+            previousRoundDistance = other.previousRoundDistance;
+            style = other.style;
+            previousRoundStyle = other.previousRoundStyle;
+            actualGate = other.actualGate;
+            previousRoundGate = other.previousRoundGate;
+            rank = other.rank;
+            currentCompetitorId = other.currentCompetitorId;
+
+            // Copy arrays (deep copy)
+            totalResults = other.totalResults != null ? (decimal[])other.totalResults.Clone() : null;
+            bibs = other.bibs != null ? (int[])other.bibs.Clone() : null;
+
+            // Copy JumpResults array
+            if (other.results != null)
+            {
+                results = new JumpResults[other.results.Length];
+                for (int i = 0; i < other.results.Length; i++)
+                {
+                    results[i] = new JumpResults
+                    {
+                        results = new List<JumpResult>(other.results[i].results)
+                    };
+                }
+            }
+        }
 
     }
 }

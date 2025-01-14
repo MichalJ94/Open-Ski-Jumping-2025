@@ -160,10 +160,21 @@ namespace OpenSkiJumping.TVGraphics.SideResults
 
         public void PrintGrabbedFinalResults()
         {
-            for (int i = 0; i < finalResultsGrabbed.Count; i++)
+            //for (int i = 0; i < finalResultsGrabbed.Count; i++)
+            for (int i = 0; i < resultsManager.Value.ResultsDeepCopy.Length; i++)
             {
-                var localId = resultsManager.Value.GetIdByRank(i+1);
-                Debug.Log($"PrintGrabbedFinalResults i = {i}: Keys = {finalResultsGrabbed.Keys[i]} Values: {finalResultsGrabbed.Values[i]} GetIdByRank(i+1): {localId}");
+                //var localId = resultsManager.Value.GetIdByRank(resultsManager.Value.ResultsDeepCopy[i].Rank);
+                //var globalId = resultsManager.Value.OrderedParticipants[localId].id;
+
+
+               //Debug.Log($"resultsManager.Value.ResultsDeepCopy[i].Rank = {(resultsManager.Value.ResultsDeepCopy[i].Rank)-1} resultsManager.Value.ResultsDeepCopy[i].TotalPoints: {resultsManager.Value.ResultsDeepCopy[i].TotalPoints}");
+               Debug.Log($"resultsManager.Value.ResultsDeepCopy[i].Rank = {(resultsManager.Value.ResultsDeepCopy[i].Rank)} resultsManager.Value.ResultsDeepCopy[i].TotalPoints: {resultsManager.Value.ResultsDeepCopy[i].TotalPoints} resultsManager.Value.ResultsDeepCopy[i].CurrentCompetitorId {resultsManager.Value.ResultsDeepCopy[i].CurrentCompetitorId} Name: {GetNameById(resultsManager.Value.ResultsDeepCopy[i].CurrentCompetitorId)}");
+               
+                
+                
+                //Debug.Log($"resultsManager.Value.IDDeepCopy[i].Item2: {resultsManager.Value.IDDeepCopy[i].Item2} Name: {GetNameById(resultsManager.Value.IDDeepCopy[i].Item2)}");
+            
+                           
             }
         }
         public void PrintRoundResults()
