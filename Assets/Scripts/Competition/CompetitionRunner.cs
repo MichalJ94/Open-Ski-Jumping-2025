@@ -78,13 +78,17 @@ namespace OpenSkiJumping.Competition
                   }*/
                 onJumpFinish.Invoke();
                 OnJumpStart();
-               /*i (jumperCounter == bibColors - 1)
+
+
+              //Aktywacja kodu ponizej bez komentarzy sprawia, ze gra siê zatrzymuje przed ostatnim skoczkiem serii
+
+              if (jumperCounter == bibColors-1)
                 {
-                    Debug.Log("ROUND RESULTS MISSION. onJumpFinish.Invoke(); i jumperCounter == bibColors-1. Current jumperID: " + id);
-                    onRoundCompleted.Invoke();
-                    permitCPUJumps = false;
+                    Debug.Log("ROUND RESULTS MISSION. onJumpFinish.Invoke(); i jumperCounter == bibColors-1.");
+                   // onRoundCompleted.Invoke();
+                    //permitCPUJumps = false;
                     return;
-                }*/
+                }
                 return;
             }
             Debug.Log("ROUND RESULTS MISSION. jumperCounterReached = true;");
@@ -121,7 +125,9 @@ namespace OpenSkiJumping.Competition
             {
                 onRoundFinish.Invoke();
                 Debug.Log("ROUND RESULTS MISSION. onRoundFinish.Invoke();");
-              //  LastRankUsable = resultsManager.Value.LastRank.ToArray();
+                //  LastRankUsable = resultsManager.Value.LastRank.ToArray();
+                onRoundCompleted.Invoke();
+                permitCPUJumps = false;
                 OnRoundStart();
                 return;
             }

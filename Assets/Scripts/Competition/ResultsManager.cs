@@ -22,7 +22,6 @@ namespace OpenSkiJumping.Competition
 
         Result[] ResultsDeepCopy { get; }
 
-        Tuple<int, int>[] IDDeepCopy { get; }
         int[] LastRank { get; }
         List<int> StartList { get; }
         int StartListIndex { get; }
@@ -128,7 +127,6 @@ namespace OpenSkiJumping.Competition
         public Result[] Results { get; private set; }
 
         public Result[] ResultsDeepCopy { get; private set; }
-        public Tuple<int, int>[] IDDeepCopy { get; private set; }
         public int[] LastRank { get; private set; }
 
         public void SubroundInit()
@@ -257,20 +255,6 @@ namespace OpenSkiJumping.Competition
                 .OrderByDescending(result => result.Rank)
                 .ToArray();
 
-            IDDeepCopy = new Tuple<int, int>[ResultsDeepCopy.Length];
-            for (int i = 0; i < ResultsDeepCopy.Length; i++)
-            {
-                try
-                {
-                    int localId = GetIdByRank((ResultsDeepCopy[i].Rank)-1);
-                    int globalId = OrderedParticipants[localId].id; // Assuming this is a method you have or need to implement
-                    IDDeepCopy[i] = Tuple.Create(localId, globalId);
-                }
-                catch (Exception e)
-                {
-                    UnityEngine.Debug.Log($"IDDeepCopy exception at i {i}: {e.Message}");
-                }
-            }
 
             SubroundIndex++;
             StartListIndex = 0;
