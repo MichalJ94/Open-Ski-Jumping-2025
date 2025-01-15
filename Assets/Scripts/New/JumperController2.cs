@@ -499,6 +499,7 @@ namespace OpenSkiJumping.New
             if (skiJumperDataController.GetControl() == 1 && competitionRunner.permitCPUJumps == true)
                 {
                 CPUJumpPerformed.Invoke();
+                UnityEngine.Debug.Log("Od JumperController2 Update CPUJumpPerformed.Invoke();");
                 /*if (competitionRunner.jumperCounterReached)
                 {
                     competitionRunner.jumperCounter = 0;
@@ -528,6 +529,7 @@ namespace OpenSkiJumping.New
                 UnityEngine.Debug.Log("Klikam S.");
                 CPUJumpPerformed.Invoke();
             }
+
 
             jumperModel.animator.SetInteger(JumperState, State);
            //UnityEngine.Debug.Log( "State: " + state + " struggleToCrash: " + struggleToCrash);
@@ -575,6 +577,11 @@ namespace OpenSkiJumping.New
                         Crash();
                     }
             }
+        }
+
+        public void CheckCurrentJumperControl()
+        {
+            UnityEngine.Debug.Log($"Po kliknieciu miedzy rundami Current jumper control: {skiJumperDataController.GetControl()}");
         }
 
         private void FixedUpdate()
