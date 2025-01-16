@@ -54,7 +54,7 @@ namespace OpenSkiJumping.Competition
         public int jumperCounter;
         public bool jumperCounterReached;
         public int[] LastRankUsable;
-
+        public bool finishCompetition;
 
         private void Start()
         {
@@ -131,20 +131,31 @@ namespace OpenSkiJumping.Competition
                 OnRoundStart();
                 return;
             }
+
             onRoundFinish.Invoke();
             OnCompetitionFinish();
         }
 
         public void OnCompetitionFinish()
         {
-            onCompetitionFinish.Invoke();
 
             UpdateClassifications();
             var save = savesRepository.GetCurrentSave();
             save.resultsContainer.eventIndex++;
             savesRepository.SaveData();
             snowParticles.SetActive(false);
+            finishCompetition = true;
             menuController.LoadTournamentMenu();
+
+        }
+
+        public void LoadTournamentMenuWithButton()
+        {
+            Debug.Log($"LoadTournamentMenuWithButton finishCompetition before = ");
+            if (finishCompetition)
+            {
+                finishCompetition = false;
+            }
 
         }
 

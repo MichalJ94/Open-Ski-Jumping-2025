@@ -84,7 +84,7 @@ namespace OpenSkiJumping.TVGraphics.SideResults
 
         private void BindListViewItem(int index, RoundResultsListItem listItem)
         {
-            Debug.Log($"From BindListViewItem resultsManager.Value.ResultsDeepCopy[index].CurrentCompetitorId {resultsManager.Value.ResultsDeepCopy[index].CurrentCompetitorId}");
+            //Debug.Log($"From BindListViewItem resultsManager.Value.ResultsDeepCopy[index].CurrentCompetitorId {resultsManager.Value.ResultsDeepCopy[index].CurrentCompetitorId}");
             var globalId = resultsManager.Value.ResultsDeepCopy[index].CurrentCompetitorId;
             var item = resultsManager.Value.ResultsDeepCopy[index];
             var roundNumber = resultsManager.Value.GetRoundNumber();
@@ -97,17 +97,21 @@ namespace OpenSkiJumping.TVGraphics.SideResults
             listItem.resultText.text = $"{item.TotalPoints.ToString("F1", CultureInfo.InvariantCulture)}";
             listItem.distanceText.text = $"{item.Distance.ToString("F1", CultureInfo.InvariantCulture)} m";
             listItem.gateText.text = $"{item.ActualGate}";
-            listItem.previousRoundDistanceText.text = $"{item.PreviousRoundDistance.ToString("F1", CultureInfo.InvariantCulture)}";
+
 
             if (roundNumber == 0)
             {
                 listItem.previousRoundDistanceText.enabled = false;
                 listItem.previousRoundStyleText.enabled = false;
+                listItem.previousRoundGateText.enabled = false;
+            //    listItem.previousRoundWindText.enabled = false;
             }
             else
             {
                 listItem.previousRoundDistanceText.enabled = true;
                 listItem.previousRoundStyleText.enabled = true;
+                listItem.previousRoundGateText.enabled = true;
+              //  listItem.previousRoundWindText.enabled = true;
             }
 
             listItem.styleText.text = item.Style > 0
@@ -118,9 +122,20 @@ namespace OpenSkiJumping.TVGraphics.SideResults
                 ? $"{item.PreviousRoundStyle.ToString("F1", CultureInfo.InvariantCulture)}"
                 : "";
 
+            listItem.previousRoundGateText.text = item.PreviousRoundGate > 0
+                ? $"{item.PreviousRoundStyle.ToString("F1", CultureInfo.InvariantCulture)}"
+                : "";
 
-        
-    }
+/*            listItem.previousRoundWindText.text = item.PreviousRoundWind != null
+                ? $"{item.PreviousRoundStyle.ToString("F1", CultureInfo.InvariantCulture)}"
+                : "";
+*/
+            listItem.previousRoundDistanceText.text = $"{item.PreviousRoundDistance.ToString("F1", CultureInfo.InvariantCulture)}";
+
+
+
+
+        }
 
         public void GrabRoundResults()
         {
@@ -144,13 +159,15 @@ namespace OpenSkiJumping.TVGraphics.SideResults
 
                //Debug.Log($"resultsManager.Value.ResultsDeepCopy[i].Rank = {(resultsManager.Value.ResultsDeepCopy[i].Rank)-1} resultsManager.Value.ResultsDeepCopy[i].TotalPoints: {resultsManager.Value.ResultsDeepCopy[i].TotalPoints}");
                Debug.Log($"resultsManager.Value.ResultsDeepCopy[i].Rank = {(resultsManager.Value.ResultsDeepCopy[i].Rank)} resultsManager.Value.ResultsDeepCopy[i].TotalPoints: {resultsManager.Value.ResultsDeepCopy[i].TotalPoints} resultsManager.Value.ResultsDeepCopy[i].CurrentCompetitorId {resultsManager.Value.ResultsDeepCopy[i].CurrentCompetitorId} IName: {GetNameById(resultsManager.Value.ResultsDeepCopy[i].CurrentCompetitorId)}");
-                Initialize();
-                PopulateTheList();
+
                 
                 //Debug.Log($"resultsManager.Value.IDDeepCopy[i].Item2: {resultsManager.Value.IDDeepCopy[i].Item2} Name: {GetNameById(resultsManager.Value.IDDeepCopy[i].Item2)}");
             
                            
             }
+
+            Initialize();
+            PopulateTheList();
         }
 
         private void PopulateTheList()
@@ -174,10 +191,11 @@ namespace OpenSkiJumping.TVGraphics.SideResults
             for (int i = 0; i < resultsManager.Value.ResultsDeepCopy.Length; i++)
             {
                 listView.Items.Add(i); // Add indices as keys
-                listView.Refresh();
+                if (i == (resultsManager.Value.ResultsDeepCopy.Length) - 1)
+                {
+                    listView.Refresh();
+                }
             }
-
-            // Refresh the list view
 
         }
 
