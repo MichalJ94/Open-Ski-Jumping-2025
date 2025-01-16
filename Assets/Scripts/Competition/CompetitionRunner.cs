@@ -30,7 +30,7 @@ namespace OpenSkiJumping.Competition
         [SerializeField] private RuntimeJumpData jumpData;
         [SerializeField] private GameplayExtension gameplayExtension;
         [SerializeField] private GameObject snowParticles;
-
+        [SerializeField] public bool permitCPUJumps = true;
 
         public UnityEvent onCompetitionFinish;
 
@@ -54,7 +54,7 @@ namespace OpenSkiJumping.Competition
         public int jumperCounter;
         public bool jumperCounterReached;
         public int[] LastRankUsable;
-        public bool permitCPUJumps = true;
+
 
         private void Start()
         {

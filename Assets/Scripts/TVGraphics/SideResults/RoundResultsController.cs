@@ -17,11 +17,10 @@ namespace OpenSkiJumping.TVGraphics.SideResults
         [SerializeField] private Button continueButton;
         [SerializeField] protected FlagsData flagsData;
         [SerializeField] protected RoundResultsListView listView;
-        public RoundResultsListView listViewAccessible;
-        public List<int> listViewAccessibleItems;
+        //public RoundResultsListView listViewAccessible;
+        //public List<int> listViewAccessibleItems;
         private int[] LastRankInController;
         private SortedList<(int state, decimal points, int bib), int> finalResultsGrabbed;
-        public List<RoundResultsItemData> listViewItemsSnapshot = new List<RoundResultsItemData>();
         [SerializeField] protected RuntimeResultsManager resultsManager;
         [SerializeField] protected RuntimeCompetitorsList competitorsList;
         [SerializeField] protected List<int> listViewItems;
@@ -34,13 +33,31 @@ namespace OpenSkiJumping.TVGraphics.SideResults
         {
             listViewItems = new List<int>();
             listView.SelectionType = SelectionType.None;
-            listView.Items = listViewItems;
-            listView.Initialize(BindListViewItem);
+
 
             if (continueButton != null)
             {
                 continueButton.onClick.AddListener(OnContinueClicked);
             }
+        }
+
+        public void Initialize()
+        {
+            if (resultsManager.Value.ResultsDeepCopy == null || resultsManager.Value.ResultsDeepCopy.Length < competitionRunner.bibColors)
+            {
+                Debug.LogWarning("Results data is not yet available. Delaying list initialization.");
+                return;
+            }
+
+            if (listView == null)
+            {
+                Debug.LogError("ListView is not assigned. Check the Inspector.");
+                return;
+            }
+
+            Debug.Log("Now I initialize  the Round Results listview");
+            listView.Items = listViewItems ?? new List<int>(); // Ensure listViewItems is not null
+            listView.Initialize(BindListViewItem);
         }
 
         public void Show()
@@ -67,9 +84,9 @@ namespace OpenSkiJumping.TVGraphics.SideResults
 
         private void BindListViewItem(int index, RoundResultsListItem listItem)
         {
-            var localId = resultsManager.Value.GetIdByRank(index);
-            var globalId = resultsManager.Value.OrderedParticipants[localId].id;
-            var item = resultsManager.Value.Results[localId];
+            Debug.Log($"From BindListViewItem resultsManager.Value.ResultsDeepCopy[index].CurrentCompetitorId {resultsManager.Value.ResultsDeepCopy[index].CurrentCompetitorId}");
+            var globalId = resultsManager.Value.ResultsDeepCopy[index].CurrentCompetitorId;
+            var item = resultsManager.Value.ResultsDeepCopy[index];
             var roundNumber = resultsManager.Value.GetRoundNumber();
 
             // Fill in the listItem UI components
@@ -101,50 +118,7 @@ namespace OpenSkiJumping.TVGraphics.SideResults
                 ? $"{item.PreviousRoundStyle.ToString("F1", CultureInfo.InvariantCulture)}"
                 : "";
 
-            // Fill in the snapshot
-            var snapshotItem = new RoundResultsItemData
-            {
-                Rank = listItem.rankText.text,
-                Name = listItem.nameText.text,
-                CountryCode = listItem.countryFlagText.text,
-                CountryFlag = listItem.countryFlagImage.sprite,
-                TotalPoints = listItem.resultText.text,
-                Distance = listItem.distanceText.text,
-                Gate = listItem.gateText.text,
-                PreviousRoundDistance = listItem.previousRoundDistanceText.text,
-                Style = listItem.styleText.text,
-                PreviousRoundStyle = listItem.previousRoundStyleText.text,
-                ShowPreviousRoundDistance = listItem.previousRoundDistanceText.enabled,
-                ShowPreviousRoundStyle = listItem.previousRoundStyleText.enabled
-            };
 
-            // Add logging to debug snapshot addition
-          //  Debug.Log($"Checking snapshot: Rank={snapshotItem.Rank}, Name={snapshotItem.Name}");
-            if (!listViewItemsSnapshot.Any(snapshot => snapshot.Name == snapshotItem.Name))
-            {
-               listViewItemsSnapshot.Add(snapshotItem);
-                //Debug.Log($"Snapshot added: Rank={snapshotItem.Rank}, Name={snapshotItem.Name}");
-            }
-            else
-            {
-             // Debug.LogWarning($"Duplicate or missing name detected: {snapshotItem.Name}");
-            }
-
-            /*
-            if (resultsManager.Value.LastRank[0] != 0)
-            {
-                listViewAccessibleItems = new List<int>(listViewItems);
-                LastRankInController = resultsManager.Value.LastRank.ToArray();
-                Debug.Log($"LastRankInController.Length: {LastRankInController.Length}");
-                if(LastRankInController.Length == competitionRunner.bibColors)
-                {
-                    PrintRoundResults();
-                }
-                // Creates a copy of the list.
-                /* Debug.Log("listViewAccessibleItems = listViewItems. listViewItems.Count: " + listViewItems.Count +
-                           " listView.Items.Count: " + listView.Items.Count +
-                           " listViewItemsSnapshot.Count: " + listViewItemsSnapshot.Count);
-                 */
         
     }
 
@@ -156,6 +130,7 @@ namespace OpenSkiJumping.TVGraphics.SideResults
 
             Debug.Log($"Essa essa pobra³em wyniniki tej rundy. Spróbujmy je wydrukowaæ. Ale najpierw finalResultsGrabbed.Count: {finalResultsGrabbed.Count} resultsManager.Value.Results.Length: {resultsManager.Value.Results.Length}");
             PrintGrabbedFinalResults();
+            //PopulateTheList();
         }
 
         public void PrintGrabbedFinalResults()
@@ -169,14 +144,43 @@ namespace OpenSkiJumping.TVGraphics.SideResults
 
                //Debug.Log($"resultsManager.Value.ResultsDeepCopy[i].Rank = {(resultsManager.Value.ResultsDeepCopy[i].Rank)-1} resultsManager.Value.ResultsDeepCopy[i].TotalPoints: {resultsManager.Value.ResultsDeepCopy[i].TotalPoints}");
                Debug.Log($"resultsManager.Value.ResultsDeepCopy[i].Rank = {(resultsManager.Value.ResultsDeepCopy[i].Rank)} resultsManager.Value.ResultsDeepCopy[i].TotalPoints: {resultsManager.Value.ResultsDeepCopy[i].TotalPoints} resultsManager.Value.ResultsDeepCopy[i].CurrentCompetitorId {resultsManager.Value.ResultsDeepCopy[i].CurrentCompetitorId} IName: {GetNameById(resultsManager.Value.ResultsDeepCopy[i].CurrentCompetitorId)}");
-               
-                
+                Initialize();
+                PopulateTheList();
                 
                 //Debug.Log($"resultsManager.Value.IDDeepCopy[i].Item2: {resultsManager.Value.IDDeepCopy[i].Item2} Name: {GetNameById(resultsManager.Value.IDDeepCopy[i].Item2)}");
             
                            
             }
         }
+
+        private void PopulateTheList()
+        {
+            if (listView == null)
+            {
+                Debug.LogError("ListView is not assigned.");
+                return;
+            }
+
+            if (resultsManager?.Value?.ResultsDeepCopy == null)
+            {
+                Debug.LogWarning("Results data is not available. Skipping PopulateTheList.");
+                return;
+            }
+
+            // Clear existing items
+            listView.Items.Clear();
+
+            // Populate the list
+            for (int i = 0; i < resultsManager.Value.ResultsDeepCopy.Length; i++)
+            {
+                listView.Items.Add(i); // Add indices as keys
+                listView.Refresh();
+            }
+
+            // Refresh the list view
+
+        }
+
         public void PrintRoundResults()
         {
             for(int i = 1; i <= LastRankInController.Length; i++)
@@ -190,77 +194,7 @@ namespace OpenSkiJumping.TVGraphics.SideResults
               //  Debug.Log($"PrintRoundResults pozycja = {i+1}: {GetNameById(globalId)} localID = {localId} globalID = {globalId}");
             }
         }
-        public void PopulateSnapshotFromListViewItems()
-        {
-            // Clear the snapshot to avoid duplicates
-            listViewItemsSnapshot.Clear();
-
-            foreach (var index in listViewItems)
-            {
-                var localId = resultsManager.Value.GetIdByRank(index);
-                var globalId = resultsManager.Value.OrderedParticipants[localId].id;
-                var item = resultsManager.Value.Results[localId];
-
-                var snapshotItem = new RoundResultsItemData
-                {
-                    Rank = $"{item.Rank}",
-                    Name = $"{GetNameById(globalId)}",
-                    CountryCode = $"{GetCountryCodeById(globalId)}",
-                    CountryFlag = flagsData.GetFlag(GetCountryCodeById(globalId)),
-                    TotalPoints = $"{item.TotalPoints.ToString("F1", CultureInfo.InvariantCulture)}",
-                    Distance = $"{item.Distance.ToString("F1", CultureInfo.InvariantCulture)} m",
-                    Gate = $"{item.ActualGate}",
-                    PreviousRoundDistance = $"{item.PreviousRoundDistance.ToString("F1", CultureInfo.InvariantCulture)} m",
-                    Style = item.Style > 0 ? $"{item.Style.ToString("F1", CultureInfo.InvariantCulture)}" : "",
-                    PreviousRoundStyle = item.PreviousRoundStyle > 0 && item.PreviousRoundStyle <= 60
-                        ? $"{item.PreviousRoundStyle.ToString("F1", CultureInfo.InvariantCulture)}"
-                        : "",
-                    ShowPreviousRoundDistance = item.PreviousRoundDistance > 0,
-                    ShowPreviousRoundStyle = item.PreviousRoundStyle > 0 && item.PreviousRoundStyle <= 60
-                };
-
-                listViewItemsSnapshot.Add(snapshotItem);
-
-                Debug.Log($"Snapshot added: Rank={snapshotItem.Rank}, Name={snapshotItem.Name}");
-            }
-
-            Debug.Log($"Final snapshot count: {listViewItemsSnapshot.Count}");
-        }
-        public void PrintSortedSnapshotItems()
-        {
-            // Sort the snapshot items by TotalPoints in descending order
-            var sortedSnapshot = listViewItemsSnapshot
-                .OrderByDescending(snapshot =>
-                {
-                    if (float.TryParse(snapshot.TotalPoints, NumberStyles.Float, CultureInfo.InvariantCulture, out float totalPoints))
-                        return totalPoints;
-                    return 0f; // Default value if parsing fails
-                })
-                .ToList();
-
-            Debug.Log("===== Sorted Snapshot Items by Total Points =====");
-
-            // Print each item with its place
-            for (int place = 0; place < sortedSnapshot.Count; place++)
-            {
-                var item = sortedSnapshot[place];
-                Debug.Log($"Place: {place + 1}, Name: {item.Name}, Total Points: {item.TotalPoints}, Rank: {item.Rank}");
-            }
-            Debug.Log("=================================================");
-        }
-
-
-        public void LogSortedSnapshotByPoints()
-        {
-            var sortedSnapshot = listViewItemsSnapshot
-                .OrderByDescending(item => float.Parse(item.TotalPoints, CultureInfo.InvariantCulture))
-                .ToList();
-
-            for (int i = 0; i < sortedSnapshot.Count; i++)
-            {
-                Debug.Log($"Place {i + 1}: Name={sortedSnapshot[i].Name}, TotalPoints={sortedSnapshot[i].TotalPoints}");
-            }
-        }
+       
 
         protected abstract string GetNameById(int id);
         protected abstract string GetCountryCodeById(int id);
@@ -271,11 +205,6 @@ namespace OpenSkiJumping.TVGraphics.SideResults
             listView.Refresh();
         }
 
-        public void ClearSnapshot()
-        {
-            listViewItemsSnapshot.Clear();
-            
-        }
 
 
         public void AddResult()
@@ -284,11 +213,7 @@ namespace OpenSkiJumping.TVGraphics.SideResults
             listView.Refresh();
         }
 
-        public void PopulateList()
-        {
-            listView.Items = listViewAccessibleItems;
-            listView.Refresh();
-        }
+
     }
 
     public class RoundResultsItemData

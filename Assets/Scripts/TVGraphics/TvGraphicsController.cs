@@ -64,10 +64,10 @@ namespace OpenSkiJumping.TVGraphics
                 graphicsData[current].postJump.Hide();
             }
 
-            if(roundResultsController.listViewAccessibleItems.Count == 50)
+            /*if(roundResultsController.listViewAccessibleItems.Count == 50)
             {
              //   onRoundCompleted.Invoke();
-            }
+            }*/
 
 
             if (Input.GetKeyDown(KeyCode.Tab))
@@ -131,8 +131,7 @@ namespace OpenSkiJumping.TVGraphics
     new List<int>(graphicsData[current].roundResults.listViewAccessibleItems);*/
             Debug.Log("ROUND RESULTS MISSION. Clear roundResults w TVGrphicsController.");
            graphicsData[current].sideResults.Clear();
-           graphicsData[current].roundResults.Clear();
-            graphicsData[current].roundResults.ClearSnapshot();
+           //graphicsData[current].roundResults.Clear();
         }
 
 

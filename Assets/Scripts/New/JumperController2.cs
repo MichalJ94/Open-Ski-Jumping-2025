@@ -496,25 +496,16 @@ namespace OpenSkiJumping.New
         private void Update()
         {
 
+
             if (skiJumperDataController.GetControl() == 1 && competitionRunner.permitCPUJumps == true)
-                {
+            {
                 CPUJumpPerformed.Invoke();
                 UnityEngine.Debug.Log("Od JumperController2 Update CPUJumpPerformed.Invoke();");
-                /*if (competitionRunner.jumperCounterReached)
-                {
-                    competitionRunner.jumperCounter = 0;
-                    OnRoundCompleted.Invoke();
-                }
-                else
-                {
-                    CPUJumpPerformed.Invoke();
-                }*/
             }
-               
-            
 
 
-            if (OnInrun || OnOutrun)
+
+                if (OnInrun || OnOutrun)
             {
                 audioSource.mute = false;
                 audioSource.pitch = Mathf.Sqrt(rb.velocity.magnitude / 20.0f);
@@ -582,6 +573,27 @@ namespace OpenSkiJumping.New
         public void CheckCurrentJumperControl()
         {
             UnityEngine.Debug.Log($"Po kliknieciu miedzy rundami Current jumper control: {skiJumperDataController.GetControl()}");
+        }
+
+        public void ResumeCPUJumps()
+        {
+            if (skiJumperDataController.GetControl() == 1 && competitionRunner.permitCPUJumps == true)
+            {
+
+                //Kod ponizej przeniesiony z Update()
+
+                CPUJumpPerformed.Invoke();
+                UnityEngine.Debug.Log("Od JumperController2 ResumeCPUJumps() CPUJumpPerformed.Invoke();");
+                /*if (competitionRunner.jumperCounterReached)
+                {
+                    competitionRunner.jumperCounter = 0;
+                    OnRoundCompleted.Invoke();
+                }
+                else
+                {
+                    CPUJumpPerformed.Invoke();
+                }*/
+            }
         }
 
         private void FixedUpdate()
