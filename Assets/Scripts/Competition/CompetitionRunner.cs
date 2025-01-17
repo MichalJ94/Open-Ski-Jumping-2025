@@ -132,10 +132,18 @@ namespace OpenSkiJumping.Competition
                 return;
             }
 
+            onRoundCompleted.Invoke();
             onRoundFinish.Invoke();
-            OnCompetitionFinish();
+            //OnCompetitionFinish();
         }
 
+        public void LetCompetitionFinish()
+        {
+            if(resultsManager.Value.RoundIndex == resultsManager.Value.EventInfo.roundInfos.Count)
+            {
+                OnCompetitionFinish();
+            }
+        }
         public void OnCompetitionFinish()
         {
 

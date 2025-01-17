@@ -500,7 +500,7 @@ namespace OpenSkiJumping.New
             if (skiJumperDataController.GetControl() == 1 && competitionRunner.permitCPUJumps == true)
             {
                 CPUJumpPerformed.Invoke();
-                UnityEngine.Debug.Log("Od JumperController2 Update CPUJumpPerformed.Invoke();");
+               // UnityEngine.Debug.Log("Od JumperController2 Update CPUJumpPerformed.Invoke();");
             }
 
 
