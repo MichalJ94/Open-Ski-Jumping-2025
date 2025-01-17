@@ -168,6 +168,7 @@ namespace OpenSkiJumping.TVGraphics.SideResults
 
             Initialize();
             PopulateTheList();
+            Show();
         }
 
         private void PopulateTheList()
