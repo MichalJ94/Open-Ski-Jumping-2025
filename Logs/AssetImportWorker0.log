@@ -1,0 +1,989 @@
+Using pre-set license
+Built from '2020.3/release' branch; Version is '2020.3.2f1 (8fd9074bf66c) revision 9427207'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10 Home; OS build 22631.4751; Version 2009; 64bit' Language: 'pl' Physical Memory: 15628 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+ COMMAND LINE ARGUMENTS:
+E:\Unity\2020.3.2f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+E:/Unity Projects/Open-Ski-Jumping-2025
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+58405
+Successfully changed project path to: E:/Unity Projects/Open-Ski-Jumping-2025
+E:/Unity Projects/Open-Ski-Jumping-2025
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 92.93 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2020.3.2f1 (8fd9074bf66c)
+[Subsystems] Discovering subsystems at path E:/Unity/2020.3.2f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path E:/Unity Projects/Open-Ski-Jumping-2025/Assets
+GfxDevice: creating device client; threaded=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 3060 Laptop GPU (ID=0x2520)
+    Vendor:   
+    VRAM:     5996 MB
+    Driver:   32.0.15.6607
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Initialize mono
+Mono path[0] = 'E:/Unity/2020.3.2f1/Editor/Data/Managed'
+Mono path[1] = 'E:/Unity/2020.3.2f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'E:/Unity/2020.3.2f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56304
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: E:/Unity/2020.3.2f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.000882 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 88.25 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.812 seconds
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.004953 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 100.50 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.625 seconds
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.06 seconds
+Refreshing native plugins compatible for Editor in 1.16 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4028 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 273.5 MB.
+System memory in use after: 273.7 MB.
+
+Unloading 46 unused Assets to reduce memory usage. Loaded Objects now: 4466.
+Total: 3.384100 ms (FindLiveObjects: 0.459700 ms CreateObjectMapping: 0.183400 ms MarkObjects: 2.650400 ms  DeleteObjects: 0.089700 ms)
+
+========================================================================
+Received Import Request.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: 'a30334292fe78b6a4a18db224d2e847e') in 0.283389 seconds
+  Import took 0.300851 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 440.066739 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: '7a403d48809fdb87ed1b48de0edb2e02') in 0.177870 seconds
+  Import took 0.191434 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 19.401382 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: '62db71a345f4afe8785da9277a5b565e') in 0.142331 seconds
+  Import took 0.151651 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 20.039482 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: '4dc5889c9f45016ae9a682e59d036a3c') in 0.140403 seconds
+  Import took 0.152232 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.709404 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: 'c9a006ac0c64133125897471769217ea') in 0.146628 seconds
+  Import took 0.158393 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.541781 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: '901c23b3c6baf7ee71d56d576d40a5c9') in 0.136894 seconds
+  Import took 0.146506 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 7.417514 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: '3882290387646e81ce1ff31bdb062c0b') in 0.135736 seconds
+  Import took 0.145763 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.624036 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: '7a44142089bc70263b11dc0f15968fa2') in 0.162877 seconds
+  Import took 0.173317 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 23.377775 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: 'f177b4ea96d6ec2f1115f1a10ee75d0e') in 0.154818 seconds
+  Import took 0.165669 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3815.516307 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: 'eb97cf86bcd4a9dc9f18d805ea89aeb6') in 0.171207 seconds
+  Import took 0.186552 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 12.338271 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: 'bee80224688f30ed89872f4d0d27b921') in 0.152531 seconds
+  Import took 0.163358 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.914357 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: '4ebe8cd382acc7fc389b6a9037421fc6') in 0.260310 seconds
+  Import took 0.270184 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.423726 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: '403cb62d051599182a087ad7dea6ab0c') in 0.151290 seconds
+  Import took 0.161226 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 29.591103 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: '72183cdc70622e7ac36acc8fd6eaf4fe') in 0.135093 seconds
+  Import took 0.145494 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 7.995837 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: '7fb0a320fd82c45c00b9850700699e3d') in 0.151425 seconds
+  Import took 0.162344 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.807904 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: '7eaf262206a1d585b05e75f52777ee72') in 0.157493 seconds
+  Import took 0.167946 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 8.803168 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: '60fb0e8ab1c6efb46f101382e3695261') in 0.141887 seconds
+  Import took 0.153208 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 11.655900 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: 'a291be1527dd9a9e2cd097084be3f334') in 0.171300 seconds
+  Import took 0.182785 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 20.118237 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: 'd25253254834ca6e8be20afe14ca4f8c') in 0.136499 seconds
+  Import took 0.147705 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 10.926894 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: '7f9f6f862953a184b5041fc7e1e70fa1') in 0.136485 seconds
+  Import took 0.145501 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.767649 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: 'e7689ded1b799074043cbd6952810dbb') in 0.131268 seconds
+  Import took 0.140914 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.507355 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: '1cc83dc64b98712bcad07182998f4b5d') in 0.140457 seconds
+  Import took 0.149556 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 13.804414 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: '1056a0fb97e0a362a3307cbb9ad56fb8') in 0.157109 seconds
+  Import took 0.168554 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 13.626130 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: '4c430f0e3b4bf62729d8c7b9656d9958') in 0.145963 seconds
+  Import took 0.156471 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.703667 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: '991e62e5bbf27e0311c4e41e22b73cd9') in 0.131015 seconds
+  Import took 0.141616 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 43.134746 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: '0b51a5235d007fdfd9e89815c42678cf') in 0.159458 seconds
+  Import took 0.170071 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.927632 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: '3da048c6b457185c6fa15fc29b909503') in 0.161446 seconds
+  Import took 0.174255 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 9.408447 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: '4802e02c9420203b7245f01d12bc7358') in 0.129328 seconds
+  Import took 0.139129 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 14.788965 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: 'b727c85b24a7cab4bcb79b41f03998bb') in 0.144143 seconds
+  Import took 0.154564 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.152251 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: '9292f2777bce16fb28f94df3893c32b0') in 0.137370 seconds
+  Import took 0.147017 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 42.220511 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: 'b8460efef782f3e5a07990cca9e5a6d2') in 0.168861 seconds
+  Import took 0.180304 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 16.431156 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: '87664a819e252ceeaebe2389c6540ca6') in 0.136130 seconds
+  Import took 0.147744 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 16.517202 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: '94011f40fe9daa40ddfc350ee63fc009') in 0.167850 seconds
+  Import took 0.179736 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 12.483187 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: '4248adc07b3a36a8ddf74e9c68a5c630') in 0.142272 seconds
+  Import took 0.153597 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 27.336611 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: '9ffccdbd870adb337cfba16b98277d45') in 0.133409 seconds
+  Import took 0.143945 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 15.677739 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: '0c240e22da2e642738541c6c9d5117f2') in 0.151865 seconds
+  Import took 0.161826 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.518584 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: 'aed3831b54a8397cb7bdda579ede0265') in 0.132370 seconds
+  Import took 0.142871 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.957755 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: '02cda40d398b7afc3190206a6071ebcc') in 0.173279 seconds
+  Import took 0.185262 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.910162 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: 'dc82cf759ddcc2a7cef1b3e0eabd0b92') in 0.142615 seconds
+  Import took 0.153289 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 48.589087 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: '1ef43b22ddf099a1b0f09c2a4592765e') in 0.133248 seconds
+  Import took 0.142744 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.503759 seconds.
+  path: Assets/Prefabs/Results/RoundResultsIndividual.prefab
+  artifactKey: Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Results/RoundResultsIndividual.prefab using Guid(9f3a0758db6742e4aaf9798e466aaea8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) ENABLED FLAGS MANAGER
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+OpenSkiJumping.ScriptableObjects.FlagsData:OnEnable () (at Assets/Scripts/ScriptableObjects/FlagsData.cs:20)
+
+(Filename: Assets/Scripts/ScriptableObjects/FlagsData.cs Line: 20)
+
+ -> (artifact id: '7b512cfb0fa7bdf199dd7bf895b8e80d') in 0.142983 seconds
+  Import took 0.152283 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.006095 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.07 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.972 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 0.99 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3842 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 268.5 MB.
+System memory in use after: 268.8 MB.
+
+Unloading 40 unused Assets to reduce memory usage. Loaded Objects now: 4714.
+Total: 3.335400 ms (FindLiveObjects: 0.400100 ms CreateObjectMapping: 0.129700 ms MarkObjects: 2.664700 ms  DeleteObjects: 0.139800 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.012956 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.04 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.770 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.08 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3842 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 268.5 MB.
+System memory in use after: 268.8 MB.
+
+Unloading 37 unused Assets to reduce memory usage. Loaded Objects now: 4717.
+Total: 2.957200 ms (FindLiveObjects: 0.460100 ms CreateObjectMapping: 0.103200 ms MarkObjects: 2.340900 ms  DeleteObjects: 0.051900 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004584 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.70 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.093 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.17 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3842 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 268.6 MB.
+System memory in use after: 268.9 MB.
+
+Unloading 37 unused Assets to reduce memory usage. Loaded Objects now: 4720.
+Total: 4.872000 ms (FindLiveObjects: 0.519800 ms CreateObjectMapping: 0.183400 ms MarkObjects: 4.089900 ms  DeleteObjects: 0.076500 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003824 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.95 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.747 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 0.99 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3842 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 268.6 MB.
+System memory in use after: 268.9 MB.
+
+Unloading 37 unused Assets to reduce memory usage. Loaded Objects now: 4723.
+Total: 3.835200 ms (FindLiveObjects: 0.743900 ms CreateObjectMapping: 0.257700 ms MarkObjects: 2.748800 ms  DeleteObjects: 0.083900 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003935 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.14 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.859 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.05 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3842 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 268.7 MB.
+System memory in use after: 268.9 MB.
+
+Unloading 37 unused Assets to reduce memory usage. Loaded Objects now: 4726.
+Total: 3.137000 ms (FindLiveObjects: 0.412700 ms CreateObjectMapping: 0.145300 ms MarkObjects: 2.547900 ms  DeleteObjects: 0.029900 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004014 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.98 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.784 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.17 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3842 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 268.7 MB.
+System memory in use after: 268.9 MB.
+
+Unloading 37 unused Assets to reduce memory usage. Loaded Objects now: 4729.
+Total: 3.849700 ms (FindLiveObjects: 0.500600 ms CreateObjectMapping: 0.141100 ms MarkObjects: 3.171800 ms  DeleteObjects: 0.034600 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003836 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.95 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.725 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 0.98 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3842 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 268.7 MB.
+System memory in use after: 268.9 MB.
+
+Unloading 37 unused Assets to reduce memory usage. Loaded Objects now: 4732.
+Total: 3.275200 ms (FindLiveObjects: 0.372600 ms CreateObjectMapping: 0.128800 ms MarkObjects: 2.742800 ms  DeleteObjects: 0.030000 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004473 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.05 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.847 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.11 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3842 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 268.7 MB.
+System memory in use after: 268.9 MB.
+
+Unloading 37 unused Assets to reduce memory usage. Loaded Objects now: 4735.
+Total: 3.674500 ms (FindLiveObjects: 0.456200 ms CreateObjectMapping: 0.157300 ms MarkObjects: 3.014500 ms  DeleteObjects: 0.045700 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004148 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.20 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.897 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.01 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3842 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 268.7 MB.
+System memory in use after: 269.0 MB.
+
+Unloading 37 unused Assets to reduce memory usage. Loaded Objects now: 4738.
+Total: 4.174600 ms (FindLiveObjects: 0.806100 ms CreateObjectMapping: 0.333000 ms MarkObjects: 2.999700 ms  DeleteObjects: 0.034500 ms)
+
