@@ -41,6 +41,8 @@ namespace OpenSkiJumping.Competition.Persistent
         [SerializeField]
         private float previousRoundGate;
         [SerializeField]
+        private float wind;
+        [SerializeField]
         private float previousRoundWind;
         [SerializeField]
         private int currentCompetitorId;
@@ -65,6 +67,7 @@ namespace OpenSkiJumping.Competition.Persistent
 
         public decimal PreviousRoundGate { get => (decimal)previousRoundGate; set => previousRoundGate = (float)value; }
 
+        public decimal Wind { get => (decimal)wind; set => wind = (float)value; }
         public decimal PreviousRoundWind { get => (decimal)previousRoundWind; set => previousRoundWind = (float)value; }
         public int CurrentCompetitorId { get => currentCompetitorId; set => currentCompetitorId = value; }
 
@@ -84,6 +87,8 @@ namespace OpenSkiJumping.Competition.Persistent
             previousRoundStyle = 0f;
             actualGate = 0f;
             previousRoundGate = 0f;
+            wind = 0f;
+            previousRoundWind = 0f;
             currentCompetitorId = 0;
         }
 
@@ -98,6 +103,8 @@ namespace OpenSkiJumping.Competition.Persistent
             previousRoundStyle = other.previousRoundStyle;
             actualGate = other.actualGate;
             previousRoundGate = other.previousRoundGate;
+            wind = other.wind;
+            previousRoundWind = other.wind;
             rank = other.rank;
             currentCompetitorId = other.currentCompetitorId;
 

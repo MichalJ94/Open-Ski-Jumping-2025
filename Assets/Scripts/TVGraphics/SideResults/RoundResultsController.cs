@@ -97,6 +97,7 @@ namespace OpenSkiJumping.TVGraphics.SideResults
             listItem.resultText.text = $"{item.TotalPoints.ToString("F1", CultureInfo.InvariantCulture)}";
             listItem.distanceText.text = $"{item.Distance.ToString("F1", CultureInfo.InvariantCulture)} m";
             listItem.gateText.text = $"{item.ActualGate}";
+            listItem.windText.text = $"{item.Wind.ToString("F1", CultureInfo.InvariantCulture)}";
 
 
             if (roundNumber == 0)
@@ -158,7 +159,7 @@ namespace OpenSkiJumping.TVGraphics.SideResults
 
 
                //Debug.Log($"resultsManager.Value.ResultsDeepCopy[i].Rank = {(resultsManager.Value.ResultsDeepCopy[i].Rank)-1} resultsManager.Value.ResultsDeepCopy[i].TotalPoints: {resultsManager.Value.ResultsDeepCopy[i].TotalPoints}");
-               Debug.Log($"resultsManager.Value.ResultsDeepCopy[i].Rank = {(resultsManager.Value.ResultsDeepCopy[i].Rank)} resultsManager.Value.ResultsDeepCopy[i].TotalPoints: {resultsManager.Value.ResultsDeepCopy[i].TotalPoints} resultsManager.Value.ResultsDeepCopy[i].CurrentCompetitorId {resultsManager.Value.ResultsDeepCopy[i].CurrentCompetitorId} IName: {GetNameById(resultsManager.Value.ResultsDeepCopy[i].CurrentCompetitorId)}");
+               Debug.Log($"resultsManager.Value.ResultsDeepCopy[i].Rank = {(resultsManager.Value.ResultsDeepCopy[i].Rank)} resultsManager.Value.ResultsDeepCopy[i].TotalPoints: {resultsManager.Value.ResultsDeepCopy[i].TotalPoints} resultsManager.Value.ResultsDeepCopy[i].CurrentCompetitorId {resultsManager.Value.ResultsDeepCopy[i].CurrentCompetitorId} Wind: {resultsManager.Value.ResultsDeepCopy[i].Wind} Name: {GetNameById(resultsManager.Value.ResultsDeepCopy[i].CurrentCompetitorId)}");
 
                 
                 //Debug.Log($"resultsManager.Value.IDDeepCopy[i].Item2: {resultsManager.Value.IDDeepCopy[i].Item2} Name: {GetNameById(resultsManager.Value.IDDeepCopy[i].Item2)}");

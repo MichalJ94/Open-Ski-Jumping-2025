@@ -330,7 +330,6 @@ namespace OpenSkiJumping.Competition
                 if (RoundIndex > 0 || SubroundIndex > 0) RemoveFromAllRoundResults();
 
             jump.actualGate = (decimal)gameplayExtension.storeGate;
-            
             AddResult(StartList[StartListIndex], SubroundIndex, jump);
             AddToAllRoundResults();
             AddToFinalResults();
@@ -377,6 +376,7 @@ namespace OpenSkiJumping.Competition
 
             if (RoundIndex > 0 || SubroundIndex > 0) RemoveFromAllRoundResults();
             cpuJump.actualGate = (decimal)gameplayExtension.storeGate;
+            UnityEngine.Debug.Log($"Od ResultsManager wind = {cpuJump.wind} windPoints = {cpuJump.windPoints}");
             AddResult(StartList[StartListIndex], SubroundIndex, cpuJump);
             AddToAllRoundResults();
             AddToFinalResults();
@@ -665,7 +665,8 @@ namespace OpenSkiJumping.Competition
 
             Results[competitorId].Style = jumpResults.results[RoundIndex].judgesTotalPoints;
             Results[competitorId].ActualGate = jumpResults.results[RoundIndex].actualGate;
-
+            Results[competitorId].Wind = jumpResults.results[RoundIndex].windPoints;
+            UnityEngine.Debug.Log($"Results[competitorId].Wind = {Results[competitorId].Wind} jumpResults.results[RoundIndex].wind {jumpResults.results[RoundIndex].wind} " );
             //Write down the name of the jumper
             Results[competitorId].CurrentCompetitorId = OrderedParticipants[competitorId].id;
 
