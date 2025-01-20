@@ -96,7 +96,7 @@ namespace OpenSkiJumping.Competition.Persistent
             Math.Round(KPointPoints + (distance - KPoint) * PointsPerMeter, 1);
 
         public decimal GetWindPoints(decimal wind) =>
-            Math.Round(-wind * (wind >= 0 ? HeadWindFactor : TailWindFactor) * PointsPerMeter, 1);
+            Math.Round(-wind * (wind >= 0 ? HeadWindFactor : (TailWindFactor * 0.5m)) * PointsPerMeter, 1);
 
         public decimal GetGatePoints(int gatesDiff) =>
             Math.Round(-gatesDiff * GatesSpacing * GateFactor * PointsPerMeter, 1);

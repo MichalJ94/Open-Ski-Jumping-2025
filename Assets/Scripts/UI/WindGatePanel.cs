@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace OpenSkiJumping.UI
 {
@@ -64,6 +65,13 @@ namespace OpenSkiJumping.UI
         {
             gameplayExtension.storeGate = gateSlider.value;
         }
+
+        public void SetRandomWind()
+        {
+            windSlider.value += Random.Range(-0.5f, 0.5f);
+            UpdateWindText(windSlider.value);
+        }
+
 
         public void Initialize(int gates)
         {
