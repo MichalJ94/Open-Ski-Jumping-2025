@@ -9,6 +9,7 @@ using UnityEngine.Events;
 using OpenSkiJumping.Competition;
 using System.Linq;
 using UnityEngine.SocialPlatforms;
+using OpenSkiJumping.UI.TournamentMenu.ResultsMenu;
 
 namespace OpenSkiJumping.TVGraphics.SideResults
 {
@@ -23,6 +24,7 @@ namespace OpenSkiJumping.TVGraphics.SideResults
         private SortedList<(int state, decimal points, int bib), int> finalResultsGrabbed;
         [SerializeField] protected RuntimeResultsManager resultsManager;
         [SerializeField] protected RuntimeCompetitorsList competitorsList;
+        [SerializeField] protected RoundResultsHeader roundResultsHeader;
         [SerializeField] protected List<int> listViewItems;
         [SerializeField] CompetitionRunner competitionRunner;
 
@@ -43,6 +45,9 @@ namespace OpenSkiJumping.TVGraphics.SideResults
 
         public void Initialize()
         {
+
+            roundResultsHeader.Initialize();
+
             if (resultsManager.Value.ResultsDeepCopy == null || resultsManager.Value.ResultsDeepCopy.Length < competitionRunner.bibColors)
             {
                 Debug.LogWarning("Results data is not yet available. Delaying list initialization.");
@@ -90,6 +95,9 @@ namespace OpenSkiJumping.TVGraphics.SideResults
             var roundNumber = resultsManager.Value.GetRoundNumber();
 
             // Fill in the listItem UI components
+
+            //item.Results[index].results[index].ffff - prior rounds access
+
             listItem.rankText.text = $"{item.Rank}";
             listItem.nameText.text = $"{GetNameById(globalId)}";
             listItem.countryFlagText.text = $"{GetCountryCodeById(globalId)}";
@@ -100,19 +108,25 @@ namespace OpenSkiJumping.TVGraphics.SideResults
             listItem.windText.text = $"{item.Wind.ToString("F1", CultureInfo.InvariantCulture)}";
 
 
+            if(roundNumber != 0)
+            {
+                //Code to print previous round rank. Let's try!
+                //Debug.Log($"Od BindListViewItem name: {listItem.nameText.text} previous round Rank:");
+            }
+
             if (roundNumber == 0)
             {
                 listItem.previousRoundDistanceText.enabled = false;
                 listItem.previousRoundStyleText.enabled = false;
                 listItem.previousRoundGateText.enabled = false;
-            //    listItem.previousRoundWindText.enabled = false;
+                listItem.previousRoundWindText.enabled = false;
             }
             else
             {
                 listItem.previousRoundDistanceText.enabled = true;
                 listItem.previousRoundStyleText.enabled = true;
                 listItem.previousRoundGateText.enabled = true;
-              //  listItem.previousRoundWindText.enabled = true;
+                listItem.previousRoundWindText.enabled = true;
             }
 
             listItem.styleText.text = item.Style > 0
@@ -124,13 +138,13 @@ namespace OpenSkiJumping.TVGraphics.SideResults
                 : "";
 
             listItem.previousRoundGateText.text = item.PreviousRoundGate > 0
-                ? $"{item.PreviousRoundStyle.ToString("F1", CultureInfo.InvariantCulture)}"
+                ? $"{item.PreviousRoundGate.ToString("F1", CultureInfo.InvariantCulture)}"
                 : "";
 
-/*            listItem.previousRoundWindText.text = item.PreviousRoundWind != null
-                ? $"{item.PreviousRoundStyle.ToString("F1", CultureInfo.InvariantCulture)}"
+            listItem.previousRoundWindText.text = item.PreviousRoundWind != null
+                ? $"{item.PreviousRoundWind.ToString("F1", CultureInfo.InvariantCulture)}"
                 : "";
-*/
+
             listItem.previousRoundDistanceText.text = $"{item.PreviousRoundDistance.ToString("F1", CultureInfo.InvariantCulture)}";
 
 

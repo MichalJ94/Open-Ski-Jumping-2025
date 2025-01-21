@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Odbc;
 using OpenSkiJumping.Competition;
 using OpenSkiJumping.Competition.Persistent;
+using OpenSkiJumping.Competition.Runtime;
 using OpenSkiJumping.ScriptableObjects;
 using TMPro;
 using UnityEngine;
@@ -11,6 +12,9 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
 {
     public class RoundResultsHeader : MonoBehaviour
     {
+
+        public RuntimeResultsManager resultsManager;
+
         public TMP_Text secondStyle;
         public TMP_Text secondDistance;
         public TMP_Text firstStyle;
@@ -32,8 +36,33 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
         public TranslatablePhrase firstWind;
         public TranslatablePhrase secondWind;
 
-        private void Start()
+        public void Initialize()
         {
+
+            if(resultsManager.Value.RoundIndex != resultsManager.Value.EventInfo.roundInfos.Count) 
+            
+            {
+                Debug.Log("RoundResultsHeader Initialzie");
+
+                firstDistance.enabled = false;
+                firstStyle.enabled = false;
+                firstGateT.enabled = false;
+                firstWindT.enabled = false;
+
+            }
+
+            else
+
+            {
+
+                firstDistance.enabled = true;
+                firstStyle.enabled = true;
+                firstGateT.enabled = true;
+                firstWindT.enabled = true;
+
+            }
+
+
         }
 
 

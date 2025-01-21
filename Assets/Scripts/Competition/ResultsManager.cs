@@ -660,7 +660,7 @@ namespace OpenSkiJumping.Competition
                 Results[competitorId].PreviousRoundDistance = jumpResults.results[RoundIndex - 1].distance;
                 Results[competitorId].PreviousRoundStyle = jumpResults.results[RoundIndex - 1].judgesTotalPoints;
                 Results[competitorId].PreviousRoundGate = jumpResults.results[RoundIndex - 1].actualGate;
-                Results[competitorId].PreviousRoundWind = jumpResults.results[RoundIndex - 1].wind;
+                Results[competitorId].PreviousRoundWind = jumpResults.results[RoundIndex - 1].windPoints;
             }
 
             Results[competitorId].Style = jumpResults.results[RoundIndex].judgesTotalPoints;
