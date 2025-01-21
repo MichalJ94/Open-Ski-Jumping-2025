@@ -138,7 +138,7 @@ namespace OpenSkiJumping.TVGraphics.SideResults
                 : "";
 
             listItem.previousRoundGateText.text = item.PreviousRoundGate > 0
-                ? $"{item.PreviousRoundGate.ToString("F1", CultureInfo.InvariantCulture)}"
+                ? $"{item.PreviousRoundGate}"
                 : "";
 
             listItem.previousRoundWindText.text = item.PreviousRoundWind != null
@@ -175,10 +175,12 @@ namespace OpenSkiJumping.TVGraphics.SideResults
                //Debug.Log($"resultsManager.Value.ResultsDeepCopy[i].Rank = {(resultsManager.Value.ResultsDeepCopy[i].Rank)-1} resultsManager.Value.ResultsDeepCopy[i].TotalPoints: {resultsManager.Value.ResultsDeepCopy[i].TotalPoints}");
                Debug.Log($"resultsManager.Value.ResultsDeepCopy[i].Rank = {(resultsManager.Value.ResultsDeepCopy[i].Rank)} resultsManager.Value.ResultsDeepCopy[i].TotalPoints: {resultsManager.Value.ResultsDeepCopy[i].TotalPoints} resultsManager.Value.ResultsDeepCopy[i].CurrentCompetitorId {resultsManager.Value.ResultsDeepCopy[i].CurrentCompetitorId} Wind: {resultsManager.Value.ResultsDeepCopy[i].Wind} Name: {GetNameById(resultsManager.Value.ResultsDeepCopy[i].CurrentCompetitorId)}");
 
-                
+
                 //Debug.Log($"resultsManager.Value.IDDeepCopy[i].Item2: {resultsManager.Value.IDDeepCopy[i].Item2} Name: {GetNameById(resultsManager.Value.IDDeepCopy[i].Item2)}");
-            
-                           
+
+
+                //HERE I WANT TO STORE Rank, TotalPoints and currentCompetitorId.
+
             }
 
             Initialize();
@@ -265,4 +267,11 @@ namespace OpenSkiJumping.TVGraphics.SideResults
         public bool ShowPreviousRoundDistance { get; set; }
         public bool ShowPreviousRoundStyle { get; set; }
     }
+}
+
+public class RoundResultData
+{
+    public int Rank { get; set; }
+    public decimal TotalPoints { get; set; }
+    public int CurrentCompetitorId { get; set; }
 }

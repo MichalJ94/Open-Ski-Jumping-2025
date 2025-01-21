@@ -15,18 +15,22 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
 
         public RuntimeResultsManager resultsManager;
 
+        public TMP_Text resultT;
         public TMP_Text secondStyle;
         public TMP_Text secondDistance;
+        public TMP_Text secondGateT;
+        public TMP_Text secondWindT;
         public TMP_Text firstStyle;
         public TMP_Text firstDistance;
         public TMP_Text firstGateT;
-        public TMP_Text secondGateT;
         public TMP_Text firstWindT;
-        public TMP_Text secondWindT;
+
 
         public TranslatablePhrase result;
         public TranslatablePhrase dist;
         public TranslatablePhrase styl;
+        public TranslatablePhrase gate;
+        public TranslatablePhrase wind;
         public TranslatablePhrase firstDist;
         public TranslatablePhrase secondDist;
         public TranslatablePhrase firstStyl;
@@ -38,29 +42,58 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
 
         public void Initialize()
         {
+            resultT.text = result.CurrentValue;
+            Debug.Log($"RoundResultsHeader Initialzie resultsManager.Value.RoundIndex: {resultsManager.Value.RoundIndex}, resultsManager.Value.EventInfo.roundInfos.Count: {resultsManager.Value.EventInfo.roundInfos.Count}");
 
-            if(resultsManager.Value.RoundIndex != resultsManager.Value.EventInfo.roundInfos.Count) 
-            
+            if (resultsManager.Value.RoundIndex != resultsManager.Value.EventInfo.roundInfos.Count && resultsManager.Value.EventInfo.roundInfos.Count < 3) 
             {
-                Debug.Log("RoundResultsHeader Initialzie");
+
+                Debug.Log("RoundResultsHeader resultsManager.Value.RoundIndex != (resultsManager.Value.EventInfo.roundInfos.Count-1");
+
 
                 firstDistance.enabled = false;
                 firstStyle.enabled = false;
                 firstGateT.enabled = false;
                 firstWindT.enabled = false;
-
+                secondStyle.text = firstStyl.CurrentValue;
+                secondDistance.text = firstDist.CurrentValue;
+                secondGateT.text = firstGate.CurrentValue;
+                secondWindT.text = firstWind.CurrentValue;
             }
 
             else
 
             {
-
+                Debug.Log("RoundResultsHeader else");
                 firstDistance.enabled = true;
                 firstStyle.enabled = true;
                 firstGateT.enabled = true;
                 firstWindT.enabled = true;
-
+                firstDistance.text = firstDist.CurrentValue;
+                firstStyle.text = firstStyl.CurrentValue;
+                firstGateT.text = firstGate.CurrentValue;
+                firstWindT.text = firstWind.CurrentValue;
+                secondStyle.text = secondStyl.CurrentValue;
+                secondDistance.text = secondDist.CurrentValue;
+                secondGateT.text = secondGate.CurrentValue;
+                secondWindT.text = secondWind.CurrentValue;
             }
+
+            if (resultsManager.Value.EventInfo.roundInfos.Count == 1)
+            {
+
+                Debug.Log("RoundResultsHeader resultsManager.Value.EventInfo.roundInfos.Count == 1");
+
+                firstDistance.enabled = false;
+                firstStyle.enabled = false;
+                firstGateT.enabled = false;
+                firstWindT.enabled = false;
+                secondStyle.text = styl.CurrentValue;
+                secondDistance.text = dist.CurrentValue;
+                secondGateT.text = gate.CurrentValue;
+                secondWindT.text = wind.CurrentValue;
+            }
+
 
 
         }

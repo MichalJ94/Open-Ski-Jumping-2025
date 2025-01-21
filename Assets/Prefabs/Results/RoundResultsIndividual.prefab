@@ -25,16 +25,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 64075878}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 893555780}
-  m_RootOrder: 0
+  m_Father: {fileID: 719272052}
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 865.97906, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &64075881
@@ -604,6 +604,7 @@ RectTransform:
   - {fileID: 1401641323}
   - {fileID: 2014863397}
   - {fileID: 3028332724621768071}
+  - {fileID: 64075879}
   m_Father: {fileID: 3877784350388577001}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -662,17 +663,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 916be5e637d8b1b4aa0ba8bd40b333fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resultsManager: {fileID: 0}
+  resultT: {fileID: 893555783}
   secondStyle: {fileID: 1649853359}
   secondDistance: {fileID: 856960192}
+  secondGateT: {fileID: 1554308577}
+  secondWindT: {fileID: 3856855801346017184}
   firstStyle: {fileID: 1401641324}
   firstDistance: {fileID: 1132180340}
   firstGateT: {fileID: 2014863398}
-  secondGateT: {fileID: 1554308577}
   firstWindT: {fileID: 8895793754436144877}
-  secondWindT: {fileID: 3856855801346017184}
   result: {fileID: 11400000, guid: e35e6094b82c60e488e950eb64eadb09, type: 2}
   dist: {fileID: 11400000, guid: 4a921551d71e23347addfa8c038b07a4, type: 2}
   styl: {fileID: 11400000, guid: 94a6044102f37174486bb0ee1074e227, type: 2}
+  gate: {fileID: 11400000, guid: afc2fbee4b956a54cb55fad1dd853554, type: 2}
+  wind: {fileID: 11400000, guid: 33b5c8afbd9af0d4d970c725cc73aef6, type: 2}
   firstDist: {fileID: 11400000, guid: 951c4e638499f7b49b2aa2788c13ceb5, type: 2}
   secondDist: {fileID: 11400000, guid: b6c3923cbc9477c4f99069eff4c7fff8, type: 2}
   firstStyl: {fileID: 11400000, guid: be46bcf8ba6823246800fc6f8032948a, type: 2}
@@ -846,14 +851,13 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 64075879}
+  m_Children: []
   m_Father: {fileID: 719272052}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -74, y: 0}
+  m_AnchoredPosition: {x: -64.7, y: 0}
   m_SizeDelta: {x: 90, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &893555784
@@ -4067,6 +4071,7 @@ MonoBehaviour:
   listView: {fileID: 3877784350664592934}
   resultsManager: {fileID: 11400000, guid: 2263c123852116d44925a3188e8ded51, type: 2}
   competitorsList: {fileID: 11400000, guid: a37b188b5d0732ffda2e4a5f63ff3a24, type: 2}
+  roundResultsHeader: {fileID: 0}
   listViewItems: 
   competitionRunner: {fileID: 0}
 --- !u!1 &3877784350497273755
@@ -4939,7 +4944,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3877784349619646380}
   m_HandleRect: {fileID: 3877784349619646381}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
