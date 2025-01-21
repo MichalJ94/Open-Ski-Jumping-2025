@@ -104,7 +104,7 @@ namespace OpenSkiJumping.Competition.Persistent
             actualGate = other.actualGate;
             previousRoundGate = other.previousRoundGate;
             wind = other.wind;
-            previousRoundWind = other.wind;
+            previousRoundWind = other.previousRoundWind;
             rank = other.rank;
             currentCompetitorId = other.currentCompetitorId;
 

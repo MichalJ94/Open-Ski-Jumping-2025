@@ -172,11 +172,11 @@ namespace OpenSkiJumping.TVGraphics.SideResults
                 //var globalId = resultsManager.Value.OrderedParticipants[localId].id;
 
 
-               //Debug.Log($"resultsManager.Value.ResultsDeepCopy[i].Rank = {(resultsManager.Value.ResultsDeepCopy[i].Rank)-1} resultsManager.Value.ResultsDeepCopy[i].TotalPoints: {resultsManager.Value.ResultsDeepCopy[i].TotalPoints}");
-               Debug.Log($"resultsManager.Value.ResultsDeepCopy[i].Rank = {(resultsManager.Value.ResultsDeepCopy[i].Rank)} resultsManager.Value.ResultsDeepCopy[i].TotalPoints: {resultsManager.Value.ResultsDeepCopy[i].TotalPoints} resultsManager.Value.ResultsDeepCopy[i].CurrentCompetitorId {resultsManager.Value.ResultsDeepCopy[i].CurrentCompetitorId} Wind: {resultsManager.Value.ResultsDeepCopy[i].Wind} Name: {GetNameById(resultsManager.Value.ResultsDeepCopy[i].CurrentCompetitorId)}");
+               
+               Debug.Log($"resultsManager.Value.ResultsDeepCopy[i].Rank = {(resultsManager.Value.ResultsDeepCopy[i].Rank)} resultsManager.Value.ResultsDeepCopy[i].TotalPoints: {resultsManager.Value.ResultsDeepCopy[i].TotalPoints} resultsManager.Value.ResultsDeepCopy[i].CurrentCompetitorId {resultsManager.Value.ResultsDeepCopy[i].CurrentCompetitorId} Wind: {resultsManager.Value.ResultsDeepCopy[i].Wind} PreviousRoundWind: {resultsManager.Value.ResultsDeepCopy[i].PreviousRoundWind} Name: {GetNameById(resultsManager.Value.ResultsDeepCopy[i].CurrentCompetitorId)}");
+                //At this point, Wind and PreviousRoundWind are same. Debug.
 
-
-                //Debug.Log($"resultsManager.Value.IDDeepCopy[i].Item2: {resultsManager.Value.IDDeepCopy[i].Item2} Name: {GetNameById(resultsManager.Value.IDDeepCopy[i].Item2)}");
+             
 
 
                 //HERE I WANT TO STORE Rank, TotalPoints and currentCompetitorId.
