@@ -537,15 +537,15 @@ namespace OpenSkiJumping.Competition
 
 
 
-            while(modifier > 1.1f)
+            while(modifier > 1.07f)
             {
-                UnityEngine.Debug.Log("COS SIE JEEEEBLO! Modifier wiekszy niz 1.1. Skok: " + (float)distance * modifier + " skill: " + skill + " modifier " + modifier + " hillsize " + hillInfo.GetHS());
+                UnityEngine.Debug.Log("COS SIE JEEEEBLO! Modifier wiekszy niz 1.07. Skok: " + (float)distance * modifier + " skill: " + skill + " modifier " + modifier + " hillsize " + hillInfo.GetHS());
                 modifier *= Random.Range(skill / 100f, (skill / 100f) + 0.1f);
                 if (skill > 90)
                 {
                     modifier *= 0.9f;
                 }
-                UnityEngine.Debug.Log("COS SIE JEEEEBLO! Po zmianie modifiera wiekszego ni¿ 1.1. Skok: " + (float)distance * modifier + " skill: " + skill + " modifier " + modifier + " hillsize " + hillInfo.GetHS());
+                UnityEngine.Debug.Log("COS SIE JEEEEBLO! Po zmianie modifiera wiekszego ni¿ 1.07. Skok: " + (float)distance * modifier + " skill: " + skill + " modifier " + modifier + " hillsize " + hillInfo.GetHS());
             }
 
             /*

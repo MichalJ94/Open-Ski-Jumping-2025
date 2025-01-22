@@ -10,6 +10,7 @@ using OpenSkiJumping.Competition;
 using System.Linq;
 using UnityEngine.SocialPlatforms;
 using OpenSkiJumping.UI.TournamentMenu.ResultsMenu;
+using static UnityEditor.Progress;
 
 namespace OpenSkiJumping.TVGraphics.SideResults
 {
@@ -27,7 +28,7 @@ namespace OpenSkiJumping.TVGraphics.SideResults
         [SerializeField] protected RoundResultsHeader roundResultsHeader;
         [SerializeField] protected List<int> listViewItems;
         [SerializeField] CompetitionRunner competitionRunner;
-
+        private Dictionary<int, RoundResultData> previousRoundDataStored = new Dictionary<int, RoundResultData>();
 
         private UnityAction onContinue;
 
@@ -137,9 +138,13 @@ namespace OpenSkiJumping.TVGraphics.SideResults
                 ? $"{item.PreviousRoundStyle.ToString("F1", CultureInfo.InvariantCulture)}"
                 : "";
 
-            listItem.previousRoundGateText.text = item.PreviousRoundGate > 0
+            /*listItem.previousRoundGateText.text = item.PreviousRoundGate > 0
                 ? $"{item.PreviousRoundGate}"
+                : "";*/
+            listItem.previousRoundGateText.text = item.PreviousRoundGate > 0
+                ? $"{previousRoundDataStored[item.CurrentCompetitorId].WindGateComp}"
                 : "";
+
 
             listItem.previousRoundWindText.text = item.PreviousRoundWind != null
                 ? $"{item.PreviousRoundWind.ToString("F1", CultureInfo.InvariantCulture)}"
@@ -171,16 +176,33 @@ namespace OpenSkiJumping.TVGraphics.SideResults
                 //var localId = resultsManager.Value.GetIdByRank(resultsManager.Value.ResultsDeepCopy[i].Rank);
                 //var globalId = resultsManager.Value.OrderedParticipants[localId].id;
 
+                Debug.Log($"resultsManager.Value.ResultsDeepCopy[i].Rank = {(resultsManager.Value.ResultsDeepCopy[i].Rank)}   Name: {GetNameById(resultsManager.Value.ResultsDeepCopy[i].CurrentCompetitorId)}");
 
-               
-               Debug.Log($"resultsManager.Value.ResultsDeepCopy[i].Rank = {(resultsManager.Value.ResultsDeepCopy[i].Rank)} resultsManager.Value.ResultsDeepCopy[i].TotalPoints: {resultsManager.Value.ResultsDeepCopy[i].TotalPoints} resultsManager.Value.ResultsDeepCopy[i].CurrentCompetitorId {resultsManager.Value.ResultsDeepCopy[i].CurrentCompetitorId} Wind: {resultsManager.Value.ResultsDeepCopy[i].Wind} PreviousRoundWind: {resultsManager.Value.ResultsDeepCopy[i].PreviousRoundWind} Name: {GetNameById(resultsManager.Value.ResultsDeepCopy[i].CurrentCompetitorId)}");
-                //At this point, Wind and PreviousRoundWind are same. Debug.
-
-             
+            }
 
 
-                //HERE I WANT TO STORE Rank, TotalPoints and currentCompetitorId.
+            //HERE I WANT TO STORE Rank, TotalPoints and currentCompetitorId.
+           if (resultsManager.Value.GetRoundNumber() < (resultsManager.Value.EventInfo.roundInfos.Count-1))
+            {
+                int roundNumber = resultsManager.Value.GetRoundNumber();
+                previousRoundDataStored.Clear();
+                for (int k = 0; k < resultsManager.Value.ResultsDeepCopy.Length; k++)
+                {
 
+                    var item = resultsManager.Value.ResultsDeepCopy[k];
+
+                 
+
+                        previousRoundDataStored[item.CurrentCompetitorId] = new RoundResultData
+                    {
+                        Rank = item.Rank,
+                        TotalPoints = item.TotalPoints,
+                        WindGateComp = item.Results[0].results[roundNumber].windPoints + item.Results[0].results[roundNumber].gatePoints
+                    };
+
+                      Debug.Log($"Debugowanie. item.Results[0].results[roundNumber].windPoints + item.Results[0].results[roundNumber].gatePoints {item.Results[0].results[roundNumber].windPoints + item.Results[0].results[roundNumber].gatePoints}"); 
+
+                }
             }
 
             Initialize();
@@ -273,5 +295,6 @@ public class RoundResultData
 {
     public int Rank { get; set; }
     public decimal TotalPoints { get; set; }
-    public int CurrentCompetitorId { get; set; }
+
+    public decimal WindGateComp { get; set; }
 }
