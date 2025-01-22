@@ -19,5 +19,6 @@ namespace OpenSkiJumping.TVGraphics.SideResults
         public TMP_Text previousRoundGateText;
         public TMP_Text windText;
         public TMP_Text previousRoundWindText;
+        public TMP_Text rankChange;
     }
 }

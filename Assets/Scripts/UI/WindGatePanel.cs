@@ -42,13 +42,13 @@ namespace OpenSkiJumping.UI
         private void UpdateCPUWinDistanceAfterGateChange(float val)
         {
             //Constant added to maintain balance between CPU and 1P
-            simulator.CPUWinnerDistanceAfterGateChange((int)val, windSlider.value*20f);
+            simulator.CPUWinnerDistanceAfterGateChange((int)val, windSlider.value*2.5f);
         }
 
         private void UpdateCPUWinDistanceAfterWindChange(float val)
         {
             //Constant added to maintain balance between CPU and 1P
-            simulator.GetGateForWind(windSlider.value*2f);
+            simulator.GetGateForWind(windSlider.value*2.5f);
         }
 
         private void SetAutoGate()

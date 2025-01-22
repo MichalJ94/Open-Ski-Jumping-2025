@@ -88,6 +88,26 @@ namespace OpenSkiJumping.TVGraphics.SideResults
             gameObject.transform.localScale = new Vector3(0, 0, 0);
         }
 
+
+        /*
+        ******************************************************************************************
+        NAMING CONVENTION GUIDE
+        
+        While the Round Results Controller and scoreboard are being adjusted, variables stored within RoundResultsListItem and Results class
+        can be used to display other information in the actual scorebaord than what their names indicate. Therefore, this guide shall serve
+        a quick reference for what data respective variables actually store and display in the game.
+
+
+
+        PreviousRoundGate -> Wind and Gate Compensation in the previous round
+        PreviousRoundWind -> Previous Round Rank
+        PreviousRoundStyle -> Previous Round TotalPoints
+
+
+
+         ******************************************************************************************
+        */
+
         private void BindListViewItem(int index, RoundResultsListItem listItem)
         {
             //Debug.Log($"From BindListViewItem resultsManager.Value.ResultsDeepCopy[index].CurrentCompetitorId {resultsManager.Value.ResultsDeepCopy[index].CurrentCompetitorId}");
@@ -134,8 +154,8 @@ namespace OpenSkiJumping.TVGraphics.SideResults
                 ? $"{item.Style.ToString("F1", CultureInfo.InvariantCulture)}"
                 : "";
 
-            listItem.previousRoundStyleText.text = item.PreviousRoundStyle > 0 && item.PreviousRoundStyle <= 60
-                ? $"{item.PreviousRoundStyle.ToString("F1", CultureInfo.InvariantCulture)}"
+            listItem.previousRoundStyleText.text = previousRoundDataStored[item.CurrentCompetitorId].TotalPoints > -1
+                ? $"{previousRoundDataStored[item.CurrentCompetitorId].TotalPoints.ToString("F1", CultureInfo.InvariantCulture)}"
                 : "";
 
             /*listItem.previousRoundGateText.text = item.PreviousRoundGate > 0
@@ -146,8 +166,8 @@ namespace OpenSkiJumping.TVGraphics.SideResults
                 : "";
 
 
-            listItem.previousRoundWindText.text = item.PreviousRoundWind != null
-                ? $"{item.PreviousRoundWind.ToString("F1", CultureInfo.InvariantCulture)}"
+            listItem.previousRoundWindText.text = previousRoundDataStored[item.CurrentCompetitorId].Rank != 0
+                ? $"{previousRoundDataStored[item.CurrentCompetitorId].Rank}"
                 : "";
 
             listItem.previousRoundDistanceText.text = $"{item.PreviousRoundDistance.ToString("F1", CultureInfo.InvariantCulture)}";

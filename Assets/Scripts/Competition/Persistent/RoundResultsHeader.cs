@@ -42,10 +42,11 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
 
         public void Initialize()
         {
+            int roundIndex = resultsManager.Value.RoundIndex;
             resultT.text = result.CurrentValue;
             Debug.Log($"RoundResultsHeader Initialzie resultsManager.Value.RoundIndex: {resultsManager.Value.RoundIndex}, resultsManager.Value.EventInfo.roundInfos.Count: {resultsManager.Value.EventInfo.roundInfos.Count}");
 
-            if (resultsManager.Value.RoundIndex != resultsManager.Value.EventInfo.roundInfos.Count && resultsManager.Value.EventInfo.roundInfos.Count < 3) 
+            if (roundIndex != resultsManager.Value.EventInfo.roundInfos.Count && resultsManager.Value.EventInfo.roundInfos.Count < 3) 
             {
 
                 Debug.Log("RoundResultsHeader resultsManager.Value.RoundIndex != (resultsManager.Value.EventInfo.roundInfos.Count-1");
@@ -75,7 +76,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
                 firstWindT.text = firstWind.CurrentValue;
                 secondStyle.text = secondStyl.CurrentValue;
                 secondDistance.text = secondDist.CurrentValue;
-                secondGateT.text = secondGate.CurrentValue;
+                secondGateT.text = secondGate.CurrentValue + " " + roundIndex;
                 secondWindT.text = secondWind.CurrentValue;
             }
 
