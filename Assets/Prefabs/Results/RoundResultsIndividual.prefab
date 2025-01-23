@@ -2985,7 +2985,7 @@ MonoBehaviour:
       - m_Target: {fileID: 3877784350388577006}
         m_TargetAssemblyTypeName: OpenSkiJumping.TVGraphics.SideResults.RoundResultsController,
           Main
-        m_MethodName: Resume
+        m_MethodName: Clear
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2995,7 +2995,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 11500000, guid: 2159d2046b7ec07b6a0d5869a63c548a, type: 3}
         m_TargetAssemblyTypeName: OpenSkiJumping.TVGraphics.SideResults.RoundResultsController,
           Main
         m_MethodName: 
@@ -3504,7 +3504,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.46885, y: 0}
+  m_AnchoredPosition: {x: 1.46885, y: -339.99966}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &3877784349854713467
@@ -4946,8 +4946,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3877784349619646380}
   m_HandleRect: {fileID: 3877784349619646381}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

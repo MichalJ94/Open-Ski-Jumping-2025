@@ -154,7 +154,7 @@ namespace OpenSkiJumping.TVGraphics.SideResults
                 ? $"{item.Style.ToString("F1", CultureInfo.InvariantCulture)}"
                 : "";
 
-            listItem.previousRoundStyleText.text = previousRoundDataStored[item.CurrentCompetitorId].TotalPoints > -1
+            listItem.previousRoundStyleText.text = previousRoundDataStored.ContainsKey(item.CurrentCompetitorId)
                 ? $"{previousRoundDataStored[item.CurrentCompetitorId].TotalPoints.ToString("F1", CultureInfo.InvariantCulture)}"
                 : "";
 
@@ -166,7 +166,7 @@ namespace OpenSkiJumping.TVGraphics.SideResults
                 : "";
 
 
-            listItem.previousRoundWindText.text = previousRoundDataStored[item.CurrentCompetitorId].Rank != 0
+            listItem.previousRoundWindText.text = previousRoundDataStored.ContainsKey(item.CurrentCompetitorId)
                 ? $"{previousRoundDataStored[item.CurrentCompetitorId].Rank}"
                 : "";
 
@@ -193,37 +193,44 @@ namespace OpenSkiJumping.TVGraphics.SideResults
             //for (int i = 0; i < finalResultsGrabbed.Count; i++)
             for (int i = 0; i < resultsManager.Value.ResultsDeepCopy.Length; i++)
             {
+
+
                 //var localId = resultsManager.Value.GetIdByRank(resultsManager.Value.ResultsDeepCopy[i].Rank);
                 //var globalId = resultsManager.Value.OrderedParticipants[localId].id;
 
+
+                //Problemy ponizej w konkursie 4-seryjnym
                 Debug.Log($"resultsManager.Value.ResultsDeepCopy[i].Rank = {(resultsManager.Value.ResultsDeepCopy[i].Rank)}   Name: {GetNameById(resultsManager.Value.ResultsDeepCopy[i].CurrentCompetitorId)}");
 
             }
 
-
             //HERE I WANT TO STORE Rank, TotalPoints and currentCompetitorId.
-           if (resultsManager.Value.GetRoundNumber() < (resultsManager.Value.EventInfo.roundInfos.Count-1))
-            {
+            if (resultsManager.Value.GetRoundNumber() < (resultsManager.Value.EventInfo.roundInfos.Count-1))
+              {
+
+
                 int roundNumber = resultsManager.Value.GetRoundNumber();
-                previousRoundDataStored.Clear();
-                for (int k = 0; k < resultsManager.Value.ResultsDeepCopy.Length; k++)
-                {
+                  previousRoundDataStored.Clear();
+                //Attempt to replace ResultsDeepCopy.Count with competitionRunner.bibColors
+                for (int k = 0; k < competitionRunner.bibColors; k++)
+                  {
+                  //  Debug.Log($"Before adding previousRoundData stored item. k: {k} roundNumber {roundNumber}");
+                      var item = resultsManager.Value.ResultsDeepCopy[k];
+                  //  Debug.Log($" var item = resultsManager.Value.ResultsDeepCopy[k], k: {k} CurrentCompetitorId {item.CurrentCompetitorId} ");
 
-                    var item = resultsManager.Value.ResultsDeepCopy[k];
-
-                 
-
-                        previousRoundDataStored[item.CurrentCompetitorId] = new RoundResultData
-                    {
-                        Rank = item.Rank,
-                        TotalPoints = item.TotalPoints,
+                //Up until this point, the code is executed correctly.
+                    previousRoundDataStored[item.CurrentCompetitorId] = new RoundResultData
+                      {
+                          Rank = item.Rank,
+                          TotalPoints = item.TotalPoints,
+                        //WindGateComp messing up the game in comps with more than 2 rounds if they have more than 30 jumpers!!   
                         WindGateComp = item.Results[0].results[roundNumber].windPoints + item.Results[0].results[roundNumber].gatePoints
-                    };
+                      };
 
-                      Debug.Log($"Debugowanie. item.Results[0].results[roundNumber].windPoints + item.Results[0].results[roundNumber].gatePoints {item.Results[0].results[roundNumber].windPoints + item.Results[0].results[roundNumber].gatePoints}"); 
+                     //   Debug.Log($"Debugowanie. item.Results[0].results[roundNumber].windPoints + item.Results[0].results[roundNumber].gatePoints {item.Results[0].results[roundNumber].windPoints + item.Results[0].results[roundNumber].gatePoints}"); 
 
-                }
-            }
+                  }
+              }
 
             Initialize();
             PopulateTheList();
