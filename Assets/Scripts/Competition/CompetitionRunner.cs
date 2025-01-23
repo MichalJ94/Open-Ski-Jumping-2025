@@ -103,7 +103,7 @@ namespace OpenSkiJumping.Competition
 
         public void PermitCPUJumpsSetInactive()
         {
-            if (resultsManager.Value.EventInfo.eventType == EventType.Individual)
+            if (resultsManager.Value.EventInfo.eventType != EventType.Team && resultsManager.Value.EventInfo.roundInfos.Count < 3)
             {
                 permitCPUJumps = false;
             }
@@ -133,7 +133,7 @@ namespace OpenSkiJumping.Competition
                 onRoundFinish.Invoke();
                 Debug.Log("ROUND RESULTS MISSION. onRoundFinish.Invoke();");
                 //  LastRankUsable = resultsManager.Value.LastRank.ToArray();
-                if (resultsManager.Value.EventInfo.eventType == EventType.Individual)
+                if (resultsManager.Value.EventInfo.eventType != EventType.Team && resultsManager.Value.EventInfo.roundInfos.Count < 3)
                 {
                     onRoundCompleted.Invoke();
                     permitCPUJumps = false;
@@ -143,12 +143,12 @@ namespace OpenSkiJumping.Competition
                 return;
             }
 
-            if (resultsManager.Value.EventInfo.eventType == EventType.Individual)
+            if (resultsManager.Value.EventInfo.eventType != EventType.Team && resultsManager.Value.EventInfo.roundInfos.Count < 3)
             {
                 onRoundCompleted.Invoke();
             }
             onRoundFinish.Invoke();
-            if (resultsManager.Value.EventInfo.eventType == EventType.Team)
+            if (resultsManager.Value.EventInfo.eventType == EventType.Team || resultsManager.Value.EventInfo.roundInfos.Count > 2)
             {
                 OnCompetitionFinish();
             }
