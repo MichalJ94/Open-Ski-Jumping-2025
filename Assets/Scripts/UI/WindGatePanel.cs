@@ -1,5 +1,6 @@
 using System;
 using OpenSkiJumping.Competition;
+using OpenSkiJumping.Competition.Runtime;
 using OpenSkiJumping.Scripts2025;
 using OpenSkiJumping.Simulation;
 using TMPro;
@@ -22,7 +23,7 @@ namespace OpenSkiJumping.UI
 
         [SerializeField] private TMP_Text windText;
         [SerializeField] private Slider windSlider;
-
+        [SerializeField] private bool jumpOverHSPerformed = false;
         public void Awake()
         {
             gateSlider.onValueChanged.AddListener(UpdateGateText);
@@ -43,17 +44,29 @@ namespace OpenSkiJumping.UI
 
         private void UpdateCPUWinDistanceAfterGateChange(float val)
         {
-
+            float modifier = 1;
             //simulator.CPUWinnerDistanceAfterGateChange((int)val, windSlider.value);
 
             //Constant added to maintain balance between CPU and 1P
-            simulator.CPUWinnerDistanceAfterGateChange((int)val, windSlider.value*(competitionRunner.GetHS()/100f));
+
+
+            simulator.CPUWinnerDistanceAfterGateChange((int)val, windSlider.value * (competitionRunner.GetHS() / 100f));
         }
 
         private void UpdateCPUWinDistanceAfterWindChange(float val)
         {
+            //Add modifier for positive and negative wind
+            if (windSlider.value > 0)
+            {
+                //
+            }
+
+            if (windSlider.value < 0)
+            {
+                //
+            }
             //Constant added to maintain balance between CPU and 1P
-            simulator.GetGateForWind(windSlider.value);
+            simulator.GetGateForWind(windSlider.value * (competitionRunner.GetHS() / 100f));
         }
 
         private void SetAutoGate()
@@ -67,6 +80,27 @@ namespace OpenSkiJumping.UI
         {
             gameplayExtension.storeGate = gateSlider.value;
         }
+
+        public void LowerGateAfterLongJump()
+        {
+            // Chyba czeba bydzie zrobiæ property z d³ugoœci¹ skoku CPU w Runtime Results Managerze. Albo storowaæ go w SO Gameplay extension!
+            if (jumpOverHSPerformed == true || gameplayExtension.storeCPUDistance > (decimal)competitionRunner.GetHS())
+            {
+                if (gateSlider.value != 1)
+                {
+                    gateSlider.value -= 1;
+                }
+            }
+
+            jumpOverHSPerformed = false;
+        }
+
+        public void JumpOverHSPerformed()
+        {
+            
+            jumpOverHSPerformed = true;
+        }
+
 
         public void StoreGate()
         {

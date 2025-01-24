@@ -12,6 +12,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
+using OpenSkiJumping.UI;
 
 namespace OpenSkiJumping.New
 {
@@ -30,7 +31,6 @@ namespace OpenSkiJumping.New
         [SerializeField] private HillsRuntime hillsRepository;
         [SerializeField] private int WindThrustDelayCap = 80;
         public CompetitionRunner competitionRunner;
-        public RuntimeResultsManager resultsManager;
         private float torqueCoef = 0f;
         [SerializeField] private int WindThrustDeterminer;
         [SerializeField]  private int WindThrustDeterminerTimesUsed;
@@ -53,6 +53,7 @@ namespace OpenSkiJumping.New
         private bool judged;
 
         public JudgesController judgesController;
+        public WindGatePanel windGatePanel;
         public GameplayExtension gameplayExtension;
         public RuntimeJumpData jumpData;
         public float jumperAngle;
@@ -186,6 +187,7 @@ namespace OpenSkiJumping.New
         {
             if ((float)jumpData.Distance > hillSize)
             {
+                windGatePanel.JumpOverHSPerformed();
                 float ofHS = ((float)jumpData.Distance/hillSize);
                 //UnityEngine.Debug.Log("ofHS: " + ofHS);
 
@@ -262,7 +264,6 @@ namespace OpenSkiJumping.New
 
 
                     }
-
 
 
 

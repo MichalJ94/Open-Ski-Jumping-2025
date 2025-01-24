@@ -21,6 +21,9 @@ namespace OpenSkiJumping.Scripts2025
         public float modifierCPURandomnessLevel;
         public float modifierWindRandomnessLevel;
         public float snowChance;
+        public float storeGate;
+        public decimal storeCPUDistance;
+
 
         private void OnEnable()
         {
@@ -37,7 +40,6 @@ namespace OpenSkiJumping.Scripts2025
 
         }
 
-        public float storeGate;
 
         public float forceScaleModifier(int skill)
         {
@@ -79,5 +81,11 @@ namespace OpenSkiJumping.Scripts2025
           return (decimal)Math.Round(distance * (decimal)modifier, MidpointRounding.AwayFromZero) / 2;
         }
 
+        public void ResetCPUDistance()
+        {
+            storeCPUDistance = 0;
+        }
+
     }
+
 }
