@@ -1,4 +1,5 @@
 using System;
+using OpenSkiJumping.Competition;
 using OpenSkiJumping.Scripts2025;
 using OpenSkiJumping.Simulation;
 using TMPro;
@@ -13,6 +14,7 @@ namespace OpenSkiJumping.UI
     {
         [SerializeField] private JumpSimulator simulator;
         [SerializeField] private GameplayExtension gameplayExtension;
+        [SerializeField] private CompetitionRunner competitionRunner;
 
         [SerializeField] private TMP_Text gateText;
         [SerializeField] private Slider gateSlider;
@@ -41,14 +43,17 @@ namespace OpenSkiJumping.UI
 
         private void UpdateCPUWinDistanceAfterGateChange(float val)
         {
+
+            //simulator.CPUWinnerDistanceAfterGateChange((int)val, windSlider.value);
+
             //Constant added to maintain balance between CPU and 1P
-            simulator.CPUWinnerDistanceAfterGateChange((int)val, windSlider.value*2.2f);
+            simulator.CPUWinnerDistanceAfterGateChange((int)val, windSlider.value*(competitionRunner.GetHS()/100f));
         }
 
         private void UpdateCPUWinDistanceAfterWindChange(float val)
         {
             //Constant added to maintain balance between CPU and 1P
-            simulator.GetGateForWind(windSlider.value*2.2f);
+            simulator.GetGateForWind(windSlider.value);
         }
 
         private void SetAutoGate()
@@ -70,7 +75,15 @@ namespace OpenSkiJumping.UI
 
         public void SetRandomWind()
         {
-            windSlider.value += Random.Range(-0.5f, 0.5f);
+            windSlider.value += Random.Range((gameplayExtension.modifierWindRandomnessLevel / -200f), (gameplayExtension.modifierWindRandomnessLevel/200f));
+            if(windSlider.value > 5f)
+            {
+                windSlider.value = 5f;
+            }
+            if (windSlider.value < -5f)
+            {
+                windSlider.value = -5f;
+            }
             UpdateWindText(windSlider.value);
         }
 

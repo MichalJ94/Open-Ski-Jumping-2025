@@ -19,13 +19,14 @@ namespace OpenSkiJumping.Scripts2025
         }*/
         [SerializeField] private GameConfigRuntime gameConfig;
         public float modifierCPURandomnessLevel;
+        public float modifierWindRandomnessLevel;
         public float snowChance;
 
         private void OnEnable()
         {
             if (gameConfig != null && gameConfig.Config != null)
             {
-                modifierCPURandomnessLevel = gameConfig.Config.randomnessLevelCPU;
+                modifierWindRandomnessLevel = gameConfig.Config.randomnessLevelWind;
                 snowChance = gameConfig.Config.snowChance;
             }
             else

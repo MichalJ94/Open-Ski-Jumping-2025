@@ -22,6 +22,7 @@ namespace OpenSkiJumping.UI
         [SerializeField] private Slider randomnessSlider;
         [SerializeField] private GameplayExtension gameplayExtension;
         [SerializeField] private Slider snowSlider;
+        [SerializeField] private Slider windSlider;
 
         private List<Resolution> _resolutions;
 
@@ -66,6 +67,22 @@ namespace OpenSkiJumping.UI
             }
             randomnessSlider.onValueChanged.AddListener(UpdateRandomnessSlider);
 
+
+
+            if (gameConfig.Config.randomnessLevelWind != 0)
+            {
+
+                windSlider.value = gameConfig.Config.randomnessLevelWind;
+                gameplayExtension.modifierWindRandomnessLevel = windSlider.value;
+            }
+            else
+            {
+                randomnessSlider.value = 20f;
+                gameplayExtension.modifierCPURandomnessLevel = 20f;
+            }
+            windSlider.onValueChanged.AddListener(UpdateWindSlider);
+
+
             if (gameConfig.Config.snowChance != float.NaN)
             {
 
@@ -99,6 +116,12 @@ namespace OpenSkiJumping.UI
         {
             gameConfig.Config.randomnessLevelCPU = randomnessSlider.value;
             gameplayExtension.modifierCPURandomnessLevel = randomnessSlider.value;
+        }
+
+        private void UpdateWindSlider(float arg)
+        {
+            gameConfig.Config.randomnessLevelWind = windSlider.value;
+            gameplayExtension.modifierWindRandomnessLevel = windSlider.value;
         }
 
         private void UpdateSnowSlider(float arg)
