@@ -141,6 +141,7 @@ namespace OpenSkiJumping.TVGraphics.SideResults
                 listItem.previousRoundStyleText.enabled = false;
                 listItem.previousRoundGateText.enabled = false;
                 listItem.previousRoundWindText.enabled = false;
+                listItem.rankChange.enabled = false;
             }
             else
             {
@@ -148,6 +149,7 @@ namespace OpenSkiJumping.TVGraphics.SideResults
                 listItem.previousRoundStyleText.enabled = true;
                 listItem.previousRoundGateText.enabled = true;
                 listItem.previousRoundWindText.enabled = true;
+                listItem.rankChange.enabled = true;
             }
 
             listItem.styleText.text = item.Style > 0
@@ -170,7 +172,33 @@ namespace OpenSkiJumping.TVGraphics.SideResults
                 ? $"{previousRoundDataStored[item.CurrentCompetitorId].Rank}"
                 : "";
 
-            listItem.previousRoundDistanceText.text = $"{item.PreviousRoundDistance.ToString("F1", CultureInfo.InvariantCulture)}";
+            listItem.previousRoundDistanceText.text = item.PreviousRoundDistance > 0
+                ? $"{item.PreviousRoundDistance.ToString("F1", CultureInfo.InvariantCulture)}"
+                : "";
+
+            int rankChange = previousRoundDataStored[item.CurrentCompetitorId].Rank - item.Rank;
+
+            // Set the text for rank change
+            listItem.rankChange.text = item.Rank < resultsManager.Value.Results.Count()
+                ? $"{rankChange}"
+                : "";
+
+
+            // Change the text color based on the rank change
+            if (rankChange > 0)
+            {
+                listItem.rankChange.color = Color.green; // Positive rank change - green
+            }
+            else if (rankChange < 0)
+            {
+                listItem.rankChange.color = Color.red; // Negative rank change - red
+            }
+            else
+            {
+                listItem.rankChange.color = Color.white; // No rank change - white or default
+            }
+
+            //  $"{item.PreviousRoundDistance.ToString("F1", CultureInfo.InvariantCulture)}";
 
 
 

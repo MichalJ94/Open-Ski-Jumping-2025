@@ -24,7 +24,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
         public TMP_Text firstDistance;
         public TMP_Text firstGateT;
         public TMP_Text firstWindT;
-
+        public TMP_Text rankChangeT;
 
         public TranslatablePhrase result;
         public TranslatablePhrase dist;
@@ -39,6 +39,8 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
         public TranslatablePhrase secondGate;
         public TranslatablePhrase firstWind;
         public TranslatablePhrase secondWind;
+        public TranslatablePhrase previousRoundRank;
+        public TranslatablePhrase rankChange;
 
         public void Initialize()
         {
@@ -56,6 +58,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
                 firstStyle.enabled = false;
                 firstGateT.enabled = false;
                 firstWindT.enabled = false;
+                rankChangeT.enabled = false;
                 secondStyle.text = firstStyl.CurrentValue;
                 secondDistance.text = firstDist.CurrentValue;
                 secondGateT.text = firstGate.CurrentValue;
@@ -70,14 +73,16 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
                 firstStyle.enabled = true;
                 firstGateT.enabled = true;
                 firstWindT.enabled = true;
+                rankChangeT.enabled = true;
                 firstDistance.text = firstDist.CurrentValue;
                 firstStyle.text = firstStyl.CurrentValue;
                 firstGateT.text = firstGate.CurrentValue;
-                firstWindT.text = firstWind.CurrentValue;
+                firstWindT.text = previousRoundRank.CurrentValue + " " + roundIndex;
                 secondStyle.text = secondStyl.CurrentValue;
                 secondDistance.text = secondDist.CurrentValue;
                 secondGateT.text = secondGate.CurrentValue + " " + roundIndex;
                 secondWindT.text = secondWind.CurrentValue;
+                rankChangeT.text = rankChange.CurrentValue;
             }
 
             if (resultsManager.Value.EventInfo.roundInfos.Count == 1)

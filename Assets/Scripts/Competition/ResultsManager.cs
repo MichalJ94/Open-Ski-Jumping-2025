@@ -376,6 +376,7 @@ namespace OpenSkiJumping.Competition
 
             if (RoundIndex > 0 || SubroundIndex > 0) RemoveFromAllRoundResults();
             cpuJump.actualGate = (decimal)gameplayExtension.storeGate;
+            gameplayExtension.storeCPUDistance = cpuJump.distance;
             //UnityEngine.Debug.Log($"Od ResultsManager wind = {cpuJump.wind} windPoints = {cpuJump.windPoints}");
             AddResult(StartList[StartListIndex], SubroundIndex, cpuJump);
             AddToAllRoundResults();

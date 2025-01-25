@@ -83,6 +83,7 @@ namespace OpenSkiJumping.UI
 
         public void LowerGateAfterLongJump()
         {
+
             // Chyba czeba bydzie zrobiæ property z d³ugoœci¹ skoku CPU w Runtime Results Managerze. Albo storowaæ go w SO Gameplay extension!
             if (jumpOverHSPerformed == true || gameplayExtension.storeCPUDistance > (decimal)competitionRunner.GetHS())
             {
