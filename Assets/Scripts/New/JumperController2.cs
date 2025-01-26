@@ -185,7 +185,7 @@ namespace OpenSkiJumping.New
 
         private void ProcessLanding()
         {
-            if ((float)jumpData.Distance > hillSize)
+            if ((float)jumpData.Distance >= hillSize)
             {
                 windGatePanel.JumpOverHSPerformed();
                 float ofHS = ((float)jumpData.Distance/hillSize);

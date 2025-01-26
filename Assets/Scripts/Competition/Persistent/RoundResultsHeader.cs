@@ -41,6 +41,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
         public TranslatablePhrase secondWind;
         public TranslatablePhrase previousRoundRank;
         public TranslatablePhrase rankChange;
+        public TranslatablePhrase windGateComp;
 
         public void Initialize()
         {
@@ -75,9 +76,9 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
                 firstWindT.enabled = true;
                 rankChangeT.enabled = true;
                 firstDistance.text = firstDist.CurrentValue;
-                firstStyle.text = firstStyl.CurrentValue;
-                firstGateT.text = firstGate.CurrentValue;
-                firstWindT.text = previousRoundRank.CurrentValue + " " + roundIndex;
+                firstStyle.text = result.CurrentValue + " " + roundIndex;
+                firstGateT.text = windGateComp.CurrentValue + " " + roundIndex;
+                firstWindT.text = previousRoundRank.CurrentValue + " " + (roundIndex-1);
                 secondStyle.text = secondStyl.CurrentValue;
                 secondDistance.text = secondDist.CurrentValue;
                 secondGateT.text = secondGate.CurrentValue + " " + roundIndex;

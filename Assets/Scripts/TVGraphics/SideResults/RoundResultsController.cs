@@ -156,7 +156,7 @@ namespace OpenSkiJumping.TVGraphics.SideResults
                 ? $"{item.Style.ToString("F1", CultureInfo.InvariantCulture)}"
                 : "";
 
-            listItem.previousRoundStyleText.text = previousRoundDataStored.ContainsKey(item.CurrentCompetitorId)
+            listItem.previousRoundStyleText.text = previousRoundDataStored[item.CurrentCompetitorId].TotalPoints > 0
                 ? $"{previousRoundDataStored[item.CurrentCompetitorId].TotalPoints.ToString("F1", CultureInfo.InvariantCulture)}"
                 : "";
 
@@ -173,7 +173,7 @@ namespace OpenSkiJumping.TVGraphics.SideResults
                 : "";
 
             listItem.previousRoundDistanceText.text = item.PreviousRoundDistance > 0
-                ? $"{item.PreviousRoundDistance.ToString("F1", CultureInfo.InvariantCulture)}"
+                ? $"{item.PreviousRoundDistance.ToString("F1", CultureInfo.InvariantCulture)} m"
                 : "";
 
             int rankChange = previousRoundDataStored[item.CurrentCompetitorId].Rank - item.Rank;
@@ -240,7 +240,7 @@ namespace OpenSkiJumping.TVGraphics.SideResults
                 int roundNumber = resultsManager.Value.GetRoundNumber();
                   previousRoundDataStored.Clear();
                 //Attempt to replace ResultsDeepCopy.Count with competitionRunner.bibColors
-                for (int k = 0; k < competitionRunner.bibColors; k++)
+                for (int k = 0; k < resultsManager.Value.ResultsDeepCopy.Length; k++)
                   {
                   //  Debug.Log($"Before adding previousRoundData stored item. k: {k} roundNumber {roundNumber}");
                       var item = resultsManager.Value.ResultsDeepCopy[k];

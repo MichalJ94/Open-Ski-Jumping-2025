@@ -47,26 +47,36 @@ namespace OpenSkiJumping.UI
             float modifier = 1;
             //simulator.CPUWinnerDistanceAfterGateChange((int)val, windSlider.value);
 
-            //Constant added to maintain balance between CPU and 1P
-
-
-            simulator.CPUWinnerDistanceAfterGateChange((int)val, windSlider.value * (competitionRunner.GetHS() / 100f));
-        }
-
-        private void UpdateCPUWinDistanceAfterWindChange(float val)
-        {
             //Add modifier for positive and negative wind
-            if (windSlider.value > 0)
+            
+            /*if (windSlider.value > 0)
             {
-                //
+                modifier *= 0.1f;
             }
 
             if (windSlider.value < 0)
             {
-                //
+                modifier *= 2f;
+            }*/
+
+            simulator.CPUWinnerDistanceAfterGateChange((int)val, windSlider.value * (competitionRunner.GetHS() / 100f) * modifier);
+        }
+
+        private void UpdateCPUWinDistanceAfterWindChange(float val)
+        {
+            float modifier = 1;
+            //Add modifier for positive and negative wind
+            if (windSlider.value > 0)
+            {
+                modifier *= 0.5f;
+            }
+
+            if (windSlider.value < 0)
+            {
+                modifier *= 3f;
             }
             //Constant added to maintain balance between CPU and 1P
-            simulator.GetGateForWind(windSlider.value * (competitionRunner.GetHS() / 100f));
+            simulator.GetGateForWind(windSlider.value * (competitionRunner.GetHS() / 100f) * modifier);
         }
 
         private void SetAutoGate()
@@ -85,7 +95,7 @@ namespace OpenSkiJumping.UI
         {
 
             // Chyba czeba bydzie zrobiæ property z d³ugoœci¹ skoku CPU w Runtime Results Managerze. Albo storowaæ go w SO Gameplay extension!
-            if (jumpOverHSPerformed == true || gameplayExtension.storeCPUDistance > (decimal)competitionRunner.GetHS())
+            if (jumpOverHSPerformed == true || gameplayExtension.storeCPUDistance >= (decimal)competitionRunner.GetHS())
             {
                 if (gateSlider.value != 1)
                 {
