@@ -22,6 +22,7 @@ namespace OpenSkiJumping.Scripts2025
         public float modifierWindRandomnessLevel;
         public float snowChance;
         public float storeGate;
+        public float gateDownChance;
         public decimal storeCPUDistance;
 
 

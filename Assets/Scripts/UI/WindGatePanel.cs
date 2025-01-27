@@ -38,7 +38,7 @@ namespace OpenSkiJumping.UI
 
         private void UpdateWindText(float val)
         {
-            windText.text = $"Wind: {val} m/s";
+            windText.text = $"Wind: {val:F2} m/s";
             autoGateButton.interactable = true;
         }
 
@@ -79,7 +79,7 @@ namespace OpenSkiJumping.UI
             simulator.GetGateForWind(windSlider.value * (competitionRunner.GetHS() / 100f) * modifier);
         }
 
-        private void SetAutoGate()
+        public void SetAutoGate()
         {
             gateSlider.value = simulator.GetGateForWind(windSlider.value);
             Debug.Log($"Calculated gate: {windSlider.value}");
@@ -93,13 +93,16 @@ namespace OpenSkiJumping.UI
 
         public void LowerGateAfterLongJump()
         {
-
-            // Chyba czeba bydzie zrobiæ property z d³ugoœci¹ skoku CPU w Runtime Results Managerze. Albo storowaæ go w SO Gameplay extension!
-            if (jumpOverHSPerformed == true || gameplayExtension.storeCPUDistance >= (decimal)competitionRunner.GetHS())
+            if (Random.Range(0f, 100f) < gameplayExtension.gateDownChance)
             {
-                if (gateSlider.value != 1)
+
+                // Chyba czeba bydzie zrobiæ property z d³ugoœci¹ skoku CPU w Runtime Results Managerze. Albo storowaæ go w SO Gameplay extension!
+                if (jumpOverHSPerformed == true || gameplayExtension.storeCPUDistance >= (decimal)competitionRunner.GetHS())
                 {
-                    gateSlider.value -= 1;
+                    if (gateSlider.value != 1)
+                    {
+                        gateSlider.value -= 1;
+                    }
                 }
             }
 

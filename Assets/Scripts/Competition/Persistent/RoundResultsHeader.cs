@@ -76,8 +76,8 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
                 firstWindT.enabled = true;
                 rankChangeT.enabled = true;
                 firstDistance.text = firstDist.CurrentValue;
-                firstStyle.text = result.CurrentValue + " " + roundIndex;
-                firstGateT.text = windGateComp.CurrentValue + " " + roundIndex;
+                firstStyle.text = result.CurrentValue + " " + (roundIndex - 1);
+                firstGateT.text = windGateComp.CurrentValue + " " + (roundIndex -1);
                 firstWindT.text = previousRoundRank.CurrentValue + " " + (roundIndex-1);
                 secondStyle.text = secondStyl.CurrentValue;
                 secondDistance.text = secondDist.CurrentValue;

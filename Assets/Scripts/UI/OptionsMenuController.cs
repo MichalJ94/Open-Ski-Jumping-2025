@@ -23,6 +23,7 @@ namespace OpenSkiJumping.UI
         [SerializeField] private GameplayExtension gameplayExtension;
         [SerializeField] private Slider snowSlider;
         [SerializeField] private Slider windSlider;
+        [SerializeField] private Slider gateDownSlider;
 
         private List<Resolution> _resolutions;
 
@@ -95,6 +96,21 @@ namespace OpenSkiJumping.UI
                 gameplayExtension.snowChance = 10f;
             }
             snowSlider.onValueChanged.AddListener(UpdateSnowSlider);
+
+            if (gameConfig.Config.gateDownChance != float.NaN)
+            {
+
+                gateDownSlider.value = gameConfig.Config.gateDownChance;
+                gameplayExtension.gateDownChance = gateDownSlider.value;
+            }
+            else
+            {
+                gateDownSlider.value = 80f;
+                gameplayExtension.gateDownChance = 80f;
+            }
+            gateDownSlider.onValueChanged.AddListener(UpdateGateDownSlider);
+
+
         }
 
         private void UpdateQuality(int arg)
@@ -127,6 +143,11 @@ namespace OpenSkiJumping.UI
         private void UpdateSnowSlider(float arg)
         {
             gameConfig.Config.snowChance = snowSlider.value;
+        }
+
+        private void UpdateGateDownSlider(float arg)
+        {
+            gameConfig.Config.gateDownChance = gateDownSlider.value;
         }
 
         private void UpdateSensitivity(string val)
