@@ -93,7 +93,7 @@ namespace OpenSkiJumping.UI
 
         public void LowerGateAfterLongJump()
         {
-            if (Random.Range(0f, 100f) < gameplayExtension.gateDownChance)
+            if (Random.Range(0, 100) < (int)gameplayExtension.gateDownChance)
             {
 
                 // Chyba czeba bydzie zrobiæ property z d³ugoœci¹ skoku CPU w Runtime Results Managerze. Albo storowaæ go w SO Gameplay extension!
