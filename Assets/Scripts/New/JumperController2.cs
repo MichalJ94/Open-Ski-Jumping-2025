@@ -13,6 +13,8 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 using OpenSkiJumping.UI;
+using UnityEngine.Animations.Rigging;
+
 
 namespace OpenSkiJumping.New
 {
