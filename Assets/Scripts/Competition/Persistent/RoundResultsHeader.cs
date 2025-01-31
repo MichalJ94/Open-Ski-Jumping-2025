@@ -95,11 +95,13 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
                 firstStyle.enabled = false;
                 firstGateT.enabled = false;
                 firstWindT.enabled = false;
+                rankChangeT.enabled = false;
                 secondStyle.text = styl.CurrentValue;
                 secondDistance.text = dist.CurrentValue;
                 secondGateT.text = gate.CurrentValue;
                 secondWindT.text = wind.CurrentValue;
             }
+
 
 
 

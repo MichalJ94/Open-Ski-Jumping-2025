@@ -1096,7 +1096,7 @@ namespace OpenSkiJumping.Hills
             {
                 if (poleSegments.Contains(i))
                 {
-                    Debug.Log("Pole segment created at i = " + i);
+                    //Debug.Log("Pole segment created at i = " + i);
                     float poleZWidth = Mathf.Abs(hill.b1 + 1.4f);
                     Vector2 position = hill.inrunPolePoints[i];
                     float heightFactor = 1f - (float)i / (hill.inrunPolePoints.Length - 1);

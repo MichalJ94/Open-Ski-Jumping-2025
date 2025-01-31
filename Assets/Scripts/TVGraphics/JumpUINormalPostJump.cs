@@ -73,6 +73,7 @@ namespace OpenSkiJumping.TVGraphics
                 item.text = xx < 0 ? "" : TvGraphicsUtils.DistanceText(jumpResults.results[xx].distance);
                 xx++;
             }
+            //Problems occur with jumper from the last qualified position in the first round
         }
 
         public override void Hide()

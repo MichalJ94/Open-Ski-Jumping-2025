@@ -77,6 +77,7 @@ namespace OpenSkiJumping.Simulation
                 velocity += (force + gravity) * timeDelta;
                 position += velocity * timeDelta;
             }
+            // UnityEngine.Debug.Log($"JumpSimulator SimulateJumpwithVelocity windspeed: {windSpeed}");
             jumpData.CPUDistance = (decimal)Distance(position);
             return Distance(position);
         }

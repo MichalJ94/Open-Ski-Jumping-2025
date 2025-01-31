@@ -305,7 +305,7 @@ namespace OpenSkiJumping.Hills
             //add points between E2 and E1 (inclusive)
             var delta = E1.x - E2.x;
             var segments = (int)(l);
-            Debug.Log($"Inrun points segments: {segments} delta: {delta}");
+            //Debug.Log($"Inrun points segments: {segments} delta: {delta}");
             for (var i = 0; i <= segments; i++)
             {
                 points.Add(new Vector2(i * delta / segments + E2.x, Inrun(i * delta / segments + E2.x)));
@@ -333,7 +333,7 @@ namespace OpenSkiJumping.Hills
 
             // Define the number of segments or intervals for the entire range T to B
             int totalSegments = (int)(totalXDistance / -1.01) ; // Use deltaX for desired x-spacing
-            Debug.Log($"InrunPolepoints segments: {totalSegments} delta: {totalXDistance}");
+            //Debug.Log($"InrunPolepoints segments: {totalSegments} delta: {totalXDistance}");
             for (int i = 1; i <= totalSegments; i++)
             {
                 float x = i * (totalXDistance / totalSegments) + T.x;

@@ -24,6 +24,7 @@ namespace OpenSkiJumping.New
         [SerializeField] private AudioSource audioSource;
         public AudioSource src;
         public AudioClip skisSound, landingSound;
+        [SerializeField] Rig rig;
         [SerializeField] private float brakeForce;
         [SerializeField] private float inrunDrag = 0.0011f;
         private int windThrustDelayCounter = 0;
@@ -490,6 +491,7 @@ namespace OpenSkiJumping.New
             forceScale += forceScaleModifier;
             WindThrustDeterminerTimesUsed = 0;
             WindThrustDeterminer = 0;
+            rig.weight= 0;
         }
 
         private bool shouldStart;
@@ -536,7 +538,7 @@ namespace OpenSkiJumping.New
             {
                 button0 |= Input.GetMouseButtonDown(0);
                 button1 |= Input.GetMouseButtonDown(1);
-                
+                rig.weight = 0f;
                 Land();
 
             }
@@ -715,6 +717,7 @@ namespace OpenSkiJumping.New
             forceScaleModifier = gameplayExtension.forceScaleModifier(skillForPresentHill);
             forceScale -= forceScaleModifier;
             State = 1;
+            rig.weight = 0f;
             OnStartEvent.Invoke();
             UnityEngine.Debug.Log("skillforpresenthill: " + skillForPresentHill + " force at gate: " + forceScale);
             //UnityEngine.Debug.Log("jumpdata.Gate: " + jumpData.Gate + "jumpdata.Wind " + jumpData.Wind);
@@ -726,6 +729,12 @@ namespace OpenSkiJumping.New
         {
             takeoff = true;
             State = 2;
+            if (windGatePanel.windSlider.value > 0)
+            {
+
+                rig.weight = (windGatePanel.windSlider.value/5f);
+                UnityEngine.Debug.Log($"rig.weight during flight: {rig.weight}");
+            }
 
         }
 

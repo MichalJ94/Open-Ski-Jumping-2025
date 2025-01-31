@@ -22,7 +22,7 @@ namespace OpenSkiJumping.UI
         [SerializeField] private Button autoGateButton;
 
         [SerializeField] private TMP_Text windText;
-        [SerializeField] private Slider windSlider;
+        [SerializeField] public Slider windSlider;
         [SerializeField] private bool jumpOverHSPerformed = false;
         public void Awake()
         {
@@ -68,7 +68,7 @@ namespace OpenSkiJumping.UI
             //Add modifier for positive and negative wind
             if (windSlider.value > 0)
             {
-                modifier *= 0.5f;
+                modifier *= 0.9f;
             }
 
             if (windSlider.value < 0)
@@ -93,12 +93,15 @@ namespace OpenSkiJumping.UI
 
         public void LowerGateAfterLongJump()
         {
-            if (Random.Range(0, 100) < (int)gameplayExtension.gateDownChance)
-            {
+  
 
                 // Chyba czeba bydzie zrobiæ property z d³ugoœci¹ skoku CPU w Runtime Results Managerze. Albo storowaæ go w SO Gameplay extension!
                 if (jumpOverHSPerformed == true || gameplayExtension.storeCPUDistance >= (decimal)competitionRunner.GetHS())
                 {
+                Debug.Log("LowerGateAfterLongJump conditions met, before Random Range");
+                if (Random.Range(0, 100) < (int)gameplayExtension.gateDownChance)
+                {
+                    UnityEngine.Debug.Log("LowerGateAfterLongJump performed. gameplayExtension.gateDownChance: " + gameplayExtension.gateDownChance);
                     if (gateSlider.value != 1)
                     {
                         gateSlider.value -= 1;

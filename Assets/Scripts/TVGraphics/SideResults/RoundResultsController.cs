@@ -156,7 +156,7 @@ namespace OpenSkiJumping.TVGraphics.SideResults
                 ? $"{item.Style.ToString("F1", CultureInfo.InvariantCulture)}"
                 : "";
 
-            listItem.previousRoundStyleText.text = previousRoundDataStored[item.CurrentCompetitorId].TotalPoints > 0
+            listItem.previousRoundStyleText.text = previousRoundDataStored.ContainsKey(item.CurrentCompetitorId)
                 ? $"{previousRoundDataStored[item.CurrentCompetitorId].TotalPoints.ToString("F1", CultureInfo.InvariantCulture)}"
                 : "";
 
@@ -176,12 +176,21 @@ namespace OpenSkiJumping.TVGraphics.SideResults
                 ? $"{item.PreviousRoundDistance.ToString("F1", CultureInfo.InvariantCulture)} m"
                 : "";
 
-            int rankChange = previousRoundDataStored[item.CurrentCompetitorId].Rank - item.Rank;
+            if (!previousRoundDataStored.ContainsKey(item.CurrentCompetitorId))
+            {
+                Debug.Log($"!previousRoundDataStored.ContainsKey(item.CurrentCompetitorId), current round number: {roundNumber} listItem.rankChange.enabled: {listItem.rankChange.enabled}" );
+            }
 
-            // Set the text for rank change
-            listItem.rankChange.text = item.Rank < resultsManager.Value.Results.Count()
-                ? $"{rankChange}"
-                : "";
+            int rankChange = 0;
+            if (roundNumber != 0)
+            {
+                rankChange = previousRoundDataStored[item.CurrentCompetitorId].Rank - item.Rank;
+
+                // Set the text for rank change
+                listItem.rankChange.text = item.Rank < resultsManager.Value.Results.Count()
+                    ? $"{rankChange}"
+                    : "";
+            }
 
 
             // Change the text color based on the rank change
@@ -219,6 +228,7 @@ namespace OpenSkiJumping.TVGraphics.SideResults
         public void PrintGrabbedFinalResults()
         {
             //for (int i = 0; i < finalResultsGrabbed.Count; i++)
+            //for (int i = 0; i < resultsManager.Value.ResultsDeepCopy.Length; i++)
             for (int i = 0; i < resultsManager.Value.ResultsDeepCopy.Length; i++)
             {
 
