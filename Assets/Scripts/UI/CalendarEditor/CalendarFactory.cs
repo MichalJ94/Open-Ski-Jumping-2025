@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenSkiJumping.Competition;
 using OpenSkiJumping.Competition.Persistent;
 using OpenSkiJumping.ScriptableObjects;
 using UnityEngine;
@@ -64,8 +65,29 @@ namespace OpenSkiJumping.UI.CalendarEditor
         {
             var index = events.IndexOf(item);
             if (index < 0) return false;
+
+            // Update references to removed event
+            foreach (var ev in events)
+            {
+                if (ev.qualRankId == index) ev.qualRankId = -1; // Reset if it was pointing to the removed event
+                else if (ev.qualRankId > index) ev.qualRankId--; // Shift down if the index was higher
+
+                if (ev.ordRankId == index) ev.ordRankId = -1;
+                else if (ev.ordRankId > index) ev.ordRankId--;
+
+                if (ev.preQualRankId == index) ev.preQualRankId = -1;
+                else if (ev.preQualRankId > index) ev.preQualRankId--;
+            }
+
+            // Remove the event
             events.RemoveAt(index);
-            for (var i = index; i < events.Count; i++) events[i].id = i;
+
+            // Reassign event IDs
+            for (var i = index; i < events.Count; i++)
+            {
+                events[i].id = i;
+            }
+
             return true;
         }
 
@@ -77,8 +99,23 @@ namespace OpenSkiJumping.UI.CalendarEditor
                 .ToDictionary(x => x.item.id, x => x.index);
 
             foreach (var item in events)
+            {
                 item.classifications =
                     item.classifications.Where(it => map.ContainsKey(it)).Select(it => map[it]).ToList();
+                //
+                if(item.qualRankId == item.id)
+                {
+                    item.qualRankId -= 1;
+                    item.qualRankType = RankType.None;
+                }
+                if(item.preQualRankId == item.id)
+                {
+                    item.preQualRankId -= 1;
+                    item.preQualRankType = RankType.None;
+                }
+
+            
+            }
 
             for (var i = 0; i < classificationDataList.Count; i++)
                 classificationDataList[i] = new ClassificationData {name = classifications[i].name, id = i};

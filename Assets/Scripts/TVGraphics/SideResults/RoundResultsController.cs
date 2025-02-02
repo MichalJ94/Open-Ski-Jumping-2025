@@ -178,7 +178,7 @@ namespace OpenSkiJumping.TVGraphics.SideResults
 
             if (!previousRoundDataStored.ContainsKey(item.CurrentCompetitorId))
             {
-                Debug.Log($"!previousRoundDataStored.ContainsKey(item.CurrentCompetitorId), current round number: {roundNumber} listItem.rankChange.enabled: {listItem.rankChange.enabled}" );
+              //  Debug.Log($"!previousRoundDataStored.ContainsKey(item.CurrentCompetitorId), current round number: {roundNumber} listItem.rankChange.enabled: {listItem.rankChange.enabled}" );
             }
 
             int rankChange = 0;

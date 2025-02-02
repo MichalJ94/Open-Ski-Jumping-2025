@@ -131,10 +131,11 @@ namespace OpenSkiJumping.Competition
             if (resultsManager.RoundFinish())
             {
                 onRoundFinish.Invoke();
-                Debug.Log("ROUND RESULTS MISSION. onRoundFinish.Invoke();");
+                Debug.Log($"ROUND RESULTS MISSION. onRoundFinish.Invoke(); resultsManager.Value.EventInfo.roundInfos.Count: {resultsManager.Value.EventInfo.roundInfos.Count}");
                 //  LastRankUsable = resultsManager.Value.LastRank.ToArray();
                 if (resultsManager.Value.EventInfo.eventType != EventType.Team && resultsManager.Value.EventInfo.roundInfos.Count < 3)
                 {
+                    Debug.Log("onRoundCompleted.Invoke();");
                     onRoundCompleted.Invoke();
                     permitCPUJumps = false;
                 }
