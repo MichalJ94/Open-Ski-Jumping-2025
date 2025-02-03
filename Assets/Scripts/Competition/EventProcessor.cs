@@ -59,6 +59,7 @@ namespace OpenSkiJumping.Competition
                 ResultsProcessor qualRankProcessor;
                 if (eventInfo.qualRankType == RankType.Event)
                 {
+                    UnityEngine.Debug.Log($"eventId: {eventId} eventInfo.qualRankType: {eventInfo.qualRankType}  eventInfo.qualRankId: {eventInfo.qualRankId}");
                     qualRankProcessor = new EventResultsProcessor(resultsDatabase.eventResults[eventInfo.qualRankId]);
                     qualEventType = calendar.events[eventInfo.qualRankId].eventType;
                 }

@@ -55,6 +55,7 @@ namespace OpenSkiJumping.UI.TournamentMenu
 
         public string GetRank(RankType rankType, int id)
         {
+         //   Debug.Log($"TournamentMenuData. rankType: {rankType} id {id}");
             if (rankType == RankType.Classification)
                 return Calendar.classifications[id].name;
             if (rankType == RankType.Event)

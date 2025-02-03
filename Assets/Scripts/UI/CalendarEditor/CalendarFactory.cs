@@ -67,7 +67,13 @@ namespace OpenSkiJumping.UI.CalendarEditor
             if (index < 0) return false;
 
             // Update references to removed event
-            foreach (var ev in events)
+            // 20250203 - need to update the rank type as well
+
+            /*
+             * Kod Jonka
+             * 
+             * 
+             *             foreach (var ev in events)
             {
                 if (ev.qualRankId == index) ev.qualRankId = -1; // Reset if it was pointing to the removed event
                 else if (ev.qualRankId > index) ev.qualRankId--; // Shift down if the index was higher
@@ -76,6 +82,35 @@ namespace OpenSkiJumping.UI.CalendarEditor
                 else if (ev.ordRankId > index) ev.ordRankId--;
 
                 if (ev.preQualRankId == index) ev.preQualRankId = -1;
+                else if (ev.preQualRankId > index) ev.preQualRankId--;
+            }
+
+             * 
+             * 
+             * */
+
+
+            foreach (var ev in events)
+            {
+                if (ev.qualRankId == index)
+                {
+                    ev.qualRankId = 0;
+                    ev.qualRankType = RankType.None;
+                } // Reset if it was pointing to the removed event
+                else if (ev.qualRankId > index) ev.qualRankId--; // Shift down if the index was higher
+
+                if (ev.ordRankId == index)
+                {
+                    ev.ordRankId = 0;
+                    ev.ordRankType = RankType.None;
+                }
+                else if (ev.ordRankId > index) ev.ordRankId--;
+
+                if (ev.preQualRankId == index)
+                {
+                    ev.preQualRankId = 0;
+                    ev.preQualRankType = RankType.None;
+                }
                 else if (ev.preQualRankId > index) ev.preQualRankId--;
             }
 
@@ -103,18 +138,34 @@ namespace OpenSkiJumping.UI.CalendarEditor
                 item.classifications =
                     item.classifications.Where(it => map.ContainsKey(it)).Select(it => map[it]).ToList();
                 //
-                if(item.qualRankId == item.id)
+               /* if(item.qualRankId >= item.id && item.qualRankType == RankType.Event)
                 {
-                    item.qualRankId -= 1;
-                    item.qualRankType = RankType.None;
+         
+                    item.qualRankId = item.id-1;
+                    if(item.id == 0)
+                    {
+                        item.qualRankId = 0;
+                        item.qualRankType = RankType.None;
+                    }
                 }
-                if(item.preQualRankId == item.id)
+                if (item.preQualRankId >= item.id && item.preQualRankType == RankType.Event)
                 {
-                    item.preQualRankId -= 1;
-                    item.preQualRankType = RankType.None;
+                    item.preQualRankId = item.id - 1;
+                    if (item.id == 0)
+                    {
+                        item.preQualRankId = 0;
+                        item.preQualRankType = RankType.None;
+                    }
                 }
 
-            
+                if(item.ordRankId == -1)
+                {
+                    item.ordRankId = 0;
+                    item.preQualRankId = 0;
+                    item.qualRankId = 0;
+                }
+
+            */
             }
 
             for (var i = 0; i < classificationDataList.Count; i++)

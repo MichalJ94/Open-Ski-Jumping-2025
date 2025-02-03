@@ -187,9 +187,9 @@ namespace OpenSkiJumping.TVGraphics.SideResults
                 rankChange = previousRoundDataStored[item.CurrentCompetitorId].Rank - item.Rank;
 
                 // Set the text for rank change
-                listItem.rankChange.text = item.Rank < resultsManager.Value.Results.Count()
+                listItem.rankChange.text = item.Rank < resultsManager.Value.Results.Count()+1
                     ? $"{rankChange}"
-                    : "";
+                    : "DUPA";
             }
 
 
