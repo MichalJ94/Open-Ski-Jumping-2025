@@ -205,6 +205,15 @@ namespace OpenSkiJumping.UI.CalendarEditor
             return classificationDataList;
         }
 
+        public void ValidateData()
+        {
+            events[0].qualRankId = 0;
+            events[0].qualRankType = RankType.None;
+            events[0].ordRankId = 0;
+            events[0].ordRankType = RankType.None;
+            events[0].preQualRankId = 0;
+            events[0].preQualRankType = RankType.None;
+        }
         public Calendar CreateCalendar()
         {
             var tmpEvents = Events.ToList();

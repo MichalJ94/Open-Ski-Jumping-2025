@@ -51,6 +51,7 @@ namespace OpenSkiJumping.UI.CalendarEditor
         public void CloseCalendarEditor()
         {
             if (calendar == null) return;
+            calendarFactory.ValidateData();
             jumpersMenu.SelectionSave();
 
             SaveToCalendar(calendar);

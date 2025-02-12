@@ -357,7 +357,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
 
         public void UpdateResults()
         {
-            CountFourthPlaces();
+            if (model.GameSave.resultsContainer.eventResults.Length > 3) { CountFourthPlaces(); }
             for (int i = 0; i < samePodiumPlacesList.Count; i++)
             {
                 {
