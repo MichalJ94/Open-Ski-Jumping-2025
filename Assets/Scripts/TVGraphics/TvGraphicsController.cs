@@ -42,6 +42,7 @@ namespace OpenSkiJumping.TVGraphics
         public List<GraphicsData> graphicsData;
         private bool sideResultsActive;
         public UnityEvent onRoundCompleted;
+        public GameObject restartButton;
 
 
         private EventInfo currentEvent;
@@ -86,6 +87,7 @@ namespace OpenSkiJumping.TVGraphics
                 //  graphicsData[current].sideResults.gameObject
                 //    .SetActive(!graphicsData[current].sideResults.gameObject.activeSelf);
             }
+
         }
 
         public void OnCompetitionStart()
@@ -104,6 +106,17 @@ namespace OpenSkiJumping.TVGraphics
         
             SetMastersActive();
             hillNameText.text = currentEvent.hillId;
+        }
+
+        public void ActivateRestartButton()
+        {
+            StartCoroutine(ActivateRestartButtonAfterDelay(0.22f));
+        }
+
+        private IEnumerator ActivateRestartButtonAfterDelay(float delay)
+        {
+            yield return new WaitForSecondsRealtime(delay);
+            restartButton.SetActive(true);
         }
 
         private void SetMastersActive()
@@ -147,6 +160,7 @@ namespace OpenSkiJumping.TVGraphics
 
         public void ShowPostJump()
         {
+
             StartCoroutine(ShowPostJumpRoutine());
         }
 

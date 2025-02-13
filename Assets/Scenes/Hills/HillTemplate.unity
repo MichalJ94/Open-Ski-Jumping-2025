@@ -4501,7 +4501,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 375597861}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 07329bfc749f2c70789e97123d2ac3e2, type: 3}
   m_Name: 
@@ -11058,7 +11058,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.46885, y: 39817940}
+  m_AnchoredPosition: {x: 1.46885, y: 56595164}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!1001 &664952345
@@ -15118,7 +15118,7 @@ Camera:
   m_FOVAxisMode: 0
   m_SensorSize: {x: 24.89, y: 18.66}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 20.259272
+  m_FocalLength: 54.052418
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -15127,7 +15127,7 @@ Camera:
     height: 1
   near clip plane: 2
   far clip plane: 1000
-  field of view: 49.454967
+  field of view: 19.586672
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -15152,9 +15152,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 816382546}
-  m_LocalRotation: {x: 0.073422454, y: -0.000000017335056, z: 0.0000000012762273,
-    w: 0.9973009}
-  m_LocalPosition: {x: 10.41, y: 2.2200005, z: -21.48}
+  m_LocalRotation: {x: -0.0048745135, y: -0.47033045, z: -0.0025979627, w: 0.8824731}
+  m_LocalPosition: {x: 58.5, y: -1.6, z: -32.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1167020446}
@@ -32286,7 +32285,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 761697686}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.40540266
+  m_Size: 0.37217823
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -46486,8 +46485,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1982634237}
-  m_LocalRotation: {x: 0.073422454, y: -0.000000017335056, z: 0.0000000012762273,
-    w: 0.9973009}
+  m_LocalRotation: {x: 0.07342243, y: 0.000000016812347, z: -0.0000000012377441, w: 0.9973009}
   m_LocalPosition: {x: 10.41, y: 2.2200005, z: -21.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -56006,7 +56004,7 @@ MonoBehaviour:
   hillNameText: {fileID: 1462445458}
   current: 0
   preJumpGraphicsCooldown: 0.5
-  postJumpGraphicsCooldown: 0.5
+  postJumpGraphicsCooldown: 0.2
   resultsManager: {fileID: 11400000, guid: 2263c123852116d44925a3188e8ded51, type: 2}
   competitors: {fileID: 11400000, guid: a37b188b5d0732ffda2e4a5f63ff3a24, type: 2}
   roundResultsController: {fileID: 2142869717}
@@ -56044,6 +56042,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  restartButton: {fileID: 1795964984}
 --- !u!114 &2141044619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56091,6 +56090,19 @@ MonoBehaviour:
       - m_Target: {fileID: 2141044618}
         m_TargetAssemblyTypeName: 
         m_MethodName: ShowPostJump
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2141044618}
+        m_TargetAssemblyTypeName: OpenSkiJumping.TVGraphics.TvGraphicsController,
+          Main
+        m_MethodName: ActivateRestartButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -57345,12 +57357,12 @@ PrefabInstance:
     - target: {fileID: 4200885254943762890, guid: 0d78cbde8fcdfdd8c84660723f488a00,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 194.87036
+      value: 197.10864
       objectReference: {fileID: 0}
     - target: {fileID: 4200885254943762890, guid: 0d78cbde8fcdfdd8c84660723f488a00,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 222365600
+      value: 232509970
       objectReference: {fileID: 0}
     - target: {fileID: 4721245906461444285, guid: 0d78cbde8fcdfdd8c84660723f488a00,
         type: 3}
