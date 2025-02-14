@@ -344,6 +344,17 @@ namespace OpenSkiJumping.Competition
 
         public void RegisterCPUJump(IJumpData jumpData, GameplayExtension gameplayExtension)
         {
+           UnityEngine.Debug.Log("RegisterCPUJump run begin");
+
+            try
+            {
+                // your code segment which might throw an exception
+                UnityEngine.Debug.Log(EventInfo.roundInfos[RoundIndex]);
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
 
             var currentRoundInfo = EventInfo.roundInfos[RoundIndex];
             /*if (currentRoundInfo.disableJudgesMarks)
@@ -353,6 +364,7 @@ namespace OpenSkiJumping.Competition
             }*/
 
             //Set init gate for round
+
             if (StartListIndex == 0 && SubroundIndex == 0)
             {
                 initGates[RoundIndex] = jumpData.Gate;
@@ -385,6 +397,7 @@ namespace OpenSkiJumping.Competition
             gameplayExtension.storeCPUDistance = cpuJump.distance;
             //UnityEngine.Debug.Log($"Od ResultsManager wind = {cpuJump.wind} windPoints = {cpuJump.windPoints}");
             AddResult(StartList[StartListIndex], SubroundIndex, cpuJump);
+
             AddToAllRoundResults();
             AddToFinalResults();
 
