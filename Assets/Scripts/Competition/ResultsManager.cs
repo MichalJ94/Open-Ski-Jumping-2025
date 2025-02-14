@@ -240,8 +240,13 @@ namespace OpenSkiJumping.Competition
 
         public bool SubroundFinish()
         {
+            if(SubroundIndex == subRoundsCount)
+            {
+                UnityEngine.Debug.Log($"if(SubroundIndex == subRoundsCount) has been run");
+                return true;
+            }
             LastRank = Results.Select(item => item.Rank).ToArray();
-            UnityEngine.Debug.Log($"Subround {SubroundIndex} is being finished. LastRank[0] value: {LastRank[0]} FinalResults.count {finalResults.Count}");
+            UnityEngine.Debug.Log($"Subround {SubroundIndex} is being finished. FinalResults.count {finalResults.Count}");
 
             finalResultsAccessible = new SortedList<(int state, decimal points, int bib), int>(finalResults.Comparer);
             foreach (var kvp in finalResults)
@@ -258,6 +263,7 @@ namespace OpenSkiJumping.Competition
 
             SubroundIndex++;
             StartListIndex = 0;
+            UnityEngine.Debug.Log($"public bool SubroundFinish() just before SubroundIndex < subRoundsCount");
             return SubroundIndex < subRoundsCount;
         }
 

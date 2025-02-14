@@ -122,7 +122,7 @@ namespace OpenSkiJumping.Competition
                 return;
             }
             // W ty miejscu pojawia sie problem!
-
+            Debug.Log("CompetitionRunner OnRoundFinish(); run in public void OnSubroundFinish()");
             OnRoundFinish();
         }
 
@@ -139,18 +139,20 @@ namespace OpenSkiJumping.Competition
                     onRoundCompleted.Invoke();
                     permitCPUJumps = false;
                 }
-
+                Debug.Log("CompetitionRunner OnRoundStart(); run in public void public void OnRoundFinish()");
                 OnRoundStart();
                 return;
             }
 
             if (resultsManager.Value.EventInfo.eventType != EventType.Team && resultsManager.Value.EventInfo.roundInfos.Count < 3)
             {
+                Debug.Log("CompetitionRunner onRoundCompleted.Invoke(); run in public void public void OnRoundFinish()");
                 onRoundCompleted.Invoke();
             }
             onRoundFinish.Invoke();
             if (resultsManager.Value.EventInfo.eventType == EventType.Team || resultsManager.Value.EventInfo.roundInfos.Count > 2)
             {
+                Debug.Log("CompetitionRunner OnCompetitionFinish(); run in public void public void OnRoundFinish()");
                 OnCompetitionFinish();
             }
         }
@@ -332,15 +334,19 @@ namespace OpenSkiJumping.Competition
 
         public void OnSubroundStart()
         {
+            Debug.Log("OnSubroundStart beginning of the method");
             resultsManager.SubroundInit();
             onSubroundStart.Invoke();
             OnJumpStart();
+            Debug.Log("OnSubroundStart end of the method");
         }
 
         public void OnJumpStart()
         {
             var id = resultsManager.Value.GetCurrentJumperId();
+            Debug.Log("OnNewJumperOnGateInvoked");
             onNewJumper.Invoke();
+
             /*if (skiJumperDataController.GetControl() == 1)
             {
                 cpuJumpPerformed.Invoke();
@@ -356,8 +362,8 @@ namespace OpenSkiJumping.Competition
                 jumpData.InitGate = jumpData.Gate;
             toBeatLineController.CompensationPoints =
                 (float) (_hillInfo.GetGatePoints(jumpData.GatesDiff) + _hillInfo.GetWindPoints(jumpData.Wind));
-            //Debug.Log(" toBeatLineController.CompensationPoints: " + toBeatLineController.CompensationPoints);
-            onWindGateChanged.Invoke();
+            Debug.Log("onWindGateChanged.Invoke() toBeatLineController.CompensationPoints: " + toBeatLineController.CompensationPoints);
+            if (jumperCounterReached == false) { onWindGateChanged.Invoke(); }
         }
     }
 }

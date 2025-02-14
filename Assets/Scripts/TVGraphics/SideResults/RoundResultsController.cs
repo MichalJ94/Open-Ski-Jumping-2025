@@ -10,7 +10,7 @@ using OpenSkiJumping.Competition;
 using System.Linq;
 using UnityEngine.SocialPlatforms;
 using OpenSkiJumping.UI.TournamentMenu.ResultsMenu;
-using static UnityEditor.Progress;
+
 
 namespace OpenSkiJumping.TVGraphics.SideResults
 {

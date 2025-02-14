@@ -110,7 +110,7 @@ namespace OpenSkiJumping.TVGraphics
 
         public void ActivateRestartButton()
         {
-            StartCoroutine(ActivateRestartButtonAfterDelay(0.22f));
+            StartCoroutine(ActivateRestartButtonAfterDelay(0.52f));
         }
 
         private IEnumerator ActivateRestartButtonAfterDelay(float delay)
