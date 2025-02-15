@@ -98,8 +98,9 @@ namespace OpenSkiJumping.UI
                 // Chyba czeba bydzie zrobiæ property z d³ugoœci¹ skoku CPU w Runtime Results Managerze. Albo storowaæ go w SO Gameplay extension!
                 if (jumpOverHSPerformed == true || gameplayExtension.storeCPUDistance >= (decimal)competitionRunner.GetHS())
                 {
-                Debug.Log("LowerGateAfterLongJump conditions met, before Random Range");
-                if (Random.Range(0, 100) < (int)gameplayExtension.gateDownChance)
+                int random = Random.Range(0, 100);
+                Debug.Log($"LowerGateAfterLongJump conditions met, before Random Range. random: {random} (int)gameplayExtension.gateDownChance: {(int)gameplayExtension.gateDownChance}");
+                if (random < (int)gameplayExtension.gateDownChance)
                 {
                     UnityEngine.Debug.Log("LowerGateAfterLongJump performed. gameplayExtension.gateDownChance: " + gameplayExtension.gateDownChance);
                     if (gateSlider.value != 1)

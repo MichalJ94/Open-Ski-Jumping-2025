@@ -32,6 +32,8 @@ namespace OpenSkiJumping.Scripts2025
             {
                 modifierWindRandomnessLevel = gameConfig.Config.randomnessLevelWind;
                 snowChance = gameConfig.Config.snowChance;
+                modifierCPURandomnessLevel = gameConfig.Config.randomnessLevelCPU;
+                gateDownChance = gameConfig.Config.gateDownChance;
             }
             else
             {
