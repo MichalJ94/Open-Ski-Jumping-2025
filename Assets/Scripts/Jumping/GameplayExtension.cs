@@ -28,6 +28,13 @@ namespace OpenSkiJumping.Scripts2025
 
         private void OnEnable()
         {
+            GrabValuesFromConfig();
+
+
+        }
+
+        public void GrabValuesFromConfig()
+        {
             if (gameConfig != null && gameConfig.Config != null)
             {
                 modifierWindRandomnessLevel = gameConfig.Config.randomnessLevelWind;
@@ -40,9 +47,7 @@ namespace OpenSkiJumping.Scripts2025
                 Debug.LogWarning("gameConfig or gameConfig.Config is null.");
             }
 
-
         }
-
 
         public float forceScaleModifier(int skill)
         {

@@ -143,11 +143,13 @@ namespace OpenSkiJumping.UI
         private void UpdateSnowSlider(float arg)
         {
             gameConfig.Config.snowChance = snowSlider.value;
+            gameplayExtension.snowChance = snowSlider.value;
         }
 
         private void UpdateGateDownSlider(float arg)
         {
             gameConfig.Config.gateDownChance = gateDownSlider.value;
+            gameplayExtension.gateDownChance = gateDownSlider.value;
         }
 
         private void UpdateSensitivity(string val)

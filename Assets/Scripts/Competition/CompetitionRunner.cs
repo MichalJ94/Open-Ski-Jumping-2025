@@ -207,6 +207,7 @@ namespace OpenSkiJumping.Competition
 
         public void OnCompetitionStart()
         {
+            gameplayExtension.GrabValuesFromConfig();
             var save = savesRepository.GetCurrentSave();
             var eventId = save.resultsContainer.eventIndex;
             var currentEventInfo = save.calendar.events[eventId];
