@@ -10,6 +10,7 @@ using OpenSkiJumping.Competition;
 using System.Linq;
 using UnityEngine.SocialPlatforms;
 using OpenSkiJumping.UI.TournamentMenu.ResultsMenu;
+using static UnityEditor.Progress;
 
 
 namespace OpenSkiJumping.TVGraphics.SideResults
@@ -238,7 +239,7 @@ namespace OpenSkiJumping.TVGraphics.SideResults
 
 
                 //Problemy ponizej w konkursie 4-seryjnym
-                Debug.Log($"resultsManager.Value.ResultsDeepCopy[i].Rank = {(resultsManager.Value.ResultsDeepCopy[i].Rank)}   Name: {GetNameById(resultsManager.Value.ResultsDeepCopy[i].CurrentCompetitorId)}");
+                Debug.Log($"resultsManager.Value.ResultsDeepCopy[i].Rank = {(resultsManager.Value.ResultsDeepCopy[i].Rank)}   Name: {GetNameById(resultsManager.Value.ResultsDeepCopy[i].CurrentCompetitorId)} ");
 
             }
 
