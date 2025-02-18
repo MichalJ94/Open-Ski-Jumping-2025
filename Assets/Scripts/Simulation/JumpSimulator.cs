@@ -129,8 +129,8 @@ namespace OpenSkiJumping.Simulation
             var tailWindDist = SimulateJump(initGatePos, -3);
             var lowerGatePos = initGatePos - 3 * (hill.A - hill.B) / hill.es;
             var lowerGateDist = SimulateJump(lowerGatePos, 0);
-            var headWindFactor = (headWindDist - initDist) / 3.0f;
-            var tailWindFactor = (initDist - tailWindDist) / 3.0f;
+            var headWindFactor = (headWindDist - initDist) / 1.3f;
+            var tailWindFactor = (initDist - tailWindDist) / 1.4f;
             var gateFactor = (initDist - lowerGateDist) / 3.0f;
          //   Debug.Log($"{headWindFactor} | {tailWindFactor} | {gateFactor}");
 

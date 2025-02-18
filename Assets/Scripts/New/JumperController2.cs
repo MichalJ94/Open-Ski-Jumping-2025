@@ -603,7 +603,8 @@ namespace OpenSkiJumping.New
 
         private void FixedUpdate()
         {
-            var vel = rb.velocity + rb.velocity.normalized * windForce;
+            //Text windforce
+            var vel = rb.velocity + rb.velocity.normalized * (windForce*0.72f);
             //Debug.Log("rb.velocity: " + rb.velocity + " rb velocity.normalized: " + rb.velocity.normalized);
 
             var liftVec = new Vector3(-vel.normalized.y, vel.normalized.x, 0.0f);
