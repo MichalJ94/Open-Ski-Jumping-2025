@@ -16,6 +16,7 @@ using OpenSkiJumping.UI;
 using UnityEngine.Animations.Rigging;
 
 
+
 namespace OpenSkiJumping.New
 {
     public class JumperController2 : MonoBehaviour
@@ -445,7 +446,7 @@ namespace OpenSkiJumping.New
             if(hS < 130)
             {
                 modifier += (130 - hS) / 10;
-                startForceScale -= (130 - hS) * (0.00065f*modifier);
+                startForceScale -= (130 - hS) * (0.00062f*modifier);
             }
             if (hS > 250)
             {
@@ -603,9 +604,25 @@ namespace OpenSkiJumping.New
 
         private void FixedUpdate()
         {
-            //Text windforce
-            var vel = rb.velocity + rb.velocity.normalized * (windForce*0.72f);
-            //Debug.Log("rb.velocity: " + rb.velocity + " rb velocity.normalized: " + rb.velocity.normalized);
+            //Test windforce
+            
+                        var vel = new Vector3();
+         
+                        if (windForce > 0)
+                        {
+                            vel = rb.velocity + rb.velocity.normalized * windForce*(0.8f+windForce*(hillSize * 0.0005f));
+                        }
+                        else if (windForce < 0)
+                        {
+                            vel = rb.velocity + rb.velocity.normalized * windForce*(4f+((-windForce)*(hillSize*0.0005f)));
+                        }
+                        else
+                        {
+                            vel = rb.velocity + rb.velocity.normalized * windForce;
+                        }
+            
+            //var vel = rb.velocity + rb.velocity.normalized * windForce;
+                //Debug.Log("rb.velocity: " + rb.velocity + " rb velocity.normalized: " + rb.velocity.normalized);
 
             var liftVec = new Vector3(-vel.normalized.y, vel.normalized.x, 0.0f);
             double tmp = rb.rotation.eulerAngles.z;

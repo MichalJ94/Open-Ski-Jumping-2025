@@ -77,8 +77,19 @@ namespace OpenSkiJumping.Simulation
                 velocity += (force + gravity) * timeDelta;
                 position += velocity * timeDelta;
             }
+            //Trying to make CPUs jump slightly better with front wind
             // UnityEngine.Debug.Log($"JumpSimulator SimulateJumpwithVelocity windspeed: {windSpeed}");
-            jumpData.CPUDistance = (decimal)Distance(position);
+
+            decimal CPUDistance = (decimal)Distance(position);
+            if (windSpeed >= 0)
+            {
+                jumpData.CPUDistance = CPUDistance * (((decimal)windSpeed * 0.015m) + 1);
+            }
+            else
+            {
+                jumpData.CPUDistance = CPUDistance * (((decimal)windSpeed * 0.025m) + 1);
+            }
+                UnityEngine.Debug.Log($"CPU Distance after wind change: {jumpData.CPUDistance} core distance: {Distance(position)} windSpeed: {windSpeed}");
             return Distance(position);
         }
 
@@ -129,11 +140,26 @@ namespace OpenSkiJumping.Simulation
             var tailWindDist = SimulateJump(initGatePos, -3);
             var lowerGatePos = initGatePos - 3 * (hill.A - hill.B) / hill.es;
             var lowerGateDist = SimulateJump(lowerGatePos, 0);
-            var headWindFactor = (headWindDist - initDist) / 1.3f;
-            var tailWindFactor = (initDist - tailWindDist) / 1.4f;
-            var gateFactor = (initDist - lowerGateDist) / 3.0f;
-         //   Debug.Log($"{headWindFactor} | {tailWindFactor} | {gateFactor}");
+            var headWindFactor = (headWindDist - initDist)*0.75f;
+            var tailWindFactor = (initDist - tailWindDist)*0.75f;
+            var gateFactor = (initDist - lowerGateDist) * 0.3f;
 
+            Debug.Log($"Before changes initDist {initDist} lowerGateDist {lowerGateDist}");
+            /*
+if(hill.hS < 105 && gateFactor > 2)
+            {
+                gateFactor = 2;
+            }
+if(hill.hS >= 105 && hill.hS < 155 && gateFactor > 1.8)
+            {
+                gateFactor = 1.8f;
+            }
+if(hill.hS >= 155 & gateFactor > 1.2f)
+            {
+                gateFactor = 1.2f;
+            }
+
+*/
             return (headWindFactor, tailWindFactor, gateFactor);
         }
     }
