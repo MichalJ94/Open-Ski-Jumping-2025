@@ -113,6 +113,24 @@ namespace OpenSkiJumping.UI
             jumpOverHSPerformed = false;
         }
 
+        public void AdjustWindAndGateAtTheEndOfTheRound()
+        {
+            if(windSlider.value > 0.5f)
+            {
+                windSlider.value = Random.Range(0.3f,0.5f);
+            }
+            if(windSlider.value < -0.5f)
+            {
+                windSlider.value = Random.Range(-0.5f,-0.3f);
+            }
+
+            UpdateWindText(windSlider.value);
+            if (competitionRunner.GetHS() < 160)
+            {
+                SetAutoGate();
+            }
+        }
+
         public void JumpOverHSPerformed()
         {
             
