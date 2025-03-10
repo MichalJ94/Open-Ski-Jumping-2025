@@ -89,7 +89,7 @@ namespace OpenSkiJumping.Simulation
             {
                 jumpData.CPUDistance = CPUDistance * (((decimal)windSpeed * 0.025m) + 1);
             }
-                UnityEngine.Debug.Log($"CPU Distance after wind change: {jumpData.CPUDistance} core distance: {Distance(position)} windSpeed: {windSpeed}");
+                //UnityEngine.Debug.Log($"CPU Distance after wind change: {jumpData.CPUDistance} core distance: {Distance(position)} windSpeed: {windSpeed}");
             return Distance(position);
         }
 

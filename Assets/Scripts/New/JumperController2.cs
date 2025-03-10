@@ -82,10 +82,12 @@ namespace OpenSkiJumping.New
         public UnityEvent OnRoundCompleted;
         private Rigidbody rb;
         public FloatVariable rotCoef;
+        public Collider landingAreaCollider;
         public GameObject rSkiClone, lSkiClone;
 
         public float sensCoef = 0.01f;
         public float smoothCoef = 0.01f;
+        private float minRearWindMultiplier = 2f;
 
         private bool takeoff;
         public int totalSamples;
@@ -132,6 +134,8 @@ namespace OpenSkiJumping.New
 
             if (!Landed && other.CompareTag("LandingArea"))
             {
+                
+
                 judgesController.OnDistanceMeasurement((jumperModel.distCollider1.transform.position +
                                                         jumperModel.distCollider2.transform.position) / 2.0f);
                 // UnityEngine.Debug.Log("Teraz pokazuję jumpData.distance od OnTriggerEnter: " + jumpData.Distance);
@@ -509,6 +513,10 @@ namespace OpenSkiJumping.New
                // UnityEngine.Debug.Log("Od JumperController2 Update CPUJumpPerformed.Invoke();");
             }
 
+          if(state == 2 && !Landed)
+            {
+                UnityEngine.Debug.Log($"Vertical distance between jumper and landing area: {jumperModel.distCollider1.transform.position.y - landingAreaCollider.bounds.max.y}");
+            }
 
 
                 if (OnInrun || OnOutrun)
@@ -540,6 +548,7 @@ namespace OpenSkiJumping.New
                 button0 |= Input.GetMouseButtonDown(0);
                 button1 |= Input.GetMouseButtonDown(1);
                 rig.weight = 0f;
+                
                 Land();
 
             }
@@ -602,27 +611,65 @@ namespace OpenSkiJumping.New
             }
         }
 
+        private float GetHillMultiplier(float hillSize)
+        {
+            // For hillSize <= 90, use 0.0001
+            if (hillSize <= 90f)
+            {
+                return 0.000f;
+            }
+            // For hillSize between 90 and 130, interpolate between 0.0001 and 0.0003
+            else if (hillSize <= 130f)
+            {
+                return Mathf.Lerp(0.0000f, 0.0007f, (hillSize - 90f) / (130f - 90f));
+            }
+            // For hillSize between 130 and 250, interpolate between 0.0003 and 0.006
+            else if (hillSize <= 250f)
+            {
+                return Mathf.Lerp(0.0007f, 0.018f, (hillSize - 130f) / (250f - 130f));
+            }
+            else
+            {
+                // For sizes above 250, clamp to 0.006 or extrapolate if desired
+                return 0.018f;
+            }
+        }
+
         private void FixedUpdate()
         {
             //Test windforce
             
                         var vel = new Vector3();
-         
-                        if (windForce > 0)
-                        {
-                            vel = rb.velocity + rb.velocity.normalized * windForce*(0.8f+windForce*(hillSize * 0.0005f));
-                        }
-                        else if (windForce < 0)
-                        {
-                            vel = rb.velocity + rb.velocity.normalized * windForce*(4f+((-windForce)*(hillSize*0.0005f)));
-                        }
-                        else
-                        {
-                            vel = rb.velocity + rb.velocity.normalized * windForce;
-                        }
-            
+
+            if (windForce > 0)
+            {
+                vel = rb.velocity + rb.velocity.normalized * windForce * (0.8f + windForce * (hillSize * 0.0005f));
+            }
+            else if (windForce < 0 && windForce > -2f)
+            {
+                // Clamp windForce to the range [0, -2]
+                float clampedWind = Mathf.Clamp(windForce, -2f, 0f);
+
+                // Compute t such that t is 0 when windForce is 0 and 1 when windForce is -2
+                float t = Mathf.InverseLerp(0f, -2f, clampedWind);
+
+                // Interpolate the base multiplier (here using 2.8f as your starting value) 
+                // and add the dynamic hillSize modifier:
+                float multiplier = Mathf.Lerp(2f, minRearWindMultiplier, t) + (-windForce) * (hillSize * GetHillMultiplier(hillSize));
+
+                vel = rb.velocity + rb.velocity.normalized * windForce * multiplier;
+            }
+            else if (windForce <= -2.5f)
+            {
+                vel = rb.velocity + rb.velocity.normalized * windForce * (minRearWindMultiplier + (-windForce) * (hillSize * GetHillMultiplier(hillSize)));
+            }
+            else
+            {
+                vel = rb.velocity + rb.velocity.normalized * windForce;
+            }
+
             //var vel = rb.velocity + rb.velocity.normalized * windForce;
-                //Debug.Log("rb.velocity: " + rb.velocity + " rb velocity.normalized: " + rb.velocity.normalized);
+            //Debug.Log("rb.velocity: " + rb.velocity + " rb velocity.normalized: " + rb.velocity.normalized);
 
             var liftVec = new Vector3(-vel.normalized.y, vel.normalized.x, 0.0f);
             double tmp = rb.rotation.eulerAngles.z;
@@ -750,7 +797,10 @@ namespace OpenSkiJumping.New
             if (windGatePanel.windSlider.value > 0)
             {
 
-                rig.weight = (windGatePanel.windSlider.value/5f);
+                rig.weight = (windGatePanel.windSlider.value/3f);
+                if(rig.weight > 1){
+                    rig.weight = 1;
+                }
                 UnityEngine.Debug.Log($"rig.weight during flight: {rig.weight}");
             }
 
