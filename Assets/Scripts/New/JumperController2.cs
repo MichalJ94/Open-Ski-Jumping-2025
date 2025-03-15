@@ -21,7 +21,7 @@ namespace OpenSkiJumping.New
 {
     public class JumperController2 : MonoBehaviour
     {
-        [Space] [Header("Flight")] public double angle;
+        [Space][Header("Flight")] public double angle;
         [SerializeField] private AudioSource audioSource;
         public AudioSource src;
         public AudioClip skisSound, landingSound;
@@ -37,18 +37,18 @@ namespace OpenSkiJumping.New
         public CompetitionRunner competitionRunner;
         private float torqueCoef = 0f;
         [SerializeField] private int WindThrustDeterminer;
-        [SerializeField]  private int WindThrustDeterminerTimesUsed;
+        [SerializeField] private int WindThrustDeterminerTimesUsed;
         [SerializeField] private float fixedUpdateTorqueReference;
         public GameObject continueButton;
         private float forceScaleModifier;
-
+        private float windModifier;
 
         //                                                                                          BUG Z ROTACJĄ LEŻY W WINDTHRUSTDETERMINERTIMESUSED.
 
         bool button0, button1;
         public bool willFall;
         private bool deductedforlanding;
-        public float dirChange;        
+        public float dirChange;
         public double drag = 0.001d;
         public float forceChange;
         private int goodSamples;
@@ -65,7 +65,7 @@ namespace OpenSkiJumping.New
         public JumperModel jumperModel;
 
 
-        [Space] [Header("Parameters")] public float jumpSpeed;
+        [Space][Header("Parameters")] public float jumpSpeed;
         [SerializeField] private float forceScale;
         public float startForceScale;
 
@@ -87,7 +87,7 @@ namespace OpenSkiJumping.New
 
         public float sensCoef = 0.01f;
         public float smoothCoef = 0.01f;
-        private float minRearWindMultiplier = 2f;
+
 
         private bool takeoff;
         public int totalSamples;
@@ -97,7 +97,7 @@ namespace OpenSkiJumping.New
 
 
         // public float mouseSensitivity = 2f; 
-        [Space] [Header("Wind")] public Vector2 windDir;
+        [Space][Header("Wind")] public Vector2 windDir;
         public float windForce;
         private static readonly int JumperCrash = Animator.StringToHash("JumperCrash");
         private static readonly int JumperState = Animator.StringToHash("JumperState");
@@ -134,7 +134,7 @@ namespace OpenSkiJumping.New
 
             if (!Landed && other.CompareTag("LandingArea"))
             {
-                
+
 
                 judgesController.OnDistanceMeasurement((jumperModel.distCollider1.transform.position +
                                                         jumperModel.distCollider2.transform.position) / 2.0f);
@@ -160,7 +160,7 @@ namespace OpenSkiJumping.New
             }
         }
 
-      
+
 
 
         private void ReducePointsForShorterJump()
@@ -170,7 +170,7 @@ namespace OpenSkiJumping.New
 
             if ((float)jumpData.Distance < hillSize)
             {
-                distanceAwayFromHS = ((decimal)hillSize - jumpData.Distance)/(decimal)hillSize;
+                distanceAwayFromHS = ((decimal)hillSize - jumpData.Distance) / (decimal)hillSize;
                 pointsToDeduct = Math.Round(distanceAwayFromHS * 25, MidpointRounding.AwayFromZero) / 2;
                 judgesController.PointDeduction(1, pointsToDeduct);
             }
@@ -196,7 +196,7 @@ namespace OpenSkiJumping.New
             if ((float)jumpData.Distance >= hillSize)
             {
                 windGatePanel.JumpOverHSPerformed();
-                float ofHS = ((float)jumpData.Distance/hillSize);
+                float ofHS = ((float)jumpData.Distance / hillSize);
                 //UnityEngine.Debug.Log("ofHS: " + ofHS);
 
                 if (landing == 1)//jumper attempted telemark
@@ -209,13 +209,13 @@ namespace OpenSkiJumping.New
                     {
                         float saveFromStruggle = Random.Range(1, 1.03f);
                         float saveFromFall = Random.Range(1.03f, 1.06f);
-                       // UnityEngine.Debug.Log("saveFromStruggle: " + saveFromStruggle + " saveFromFall: " + saveFromFall);
+                        // UnityEngine.Debug.Log("saveFromStruggle: " + saveFromStruggle + " saveFromFall: " + saveFromFall);
 
                         if (ofHS > saveFromStruggle)
                         {
                             jumperModel.animator.SetFloat(InitiateStruggleLanding, 1);
                             initiateStruggleLanding = 1;
-                            if(saveFromFall > ofHS)
+                            if (saveFromFall > ofHS)
                             {
                                 judgesController.PointDeduction(1, 2);
                                 struggleToCrash = 0;
@@ -226,18 +226,18 @@ namespace OpenSkiJumping.New
                                 jumperModel.animator.SetFloat(StruggleToCrash, 1);
                             }
                         }
-                      /*  if(ofHS > saveFromFall && initiateStruggleLanding == 1)
-                        {
-                            struggleToCrash = 1;
-                            judgesController.PointDeduction(1, 2);
-                        }*/
+                        /*  if(ofHS > saveFromFall && initiateStruggleLanding == 1)
+                          {
+                              struggleToCrash = 1;
+                              judgesController.PointDeduction(1, 2);
+                          }*/
                     }
 
-                   /* jumperModel.animator.SetFloat(InitiateStruggleLanding, 1);
-                    initiateStruggleLanding = 1;
-                    //UnityEngine.Debug.Log("Teraz dałem InitStruggleLanding na 1");
-                    struggleToCrash = 1;
-                    judgesController.PointDeduction(1, 2);*/
+                    /* jumperModel.animator.SetFloat(InitiateStruggleLanding, 1);
+                     initiateStruggleLanding = 1;
+                     //UnityEngine.Debug.Log("Teraz dałem InitStruggleLanding na 1");
+                     struggleToCrash = 1;
+                     judgesController.PointDeduction(1, 2);*/
                 }
 
 
@@ -248,11 +248,11 @@ namespace OpenSkiJumping.New
                     {
                         Crash();
                     }
-                    else { 
+                    else {
 
-                    float saveFromStruggle = Random.Range(1, 1.05f);
-                    float saveFromFall = Random.Range(1.05f, 1.08f);
-                    UnityEngine.Debug.Log("saveFromStruggle: " + saveFromStruggle + " saveFromFall: " + saveFromFall);
+                        float saveFromStruggle = Random.Range(1, 1.05f);
+                        float saveFromFall = Random.Range(1.05f, 1.08f);
+                        UnityEngine.Debug.Log("saveFromStruggle: " + saveFromStruggle + " saveFromFall: " + saveFromFall);
 
                         if (ofHS > saveFromStruggle)
                         {
@@ -306,22 +306,22 @@ namespace OpenSkiJumping.New
 
 
 
-             /*   if (landing == 1)//jumper attempted telemark
-                {
-                    
-                    jumperModel.animator.SetFloat(InitiateStruggleLanding, 1);
-                    initiateStruggleLanding = 1;
-                    //UnityEngine.Debug.Log("Teraz dałem InitStruggleLanding na 1");
-                    struggleToCrash = 1;
-                    judgesController.PointDeduction(1, 2);
-                }
-                if (landing == -1)//if the jumper attempted to land on twolegs
-                {
-                    jumperModel.animator.SetFloat(InitiateStruggleLanding, 2);
-                    initiateStruggleLanding = 2;
-                   // UnityEngine.Debug.Log("Teraz dałem InitStruggleLanding na 2");
-                    judgesController.PointDeduction(1, 3);
-                }*/
+                /*   if (landing == 1)//jumper attempted telemark
+                   {
+
+                       jumperModel.animator.SetFloat(InitiateStruggleLanding, 1);
+                       initiateStruggleLanding = 1;
+                       //UnityEngine.Debug.Log("Teraz dałem InitStruggleLanding na 1");
+                       struggleToCrash = 1;
+                       judgesController.PointDeduction(1, 2);
+                   }
+                   if (landing == -1)//if the jumper attempted to land on twolegs
+                   {
+                       jumperModel.animator.SetFloat(InitiateStruggleLanding, 2);
+                       initiateStruggleLanding = 2;
+                      // UnityEngine.Debug.Log("Teraz dałem InitStruggleLanding na 2");
+                       judgesController.PointDeduction(1, 3);
+                   }*/
             }
             else if (landing != -1)
             {
@@ -340,7 +340,7 @@ namespace OpenSkiJumping.New
 
             if (other.CompareTag("LandingArea"))
             {
-               // UnityEngine.Debug.Log("Teraz jestem na OnTriggerExit i LandingArea");
+                // UnityEngine.Debug.Log("Teraz jestem na OnTriggerExit i LandingArea");
                 OnOutrun = false;
             }
         }
@@ -392,7 +392,7 @@ namespace OpenSkiJumping.New
             //UnityEngine.Debug.Log("determineCrashatAngle: " + determineCrashAtAngle);
             if (determineCrashAtAngle == 0)
             {
-               if(angle < crashAngle)
+                if (angle < crashAngle)
                 {
                     determineCrashAtAngle = 1;
                 }
@@ -401,7 +401,7 @@ namespace OpenSkiJumping.New
                     determineCrashAtAngle = 2;
                 }
             }
-          //  UnityEngine.Debug.Log("Angle on landing: " + angle);
+            //  UnityEngine.Debug.Log("Angle on landing: " + angle);
             if (angle > 30 && determineCrashAtAngle == 1)//usunięcie slide bugu
             {
 
@@ -442,15 +442,15 @@ namespace OpenSkiJumping.New
         {
             float modifier = 1;
             float hS = hillSize = competitionRunner.GetHS();
-            if (hS > 130) 
+            if (hS > 130)
             {
                 modifier += (hS - 130) / 10;
-                startForceScale += (hS-130)*(0.00013f*modifier);
+                startForceScale += (hS - 130) * (0.00013f * modifier);
             }
-            if(hS < 130)
+            if (hS < 130)
             {
                 modifier += (130 - hS) / 10;
-                startForceScale -= (130 - hS) * (0.00062f*modifier);
+                startForceScale -= (130 - hS) * (0.00062f * modifier);
             }
             if (hS > 250)
             {
@@ -462,7 +462,7 @@ namespace OpenSkiJumping.New
         public void OffsetGateChange()
 
         {
-         forceScale -= forceScaleModifier;
+            forceScale -= forceScaleModifier;
         }
 
         public void ResetValues()
@@ -480,7 +480,7 @@ namespace OpenSkiJumping.New
             rb.isKinematic = true;
             jumperModel.GetComponent<Transform>().localPosition = new Vector3();
             jumperAngle = 1;
-           // inrunDrag = 0.0011f;
+            // inrunDrag = 0.0011f;
             button0 = button1 = false;
             rSkiClone.SetActive(false);
             lSkiClone.SetActive(false);
@@ -496,7 +496,8 @@ namespace OpenSkiJumping.New
             forceScale += forceScaleModifier;
             WindThrustDeterminerTimesUsed = 0;
             WindThrustDeterminer = 0;
-            rig.weight= 0;
+            rig.weight = 0;
+            windModifier = 1;
         }
 
         private bool shouldStart;
@@ -510,16 +511,16 @@ namespace OpenSkiJumping.New
             if (skiJumperDataController.GetControl() == 1 && competitionRunner.permitCPUJumps == true)
             {
                 CPUJumpPerformed.Invoke();
-               // UnityEngine.Debug.Log("Od JumperController2 Update CPUJumpPerformed.Invoke();");
+                // UnityEngine.Debug.Log("Od JumperController2 Update CPUJumpPerformed.Invoke();");
             }
 
-          if(state == 2 && !Landed)
+            if (state == 2 && !Landed)
             {
-                UnityEngine.Debug.Log($"Vertical distance between jumper and landing area: {jumperModel.distCollider1.transform.position.y - landingAreaCollider.bounds.max.y}");
+                //  UnityEngine.Debug.Log($"Vertical distance between jumper and landing area: {jumperModel.distCollider1.transform.position.y - landingAreaCollider.bounds.max.y}");
             }
 
 
-                if (OnInrun || OnOutrun)
+            if (OnInrun || OnOutrun)
             {
                 audioSource.mute = false;
                 audioSource.pitch = Mathf.Sqrt(rb.velocity.magnitude / 20.0f);
@@ -537,7 +538,7 @@ namespace OpenSkiJumping.New
 
 
             jumperModel.animator.SetInteger(JumperState, State);
-           //UnityEngine.Debug.Log( "State: " + state + " struggleToCrash: " + struggleToCrash);
+            //UnityEngine.Debug.Log( "State: " + state + " struggleToCrash: " + struggleToCrash);
             if (State == 1 && Input.GetMouseButtonDown(0))
             {
                 Jump();
@@ -548,7 +549,7 @@ namespace OpenSkiJumping.New
                 button0 |= Input.GetMouseButtonDown(0);
                 button1 |= Input.GetMouseButtonDown(1);
                 rig.weight = 0f;
-                
+
                 Land();
 
             }
@@ -576,12 +577,12 @@ namespace OpenSkiJumping.New
             }
 
             //pomysł taki, żeby się wycrashował po ciężkim lądowaniu
-            if(struggleToCrash != 0)
+            if (struggleToCrash != 0)
             {
-                if(jumperModel.animator.GetCurrentAnimatorStateInfo(0).IsName("StruggleToCrash"))
-                    {
-                        Crash();
-                    }
+                if (jumperModel.animator.GetCurrentAnimatorStateInfo(0).IsName("StruggleToCrash"))
+                {
+                    Crash();
+                }
             }
         }
 
@@ -611,6 +612,42 @@ namespace OpenSkiJumping.New
             }
         }
 
+
+        private float GetWindMultiplier()
+        {
+        float minRearWindMultiplier = 1.8f;
+        UnityEngine.Debug.Log("GetWindMultiplier()");
+            if (windForce > 0)
+            {
+                UnityEngine.Debug.Log("GetWindMultiplier() windForce > 0");
+                return (0.8f + windForce * (hillSize * 0.0005f));
+            }
+            else if (windForce < 0 && windForce > -2f)
+            {
+                // Clamp windForce to the range [0, -2]
+                float clampedWind = Mathf.Clamp(windForce, -2f, 0f);
+
+                // Compute t such that t is 0 when windForce is 0 and 1 when windForce is -2
+                float t = Mathf.InverseLerp(0f, -2f, clampedWind);
+
+                // Interpolate the base multiplier (here using 2.8f as your starting value) 
+                // and add the dynamic hillSize modifier:
+                float multiplier = Mathf.Lerp(3f, minRearWindMultiplier, t) + (-windForce) * (hillSize * GetHillMultiplier(hillSize));
+                UnityEngine.Debug.Log("GetWindMultiplier() windForce < 0 && windForce > -2f");
+                return multiplier;
+            }
+            else if (windForce <= -2f)
+            {
+                UnityEngine.Debug.Log("GetWindMultiplier() windForce <= -2f");
+                return (minRearWindMultiplier + (-windForce) * (hillSize * GetHillMultiplier(hillSize)));
+            }
+            else
+            {
+                UnityEngine.Debug.Log("GetWindMultiplier() else");
+                return 1f;
+            }
+        }
+
         private float GetHillMultiplier(float hillSize)
         {
             // For hillSize <= 90, use 0.0001
@@ -619,14 +656,14 @@ namespace OpenSkiJumping.New
                 return 0.000f;
             }
             // For hillSize between 90 and 130, interpolate between 0.0001 and 0.0003
-            else if (hillSize <= 130f)
+            else if (hillSize <= 150f)
             {
-                return Mathf.Lerp(0.0000f, 0.0007f, (hillSize - 90f) / (130f - 90f));
+                return Mathf.Lerp(0.0000f, 0.0006f, (hillSize - 90f) / (150f - 90f));
             }
             // For hillSize between 130 and 250, interpolate between 0.0003 and 0.006
             else if (hillSize <= 250f)
             {
-                return Mathf.Lerp(0.0007f, 0.018f, (hillSize - 130f) / (250f - 130f));
+                return Mathf.Lerp(0.0006f, 0.018f, (hillSize - 130f) / (250f - 130f));
             }
             else
             {
@@ -641,32 +678,10 @@ namespace OpenSkiJumping.New
             
                         var vel = new Vector3();
 
-            if (windForce > 0)
-            {
-                vel = rb.velocity + rb.velocity.normalized * windForce * (0.8f + windForce * (hillSize * 0.0005f));
-            }
-            else if (windForce < 0 && windForce > -2f)
-            {
-                // Clamp windForce to the range [0, -2]
-                float clampedWind = Mathf.Clamp(windForce, -2f, 0f);
 
-                // Compute t such that t is 0 when windForce is 0 and 1 when windForce is -2
-                float t = Mathf.InverseLerp(0f, -2f, clampedWind);
-
-                // Interpolate the base multiplier (here using 2.8f as your starting value) 
-                // and add the dynamic hillSize modifier:
-                float multiplier = Mathf.Lerp(2f, minRearWindMultiplier, t) + (-windForce) * (hillSize * GetHillMultiplier(hillSize));
-
-                vel = rb.velocity + rb.velocity.normalized * windForce * multiplier;
-            }
-            else if (windForce <= -2.5f)
-            {
-                vel = rb.velocity + rb.velocity.normalized * windForce * (minRearWindMultiplier + (-windForce) * (hillSize * GetHillMultiplier(hillSize)));
-            }
-            else
-            {
-                vel = rb.velocity + rb.velocity.normalized * windForce;
-            }
+            
+                vel = rb.velocity + rb.velocity.normalized * windForce * windModifier;
+            
 
             //var vel = rb.velocity + rb.velocity.normalized * windForce;
             //Debug.Log("rb.velocity: " + rb.velocity + " rb velocity.normalized: " + rb.velocity.normalized);
@@ -783,8 +798,10 @@ namespace OpenSkiJumping.New
             forceScale -= forceScaleModifier;
             State = 1;
             rig.weight = 0f;
+            windModifier = 1f;
+            windModifier = GetWindMultiplier();
             OnStartEvent.Invoke();
-            UnityEngine.Debug.Log("skillforpresenthill: " + skillForPresentHill + " force at gate: " + forceScale);
+            UnityEngine.Debug.Log("windModifier: " + windModifier + " skillforpresenthill: " + skillForPresentHill + " force at gate: " + forceScale);
             //UnityEngine.Debug.Log("jumpdata.Gate: " + jumpData.Gate + "jumpdata.Wind " + jumpData.Wind);
             rb.isKinematic = false;
 

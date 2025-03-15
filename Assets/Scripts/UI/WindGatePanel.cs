@@ -125,10 +125,10 @@ namespace OpenSkiJumping.UI
             }
 
             UpdateWindText(windSlider.value);
-            if (competitionRunner.GetHS() < 160)
+           /* if (competitionRunner.GetHS() < 160)
             {
                 SetAutoGate();
-            }
+            }*/
         }
 
         public void JumpOverHSPerformed()
