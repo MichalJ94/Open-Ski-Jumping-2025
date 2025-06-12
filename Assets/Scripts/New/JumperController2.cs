@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Collections;
 using OpenSkiJumping.Competition;
 using OpenSkiJumping.Competition.Persistent;
 using OpenSkiJumping.Competition.Runtime;
@@ -108,6 +109,11 @@ namespace OpenSkiJumping.New
         private static readonly int Landing = Animator.StringToHash("Landing");
         private static readonly int InitiateStruggleLanding = Animator.StringToHash("InitiateStruggleLanding");
         private static readonly int StruggleToCrash = Animator.StringToHash("StruggleToCrash");
+
+
+        float tiltTimer = 0f;
+        float nextTiltTime = 0f;
+        bool canTilt = true;
 
         public int State
         {
@@ -521,11 +527,48 @@ namespace OpenSkiJumping.New
                 // UnityEngine.Debug.Log("Od JumperController2 Update CPUJumpPerformed.Invoke();");
             }
 
-            if (state == 2 && !Landed)
+           if (state == 2 && !takeoff)
             {
-                //  UnityEngine.Debug.Log($"Vertical distance between jumper and landing area: {jumperModel.distCollider1.transform.position.y - landingAreaCollider.bounds.max.y}");
-            }
+                tiltTimer += Time.deltaTime;
 
+                // Time to trigger a new tilt?
+                if (tiltTimer >= nextTiltTime && canTilt)
+                {
+                    canTilt = false;
+                    tiltTimer = 0f;
+
+                    // Randomly decide left or right
+                    bool tiltLeft = Random.value < 0.5f;
+
+                    // Trigger tilt
+                    if (tiltLeft)
+                    {
+                        jumperModel.animator.SetTrigger("TiltLeft");
+                        UnityEngine.Debug.Log("jumperModel.animator.SetTrigger(TiltLeft");
+                    }
+                    else
+                    { 
+                        jumperModel.animator.SetTrigger("TiltRight");
+                        UnityEngine.Debug.Log("jumperModel.animator.SetTrigger(TiltRight");
+                    }
+                    // Random delay before next tilt
+                    nextTiltTime = Random.Range(1.0f, 2.5f);
+
+                    // Optional: vary additive layer weight slightly to simulate intensity
+                    float newWeight = Random.Range(0.5f, 1.0f);
+                    jumperModel.animator.SetLayerWeight(jumperModel.animator.GetLayerIndex("FlightRot"), newWeight);
+
+                    // Reset layer weight after short duration
+                    StartCoroutine(ResetAdditiveLayerWeight(0.2f)); // after 0.5s
+                }
+            }
+            else
+            {
+                // Reset if not in air
+                tiltTimer = 0f;
+                canTilt = true;
+            }
+           
 
             if (OnInrun || OnOutrun)
             {
@@ -627,6 +670,14 @@ namespace OpenSkiJumping.New
             return verticalDistance;
         }
 
+        IEnumerator ResetAdditiveLayerWeight(float delay)
+        {
+            UnityEngine.Debug.Log("ResetAdditiveLayerWeightRun");
+            yield return new WaitForSeconds(delay);
+
+            jumperModel.animator.SetLayerWeight(jumperModel.animator.GetLayerIndex("FlightRot"), 1f); // back to default
+            canTilt = true;
+        }
 
         public void CheckCurrentJumperControl()
         {
