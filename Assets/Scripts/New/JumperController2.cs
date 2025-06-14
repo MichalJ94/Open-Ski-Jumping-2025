@@ -109,11 +109,14 @@ namespace OpenSkiJumping.New
         private static readonly int Landing = Animator.StringToHash("Landing");
         private static readonly int InitiateStruggleLanding = Animator.StringToHash("InitiateStruggleLanding");
         private static readonly int StruggleToCrash = Animator.StringToHash("StruggleToCrash");
+        private static readonly int Flight = Animator.StringToHash("Flight");
+        private static readonly int LeftRot = Animator.StringToHash("LeftRot");
+        private static readonly int RightRot = Animator.StringToHash("RightRot");
 
+        private float tiltTimer = 0f;
+        private float nextTiltDelay = 0f;
+        private bool tilting = false;
 
-        float tiltTimer = 0f;
-        float nextTiltTime = 0f;
-        bool canTilt = true;
 
         public int State
         {
@@ -527,48 +530,53 @@ namespace OpenSkiJumping.New
                 // UnityEngine.Debug.Log("Od JumperController2 Update CPUJumpPerformed.Invoke();");
             }
 
-           if (state == 2 && !takeoff)
+
+            if (state == 2 && !takeoff)
             {
                 tiltTimer += Time.deltaTime;
 
-                // Time to trigger a new tilt?
-                if (tiltTimer >= nextTiltTime && canTilt)
+                AnimatorStateInfo stateInfo = jumperModel.animator.GetCurrentAnimatorStateInfo(0);
+                bool inFlight = stateInfo.shortNameHash == Flight;
+                bool inTransition = jumperModel.animator.IsInTransition(0);
+
+                if (!tilting && inFlight && !inTransition && tiltTimer >= nextTiltDelay)
                 {
-                    canTilt = false;
+                    tilting = true;
                     tiltTimer = 0f;
 
-                    // Randomly decide left or right
                     bool tiltLeft = Random.value < 0.5f;
-
-                    // Trigger tilt
+                    
+                    float returnTime = Random.Range(0.2f, 0.5f); // How long to stay tilted
+                    /*
+                    jumperModel.animator.SetFloat("TiltReturnTime", returnTime);
+                    */
                     if (tiltLeft)
-                    {
                         jumperModel.animator.SetTrigger("TiltLeft");
-                        UnityEngine.Debug.Log("jumperModel.animator.SetTrigger(TiltLeft");
-                    }
                     else
-                    { 
                         jumperModel.animator.SetTrigger("TiltRight");
-                        UnityEngine.Debug.Log("jumperModel.animator.SetTrigger(TiltRight");
-                    }
-                    // Random delay before next tilt
-                    nextTiltTime = Random.Range(1.0f, 2.5f);
 
-                    // Optional: vary additive layer weight slightly to simulate intensity
-                    float newWeight = Random.Range(0.5f, 1.0f);
-                    jumperModel.animator.SetLayerWeight(jumperModel.animator.GetLayerIndex("FlightRot"), newWeight);
+                    StartCoroutine(ResetTiltingFlag(returnTime));
 
-                    // Reset layer weight after short duration
-                    StartCoroutine(ResetAdditiveLayerWeight(0.2f)); // after 0.5s
+                    nextTiltDelay = Random.Range(0.1f, 0.2f);
                 }
             }
-            else
+
+
+
+
+
+            if (Input.GetKeyDown(KeyCode.F))
             {
-                // Reset if not in air
-                tiltTimer = 0f;
-                canTilt = true;
+                //jumperModel.animator.SetLayerWeight(jumperModel.animator.GetLayerIndex("LeftRot"), 1f);
+                jumperModel.animator.SetTrigger("TiltLeft");
+                UnityEngine.Debug.Log("jumperModel.animator.SetTrigger(\"TiltLeft\");");
             }
-           
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                // jumperModel.animator.SetLayerWeight(jumperModel.animator.GetLayerIndex("LeftRot"), 0f);
+                jumperModel.animator.SetTrigger("TiltRight");
+                UnityEngine.Debug.Log("jumperModel.animator.SetTrigger(\"TiltRight\");");
+            }
 
             if (OnInrun || OnOutrun)
             {
@@ -601,6 +609,10 @@ namespace OpenSkiJumping.New
             else if ((State == 2 || State == 3 || State == 4) &&
                      (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)))
             {
+
+                tilting = false;
+                StopAllCoroutines();
+
                 button0 |= Input.GetMouseButtonDown(0);
                 button1 |= Input.GetMouseButtonDown(1);
                 rig.weight = 0f;
@@ -614,6 +626,8 @@ namespace OpenSkiJumping.New
                     rb.AddForce(transform.up * 100f);
                     desperateLanding = true;
                 }
+
+
                 Land();
 
             }
@@ -650,7 +664,13 @@ namespace OpenSkiJumping.New
             }
         }
 
+        private IEnumerator ReturnToFlight(float delay, float blendBackTime)
+        {
+            yield return new WaitForSeconds(delay);
 
+            jumperModel.animator.CrossFade(Flight, blendBackTime, 0);
+            tilting = false;
+        }
         public float RayCast()
         {
             Ray ray = new Ray(jumperModel.skiLeft.transform.position, Vector3.down);
@@ -668,15 +688,6 @@ namespace OpenSkiJumping.New
             }
 
             return verticalDistance;
-        }
-
-        IEnumerator ResetAdditiveLayerWeight(float delay)
-        {
-            UnityEngine.Debug.Log("ResetAdditiveLayerWeightRun");
-            yield return new WaitForSeconds(delay);
-
-            jumperModel.animator.SetLayerWeight(jumperModel.animator.GetLayerIndex("FlightRot"), 1f); // back to default
-            canTilt = true;
         }
 
         public void CheckCurrentJumperControl()
@@ -705,7 +716,11 @@ namespace OpenSkiJumping.New
             }
         }
 
-
+        IEnumerator ResetTiltingFlag(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            tilting = false;
+        }
         private float GetWindMultiplier()
         {
             float minRearWindMultiplier = 1.8f;
