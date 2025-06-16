@@ -531,7 +531,7 @@ namespace OpenSkiJumping.New
             }
 
 
-            if (state == 2 && !takeoff)
+            if (state == 2 && !takeoff && Random.value < 0.5f)
             {
                 tiltTimer += Time.deltaTime;
 
@@ -544,20 +544,42 @@ namespace OpenSkiJumping.New
                     tilting = true;
                     tiltTimer = 0f;
 
-                    bool tiltLeft = Random.value < 0.5f;
+                  //  bool startTilt = Random.value < 0.5f;
                     
                     float returnTime = Random.Range(0.2f, 0.5f); // How long to stay tilted
                     /*
                     jumperModel.animator.SetFloat("TiltReturnTime", returnTime);
                     */
-                    if (tiltLeft)
-                        jumperModel.animator.SetTrigger("TiltLeft");
+
+                    if (Random.value < 0.05f)
+                    {
+                        if (Random.value < 0.5f)
+                        {
+                            jumperModel.animator.SetTrigger("TiltLeft");
+                        }
+                        else
+                        {
+                            jumperModel.animator.SetTrigger("TiltRight");
+                        }
+                    }
                     else
-                        jumperModel.animator.SetTrigger("TiltRight");
+                    {
+                        if (Random.value < 0.5f)
+                        {
+                            jumperModel.animator.SetTrigger("LEscape");
+                        }
+                        else
+                        {
+                            jumperModel.animator.SetTrigger("REscape");
+                        }
 
-                    StartCoroutine(ResetTiltingFlag(returnTime));
+                    }
 
-                    nextTiltDelay = Random.Range(0.1f, 0.2f);
+
+
+                        StartCoroutine(ResetTiltingFlag(returnTime));
+
+                  //  nextTiltDelay = Random.Range(0.1f, 0.2f);
                 }
             }
 
