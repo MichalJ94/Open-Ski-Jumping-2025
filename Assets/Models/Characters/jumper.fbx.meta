@@ -135,7 +135,10 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: 
+    animationImportWarnings: "\nClip 'Armature|Flight-Lo.LeftRot' has import animation
+      warnings that might lower retargeting quality:\nNote: Activate translation
+      DOF on avatar to improve retargeting quality.\n\t'Upper Leg.L' has translation
+      animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -707,7 +710,7 @@ ModelImporter:
       lastFrame: 23
       wrapMode: 0
       orientationOffsetY: 0
-      level: 0
+      level: -0.09
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 1
@@ -736,7 +739,7 @@ ModelImporter:
       lastFrame: 23
       wrapMode: 0
       orientationOffsetY: 0
-      level: 0
+      level: -0.09
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 1

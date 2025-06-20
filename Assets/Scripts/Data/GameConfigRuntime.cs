@@ -26,6 +26,8 @@ namespace OpenSkiJumping.Data
 
         public float gateDownChance;
 
+        public float turbulenceChance;
+
         [JsonConverter(typeof(StringEnumConverter))]
         public Language currentLanguage;
     }

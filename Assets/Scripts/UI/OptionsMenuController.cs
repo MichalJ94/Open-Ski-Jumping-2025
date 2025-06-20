@@ -24,6 +24,7 @@ namespace OpenSkiJumping.UI
         [SerializeField] private Slider snowSlider;
         [SerializeField] private Slider windSlider;
         [SerializeField] private Slider gateDownSlider;
+        [SerializeField] private Slider turbulenceSlider;
 
         private List<Resolution> _resolutions;
 
@@ -82,6 +83,21 @@ namespace OpenSkiJumping.UI
                 gameplayExtension.modifierCPURandomnessLevel = 20f;
             }
             windSlider.onValueChanged.AddListener(UpdateWindSlider);
+
+
+            if (gameConfig.Config.turbulenceChance != 0)
+            {
+
+                turbulenceSlider.value = gameConfig.Config.turbulenceChance;
+                gameplayExtension.turbulenceChance = turbulenceSlider.value;
+            }
+            else
+            {
+                turbulenceSlider.value = 10f;
+                gameplayExtension.turbulenceChance = 10f;
+            }
+            windSlider.onValueChanged.AddListener(UpdateWindSlider);
+
 
 
             if (gameConfig.Config.snowChance != float.NaN)

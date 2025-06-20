@@ -23,6 +23,7 @@ namespace OpenSkiJumping.Scripts2025
         public float snowChance;
         public float storeGate;
         public float gateDownChance;
+        public float turbulenceChance;
         public decimal storeCPUDistance;
 
 
@@ -41,6 +42,7 @@ namespace OpenSkiJumping.Scripts2025
                 snowChance = gameConfig.Config.snowChance;
                 modifierCPURandomnessLevel = gameConfig.Config.randomnessLevelCPU;
                 gateDownChance = gameConfig.Config.gateDownChance;
+                turbulenceChance = gameConfig.Config.turbulenceChance;
             }
             else
             {

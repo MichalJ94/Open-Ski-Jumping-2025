@@ -531,7 +531,7 @@ namespace OpenSkiJumping.New
             }
 
 
-            if (state == 2 && !takeoff && Random.value < 0.5f)
+            if (state == 2 && !takeoff && Random.value < (float)((0.01)*gameplayExtension.turbulenceChance))
             {
                 tiltTimer += Time.deltaTime;
 
@@ -551,15 +551,17 @@ namespace OpenSkiJumping.New
                     jumperModel.animator.SetFloat("TiltReturnTime", returnTime);
                     */
 
-                    if (Random.value < 0.05f)
+                    if (Random.value < 0.5f)
                     {
                         if (Random.value < 0.5f)
                         {
                             jumperModel.animator.SetTrigger("TiltLeft");
+                            UnityEngine.Debug.Log("Turbulence Tiltlft");
                         }
                         else
                         {
                             jumperModel.animator.SetTrigger("TiltRight");
+                            UnityEngine.Debug.Log("Turbulence TiltRight");
                         }
                     }
                     else
@@ -567,10 +569,12 @@ namespace OpenSkiJumping.New
                         if (Random.value < 0.5f)
                         {
                             jumperModel.animator.SetTrigger("LEscape");
+                            UnityEngine.Debug.Log("Turbulence LEscape");
                         }
                         else
                         {
                             jumperModel.animator.SetTrigger("REscape");
+                            UnityEngine.Debug.Log("Turbulence REscape");
                         }
 
                     }
