@@ -85,7 +85,7 @@ namespace OpenSkiJumping.UI
             windSlider.onValueChanged.AddListener(UpdateWindSlider);
 
 
-            if (gameConfig.Config.turbulenceChance != 0)
+            if (gameConfig.Config.turbulenceChance != float.NaN)
             {
 
                 turbulenceSlider.value = gameConfig.Config.turbulenceChance;
@@ -96,7 +96,7 @@ namespace OpenSkiJumping.UI
                 turbulenceSlider.value = 10f;
                 gameplayExtension.turbulenceChance = 10f;
             }
-            windSlider.onValueChanged.AddListener(UpdateWindSlider);
+            turbulenceSlider.onValueChanged.AddListener(UpdateTurbulenceSlider);
 
 
 
@@ -166,6 +166,12 @@ namespace OpenSkiJumping.UI
         {
             gameConfig.Config.gateDownChance = gateDownSlider.value;
             gameplayExtension.gateDownChance = gateDownSlider.value;
+        }
+
+        private void UpdateTurbulenceSlider(float arg)
+        {
+            gameConfig.Config.turbulenceChance = turbulenceSlider.value;
+            gameplayExtension.turbulenceChance = turbulenceSlider.value;
         }
 
         private void UpdateSensitivity(string val)

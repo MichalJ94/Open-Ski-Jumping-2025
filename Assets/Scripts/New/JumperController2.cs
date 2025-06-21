@@ -513,6 +513,7 @@ namespace OpenSkiJumping.New
             rig.weight = 0;
             landingVertDistance = 0;
             windModifier = 1;
+            tilting = false;
         }
 
         private bool shouldStart;
@@ -531,7 +532,7 @@ namespace OpenSkiJumping.New
             }
 
 
-            if (state == 2 && !takeoff && Random.value < (float)((0.01)*gameplayExtension.turbulenceChance))
+            if (state == 2 && !takeoff && Random.value < (float)((0.0001)*gameplayExtension.turbulenceChance))
             {
                 tiltTimer += Time.deltaTime;
 
@@ -546,7 +547,7 @@ namespace OpenSkiJumping.New
 
                   //  bool startTilt = Random.value < 0.5f;
                     
-                    float returnTime = Random.Range(0.2f, 0.5f); // How long to stay tilted
+                    float returnTime = Random.Range(0.3f, 0.5f); // How long to stay tilted
                     /*
                     jumperModel.animator.SetFloat("TiltReturnTime", returnTime);
                     */
@@ -556,7 +557,7 @@ namespace OpenSkiJumping.New
                         if (Random.value < 0.5f)
                         {
                             jumperModel.animator.SetTrigger("TiltLeft");
-                            UnityEngine.Debug.Log("Turbulence Tiltlft");
+                            UnityEngine.Debug.Log("Turbulence Tiltleft");
                         }
                         else
                         {
