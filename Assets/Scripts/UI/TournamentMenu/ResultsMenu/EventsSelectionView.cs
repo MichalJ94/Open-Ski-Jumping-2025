@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenSkiJumping.Competition.Persistent;
+using OpenSkiJumping.Competition;
 using OpenSkiJumping.ScriptableObjects;
 using OpenSkiJumping.UI.CalendarEditor.Events;
 using OpenSkiJumping.UI.ListView;
@@ -50,6 +51,34 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
         public event Action OnSelectionChanged;
         public event Action OnDataReload;
 
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                //  UnityEngine.Debug.Log("tournamentMenuData.GameSave.resultsContainer.eventResults.Length: " + tournamentMenuData.GameSave.resultsContainer.eventResults.Length + " listView.Items.Count " + listView.Items.Count);
+
+                for (int i = 0; i < listView.Items.Count; i++)
+                {
+                    if (events[i].eventType == OpenSkiJumping.Competition.EventType.Individual && events[i].roundInfos.name[0] != 'Q' && !events[i].roundInfos.name.Contains("Trial"))
+                    {
+
+                        // && events[i].roundInfos.name[0] != 'Q' && events[i].roundInfos.name.Contains("Trial")
+                        UnityEngine.Debug.Log($"eventID {i} is valid. tournamentMenuData.GameSave.resultsContainer.eventResults[i].competitorIds.Count: {tournamentMenuData.GameSave.resultsContainer.eventResults[i].competitorIds.Count} tournamentMenuData.GameSave.resultsContainer.eventResults[i].allroundResults.Count {tournamentMenuData.GameSave.resultsContainer.eventResults[i].allroundResults.Count}");
+                        for (int j = 0; j < tournamentMenuData.GameSave.resultsContainer.eventResults[i].competitorIds.Count; j++)
+                        {
+
+                            if (tournamentMenuData.GameSave.competitors[tournamentMenuData.GameSave.resultsContainer.eventResults[i].competitorIds[j]].competitor.firstName == "Ryoyu")
+                            {
+                                UnityEngine.Debug.Log($"Ryoyu has competitorID {tournamentMenuData.GameSave.resultsContainer.eventResults[i].competitorIds[j]} while i is {i} and j is {j}. His rank in that comp was {tournamentMenuData.GameSave.resultsContainer.eventResults[i].results[j].Rank}");
+                            }
+
+                        }
+                        //tournamentMenuData.GameSave.resultsContainer.eventResults.Length
+                        //if (tournamentMenuData.GameSave.resultsContainer.eventResults[i].competitorIds.)
+                    }
+                }
+            }
+        }
         private void SelectEvent(EventInfo item)
         {
             listView.SelectedIndex =
