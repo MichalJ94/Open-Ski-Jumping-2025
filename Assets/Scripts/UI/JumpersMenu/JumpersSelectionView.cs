@@ -1,0 +1,246 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using JetBrains.Annotations;
+using OpenSkiJumping.Competition.Persistent;
+using OpenSkiJumping.Data;
+using OpenSkiJumping.ScriptableObjects;
+using OpenSkiJumping.UI.ListView;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UI.Extensions;
+
+namespace OpenSkiJumping.UI.JumpersMenu
+{
+    public class JumpersResultsView : MonoBehaviour, IJumpersMenuView
+    {
+        [SerializeField] private FlagsData flagsData;
+        [SerializeField] private Sprite[] genderIcons;
+        [SerializeField] private ImageCacher imageCacher;
+        private List<Competitor> jumpers;
+
+        [SerializeField] private CompetitorsRuntime jumpersRuntime;
+
+        [SerializeField] private JumpersListView listView;
+        [SerializeField] private Toggle toggle;
+
+        private JumpersMenuPresenter presenter;
+
+        public Competitor SelectedJumper
+        {
+            get => listView.SelectedIndex < 0 ? null : jumpers[listView.SelectedIndex];
+            set => SelectJumper(value);
+        }
+
+        public event Action OnSelectionChanged;
+        public event Action OnCurrentJumperChanged;
+        public event Action OnAdd;
+        public event Action OnRemove;
+
+        public bool JumperInfoEnabled
+        {
+            set => jumperInfoObj.SetActive(value);
+        }
+
+        public IEnumerable<Competitor> Jumpers
+        {
+            set
+            {
+                jumpers = value.ToList();
+                listView.Items = jumpers;
+                listView.SelectedIndex = Mathf.Clamp(listView.SelectedIndex, 0, jumpers.Count - 1);
+                listView.Refresh();
+            }
+        }
+
+        public void LoadImage(string path)
+        {
+            StartCoroutine(imageCacher.GetSpriteAsync(path, SetJumperImage));
+        }
+
+        private void Start()
+        {
+            ListViewSetup();
+            RegisterCallbacks();
+            presenter = new JumpersMenuPresenter(this, jumpersRuntime, flagsData);
+        }
+
+        private void ListViewSetup()
+        {
+            listView.OnSelectionChanged += x => OnSelectionChanged?.Invoke();
+            listView.SelectionType = SelectionType.Single;
+            listView.Initialize(BindListViewItem);
+        }
+
+        private void RegisterCallbacks()
+        {
+     
+        }
+
+        private void OnValueChanged()
+        {
+            OnCurrentJumperChanged?.Invoke();
+        }
+
+        private void SelectJumper(Competitor jumper)
+        {
+            var index = jumper == null ? listView.SelectedIndex : jumpers.IndexOf(jumper);
+            index = Mathf.Clamp(index, 0, jumpers.Count - 1);
+            listView.SelectedIndex = index;
+            listView.ScrollToIndex(index);
+            listView.RefreshShownValue();
+        }
+
+        private void SetJumperImage(Sprite value, bool succeeded)
+        {
+            if (!succeeded)
+            {
+                image.enabled = false;
+                return;
+            }
+
+            image.enabled = true;
+            image.sprite = value;
+        }
+
+
+        private void BindListViewItem(int index, JumpersListItem item)
+        {
+            var jumper = jumpers[index];
+            item.nameText.text = $"{jumper.firstName} {jumper.lastName.ToUpper()}";
+            item.countryFlagText.text = jumper.countryCode;
+            item.countryFlagImage.sprite = flagsData.GetFlag(jumper.countryCode);
+            item.genderIconImage.sprite = genderIcons[(int)jumper.gender];
+            item.control = jumper.control;
+           if ((int)item.control == 1)
+            {
+                item.cpuOverlay.enabled= true;
+            }
+            else
+            {
+                item.cpuOverlay.enabled = false;
+            }
+        }
+
+        #region JumperInfoUI
+
+        [SerializeField] private GameObject jumperInfoObj;
+        [SerializeField] private TMP_InputField firstNameInput;
+        [SerializeField] private TMP_InputField lastNameInput;
+        [SerializeField] private TMP_InputField countryCodeInput;
+        [SerializeField] private SegmentedControl genderSelect;
+        [SerializeField] private SegmentedControl controlSelect;
+        [SerializeField] private SimpleColorPicker helmetColorPicker;
+        [SerializeField] private SimpleColorPicker suitTopFrontColorPicker;
+        [SerializeField] private SimpleColorPicker suitTopBackColorPicker;
+        [SerializeField] private SimpleColorPicker suitBottomFrontColorPicker;
+        [SerializeField] private SimpleColorPicker suitBottomBackColorPicker;
+        [SerializeField] private SimpleColorPicker skisColorPicker;
+        [SerializeField] private TMP_InputField imagePathInput;
+        [SerializeField] private Image image;
+        [SerializeField] private Button addButton;
+        [SerializeField] private Button removeButton;
+        [SerializeField] private Slider normalHillSlider;
+        [SerializeField] private Slider largeHillSlider;
+        [SerializeField] private Slider skiFlyingHillSlider;
+
+        #endregion
+
+        #region JumperInfoProps
+
+        public string FirstName
+        {
+            get => firstNameInput.text;
+            set => firstNameInput.SetTextWithoutNotify(value);
+        }
+
+        public string LastName
+        {
+            get => lastNameInput.text;
+            set => lastNameInput.SetTextWithoutNotify(value);
+        }
+
+        public string CountryCode
+        {
+            get => countryCodeInput.text;
+            set => countryCodeInput.SetTextWithoutNotify(value);
+        }
+
+        public int Gender
+        {
+            get => genderSelect.selectedSegmentIndex;
+            set => genderSelect.SetSelectedSegmentWithoutNotify(value);
+        }
+
+        public int Control
+        {
+            get => controlSelect.selectedSegmentIndex;
+            set => controlSelect.SetSelectedSegmentWithoutNotify(value);
+        }
+
+        public string SuitTopFront
+        {
+            get => suitTopFrontColorPicker.ToHex;
+            set => suitTopFrontColorPicker.SetValueWithoutNotify(value);
+        }
+
+        public string SuitTopBack
+        {
+            get => suitTopBackColorPicker.ToHex;
+            set => suitTopBackColorPicker.SetValueWithoutNotify(value);
+        }
+
+        public string SuitBottomFront
+        {
+            get => suitBottomFrontColorPicker.ToHex;
+            set => suitBottomFrontColorPicker.SetValueWithoutNotify(value);
+        }
+
+        public string SuitBottomBack
+        {
+            get => suitBottomBackColorPicker.ToHex;
+            set => suitBottomBackColorPicker.SetValueWithoutNotify(value);
+        }
+
+        public string Helmet
+        {
+            get => helmetColorPicker.ToHex;
+            set => helmetColorPicker.SetValueWithoutNotify(value);
+        }
+
+        public string Skis
+        {
+            get => skisColorPicker.ToHex;
+            set => skisColorPicker.SetValueWithoutNotify(value);
+        }
+
+        public string ImagePath
+        {
+            get => imagePathInput.text;
+            set => imagePathInput.SetTextWithoutNotify(value);
+        }
+
+
+        public int NormalHillSkill
+        {
+            get => ((int)normalHillSlider.value);
+            set => normalHillSlider.SetValueWithoutNotify(value);
+        }
+
+        public int LargeHillSkill
+        {
+            get => ((int)largeHillSlider.value);
+            set => largeHillSlider.SetValueWithoutNotify(value);
+        }
+
+        public int SkiFlyingHillSkill
+        {
+            get => ((int)skiFlyingHillSlider.value);
+            set => skiFlyingHillSlider.SetValueWithoutNotify(value);
+        }
+
+        #endregion
+    }
+}
