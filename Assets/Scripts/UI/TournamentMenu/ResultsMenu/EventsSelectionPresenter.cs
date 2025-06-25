@@ -51,15 +51,6 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
 
 
 
-
-
-
-
-
-
-
-
-
             }).ToList();
             view.ResultsListController.Results = tmp;
             
