@@ -1447,10 +1447,10 @@ RectTransform:
   m_Father: {fileID: 511796073}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 10, y: 0}
-  m_SizeDelta: {x: 20, y: 20}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &111951530
 MonoBehaviour:
@@ -4291,8 +4291,9 @@ GameObject:
   m_Component:
   - component: {fileID: 261984096}
   - component: {fileID: 261984097}
+  - component: {fileID: 261984098}
   m_Layer: 5
-  m_Name: Jumpers (1)
+  m_Name: Jumpers List
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4326,7 +4327,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 261984095}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb0c0e10d74e4edd99673fe7c78298f0, type: 3}
   m_Name: 
@@ -4336,6 +4337,22 @@ MonoBehaviour:
   iconsData: {fileID: 11400000, guid: b2eaa7a27ecdd17efb01456da2020d9c, type: 2}
   listView: {fileID: 1568652891}
   toggleGroupExtension: {fileID: 1568652889}
+--- !u!114 &261984098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 261984095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8085efa0055eb8a4d8e1600113ca4f6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tournamentMenuData: {fileID: 11400000, guid: 7023f85d4abbbe639b75b585f0ec83fb, type: 2}
+  flagsData: {fileID: 11400000, guid: 94f547efcb34a33049603d5e07a748ea, type: 2}
+  iconsData: {fileID: 11400000, guid: b2eaa7a27ecdd17efb01456da2020d9c, type: 2}
+  listView: {fileID: 1568652891}
 --- !u!1 &262055158
 GameObject:
   m_ObjectHideFlags: 0
@@ -9258,7 +9275,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 511796072}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1366d441e1951f287930e81e214b03a0, type: 3}
   m_Name: 
@@ -9312,19 +9329,7 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 511796075}
-        m_TargetAssemblyTypeName: OpenSkiJumping.UI.ListView.ToggleExtension, Main
-        m_MethodName: OnValueChanged
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_IsOn: 0
 --- !u!114 &511796077
 MonoBehaviour:

@@ -19,8 +19,8 @@ namespace OpenSkiJumping.UI.TournamentMenu.JumpersSelection
         [SerializeField] private IconsData iconsData;
 
         [SerializeField] private JumpersSelectionListView listView;
- 
 
+        public CompetitorData SelectedJumper { get; private set; }
 
         private List<CompetitorData> jumpers;
 
@@ -36,7 +36,8 @@ namespace OpenSkiJumping.UI.TournamentMenu.JumpersSelection
         }
 
         public event Action OnDataReload;
-
+        public event Action<CompetitorData> OnJumperSelected;
+        public event Action OnSelectionChanged;
 
         private void Start()
         {
@@ -55,8 +56,8 @@ namespace OpenSkiJumping.UI.TournamentMenu.JumpersSelection
 
         private void ListViewSetup()
         {
-
-            listView.SelectionType = SelectionType.None;
+            listView.OnSelectionChanged += x => OnSelectionChanged?.Invoke();
+            listView.SelectionType = SelectionType.Single;
             listView.Initialize(BindListViewItem);
         }
 
@@ -69,13 +70,17 @@ namespace OpenSkiJumping.UI.TournamentMenu.JumpersSelection
             listItem.countryFlagImage.sprite = flagsData.GetFlag(item.competitor.countryCode);
             listItem.genderIconImage.sprite = iconsData.GetGenderIcon(item.competitor.gender);
 
-            listItem.toggleExtension.SetElementId(index);
-            listItem.toggleExtension.Toggle.SetIsOnWithoutNotify(item.registered);
         }
 
         private void HandleSelectionChanged(int index, bool value)
         {
             var item = jumpers[index];
         }
+        private void HandleJumperSelected(CompetitorData jumper)
+        {
+            SelectedJumper = jumper;
+            OnJumperSelected?.Invoke(jumper);
+        }
+
     }
 }
