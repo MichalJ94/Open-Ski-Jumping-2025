@@ -87,7 +87,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
             listView.ClampSelectedIndex();
             listView.ScrollToIndex(listView.SelectedIndex);
             listView.RefreshShownValue();
-          //  eventResultsHeader.UpdateAccordingToSelectedEvent(item);
+            //  eventResultsHeader.UpdateAccordingToSelectedEvent(item);
         }
 
 

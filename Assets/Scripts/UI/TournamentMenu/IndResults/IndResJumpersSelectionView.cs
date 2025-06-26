@@ -1,10 +1,12 @@
 using OpenSkiJumping.ScriptableObjects;
 using OpenSkiJumping.UI.JumpersMenu;
 using OpenSkiJumping.UI.ListView;
+using OpenSkiJumping.UI.TournamentMenu.ResultsMenu;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 namespace OpenSkiJumping.UI.TournamentMenu.JumpersSelection
@@ -17,10 +19,15 @@ namespace OpenSkiJumping.UI.TournamentMenu.JumpersSelection
         [SerializeField] private TournamentMenuData tournamentMenuData;
         [SerializeField] private FlagsData flagsData;
         [SerializeField] private IconsData iconsData;
+        [SerializeField] private IndResultsListController indResultsListController;
 
         [SerializeField] private JumpersSelectionListView listView;
 
-        public CompetitorData SelectedJumper { get; private set; }
+        public CompetitorData SelectedJumper 
+        {
+            get => listView.SelectedIndex < 0 ? null : jumpers [listView.SelectedIndex];
+            set => SelectJumper(value); 
+        }
 
         private List<CompetitorData> jumpers;
 
@@ -34,7 +41,8 @@ namespace OpenSkiJumping.UI.TournamentMenu.JumpersSelection
                 listView.Refresh();
             }
         }
-
+        private List<IndResultsListItem> results;
+      
         public event Action OnDataReload;
         public event Action<CompetitorData> OnJumperSelected;
         public event Action OnSelectionChanged;
@@ -42,8 +50,10 @@ namespace OpenSkiJumping.UI.TournamentMenu.JumpersSelection
         private void Start()
         {
             ListViewSetup();
+            indResultsListController.Initialize();
             presenter = new IndResJumpersSelectionPresenter(this, tournamentMenuData);
             initialized = true;
+            
         }
 
         private void OnEnable()
@@ -52,7 +62,21 @@ namespace OpenSkiJumping.UI.TournamentMenu.JumpersSelection
             OnDataReload?.Invoke();
             listView.Reset();
         }
+        public void Initialize()
+        {
+            listView.SelectionType = SelectionType.None;
+            listView.Initialize(BindListViewItem);
+        }
 
+        private void BindListItem(int index, IndResultsListItemUI uiItem)
+        {
+            var data = results[index];
+            uiItem.nameText.text = data.name;
+            uiItem.rankText.text = data.rank.ToString();
+            uiItem.countryCodeText.text = data.countryCode;
+            uiItem.valueText.text = data.value.ToString("F1");
+            uiItem.countryFlagImage.sprite = flagsData.GetFlag(data.countryCode);
+        }
 
         private void ListViewSetup()
         {
@@ -76,10 +100,55 @@ namespace OpenSkiJumping.UI.TournamentMenu.JumpersSelection
         {
             var item = jumpers[index];
         }
-        private void HandleJumperSelected(CompetitorData jumper)
+        private void HandleJumperSelected(int index)
         {
+            if (index < 0 || index >= jumpers.Count) return;
+
+            var jumper = jumpers[index];
             SelectedJumper = jumper;
-            OnJumperSelected?.Invoke(jumper);
+
+            OnJumperSelected?.Invoke(jumper); // Let presenter or controller listen to this
+
+            // Example logic to fetch results:
+            var jumperResults = GetResultsForJumper(jumper);
+            indResultsListController.Results = jumperResults;
+        }
+
+        private List<IndResultsListItem> GetResultsForJumper(CompetitorData jumper)
+        {
+            var jumperResults = new List<IndResultsListItem>();
+
+            for (int i = 0; i < tournamentMenuData.GameSave.resultsContainer.eventResults.Length; i++)
+            {
+                var result = tournamentMenuData.GameSave.resultsContainer.eventResults[i];
+                int jumperIndex = result.competitorIds.IndexOf(jumper.calendarId);
+
+                if (jumperIndex >= 0)
+                {
+                    var compResult = result.results[jumperIndex];
+                    jumperResults.Add(new IndResultsListItem
+                    {
+                        name = jumper.competitor.lastName,
+                        countryCode = jumper.competitor.countryCode,
+                        rank = compResult.Rank,
+                        value = compResult.TotalPoints // or whatever stat you want
+                    });
+                }
+            }
+
+            return jumperResults;
+        }
+
+        private void SelectJumper(CompetitorData item)
+        {
+            listView.SelectedIndex =
+                item == null ? listView.SelectedIndex : jumpers.IndexOf(item);
+
+            listView.ClampSelectedIndex();
+            listView.ScrollToIndex(listView.SelectedIndex);
+            listView.RefreshShownValue();
+            //  eventResultsHeader.UpdateAccordingToSelectedEvent(item);
+            Debug.Log($"SelectJumper index: {listView.SelectedIndex}");
         }
 
     }
