@@ -13,6 +13,8 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
         public TMP_Text rankText;
         public TMP_Text valueText;
         public TMP_Text countryCodeText;
+        public TMP_Text competitionID;
+        public TMP_Text hillName;
         public Image countryFlagImage;
     }
 }

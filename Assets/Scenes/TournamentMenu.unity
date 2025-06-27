@@ -3072,6 +3072,8 @@ MonoBehaviour:
   rankText: {fileID: 1758049608}
   valueText: {fileID: 0}
   countryCodeText: {fileID: 89550537}
+  competitionID: {fileID: 0}
+  hillName: {fileID: 0}
   countryFlagImage: {fileID: 2145555566}
 --- !u!1 &197813182
 GameObject:
@@ -22615,7 +22617,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listView: {fileID: 1033172110}
-  flagsData: {fileID: 0}
+  flagsData: {fileID: 11400000, guid: 94f547efcb34a33049603d5e07a748ea, type: 2}
 --- !u!1 &1037187991
 GameObject:
   m_ObjectHideFlags: 0
@@ -34314,7 +34316,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 5, y: 0}
+  m_AnchoredPosition: {x: 461.35, y: 0}
   m_SizeDelta: {x: 50, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1758049608
@@ -34337,7 +34339,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1
+  m_text: 'Rank
+
+    w'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 39d4252fcb1c41439b6f74e5f1f85bec, type: 2}
   m_sharedMaterial: {fileID: -4096231471591552904, guid: 39d4252fcb1c41439b6f74e5f1f85bec,

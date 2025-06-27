@@ -12,6 +12,8 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
     {
         public string countryCode;
         public string name;
+        public string competitionID;
+        public string hillName;
         public int rank;
         public decimal value;
     }
@@ -44,11 +46,17 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
         private void BindListItem(int index, IndResultsListItemUI uiItem)
         {
             var data = results[index];
-            uiItem.nameText.text = data.name;
-            uiItem.rankText.text = data.rank.ToString();
-            uiItem.valueText.text = data.value.ToString("F1");
-            uiItem.countryCodeText.text = data.countryCode;
-            uiItem.countryFlagImage.sprite = flagsData.GetFlag(data.countryCode);
+
+            // Show "HillName (#ID)"
+            uiItem.nameText.text = $" ({data.competitionID}) {data.hillName}";
+
+            // Show rank or "-"
+            uiItem.rankText.text = data.rank > 0 ? data.rank.ToString() : "-";
+
+            // Optionally show other data
+            // uiItem.valueText.text = data.rank > 0 ? data.value.ToString("F1") : "-";
+            // uiItem.countryCodeText.text = data.countryCode;
+            // uiItem.countryFlagImage.sprite = flagsData.GetFlag(data.countryCode);
         }
     }
 }
