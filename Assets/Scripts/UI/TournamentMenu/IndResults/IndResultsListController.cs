@@ -7,15 +7,24 @@ using OpenSkiJumping.UI.ListView;
 using UnityEngine;
 namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
 {
-    [Serializable]
+    public enum ResultBackgroundStyle
+    {
+        NoResult,
+        Top30,
+        Bottom20,
+        Qualification,
+        Trial
+    }
+
     public class IndResultsListItem
     {
-        public string countryCode;
-        public string name;
         public string competitionID;
         public string hillName;
+        public string name;
+        public string countryCode;
         public int rank;
         public decimal value;
+        public ResultBackgroundStyle backgroundStyle;
     }
 
     public class IndResultsListController : MonoBehaviour

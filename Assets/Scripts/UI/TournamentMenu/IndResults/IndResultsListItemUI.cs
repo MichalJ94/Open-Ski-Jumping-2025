@@ -1,4 +1,4 @@
-// Example: IndResultsListItemUI.cs
+﻿// Example: IndResultsListItemUI.cs
 using OpenSkiJumping.UI.ListView;
 using TMPro;
 using UnityEngine;
@@ -16,5 +16,6 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
         public TMP_Text competitionID;
         public TMP_Text hillName;
         public Image countryFlagImage;
+        [SerializeField] public Image background;
     }
 }

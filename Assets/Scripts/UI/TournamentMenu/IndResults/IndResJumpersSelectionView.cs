@@ -2,6 +2,7 @@
 using OpenSkiJumping.UI.JumpersMenu;
 using OpenSkiJumping.UI.ListView;
 using OpenSkiJumping.UI.TournamentMenu.ResultsMenu;
+using OpenSkiJumping.Competition;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -141,43 +142,63 @@ namespace OpenSkiJumping.UI.TournamentMenu.JumpersSelection
             for (int i = 0; i < allEvents.Count; i++)
             {
                 var eventInfo = allEvents[i];
-                var result = (i < resultContainer.Length) ? resultContainer[i] : null;
 
-                IndResultsListItem resultItem = new IndResultsListItem
+                // ❌ Skip team competitions
+                if (eventInfo.eventType == OpenSkiJumping.Competition.EventType.Team)
+                    continue;
+
+                string displayHillName = eventInfo.hillId;
+                if (eventInfo.roundInfos.name.StartsWith("Q"))
+                    displayHillName += " (Q)";
+                else if (eventInfo.roundInfos.name.Contains("Trial"))
+                    displayHillName += " Trial";
+
+                var item = new IndResultsListItem
                 {
                     competitionID = i.ToString(),
-                    hillName = eventInfo.hillId,
+                    hillName = displayHillName,
                     name = $"{jumper.competitor.firstName} {jumper.competitor.lastName}",
-                    countryCode = jumper.competitor.countryCode
+                    countryCode = jumper.competitor.countryCode,
+                    rank = 0,
+                    value = 0m,
+                    backgroundStyle = ResultBackgroundStyle.NoResult
                 };
 
-                if (result != null && result.competitorIds != null)
+                // ✅ Check that resultContainer has this index and it’s not null
+                if (i < resultContainer.Length && resultContainer[i] != null)
                 {
-                    int index = result.competitorIds.IndexOf(jumper.calendarId);
+                    var result = resultContainer[i];
 
-                    if (index >= 0 && index < result.results.Count)
+                    // ✅ Also check that lists aren't null
+                    if (result.competitorIds != null && result.results != null)
                     {
-                        var compResult = result.results[index];
-                        resultItem.rank = compResult.Rank;
-                        resultItem.value = compResult.TotalPoints;
-                    }
-                    else
-                    {
-                        resultItem.rank = 0; // 0 means "no result"
-                        resultItem.value = 0;
+                        int competitorIndex = result.competitorIds.IndexOf(jumper.calendarId);
+
+                        if (competitorIndex >= 0 && competitorIndex < result.results.Count)
+                        {
+                            var compResult = result.results[competitorIndex];
+                            item.rank = compResult.Rank;
+                            item.value = compResult.TotalPoints;
+                        }
                     }
                 }
-                else
-                {
-                    resultItem.rank = 0;
-                    resultItem.value = 0;
-                }
 
-                jumperResults.Add(resultItem);
+                // 🎨 Assign background style
+                if (eventInfo.roundInfos.name.Contains("Trial"))
+                    item.backgroundStyle = ResultBackgroundStyle.Trial;
+                else if (eventInfo.roundInfos.name.StartsWith("Q"))
+                    item.backgroundStyle = ResultBackgroundStyle.Qualification;
+                else if (item.rank > 0 && item.rank <= 30)
+                    item.backgroundStyle = ResultBackgroundStyle.Top30;
+                else if (item.rank > 30 && item.rank <= 50)
+                    item.backgroundStyle = ResultBackgroundStyle.Bottom20;
+
+                jumperResults.Add(item);
             }
 
             return jumperResults;
         }
+
 
 
         private int GetJumperId(CompetitorData jumper)
