@@ -16,6 +16,13 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
         public TMP_Text competitionID;
         public TMP_Text hillName;
         public Image countryFlagImage;
-        [SerializeField] public Image background;
+        public Image overlayTop30;
+        public Image overlayBottom20;
+        public Image overlayQualification;
+        public Image overlayTrial;
+        public Image overlayNoResult;
+        public Image overlayPlace1;
+        public Image overlayPlace2;
+        public Image overlayPlace3;
     }
 }
