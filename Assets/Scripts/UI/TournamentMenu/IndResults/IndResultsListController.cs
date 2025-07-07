@@ -14,7 +14,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
         Bottom20,
         Qualification,
         Trial,
-           Place1,
+        Place1,
     Place2,
     Place3,
     }
@@ -71,6 +71,9 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
             // 🥇 Rank or "-"
             uiItem.rankText.text = data.rank > 0 ? data.rank.ToString() : "-";
 
+            // ❌ Reset text colors
+            uiItem.nameText.color = Color.white;
+            uiItem.rankText.color = Color.white;
 
             // ❌ Disable all overlays first
             uiItem.overlayTop30.gameObject.SetActive(false);
@@ -82,36 +85,60 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
             uiItem.overlayPlace2.gameObject.SetActive(false);
             uiItem.overlayPlace3.gameObject.SetActive(false);
 
-            // 🥇 Show place overlays for top 3
-            if (data.rank == 1)
-                uiItem.overlayPlace1.gameObject.SetActive(true);
-            else if (data.rank == 2)
-                uiItem.overlayPlace2.gameObject.SetActive(true);
-            else if (data.rank == 3)
-                uiItem.overlayPlace3.gameObject.SetActive(true);
-            else
+            // ✅ Show overlay according to backgroundStyle
+            switch (data.backgroundStyle)
             {
-                // 🎨 Set background style only if not top 3
-                switch (data.backgroundStyle)
-                {
-                    case ResultBackgroundStyle.Top30:
-                        uiItem.overlayTop30.gameObject.SetActive(true);
-                        break;
-                    case ResultBackgroundStyle.Bottom20:
-                        uiItem.overlayBottom20.gameObject.SetActive(true);
-                        break;
-                    case ResultBackgroundStyle.Qualification:
-                        uiItem.overlayQualification.gameObject.SetActive(true);
-                        break;
-                    case ResultBackgroundStyle.Trial:
-                        uiItem.overlayTrial.gameObject.SetActive(true);
-                        break;
-                    case ResultBackgroundStyle.NoResult:
-                        uiItem.overlayNoResult.gameObject.SetActive(true);
-                        break;
-                }
+                case ResultBackgroundStyle.Qualification:
+                    uiItem.overlayQualification.gameObject.SetActive(true);
+                    if (ColorUtility.TryParseHtmlString("#666666", out Color qColor))
+                    {
+                        uiItem.nameText.color = qColor;
+                        uiItem.rankText.color = qColor;
+                    }
+                    uiItem.rankText.text += " (Q)";
+                    break;
+
+                case ResultBackgroundStyle.Trial:
+                    uiItem.overlayTrial.gameObject.SetActive(true);
+                    uiItem.rankText.text += " (T)";
+                    break;
+
+                case ResultBackgroundStyle.Place1:
+                    uiItem.overlayPlace1.gameObject.SetActive(true);
+                    break;
+
+                case ResultBackgroundStyle.Place2:
+                    uiItem.overlayPlace2.gameObject.SetActive(true);
+                    break;
+
+                case ResultBackgroundStyle.Place3:
+                    uiItem.overlayPlace3.gameObject.SetActive(true);
+                    break;
+
+                case ResultBackgroundStyle.Top30:
+                    uiItem.overlayTop30.gameObject.SetActive(true);
+                    break;
+
+                case ResultBackgroundStyle.Bottom20:
+                    uiItem.overlayBottom20.gameObject.SetActive(true);
+                    if (ColorUtility.TryParseHtmlString("#d9d9d9", out Color btColor))
+                    {
+                        uiItem.nameText.color = btColor;
+                        uiItem.rankText.color = btColor;
+                    }
+                    break;
+
+                case ResultBackgroundStyle.NoResult:
+                    uiItem.overlayNoResult.gameObject.SetActive(true);
+                    if (ColorUtility.TryParseHtmlString("#464646", out Color nrColor))
+                    {
+                        uiItem.nameText.color = nrColor;
+                        uiItem.rankText.color = nrColor;
+                    }
+                    break;
             }
         }
+
 
 
 

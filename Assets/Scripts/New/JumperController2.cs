@@ -552,7 +552,7 @@ namespace OpenSkiJumping.New
                     jumperModel.animator.SetFloat("TiltReturnTime", returnTime);
                     */
 
-                    if (Random.value < 0.5f)
+                    if (Random.value < 0.1f)//reduced fortesting
                     {
                         if (Random.value < 0.5f)
                         {
@@ -567,7 +567,7 @@ namespace OpenSkiJumping.New
                     }
                     else
                     {
-                        if (Random.value < 0.5f)
+                        if (Random.value < 0.1f) //reduced for testing
                         {
                             jumperModel.animator.SetTrigger("LEscape");
                             UnityEngine.Debug.Log("Turbulence LEscape");

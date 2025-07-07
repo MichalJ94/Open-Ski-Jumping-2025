@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor.PackageManager;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace OpenSkiJumping.UI.TournamentMenu.JumpersSelection
 {
@@ -21,6 +22,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.JumpersSelection
         [SerializeField] private FlagsData flagsData;
         [SerializeField] private IconsData iconsData;
         [SerializeField] private IndResultsListController indResultsListController;
+        [SerializeField] private Toggle includeQualiTrialToggle;
 
         [SerializeField] private JumpersSelectionListView listView;
 
@@ -43,7 +45,9 @@ namespace OpenSkiJumping.UI.TournamentMenu.JumpersSelection
             }
         }
         private List<IndResultsListItem> results;
-      
+
+        private bool includeQualiTrial = false;
+
         public event Action OnDataReload;
         public event Action<CompetitorData> OnJumperSelected;
         public event Action OnSelectionChanged;
@@ -147,57 +151,70 @@ namespace OpenSkiJumping.UI.TournamentMenu.JumpersSelection
                 if (eventInfo.eventType == OpenSkiJumping.Competition.EventType.Team)
                     continue;
 
+                var result = resultContainer[i];
+                if (result == null || result.competitorIds == null || result.results == null)
+                    continue;
+
+                int competitorIndex = result.competitorIds.IndexOf(jumper.calendarId);
+                if (competitorIndex < 0 || competitorIndex >= result.results.Count)
+                    continue; // ❌ Skip comps with no result for this jumper
+
+                var compResult = result.results[competitorIndex];
+
+                // 🏔️ Display name formatting
                 string displayHillName = eventInfo.hillId;
-                if (eventInfo.roundInfos.name.StartsWith("Q"))
+                bool isQualification = eventInfo.roundInfos.name.StartsWith("Q");
+                bool isTrial = eventInfo.roundInfos.name.Contains("Trial");
+
+                if (isQualification)
                     displayHillName += " (Q)";
-                else if (eventInfo.roundInfos.name.Contains("Trial"))
+                else if (isTrial)
                     displayHillName += " Trial";
 
+                // 📦 Build result item
                 var item = new IndResultsListItem
                 {
                     competitionID = i.ToString(),
                     hillName = displayHillName,
                     name = $"{jumper.competitor.firstName} {jumper.competitor.lastName}",
                     countryCode = jumper.competitor.countryCode,
-                    rank = 0,
-                    value = 0m,
-                    backgroundStyle = ResultBackgroundStyle.NoResult
+                    rank = compResult.Rank,
+                    value = compResult.TotalPoints,
+                    backgroundStyle = ResultBackgroundStyle.NoResult // will be overwritten
                 };
 
-                // ✅ Check that resultContainer has this index and it’s not null
-                if (i < resultContainer.Length && resultContainer[i] != null)
+                // 🎨 Background style logic
+                if (isTrial)
                 {
-                    var result = resultContainer[i];
-
-                    // ✅ Also check that lists aren't null
-                    if (result.competitorIds != null && result.results != null)
-                    {
-                        int competitorIndex = result.competitorIds.IndexOf(jumper.calendarId);
-
-                        if (competitorIndex >= 0 && competitorIndex < result.results.Count)
-                        {
-                            var compResult = result.results[competitorIndex];
-                            item.rank = compResult.Rank;
-                            item.value = compResult.TotalPoints;
-                        }
-                    }
-                }
-
-                // 🎨 Assign background style
-                if (eventInfo.roundInfos.name.Contains("Trial"))
                     item.backgroundStyle = ResultBackgroundStyle.Trial;
-                else if (eventInfo.roundInfos.name.StartsWith("Q"))
+                }
+                else if (isQualification)
+                {
                     item.backgroundStyle = ResultBackgroundStyle.Qualification;
-                else if (item.rank > 0 && item.rank <= 30)
-                    item.backgroundStyle = ResultBackgroundStyle.Top30;
-                else if (item.rank > 30 && item.rank <= 50)
-                    item.backgroundStyle = ResultBackgroundStyle.Bottom20;
+                }
+                else
+                {
+                    // Only apply podium/placement overlays if not Trial or Quali
+                    if (item.rank == 1)
+                        item.backgroundStyle = ResultBackgroundStyle.Place1;
+                    else if (item.rank == 2)
+                        item.backgroundStyle = ResultBackgroundStyle.Place2;
+                    else if (item.rank == 3)
+                        item.backgroundStyle = ResultBackgroundStyle.Place3;
+                    else if (item.rank > 3 && item.rank <= 30)
+                        item.backgroundStyle = ResultBackgroundStyle.Top30;
+                    else if (item.rank > 30 && item.rank <= 50)
+                        item.backgroundStyle = ResultBackgroundStyle.Bottom20;
+                    else
+                        item.backgroundStyle = ResultBackgroundStyle.NoResult;
+                }
 
                 jumperResults.Add(item);
             }
 
             return jumperResults;
         }
+
 
 
 
