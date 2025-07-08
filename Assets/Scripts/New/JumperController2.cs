@@ -552,7 +552,7 @@ namespace OpenSkiJumping.New
                     jumperModel.animator.SetFloat("TiltReturnTime", returnTime);
                     */
 
-                    if (Random.value < 0.9f)//reduced fortesting
+                    if (Random.value < 0.5f)
                     {
                         if (Random.value < 0.5f)
                         {
@@ -569,7 +569,7 @@ namespace OpenSkiJumping.New
                     }
                     else
                     {
-                        if (Random.value < 0.5f) //reduced for testing
+                        if (Random.value < 0.5f) 
                         {
                             jumperModel.animator.SetTrigger("LEscape");
                             jumperModel.animator.SetBool("Return", true);
