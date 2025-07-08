@@ -56,9 +56,15 @@ namespace OpenSkiJumping.UI.TournamentMenu.JumpersSelection
         {
             ListViewSetup();
             indResultsListController.Initialize();
+
             presenter = new IndResJumpersSelectionPresenter(this, tournamentMenuData);
             initialized = true;
-            
+
+            // Listen to toggle changes
+            includeQualiTrialToggle.onValueChanged.AddListener(OnQualiTrialToggleChanged);
+
+            // Automatically select the first jumper after data is loaded
+            StartCoroutine(AutoSelectFirstJumperNextFrame());
         }
 
         private void OnEnable()
@@ -151,39 +157,40 @@ namespace OpenSkiJumping.UI.TournamentMenu.JumpersSelection
                 if (eventInfo.eventType == OpenSkiJumping.Competition.EventType.Team)
                     continue;
 
+                bool isQualification = eventInfo.roundInfos.name.StartsWith("Q");
+                bool isTrial = eventInfo.roundInfos.name.Contains("Trial");
+
+                if (!includeQualiTrial && (isQualification || isTrial))
+                    continue;
+
+                if (i >= resultContainer.Length) continue;
+
                 var result = resultContainer[i];
                 if (result == null || result.competitorIds == null || result.results == null)
                     continue;
 
                 int competitorIndex = result.competitorIds.IndexOf(jumper.calendarId);
                 if (competitorIndex < 0 || competitorIndex >= result.results.Count)
-                    continue; // ❌ Skip comps with no result for this jumper
+                    continue;
 
                 var compResult = result.results[competitorIndex];
 
-                // 🏔️ Display name formatting
                 string displayHillName = eventInfo.hillId;
-                bool isQualification = eventInfo.roundInfos.name.StartsWith("Q");
-                bool isTrial = eventInfo.roundInfos.name.Contains("Trial");
+                if (isQualification) displayHillName += " (Q)";
+                else if (isTrial) displayHillName += " Trial";
 
-                if (isQualification)
-                    displayHillName += " (Q)";
-                else if (isTrial)
-                    displayHillName += " Trial";
-
-                // 📦 Build result item
                 var item = new IndResultsListItem
                 {
-                    competitionID = i.ToString(),
+                    // temporary ID, will be overwritten
+                    competitionID = isQualification ? "Q" : isTrial ? "T" : "",
                     hillName = displayHillName,
                     name = $"{jumper.competitor.firstName} {jumper.competitor.lastName}",
                     countryCode = jumper.competitor.countryCode,
                     rank = compResult.Rank,
                     value = compResult.TotalPoints,
-                    backgroundStyle = ResultBackgroundStyle.NoResult // will be overwritten
+                    backgroundStyle = ResultBackgroundStyle.NoResult
                 };
 
-                // 🎨 Background style logic
                 if (isTrial)
                 {
                     item.backgroundStyle = ResultBackgroundStyle.Trial;
@@ -194,7 +201,6 @@ namespace OpenSkiJumping.UI.TournamentMenu.JumpersSelection
                 }
                 else
                 {
-                    // Only apply podium/placement overlays if not Trial or Quali
                     if (item.rank == 1)
                         item.backgroundStyle = ResultBackgroundStyle.Place1;
                     else if (item.rank == 2)
@@ -205,17 +211,49 @@ namespace OpenSkiJumping.UI.TournamentMenu.JumpersSelection
                         item.backgroundStyle = ResultBackgroundStyle.Top30;
                     else if (item.rank > 30 && item.rank <= 50)
                         item.backgroundStyle = ResultBackgroundStyle.Bottom20;
-                    else
-                        item.backgroundStyle = ResultBackgroundStyle.NoResult;
                 }
 
                 jumperResults.Add(item);
+            }
+
+            // ✅ Assign sequential competitionID numbers post-creation
+            int compIndex = 1;
+            foreach (var item in jumperResults)
+            {
+                if (item.competitionID == "") // i.e. not Q or T
+                {
+                    item.competitionID = compIndex.ToString();
+                    compIndex++;
+                }
             }
 
             return jumperResults;
         }
 
 
+
+        private IEnumerator AutoSelectFirstJumperNextFrame()
+        {
+            yield return null; // Wait one frame to ensure UI is ready
+
+            if (jumpers != null && jumpers.Count > 0)
+            {
+                listView.SelectedIndex = 0;
+                HandleJumperSelected(0);
+            }
+        }
+
+        private void OnQualiTrialToggleChanged(bool isOn)
+        {
+            includeQualiTrial = isOn;
+
+            // Refresh current jumper’s result list
+            if (SelectedJumper != null)
+            {
+                var jumperResults = GetResultsForJumper(SelectedJumper);
+                indResultsListController.Results = jumperResults;
+            }
+        }
 
 
         private int GetJumperId(CompetitorData jumper)

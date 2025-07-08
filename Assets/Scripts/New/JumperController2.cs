@@ -535,7 +535,7 @@ namespace OpenSkiJumping.New
             if (state == 2 && !takeoff && Random.value < (float)((0.0001)*gameplayExtension.turbulenceChance))
             {
                 tiltTimer += Time.deltaTime;
-
+                
                 AnimatorStateInfo stateInfo = jumperModel.animator.GetCurrentAnimatorStateInfo(0);
                 bool inFlight = stateInfo.shortNameHash == Flight;
                 bool inTransition = jumperModel.animator.IsInTransition(0);
@@ -552,29 +552,33 @@ namespace OpenSkiJumping.New
                     jumperModel.animator.SetFloat("TiltReturnTime", returnTime);
                     */
 
-                    if (Random.value < 0.1f)//reduced fortesting
+                    if (Random.value < 0.9f)//reduced fortesting
                     {
                         if (Random.value < 0.5f)
                         {
                             jumperModel.animator.SetTrigger("TiltLeft");
+                            jumperModel.animator.SetBool("Return", true);
                             UnityEngine.Debug.Log("Turbulence Tiltleft");
                         }
                         else
                         {
                             jumperModel.animator.SetTrigger("TiltRight");
+                            jumperModel.animator.SetBool("Return", true);
                             UnityEngine.Debug.Log("Turbulence TiltRight");
                         }
                     }
                     else
                     {
-                        if (Random.value < 0.1f) //reduced for testing
+                        if (Random.value < 0.5f) //reduced for testing
                         {
                             jumperModel.animator.SetTrigger("LEscape");
+                            jumperModel.animator.SetBool("Return", true);
                             UnityEngine.Debug.Log("Turbulence LEscape");
                         }
                         else
                         {
                             jumperModel.animator.SetTrigger("REscape");
+                            jumperModel.animator.SetBool("Return", true);
                             UnityEngine.Debug.Log("Turbulence REscape");
                         }
 
