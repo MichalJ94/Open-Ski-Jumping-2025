@@ -44,6 +44,11 @@ namespace OpenSkiJumping.New
         private float forceScaleModifier;
         private float windModifier;
 
+        [SerializeField] private Renderer helmetRenderer;
+        [SerializeField] private int materialIndex = 0; // slot 0 is main texture
+
+        [SerializeField] private float mipMapBias = -1.5f;
+
         //                                                                                          BUG Z ROTACJĄ LEŻY W WINDTHRUSTDETERMINERTIMESUSED.
 
         bool button0, button1;
@@ -201,6 +206,21 @@ namespace OpenSkiJumping.New
                 //UnityEngine.Debug.Log("Redukcja punktów za krótki skok 0.75");
             }*/
         }
+
+        public void HelmetRendererUpdate()
+        {
+            if (helmetRenderer == null || helmetRenderer.materials.Length <= materialIndex)
+                return;
+
+            Material mat = helmetRenderer.materials[materialIndex];
+
+            if (mat.mainTexture != null)
+            {
+                mat.mainTexture.mipMapBias = mipMapBias;
+                UnityEngine.Debug.Log($"Set mipMapBias to {mipMapBias} on material: {mat.name}");
+            }
+        }
+
 
         private void ProcessLanding()
         {
