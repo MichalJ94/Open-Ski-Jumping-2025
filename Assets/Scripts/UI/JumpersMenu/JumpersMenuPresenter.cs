@@ -80,6 +80,7 @@ namespace OpenSkiJumping.UI.JumpersMenu
             view.LargeHillSkill = jumper.largeHillSkill;
             view.SkiFlyingHillSkill = jumper.skiFlyingHillSkill;
             view.ImagePath = jumper.imagePath;
+            view.HelmetTexture = jumper.helmetTexture;
             view.LoadImage(jumper.imagePath);
         }
 
@@ -106,6 +107,7 @@ namespace OpenSkiJumping.UI.JumpersMenu
             jumper.largeHillSkill = view.LargeHillSkill;
             jumper.skiFlyingHillSkill = view.SkiFlyingHillSkill;
             jumper.imagePath = view.ImagePath;
+            jumper.helmetTexture = view.HelmetTexture;
             view.LoadImage(jumper.imagePath);
             jumpers.Recalculate(jumper);
             PresentList();

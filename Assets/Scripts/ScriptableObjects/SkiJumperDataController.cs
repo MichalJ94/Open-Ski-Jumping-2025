@@ -5,6 +5,8 @@ using OpenSkiJumping.Jumping;
 using OpenSkiJumping.New;
 using OpenSkiJumping.UI;
 using UnityEngine;
+using System.Collections;
+using UnityEngine.Networking;
 
 namespace OpenSkiJumping.ScriptableObjects
 {
@@ -24,6 +26,9 @@ namespace OpenSkiJumping.ScriptableObjects
         public Material suitBottomFrontMaterial;
         public Material suitTopBackMaterial;
         public Material suitTopFrontMaterial;
+        public Renderer helmetRenderer;
+        public Material transparentHelmetMaterial;
+        public float mipMapBias = -1f;
         private static readonly int Color = Shader.PropertyToID("_BaseColor");
 
         public void GetValues()
@@ -64,6 +69,61 @@ namespace OpenSkiJumping.ScriptableObjects
                     
         }
 
+        private void LoadHelmetTexture()
+        {
+            string textureName = competitor.helmetTexture;
+
+            if (string.IsNullOrEmpty(textureName))
+            {
+                SetHelmetMaterialToTransparent();
+                return;
+            }
+
+            string fullPath = System.IO.Path.Combine(Application.streamingAssetsPath, "textures", "helmet", textureName);
+            if (!System.IO.File.Exists(fullPath))
+            {
+                SetHelmetMaterialToTransparent();
+                return;
+            }
+
+            StartCoroutine(LoadHelmetTextureCoroutine(fullPath));
+        }
+
+        private IEnumerator LoadHelmetTextureCoroutine(string filePath)
+        {
+            string uri = new System.Uri(filePath).AbsoluteUri;
+            using (UnityWebRequest www = UnityWebRequestTexture.GetTexture(uri))
+            {
+                yield return www.SendWebRequest();
+
+                if (www.result != UnityWebRequest.Result.Success)
+                {
+                    Debug.LogWarning("Failed to load helmet texture: " + www.error);
+                    SetHelmetMaterialToTransparent();
+                    yield break;
+                }
+
+                Texture2D tex = DownloadHandlerTexture.GetContent(www);
+                tex.mipMapBias = mipMapBias;
+
+                Material mat = helmetRenderer.materials[0]; // slot 0: CustomHelmet
+                mat.mainTexture = tex;
+                mat.mainTexture.mipMapBias = mipMapBias;
+
+                helmetRenderer.materials[0] = mat;
+            }
+        }
+
+        private void SetHelmetMaterialToTransparent()
+        {
+            var mats = helmetRenderer.materials;
+            if (mats.Length >= 1)
+            {
+                mats[0] = transparentHelmetMaterial;
+                helmetRenderer.materials = mats;
+            }
+        }
+
 
 
         public void SetValues(Color bibColor)
@@ -78,6 +138,7 @@ namespace OpenSkiJumping.ScriptableObjects
             suitBottomFrontMaterial.SetColor(Color, SimpleColorPicker.Hex2Color(competitor.suitBottomFrontColor));
             suitBottomBackMaterial.SetColor(Color, SimpleColorPicker.Hex2Color(competitor.suitBottomBackColor));
             skisMaterial.SetColor(Color, SimpleColorPicker.Hex2Color(competitor.skisColor));
+            LoadHelmetTexture();
         }
     }
 }
