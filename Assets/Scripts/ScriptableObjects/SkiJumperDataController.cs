@@ -71,6 +71,7 @@ namespace OpenSkiJumping.ScriptableObjects
 
         private void LoadHelmetTexture()
         {
+            Debug.Log("LoadHelmetTexture");
             string textureName = competitor.helmetTexture;
 
             if (string.IsNullOrEmpty(textureName))
@@ -106,23 +107,31 @@ namespace OpenSkiJumping.ScriptableObjects
                 Texture2D tex = DownloadHandlerTexture.GetContent(www);
                 tex.mipMapBias = mipMapBias;
 
-                Material mat = helmetRenderer.materials[0]; // slot 0: CustomHelmet
-                mat.mainTexture = tex;
-                mat.mainTexture.mipMapBias = mipMapBias;
+                Material[] mats = helmetRenderer.materials;
 
-                helmetRenderer.materials[0] = mat;
+                if (mats.Length >= 1)
+                {
+                    Material mat = new Material(mats[0]); // Duplicate to avoid editing the original
+                    mat.mainTexture = tex;
+                    mat.mainTexture.mipMapBias = mipMapBias;
+                    mats[0] = mat;
+
+                    helmetRenderer.materials = mats;
+                }
             }
         }
 
+
         private void SetHelmetMaterialToTransparent()
         {
-            var mats = helmetRenderer.materials;
+            Material[] mats = helmetRenderer.materials;
             if (mats.Length >= 1)
             {
                 mats[0] = transparentHelmetMaterial;
                 helmetRenderer.materials = mats;
             }
         }
+
 
 
 
@@ -138,7 +147,7 @@ namespace OpenSkiJumping.ScriptableObjects
             suitBottomFrontMaterial.SetColor(Color, SimpleColorPicker.Hex2Color(competitor.suitBottomFrontColor));
             suitBottomBackMaterial.SetColor(Color, SimpleColorPicker.Hex2Color(competitor.suitBottomBackColor));
             skisMaterial.SetColor(Color, SimpleColorPicker.Hex2Color(competitor.skisColor));
-            LoadHelmetTexture();
+           // LoadHelmetTexture();
         }
     }
 }
