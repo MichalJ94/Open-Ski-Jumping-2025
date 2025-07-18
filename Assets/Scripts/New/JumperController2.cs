@@ -533,6 +533,7 @@ namespace OpenSkiJumping.New
             rig.weight = 0;
             landingVertDistance = 0;
             windModifier = 1;
+            skiJumperDataController.hasCustomSkiTexture = false;
             tilting = false;
         }
 
@@ -1046,11 +1047,23 @@ namespace OpenSkiJumping.New
 
             //Na plecy i na brzuch
             //State = ;
+
+
+
             jumperModel.animator.SetBool(JumperCrash, true);
+
+      
+
             rSkiClone.SetActive(true);
             lSkiClone.SetActive(true);
+
+            skiJumperDataController.ApplySkiCloneVisuals();
+
             jumperModel.skiRight.SetActive(false);
-            jumperModel.skiLeft.SetActive(false);
+           jumperModel.skiLeft.SetActive(false);
+
+
+
             lSkiClone.GetComponent<Rigidbody>().velocity = rb.velocity * 0.9f;
             lSkiClone.GetComponent<Transform>().position = jumperModel.skiLeft.GetComponent<Transform>().position;
             lSkiClone.GetComponent<Transform>().rotation = jumperModel.skiLeft.GetComponent<Transform>().rotation;

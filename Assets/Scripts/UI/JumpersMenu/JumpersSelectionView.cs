@@ -140,6 +140,7 @@ namespace OpenSkiJumping.UI.JumpersMenu
         [SerializeField] private SimpleColorPicker skisColorPicker;
         [SerializeField] private TMP_InputField imagePathInput;
         [SerializeField] private TMP_InputField helmetTexturePathInput;
+        [SerializeField] private TMP_InputField skiTexturePathInput;
         [SerializeField] private Image image;
         [SerializeField] private Button addButton;
         [SerializeField] private Button removeButton;
@@ -227,6 +228,12 @@ namespace OpenSkiJumping.UI.JumpersMenu
         {
             get => helmetTexturePathInput.text;
             set => helmetTexturePathInput.SetTextWithoutNotify(value);
+        }
+
+        public string SkiTexture
+        {
+            get => skiTexturePathInput.text;
+            set => skiTexturePathInput.SetTextWithoutNotify(value);
         }
 
         public int NormalHillSkill

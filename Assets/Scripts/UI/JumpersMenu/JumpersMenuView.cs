@@ -83,6 +83,7 @@ namespace OpenSkiJumping.UI.JumpersMenu
             countryCodeInput.onEndEdit.AddListener(x => OnValueChanged());
             imagePathInput.onEndEdit.AddListener(x => OnValueChanged());
             helmetTexture.onEndEdit.AddListener(x => OnValueChanged());
+            skiTexture.onEndEdit.AddListener(x => OnValueChanged());
             genderSelect.onValueChanged.AddListener(x => OnValueChanged());
             controlSelect.onValueChanged.AddListener(x => OnValueChanged());
             helmetColorPicker.OnColorChange += OnValueChanged;
@@ -157,6 +158,7 @@ namespace OpenSkiJumping.UI.JumpersMenu
         [SerializeField] private SimpleColorPicker skisColorPicker;
         [SerializeField] private TMP_InputField imagePathInput;
         [SerializeField] private TMP_InputField helmetTexture;
+        [SerializeField] private TMP_InputField skiTexture;
         [SerializeField] private Image image;
         [SerializeField] private Button addButton;
         [SerializeField] private Button removeButton;
@@ -244,6 +246,12 @@ namespace OpenSkiJumping.UI.JumpersMenu
         {
             get => helmetTexture.text;
             set => helmetTexture.SetTextWithoutNotify(value);
+        }
+
+        public string SkiTexture
+        {
+            get => skiTexture.text;
+            set => skiTexture.SetTextWithoutNotify(value);
         }
 
         public int NormalHillSkill

@@ -25,6 +25,8 @@ namespace OpenSkiJumping.UI.JumpersMenu
 
         string HelmetTexture { get; set; }
 
+        string SkiTexture { get; set; }
+
         int NormalHillSkill { get; set; }
 
         int LargeHillSkill { get; set; }

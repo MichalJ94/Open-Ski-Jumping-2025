@@ -27,6 +27,7 @@ namespace OpenSkiJumping.Competition.Persistent
         public string suitBottomBackColor = "000000";
         public string skisColor = "000000";
         public string helmetTexture = "";
+        public string skiTexture = "";
         public int normalHillSkill;
         public int largeHillSkill;
         public int skiFlyingHillSkill;
