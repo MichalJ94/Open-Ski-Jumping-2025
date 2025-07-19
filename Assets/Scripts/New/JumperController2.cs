@@ -553,8 +553,15 @@ namespace OpenSkiJumping.New
             }
 
 
-            if (state == 2 && !takeoff && Random.value < (float)((0.0001)*gameplayExtension.turbulenceChance))
+            if (state == 2 && !takeoff && Random.value < (float)((0.00001)*gameplayExtension.turbulenceChance))
             {
+
+                if (RayCast() < 2f)
+                {
+                    UnityEngine.Debug.Log("RayCast preveted turbulence");
+                    return;
+                }
+
                 tiltTimer += Time.deltaTime;
                 
                 AnimatorStateInfo stateInfo = jumperModel.animator.GetCurrentAnimatorStateInfo(0);
@@ -1057,12 +1064,27 @@ namespace OpenSkiJumping.New
             rSkiClone.SetActive(true);
             lSkiClone.SetActive(true);
 
-            skiJumperDataController.ApplySkiCloneVisuals();
+          skiJumperDataController.ApplySkiCloneVisuals();
 
             jumperModel.skiRight.SetActive(false);
            jumperModel.skiLeft.SetActive(false);
 
 
+            var smr = skiJumperDataController.customLeftSkiCloneObject.GetComponent<SkinnedMeshRenderer>();
+            UnityEngine.Debug.Log("CustomSki bounds: " + smr.bounds);
+            UnityEngine.Debug.Log("CustomSki world pos: " + smr.transform.position);
+
+            var smr2 = skiJumperDataController.leftSkiCloneObject.GetComponent<SkinnedMeshRenderer>();
+            UnityEngine.Debug.Log("ColorSki bounds: " + smr2.bounds);
+            UnityEngine.Debug.Log("ColorSki world pos: " + smr2.transform.position);
+
+            var mat = smr.material;
+            UnityEngine.Debug.Log("Main Tex: " + mat.mainTexture);
+            UnityEngine.Debug.Log("Color: " + mat.color);
+            UnityEngine.Debug.Log("Shader: " + mat.shader.name);
+            UnityEngine.Debug.Log("RenderQueue: " + mat.renderQueue);
+            UnityEngine.Debug.Log("Materials count: " + smr.materials.Length);
+            UnityEngine.Debug.Log("Mesh submesh count: " + smr.sharedMesh.subMeshCount);
 
             lSkiClone.GetComponent<Rigidbody>().velocity = rb.velocity * 0.9f;
             lSkiClone.GetComponent<Transform>().position = jumperModel.skiLeft.GetComponent<Transform>().position;

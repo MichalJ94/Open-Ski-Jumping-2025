@@ -36,6 +36,7 @@ namespace OpenSkiJumping.ScriptableObjects
         public GameObject leftSkiCloneObject;
         public GameObject rightSkiCloneObject;
         public GameObject customLeftSkiCloneObject;
+        public GameObject customLeftSkiCloneObjectDummy;
         public GameObject customRightSkiCloneObject;
         public Renderer customHelmetRenderer;
         public Renderer customLeftSkiRenderer;
@@ -222,7 +223,7 @@ namespace OpenSkiJumping.ScriptableObjects
                     Material matl = new Material(matsLeft[1]); // duplicate to avoid global edits
                     //Material matr = new Material(matsRight[1]);
                     matl.mainTexture = tex;
-                   // matr.mainTexture = tex;
+                    // matr.mainTexture = tex;
                     matl.mainTexture.mipMapBias = mipMapBiasSkis;
                     //matr.mainTexture.mipMapBias = mipMapBiasSkis;
                     matsLeft[1] = matl;
@@ -235,8 +236,13 @@ namespace OpenSkiJumping.ScriptableObjects
                     customRightSkiCloneRenderer.materials = matsCloneRight;
                     customLeftSkiObject.SetActive(true);
                     customRightSkiObject.SetActive(true);
+                    customLeftSkiCloneObject.SetActive(true);
+                    customLeftSkiCloneObjectDummy.SetActive(true);
+                    customRightSkiCloneObject.SetActive(true);
                     leftSkiObject.SetActive(false);
                     rightSkiObject.SetActive(false);
+                    leftSkiCloneObject.SetActive(false);
+                    rightSkiCloneObject.SetActive(false);
                 }
                 else
                 {
@@ -246,16 +252,19 @@ namespace OpenSkiJumping.ScriptableObjects
             }
         }
 
+
+
         public void ApplySkiCloneVisuals()
         {
             if (hasCustomSkiTexture)
             {
 
                 // Use textured ski clones
+                leftSkiCloneObject.SetActive(false);
+                rightSkiCloneObject.SetActive(false);
                 customLeftSkiCloneObject.SetActive(true);
                 customRightSkiCloneObject.SetActive(true);
-                leftSkiCloneObject.SetActive(false);
-               rightSkiCloneObject.SetActive(false);
+
             
                 }
             else
