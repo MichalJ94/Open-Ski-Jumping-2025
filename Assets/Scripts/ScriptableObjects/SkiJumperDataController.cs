@@ -36,7 +36,6 @@ namespace OpenSkiJumping.ScriptableObjects
         public GameObject leftSkiCloneObject;
         public GameObject rightSkiCloneObject;
         public GameObject customLeftSkiCloneObject;
-        public GameObject customLeftSkiCloneObjectDummy;
         public GameObject customRightSkiCloneObject;
         public Renderer customHelmetRenderer;
         public Renderer customLeftSkiRenderer;
@@ -237,7 +236,6 @@ namespace OpenSkiJumping.ScriptableObjects
                     customLeftSkiObject.SetActive(true);
                     customRightSkiObject.SetActive(true);
                     customLeftSkiCloneObject.SetActive(true);
-                    customLeftSkiCloneObjectDummy.SetActive(true);
                     customRightSkiCloneObject.SetActive(true);
                     leftSkiObject.SetActive(false);
                     rightSkiObject.SetActive(false);

@@ -11,7 +11,7 @@ using OpenSkiJumping.UI.ListView;
 using UnityEngine.UI;
 using System.Linq;
 using System;
-using UnityEditor.PackageManager;
+
 
 namespace OpenSkiJumping.UI.TournamentMenu.IndResultsMenu
 {

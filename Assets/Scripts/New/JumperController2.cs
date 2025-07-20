@@ -553,10 +553,10 @@ namespace OpenSkiJumping.New
             }
 
 
-            if (state == 2 && !takeoff && Random.value < (float)((0.00001)*gameplayExtension.turbulenceChance))
+            if (state == 2 && !takeoff && Random.value < (float)((0.00005)*gameplayExtension.turbulenceChance))
             {
 
-                if (RayCast() < 2f)
+                if (RayCast() < 3f)
                 {
                     UnityEngine.Debug.Log("RayCast preveted turbulence");
                     return;
