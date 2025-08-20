@@ -230,8 +230,8 @@ namespace OpenSkiJumping.ScriptableObjects
                     matsCloneLeft[1] = matl;
                     matsCloneRight[1] = matl;
                     customLeftSkiRenderer.materials = matsLeft;
-                    customRightSkiRenderer.materials = matsLeft;
-                    customLeftSkiCloneRenderer.materials = matsLeft;
+                    customRightSkiRenderer.materials = matsRight;
+                    customLeftSkiCloneRenderer.materials = matsCloneLeft;
                     customRightSkiCloneRenderer.materials = matsCloneRight;
                     customLeftSkiObject.SetActive(true);
                     customRightSkiObject.SetActive(true);

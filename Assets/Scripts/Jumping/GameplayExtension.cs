@@ -25,7 +25,7 @@ namespace OpenSkiJumping.Scripts2025
         public float gateDownChance;
         public float turbulenceChance;
         public decimal storeCPUDistance;
-
+        public bool ragdollActive;
 
         private void OnEnable()
         {

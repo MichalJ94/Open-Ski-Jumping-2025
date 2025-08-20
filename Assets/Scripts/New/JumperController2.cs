@@ -72,6 +72,10 @@ namespace OpenSkiJumping.New
 
         public JumperModel jumperModel;
 
+        [Space][Header("Ragdoll")] public GameObject ragdoll;
+        //majstrowanie przy isKinematic na hips rigidbody pozwala włączyć ragdolla!
+        public Rigidbody ragdollHips;
+
 
         [Space][Header("Parameters")] public float jumpSpeed;
         [SerializeField] private float forceScale;
@@ -383,6 +387,7 @@ namespace OpenSkiJumping.New
             if (State >= 2 && !jumperModel.animator.GetCurrentAnimatorStateInfo(0).IsName("Take-off") &&
                 other.collider.CompareTag("Inrun"))
             {
+                UnityEngine.Debug.Log("BuOccured OnCollisionEnter");
                 BugOccured.Invoke();
                 //Crash();
             }
@@ -535,6 +540,7 @@ namespace OpenSkiJumping.New
             windModifier = 1;
             skiJumperDataController.hasCustomSkiTexture = false;
             tilting = false;
+            gameplayExtension.ragdollActive = false;
         }
 
         private bool shouldStart;
@@ -623,7 +629,7 @@ namespace OpenSkiJumping.New
 
 
 
-
+/*
             if (Input.GetKeyDown(KeyCode.F))
             {
                 //jumperModel.animator.SetLayerWeight(jumperModel.animator.GetLayerIndex("LeftRot"), 1f);
@@ -635,6 +641,16 @@ namespace OpenSkiJumping.New
                 // jumperModel.animator.SetLayerWeight(jumperModel.animator.GetLayerIndex("LeftRot"), 0f);
                 jumperModel.animator.SetTrigger("TiltRight");
                 UnityEngine.Debug.Log("jumperModel.animator.SetTrigger(\"TiltRight\");");
+            }
+*/
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                // jumperModel.animator.SetLayerWeight(jumperModel.animator.GetLayerIndex("LeftRot"), 0f);
+                if (!ragdoll.activeSelf)
+                { ragdoll.SetActive(true); ActivateRagdoll(); }
+                else
+                { ragdoll.SetActive(false);  }
+
             }
 
             if (OnInrun || OnOutrun)
@@ -867,10 +883,11 @@ namespace OpenSkiJumping.New
                     0.00000018944d * angle * angle * angle + 0.00000000352d * angle * angle * angle * angle;
             }
 
-            if (angle < -120 && angle > -130)
+            if (angle < -120 && angle > -130 && !ragdoll.active)
             {
 
                 BugOccured.Invoke();
+                UnityEngine.Debug.Log("BuOccured Angle");
                 // angleDebug = angle;
             }
 
@@ -1110,6 +1127,12 @@ namespace OpenSkiJumping.New
                 judgesController.Judge();
                 judged = true;
             }
+        }
+
+        public void ActivateRagdoll()
+        {
+            gameplayExtension.ragdollActive = true;
+            jumperModel.gameObject.transform.localScale = new Vector3(-1, 0, 0);
         }
 
         public void Brake()

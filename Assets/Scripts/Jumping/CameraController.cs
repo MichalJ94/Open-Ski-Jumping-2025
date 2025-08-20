@@ -1,5 +1,7 @@
 ﻿using Cinemachine;
 using UnityEngine;
+using OpenSkiJumping.Scripts2025;
+
 
 namespace OpenSkiJumping.Jumping
 {
@@ -15,10 +17,12 @@ namespace OpenSkiJumping.Jumping
         private Transform tr;
         private Camera cam;
         public Transform jumperTransform;
+        public Transform ragdollTransform;
         public bool fixedPosition;
         public bool fixedRotation;
         public bool fixedZoom;
         public float zoom;
+        public GameplayExtension gameplayExtension;
 
         private Vector3 position;
         private Vector3 offset;
@@ -48,19 +52,40 @@ namespace OpenSkiJumping.Jumping
         {
             if (fixedPosition)
             {
-                tr.LookAt(jumperTransform);
-                if (fixedZoom)
+                if (!gameplayExtension.ragdollActive)
                 {
-                    // cam.fieldOfView = 2.0f * Mathf.Atan(angleSize / (jumperTransform.position - tr.position).magnitude) * Mathf.Rad2Deg;
-                    Camera.fieldOfView = 360.0f * AngleSize / (jumperTransform.position - tr.position).magnitude / (2.0f * Mathf.PI);
+                    tr.LookAt(jumperTransform);
+                    if (fixedZoom)
+                    {
+                        // cam.fieldOfView = 2.0f * Mathf.Atan(angleSize / (jumperTransform.position - tr.position).magnitude) * Mathf.Rad2Deg;
+                        Camera.fieldOfView = 360.0f * AngleSize / (jumperTransform.position - tr.position).magnitude / (2.0f * Mathf.PI);
+                    }
                 }
-            }
-            if (fixedRotation)
-            {
-                tr.position = jumperTransform.position + offset;
-            }
+                else
+                {
+                    tr.LookAt(ragdollTransform);
+                    if (fixedZoom)
+                    {
+                        // cam.fieldOfView = 2.0f * Mathf.Atan(angleSize / (jumperTransform.position - tr.position).magnitude) * Mathf.Rad2Deg;
+                        Camera.fieldOfView = 360.0f * AngleSize / (ragdollTransform.position - tr.position).magnitude / (2.0f * Mathf.PI);
+                    }
+                }
 
-            // if(GetComponent<Camera>().enabled) Debug.Log("offsetMagnitude: " + (float)(jumperObject.GetComponent<Transform>().position - GetComponent<Transform>().position).magnitude);
+                if (fixedRotation)
+                {
+                    if(!gameplayExtension.ragdollActive)
+                    {
+                        tr.position = jumperTransform.position + offset;
+                    }
+                    else
+                    {
+                        tr.position = ragdollTransform.position + offset;
+                    }
+                
+                }
+
+                // if(GetComponent<Camera>().enabled) Debug.Log("offsetMagnitude: " + (float)(jumperObject.GetComponent<Transform>().position - GetComponent<Transform>().position).magnitude);
+            }
 
         }
     }
