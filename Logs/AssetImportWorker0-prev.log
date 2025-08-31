@@ -1,0 +1,253 @@
+Using pre-set license
+Built from '2020.3/release' branch; Version is '2020.3.2f1 (8fd9074bf66c) revision 9427207'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10 Home; OS build 22631.5624; Version 2009; 64bit' Language: 'pl' Physical Memory: 15628 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+ COMMAND LINE ARGUMENTS:
+E:\Unity\2020.3.2f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+E:/Unity Projects/Open-Ski-Jumping-2025
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+55683
+Successfully changed project path to: E:/Unity Projects/Open-Ski-Jumping-2025
+E:/Unity Projects/Open-Ski-Jumping-2025
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 74.21 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2020.3.2f1 (8fd9074bf66c)
+[Subsystems] Discovering subsystems at path E:/Unity/2020.3.2f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path E:/Unity Projects/Open-Ski-Jumping-2025/Assets
+GfxDevice: creating device client; threaded=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 3060 Laptop GPU (ID=0x2520)
+    Vendor:   
+    VRAM:     5996 MB
+    Driver:   32.0.15.6607
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Initialize mono
+Mono path[0] = 'E:/Unity/2020.3.2f1/Editor/Data/Managed'
+Mono path[1] = 'E:/Unity/2020.3.2f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'E:/Unity/2020.3.2f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56888
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: E:/Unity/2020.3.2f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.000853 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 61.50 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.728 seconds
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.004034 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 65.26 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.207 seconds
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.06 seconds
+Refreshing native plugins compatible for Editor in 0.96 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4054 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 198.6 MB.
+System memory in use after: 198.8 MB.
+
+Unloading 46 unused Assets to reduce memory usage. Loaded Objects now: 4484.
+Total: 3.250700 ms (FindLiveObjects: 0.731800 ms CreateObjectMapping: 0.175400 ms MarkObjects: 2.254100 ms  DeleteObjects: 0.087900 ms)
+
+========================================================================
+Received Import Request.
+  path: Assets/Models/Characters/jumper.blend
+  artifactKey: Guid(ec88853131076a0b6becbfc9185550b6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Characters/jumper.blend using Guid(ec88853131076a0b6becbfc9185550b6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1f7f73a8c4a099ea8e4b3dd9dcca9ccf') in 0.343724 seconds
+  Import took 0.352209 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 111.157536 seconds.
+  path: Assets/Models/Characters/customski.blend
+  artifactKey: Guid(6f1ea1fc6a293cd4eada6a106bb7f45a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Characters/customski.blend using Guid(6f1ea1fc6a293cd4eada6a106bb7f45a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '11e33dc6940759285747b25ef54c60cd') in 0.029964 seconds
+  Import took 0.037162 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.002485 seconds.
+  path: Assets/Models/Characters/customski.blend
+  artifactKey: Guid(6f1ea1fc6a293cd4eada6a106bb7f45a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Characters/customski.blend using Guid(6f1ea1fc6a293cd4eada6a106bb7f45a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '11e33dc6940759285747b25ef54c60cd') in 0.043744 seconds
+  Import took 0.049530 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1127.101371 seconds.
+  path: Assets/Models/Characters/jumper.blend1
+  artifactKey: Guid(57c81b95c76abd01ca57b8594c834723) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Characters/jumper.blend1 using Guid(57c81b95c76abd01ca57b8594c834723) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '95efa0d1becd79bfd88c00113ee8d475') in 0.005931 seconds
+  Import took 0.013099 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2733.795155 seconds.
+  path: Assets/Models/Characters/jumper.blend
+  artifactKey: Guid(ec88853131076a0b6becbfc9185550b6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Characters/jumper.blend using Guid(ec88853131076a0b6becbfc9185550b6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '963457df1b66d94b32e145ba7578178c') in 0.311834 seconds
+  Import took 0.323280 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000217 seconds.
+  path: Assets/Models/Characters/jumperplayground.fbx
+  artifactKey: Guid(9150a9faa0a5afa4793e69089b521294) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Models/Characters/jumperplayground.fbx using Guid(9150a9faa0a5afa4793e69089b521294) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fd57eaa9e44ec22d12f5639458b58baa') in 0.115118 seconds
+  Import took 0.122594 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.746734 seconds.
+  path: Assets/TextMesh Pro/Resources/Shaders
+  artifactKey: Guid(99f836c9cb9345dba2e72c4a1f2d0695) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/TextMesh Pro/Resources/Shaders using Guid(99f836c9cb9345dba2e72c4a1f2d0695) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6fc2ca856808172c84e6d0b0676b6080') in 0.004336 seconds
+  Import took 0.011572 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.084910 seconds.
+  path: Assets/CTI URP/CTI Runtime Components URP/Shaders
+  artifactKey: Guid(2eb3a79d859b2904cb57d0ab8c67e173) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/CTI URP/CTI Runtime Components URP/Shaders using Guid(2eb3a79d859b2904cb57d0ab8c67e173) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '499d0a8f6fb4fdda1210b5a9a7f2772f') in 0.005144 seconds
+  Import took 0.012914 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000618 seconds.
+  path: Assets/CTI URP/CTI Runtime Components URP/Shaders
+  artifactKey: Guid(2eb3a79d859b2904cb57d0ab8c67e173) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/CTI URP/CTI Runtime Components URP/Shaders using Guid(2eb3a79d859b2904cb57d0ab8c67e173) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '499d0a8f6fb4fdda1210b5a9a7f2772f') in 0.002110 seconds
+  Import took 0.008027 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.712991 seconds.
+  path: Assets/Conifers [BOTD]/Render Pipeline Support/Built-in RP/CTI Runtime Components/Shaders
+  artifactKey: Guid(22213150b9694ea4da61a950e43a2b65) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Conifers [BOTD]/Render Pipeline Support/Built-in RP/CTI Runtime Components/Shaders using Guid(22213150b9694ea4da61a950e43a2b65) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'df7ef858462154c9e8262c8fc2839c14') in 0.002760 seconds
+  Import took 0.009283 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.581961 seconds.
+  path: Assets/unity-ui-extensions/Scripts/Effects/ShaderEffects
+  artifactKey: Guid(f9656bd8c19a5a74c90babab7228f771) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/unity-ui-extensions/Scripts/Effects/ShaderEffects using Guid(f9656bd8c19a5a74c90babab7228f771) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '18b1338606da36dc35b376b6a993b7ba') in 0.002947 seconds
+  Import took 0.009833 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.169279 seconds.
+  path: Assets/unity-ui-extensions/Resources/Shaders
+  artifactKey: Guid(0873351fdb3a65f43901b3ec088375b0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/unity-ui-extensions/Resources/Shaders using Guid(0873351fdb3a65f43901b3ec088375b0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b3a4f7e763bb03e5379bb6fac5089778') in 0.003320 seconds
+  Import took 0.010630 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.936124 seconds.
+  path: Assets/unity-ui-extensions/Resources/Shaders/SoftMaskShader.shader
+  artifactKey: Guid(947afae4d36f1274ea2e4098262ceef6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/unity-ui-extensions/Resources/Shaders/SoftMaskShader.shader using Guid(947afae4d36f1274ea2e4098262ceef6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c31c05ad57eed7fe86e258d841d1bd0d') in 0.004991 seconds
+  Import took 0.012098 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.689196 seconds.
+  path: Assets/unity-ui-extensions/Resources/Shaders/SoftMaskShader.shader
+  artifactKey: Guid(947afae4d36f1274ea2e4098262ceef6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/unity-ui-extensions/Resources/Shaders/SoftMaskShader.shader using Guid(947afae4d36f1274ea2e4098262ceef6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c31c05ad57eed7fe86e258d841d1bd0d') in 0.001628 seconds
+  Import took 0.007479 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.404582 seconds.
+  path: Assets/CTI URP/CTI Runtime Components URP/Scripts/Editor/CTI_URP_ShaderGUI.cs
+  artifactKey: Guid(453e1b0bc24ec68468e6655e08e28b09) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/CTI URP/CTI Runtime Components URP/Scripts/Editor/CTI_URP_ShaderGUI.cs using Guid(453e1b0bc24ec68468e6655e08e28b09) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '21569318ff41f9ffe61cef0a1c744043') in 0.019696 seconds
+  Import took 0.026457 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 12.856610 seconds.
+  path: Assets/Unity
+  artifactKey: Guid(c5af1f06d8e41415b817cd5dd9eb48ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Unity using Guid(c5af1f06d8e41415b817cd5dd9eb48ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '71824429f817eccdfb506e7e898dab5f') in 0.003783 seconds
+  Import took 0.010173 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 24.431180 seconds.
+  path: Assets/CTI URP
+  artifactKey: Guid(63ac13dd0d988314da9561f4cb979429) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/CTI URP using Guid(63ac13dd0d988314da9561f4cb979429) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bc93314f9b4927944611a2bd605050aa') in 0.004774 seconds
+  Import took 0.011409 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 16.518286 seconds.
+  path: Assets
+  artifactKey: Guid(00000000000000001000000000000000) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets using Guid(00000000000000001000000000000000) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '819a33a9bd799f71faca6db75e8a216c') in 0.003266 seconds
+  Import took 0.009042 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 14.217716 seconds.
+  path: Assets/New Shader Graph.shadergraph
+  artifactKey: Guid(683a3a0aceff4644fa278653c074c85a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/New Shader Graph.shadergraph using Guid(683a3a0aceff4644fa278653c074c85a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'db7f5fb6d891425b883131481d7ca3aa') in 0.007980 seconds
+  Import took 0.016088 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.288818 seconds.
+  path: Assets/New Shader Graph.shadergraph
+  artifactKey: Guid(683a3a0aceff4644fa278653c074c85a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/New Shader Graph.shadergraph using Guid(683a3a0aceff4644fa278653c074c85a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'db7f5fb6d891425b883131481d7ca3aa') in 0.003017 seconds
+  Import took 0.009051 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1179.379002 seconds.
+  path: Assets/Scripts/ScriptableObjects/SkiJumperDataController.cs
+  artifactKey: Guid(ba041b551d33ded1d825b476849780df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/ScriptableObjects/SkiJumperDataController.cs using Guid(ba041b551d33ded1d825b476849780df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1eecc7a23a74a4cd0e5dc79304a30548') in 0.002845 seconds
+  Import took 0.010304 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.012076 seconds.
+  path: Assets/Scripts/ScriptableObjects/SkiJumperDataController.cs
+  artifactKey: Guid(ba041b551d33ded1d825b476849780df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/ScriptableObjects/SkiJumperDataController.cs using Guid(ba041b551d33ded1d825b476849780df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1eecc7a23a74a4cd0e5dc79304a30548') in 0.001953 seconds
+  Import took 0.007758 seconds .
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
