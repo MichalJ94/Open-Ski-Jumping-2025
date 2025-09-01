@@ -52,7 +52,6 @@ namespace OpenSkiJumping.ScriptableObjects
         {
             var id = resultsManager.Value.GetCurrentJumperId();
             competitor = competitors.competitors[id];
-            //Debug.Log("Od SkiJumperDataController competitor.normalskill: " + competitor.normalHillSkill + "id: " + id + "normalHillSKill: " + competitor.normalHillSkill);
         }
 
         public int GetNormalHillSkill()
@@ -69,7 +68,6 @@ namespace OpenSkiJumping.ScriptableObjects
             return (int)competitor.control;
         }
 
-
         public int GetSkill(float hillsize)
         {
             var id = resultsManager.Value.GetCurrentJumperId();
@@ -83,28 +81,21 @@ namespace OpenSkiJumping.ScriptableObjects
                 return competitor.largeHillSkill;
             }
             return competitor.skiFlyingHillSkill;
-                    
         }
 
         private void LoadHelmetTexture()
         {
-
             string textureName = competitor.helmetTexture;
-
-            Debug.Log($"LoadHelmetTexture before return");
 
             if (string.IsNullOrEmpty(textureName))
             {
                 UseDefaultHelmet();
                 return;
             }
-            Debug.Log($"LoadHelmetTexture after return");
 
-            // Just build the full path and try to load it; do NOT use File.Exists
             string fullPath = System.IO.Path.Combine(Application.streamingAssetsPath, "textures", "helmet", textureName);
             StartCoroutine(LoadCustomHelmetTextureCoroutine(fullPath));
         }
-
 
         private void UseDefaultHelmet()
         {
@@ -114,7 +105,6 @@ namespace OpenSkiJumping.ScriptableObjects
 
         private IEnumerator LoadCustomHelmetTextureCoroutine(string filePath)
         {
-            Debug.Log($"Trying to load helmet texture from: {filePath}");
             string uri = new System.Uri(filePath).AbsoluteUri;
             using (UnityWebRequest www = UnityWebRequestTexture.GetTexture(uri))
             {
@@ -134,11 +124,10 @@ namespace OpenSkiJumping.ScriptableObjects
 
                 tex.mipMapBias = mipMapBiasHelmet;
 
-                // Assign to customHelmetRenderer
                 Material[] mats = customHelmetRenderer.materials;
                 if (mats.Length >= 1)
                 {
-                    Material mat = new Material(mats[0]); // duplicate to avoid global edits
+                    Material mat = new Material(mats[0]); // duplicate
                     mat.mainTexture = tex;
                     mat.mainTexture.mipMapBias = mipMapBiasHelmet;
                     mats[0] = mat;
@@ -160,16 +149,12 @@ namespace OpenSkiJumping.ScriptableObjects
         {
             string textureName = competitor.skiTexture;
 
-            Debug.Log($"SkiTexture before return");
-
             if (string.IsNullOrEmpty(textureName))
             {
                 UseDefaultSkis();
                 return;
             }
-            Debug.Log($"SkiTexture after return");
 
-            // Just build the full path and try to load it; do NOT use File.Exists
             string fullPath = System.IO.Path.Combine(Application.streamingAssetsPath, "textures", "skis", textureName);
             StartCoroutine(LoadCustomSkisTextureCoroutine(fullPath));
         }
@@ -186,11 +171,8 @@ namespace OpenSkiJumping.ScriptableObjects
             customRightSkiCloneObject.SetActive(false);
         }
 
-
-
         private IEnumerator LoadCustomSkisTextureCoroutine(string filePath)
         {
-            Debug.Log($"Trying to load skis texture from: {filePath}");
             string uri = new System.Uri(filePath).AbsoluteUri;
             using (UnityWebRequest www = UnityWebRequestTexture.GetTexture(uri))
             {
@@ -208,31 +190,31 @@ namespace OpenSkiJumping.ScriptableObjects
                 Texture2D rawTex = DownloadHandlerTexture.GetContent(www);
                 Texture2D tex = new Texture2D(rawTex.width, rawTex.height, rawTex.format, true);
                 tex.SetPixels(rawTex.GetPixels());
-                tex.Apply(true); // generate mipmaps
+                tex.Apply(true); // mipmaps
 
                 tex.mipMapBias = mipMapBiasSkis;
 
-                // Assign to customHelmetRenderer
                 Material[] matsLeft = customLeftSkiRenderer.materials;
                 Material[] matsRight = customRightSkiRenderer.materials;
                 Material[] matsCloneLeft = customLeftSkiCloneRenderer.materials;
                 Material[] matsCloneRight = customRightSkiCloneRenderer.materials;
+
                 if (matsLeft.Length >= 1)
                 {
-                    Material matl = new Material(matsLeft[1]); // duplicate to avoid global edits
-                    //Material matr = new Material(matsRight[1]);
+                    Material matl = new Material(matsLeft[1]);
                     matl.mainTexture = tex;
-                    // matr.mainTexture = tex;
                     matl.mainTexture.mipMapBias = mipMapBiasSkis;
-                    //matr.mainTexture.mipMapBias = mipMapBiasSkis;
+
                     matsLeft[1] = matl;
                     matsRight[1] = matl;
                     matsCloneLeft[1] = matl;
                     matsCloneRight[1] = matl;
+
                     customLeftSkiRenderer.materials = matsLeft;
                     customRightSkiRenderer.materials = matsRight;
                     customLeftSkiCloneRenderer.materials = matsCloneLeft;
                     customRightSkiCloneRenderer.materials = matsCloneRight;
+
                     customLeftSkiObject.SetActive(true);
                     customRightSkiObject.SetActive(true);
                     customLeftSkiCloneObject.SetActive(true);
@@ -244,30 +226,58 @@ namespace OpenSkiJumping.ScriptableObjects
                 }
                 else
                 {
-                    Debug.LogWarning("Custom helmet renderer has no material slots!");
+                    Debug.LogWarning("Custom ski renderer has no material slots!");
                     UseDefaultHelmet();
                 }
             }
         }
 
+        // === SUIT LOADING ===
+        private void LoadSuitTexture()
+        {
+            // For now, hardcoded test texture
+            string textureName = "slovenia2425.png";
 
+            if (string.IsNullOrEmpty(textureName))
+                return;
+
+            string fullPath = System.IO.Path.Combine(Application.streamingAssetsPath, "textures", "suits", textureName);
+            StartCoroutine(LoadSuitTextureCoroutine(fullPath));
+        }
+
+        private IEnumerator LoadSuitTextureCoroutine(string filePath)
+        {
+            string uri = new System.Uri(filePath).AbsoluteUri;
+            using (UnityWebRequest www = UnityWebRequestTexture.GetTexture(uri))
+            {
+                yield return www.SendWebRequest();
+                if (www.result != UnityWebRequest.Result.Success)
+                {
+                    Debug.LogWarning("Failed to load suit texture: " + www.error);
+                    yield break;
+                }
+
+                Texture2D rawTex = DownloadHandlerTexture.GetContent(www);
+
+                // Assign suit texture to all 4 suit materials (Shader Graph expects "_SuitTex")
+                suitTopFrontMaterial.SetTexture("_SuitTex", rawTex);
+                suitTopBackMaterial.SetTexture("_SuitTex", rawTex);
+                suitBottomFrontMaterial.SetTexture("_SuitTex", rawTex);
+                suitBottomBackMaterial.SetTexture("_SuitTex", rawTex);
+            }
+        }
 
         public void ApplySkiCloneVisuals()
         {
             if (hasCustomSkiTexture)
             {
-
-                // Use textured ski clones
-                leftSkiCloneObject.SetActive(false);
-                rightSkiCloneObject.SetActive(false);
                 customLeftSkiCloneObject.SetActive(true);
                 customRightSkiCloneObject.SetActive(true);
-
-            
-                }
+                leftSkiCloneObject.SetActive(false);
+                rightSkiCloneObject.SetActive(false);
+            }
             else
             {
-                // Use default-colored ski clones
                 customLeftSkiCloneObject.SetActive(false);
                 customRightSkiCloneObject.SetActive(false);
                 leftSkiCloneObject.SetActive(true);
@@ -275,12 +285,12 @@ namespace OpenSkiJumping.ScriptableObjects
             }
         }
 
-
         public void SetValues(Color bibColor)
         {
             jumperMale.gameObject.SetActive(competitor.gender == Gender.Male);
             jumperFemale.gameObject.SetActive(competitor.gender == Gender.Female);
             jumperController.jumperModel = (competitor.gender == Gender.Male ? jumperMale : jumperFemale);
+
             bibMaterial.SetColor(Color, bibColor);
             helmetMaterial.SetColor(Color, SimpleColorPicker.Hex2Color(competitor.helmetColor));
             suitTopFrontMaterial.SetColor(Color, SimpleColorPicker.Hex2Color(competitor.suitTopFrontColor));
@@ -288,10 +298,10 @@ namespace OpenSkiJumping.ScriptableObjects
             suitBottomFrontMaterial.SetColor(Color, SimpleColorPicker.Hex2Color(competitor.suitBottomFrontColor));
             suitBottomBackMaterial.SetColor(Color, SimpleColorPicker.Hex2Color(competitor.suitBottomBackColor));
             skisMaterial.SetColor(Color, SimpleColorPicker.Hex2Color(competitor.skisColor));
+
             LoadHelmetTexture();
-           LoadSkisTexture();
+            LoadSkisTexture();
+            LoadSuitTexture(); // new
         }
-
-
     }
 }
