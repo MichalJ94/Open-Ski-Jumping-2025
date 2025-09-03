@@ -1,4 +1,4 @@
-using OpenSkiJumping.Competition;
+﻿using OpenSkiJumping.Competition;
 using OpenSkiJumping.Competition.Persistent;
 using OpenSkiJumping.Competition.Runtime;
 using OpenSkiJumping.Jumping;
@@ -27,6 +27,7 @@ namespace OpenSkiJumping.ScriptableObjects
         public Material suitBottomFrontMaterial;
         public Material suitTopBackMaterial;
         public Material suitTopFrontMaterial;
+        public Material suitOverlayMaterial;
         public GameObject helmetObject;
         public GameObject customHelmetObject;
         public GameObject leftSkiObject;
@@ -232,40 +233,7 @@ namespace OpenSkiJumping.ScriptableObjects
             }
         }
 
-        // === SUIT LOADING ===
-        private void LoadSuitTexture()
-        {
-            // For now, hardcoded test texture
-            string textureName = "slovenia2425.png";
-
-            if (string.IsNullOrEmpty(textureName))
-                return;
-
-            string fullPath = System.IO.Path.Combine(Application.streamingAssetsPath, "textures", "suits", textureName);
-            StartCoroutine(LoadSuitTextureCoroutine(fullPath));
-        }
-
-        private IEnumerator LoadSuitTextureCoroutine(string filePath)
-        {
-            string uri = new System.Uri(filePath).AbsoluteUri;
-            using (UnityWebRequest www = UnityWebRequestTexture.GetTexture(uri))
-            {
-                yield return www.SendWebRequest();
-                if (www.result != UnityWebRequest.Result.Success)
-                {
-                    Debug.LogWarning("Failed to load suit texture: " + www.error);
-                    yield break;
-                }
-
-                Texture2D rawTex = DownloadHandlerTexture.GetContent(www);
-
-                // Assign suit texture to all 4 suit materials (Shader Graph expects "_SuitTex")
-                suitTopFrontMaterial.SetTexture("_SuitTex", rawTex);
-                suitTopBackMaterial.SetTexture("_SuitTex", rawTex);
-                suitBottomFrontMaterial.SetTexture("_SuitTex", rawTex);
-                suitBottomBackMaterial.SetTexture("_SuitTex", rawTex);
-            }
-        }
+    
 
         public void ApplySkiCloneVisuals()
         {
@@ -285,6 +253,57 @@ namespace OpenSkiJumping.ScriptableObjects
             }
         }
 
+        private IEnumerator LoadSuitOverlayTexture(string filePath)
+        {
+            string uri = new System.Uri(filePath).AbsoluteUri;
+            using (UnityWebRequest www = UnityWebRequestTexture.GetTexture(uri))
+            {
+                yield return www.SendWebRequest();
+
+                if (www.result != UnityWebRequest.Result.Success)
+                {
+                    Debug.Log("No suit overlay found: " + www.error);
+                    yield break;
+                }
+
+                Texture2D rawTex = DownloadHandlerTexture.GetContent(www);
+                Texture2D tex = new Texture2D(rawTex.width, rawTex.height, rawTex.format, true);
+                tex.SetPixels(rawTex.GetPixels());
+                tex.Apply(true);
+
+                Material mat = new Material(suitOverlayMaterial);
+                mat.mainTexture = tex;
+
+                // 🔍 Get the correct renderer
+                var cubeTransform = jumperController?.jumperModel?.transform.Find("Cube");
+                if (cubeTransform == null)
+                {
+                    Debug.LogWarning("Cube object not found in jumper model!");
+                    yield break;
+                }
+
+                var smr = cubeTransform.GetComponent<SkinnedMeshRenderer>();
+                if (smr == null)
+                {
+                    Debug.LogWarning("Cube has no SkinnedMeshRenderer!");
+                    yield break;
+                }
+
+                // ✅ Add overlay as last material (rendered on top)
+                var mats = smr.materials;
+                Array.Resize(ref mats, mats.Length + 1);
+                mats[mats.Length - 1] = mat;
+                smr.materials = mats;
+            }
+        }
+
+
+        private void Update()
+        {
+
+        }
+
+
         public void SetValues(Color bibColor)
         {
             jumperMale.gameObject.SetActive(competitor.gender == Gender.Male);
@@ -301,7 +320,24 @@ namespace OpenSkiJumping.ScriptableObjects
 
             LoadHelmetTexture();
             LoadSkisTexture();
-            LoadSuitTexture(); // new
+
+            // Load optional overlay PNG (one per suit, e.g. "slovenia2425.png")
+
+            //LoadSuitTexture(); 
+        }
+
+        private void LoadSuitTexture()
+        {
+            string suitOverlayFile = System.IO.Path.Combine(Application.streamingAssetsPath, "textures", "suits", "slovenia2425.png");
+            if (!string.IsNullOrEmpty(suitOverlayFile))
+            {
+                Debug.Log("Attempt to start Coroutine slovenia2425.png. String: " + suitOverlayFile);
+                StartCoroutine(LoadSuitOverlayTexture(suitOverlayFile));
+            }
+            else
+            {
+                Debug.Log("Can't find slovenia2425.png");
+            }
         }
     }
 }

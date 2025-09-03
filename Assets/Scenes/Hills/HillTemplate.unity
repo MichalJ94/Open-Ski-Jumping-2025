@@ -11593,7 +11593,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.46885, y: 188222290}
+  m_AnchoredPosition: {x: 1.46885, y: 194317700}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!1001 &664952345
@@ -12848,6 +12848,7 @@ MonoBehaviour:
   suitTopBackMaterial: {fileID: 2100000, guid: 01156c728e3382af48b1cda192cf3823, type: 2}
   suitTopFrontMaterial: {fileID: 2100000, guid: fc5eaa68a5179f2b488c4a9e8507b1d4,
     type: 2}
+  suitOverlayMaterial: {fileID: 2100000, guid: 6246a59eecd2a7e40b6d9148a8708e34, type: 2}
   helmetObject: {fileID: 722689314}
   customHelmetObject: {fileID: 784146187}
   leftSkiObject: {fileID: 455194216}
@@ -15962,7 +15963,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 816382546}
-  m_LocalRotation: {x: 0.07342243, y: 0.000000016812347, z: -0.0000000012377441, w: 0.9973009}
+  m_LocalRotation: {x: 0.07342243, y: -0.000000016812344, z: 0.0000000012377439, w: 0.9973009}
   m_LocalPosition: {x: 10.41, y: 2.2200005, z: -21.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -16651,7 +16652,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[3]
       value: 
-      objectReference: {fileID: 2100000, guid: dc46f437ad95439e9bd267ad64942812, type: 2}
+      objectReference: {fileID: 2100000, guid: da47b896ee9d06943a1bf1518867c692, type: 2}
     - target: {fileID: -7780734103960978560, guid: ec88853131076a0b6becbfc9185550b6,
         type: 3}
       propertyPath: m_Materials.Array.data[4]
@@ -16672,6 +16673,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[7]
       value: 
       objectReference: {fileID: 2100000, guid: a42b3a34c60daaf79b24efccf5ac82ed, type: 2}
+    - target: {fileID: -7780734103960978560, guid: ec88853131076a0b6becbfc9185550b6,
+        type: 3}
+      propertyPath: m_Materials.Array.data[8]
+      value: 
+      objectReference: {fileID: 2100000, guid: fe9fb2ec746412c25ba19b8789b2869c, type: 2}
     - target: {fileID: -7644368708306251204, guid: ec88853131076a0b6becbfc9185550b6,
         type: 3}
       propertyPath: m_Layer
@@ -20827,6 +20833,7 @@ MonoBehaviour:
   suitTopBackMaterial: {fileID: 2100000, guid: 01156c728e3382af48b1cda192cf3823, type: 2}
   suitTopFrontMaterial: {fileID: 2100000, guid: fc5eaa68a5179f2b488c4a9e8507b1d4,
     type: 2}
+  suitOverlayMaterial: {fileID: 0}
   helmetObject: {fileID: 0}
   customHelmetObject: {fileID: 0}
   leftSkiObject: {fileID: 0}
@@ -28836,7 +28843,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1208352403}
-  m_LocalRotation: {x: 0.07342243, y: 0.000000016812347, z: -0.0000000012377441, w: 0.9973009}
+  m_LocalRotation: {x: 0.073422454, y: -0.000000017335056, z: 0.0000000012762273,
+    w: 0.9973009}
   m_LocalPosition: {x: 10.41, y: 2.2200005, z: -21.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -33632,7 +33640,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 761697686}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.40531147
+  m_Size: 0.40549052
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -48579,7 +48587,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1982634237}
-  m_LocalRotation: {x: 0.07342243, y: 0.000000016812347, z: -0.0000000012377441, w: 0.9973009}
+  m_LocalRotation: {x: 0.07342243, y: -0.000000016812344, z: 0.0000000012377439, w: 0.9973009}
   m_LocalPosition: {x: 10.41, y: 2.2200005, z: -21.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -59602,7 +59610,7 @@ PrefabInstance:
     - target: {fileID: 4200885254943762890, guid: 0d78cbde8fcdfdd8c84660723f488a00,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 303.14722
+      value: 309.3025
       objectReference: {fileID: 0}
     - target: {fileID: 4200885254943762890, guid: 0d78cbde8fcdfdd8c84660723f488a00,
         type: 3}
