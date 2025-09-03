@@ -8,6 +8,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.Networking;
 using System;
+using System.Collections.Generic;
 
 namespace OpenSkiJumping.ScriptableObjects
 {
@@ -43,11 +44,14 @@ namespace OpenSkiJumping.ScriptableObjects
         public Renderer customRightSkiRenderer;
         public Renderer customLeftSkiCloneRenderer;
         public Renderer customRightSkiCloneRenderer;
+        [SerializeField] private SkinnedMeshRenderer suitRenderer;
         public Material transparentHelmetMaterial; // For fallback if texture is missing
         public float mipMapBiasHelmet = -1f;
         public float mipMapBiasSkis = -1f;
         public bool hasCustomSkiTexture = false;
         private static readonly int Color = Shader.PropertyToID("_BaseColor");
+        private MaterialPropertyBlock mpb;
+        [SerializeField] private int suitBottomFrontIndex = -1;
 
         public void GetValues()
         {
@@ -64,7 +68,7 @@ namespace OpenSkiJumping.ScriptableObjects
 
         public int GetControl()
         {
-            var id = resultsManager.Value.GetCurrentJumperId(); 
+            var id = resultsManager.Value.GetCurrentJumperId();
             competitor = competitors.competitors[id];
             return (int)competitor.control;
         }
@@ -233,7 +237,7 @@ namespace OpenSkiJumping.ScriptableObjects
             }
         }
 
-    
+
 
         public void ApplySkiCloneVisuals()
         {
@@ -298,10 +302,53 @@ namespace OpenSkiJumping.ScriptableObjects
         }
 
 
+        private void Awake()
+        {
+            mpb = new MaterialPropertyBlock();
+
+            // Auto-detect slot if index is not set manually
+            if (suitBottomFrontIndex < 0 && suitRenderer != null)
+            {
+                var mats = suitRenderer.sharedMaterials;
+                for (int i = 0; i < mats.Length; i++)
+                {
+                    if (mats[i] != null && mats[i].name.Contains("CustomSuitBottomFront"))
+                    {
+                        suitBottomFrontIndex = i;
+                        Debug.Log($"Detected CustomSuitBottomFront at index {suitBottomFrontIndex}");
+                        break;
+                    }
+                }
+            }
+        }
+
         private void Update()
         {
-
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                ApplySuitSettings("3D5D7D");
+                
+            }
         }
+
+        public void ApplySuitSettings(string baseColor)
+        {
+            if (suitBottomFrontIndex < 0)
+            {
+                Debug.LogWarning("Suit bottom front index not set!");
+                return;
+            }
+
+            Color actualColor = SimpleColorPicker.Hex2Color(baseColor);
+            Debug.Log("Running ApplySuitSettings");
+
+            suitRenderer.GetPropertyBlock(mpb, suitBottomFrontIndex);
+            mpb.SetColor("_BaseColor", actualColor);
+            suitRenderer.SetPropertyBlock(mpb, suitBottomFrontIndex);
+
+            Debug.Log($"Applied {actualColor} to suit material slot {suitBottomFrontIndex}");
+        }
+    
 
 
         public void SetValues(Color bibColor)
