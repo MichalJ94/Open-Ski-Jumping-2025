@@ -11599,7 +11599,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.46885, y: 196936700}
+  m_AnchoredPosition: {x: 1.46885, y: 223732380}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!1001 &664952345
@@ -12870,12 +12870,24 @@ MonoBehaviour:
   customRightSkiRenderer: {fileID: 769120807}
   customLeftSkiCloneRenderer: {fileID: 1094259715}
   customRightSkiCloneRenderer: {fileID: 1655130650}
-  suitRenderer: {fileID: 363818653}
   transparentHelmetMaterial: {fileID: 2100000, guid: 77c2ddc4b8c47ca459ebf30c182d8749,
     type: 2}
   mipMapBiasHelmet: -1
   mipMapBiasSkis: -1
   hasCustomSkiTexture: 0
+  suitRenderer: {fileID: 363818653}
+  suitParts:
+  - key: BottomFront
+    material: {fileID: 2100000, guid: da47b896ee9d06943a1bf1518867c692, type: 2}
+    color: {r: 1, g: 0.6594041, b: 0, a: 0}
+    fileSuffix: _bottomfront.png
+    slotIndex: -1
+  - key: TopFront
+    material: {fileID: 2100000, guid: 299fad07f9d8bbc449a66f58c755098d, type: 2}
+    color: {r: 1, g: 0.4543721, b: 0, a: 0}
+    fileSuffix: _topfront.png
+    slotIndex: -1
+  suitBottomFrontIndex: -1
 --- !u!114 &710402061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15936,7 +15948,7 @@ Camera:
   m_FOVAxisMode: 0
   m_SensorSize: {x: 24.89, y: 18.66}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 20.259272
+  m_FocalLength: 54.052418
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -15945,7 +15957,7 @@ Camera:
     height: 1
   near clip plane: 2
   far clip plane: 1000
-  field of view: 49.454967
+  field of view: 19.586672
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -15970,8 +15982,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 816382546}
-  m_LocalRotation: {x: 0.073422454, y: 0.00000001733506, z: -0.0000000012762276, w: 0.9973009}
-  m_LocalPosition: {x: 10.41, y: 2.2200005, z: -21.48}
+  m_LocalRotation: {x: -0.0048745135, y: -0.47033045, z: -0.0025979627, w: 0.8824731}
+  m_LocalPosition: {x: 58.5, y: -1.6, z: -32.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1167020446}
@@ -16674,7 +16686,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[6]
       value: 
-      objectReference: {fileID: 2100000, guid: fc5eaa68a5179f2b488c4a9e8507b1d4, type: 2}
+      objectReference: {fileID: 2100000, guid: 299fad07f9d8bbc449a66f58c755098d, type: 2}
     - target: {fileID: -7780734103960978560, guid: ec88853131076a0b6becbfc9185550b6,
         type: 3}
       propertyPath: m_Materials.Array.data[7]
@@ -20856,11 +20868,13 @@ MonoBehaviour:
   customRightSkiRenderer: {fileID: 0}
   customLeftSkiCloneRenderer: {fileID: 0}
   customRightSkiCloneRenderer: {fileID: 0}
-  suitRenderer: {fileID: 0}
   transparentHelmetMaterial: {fileID: 0}
   mipMapBiasHelmet: -1
   mipMapBiasSkis: 1
   hasCustomSkiTexture: 0
+  suitRenderer: {fileID: 0}
+  suitParts: []
+  suitBottomFrontIndex: -1
 --- !u!1 &1040702765
 GameObject:
   m_ObjectHideFlags: 0
@@ -48594,7 +48608,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1982634237}
-  m_LocalRotation: {x: 0.073422454, y: 0.00000001733506, z: -0.0000000012762276, w: 0.9973009}
+  m_LocalRotation: {x: 0.07342243, y: -0.000000016812344, z: 0.0000000012377439, w: 0.9973009}
   m_LocalPosition: {x: 10.41, y: 2.2200005, z: -21.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -59617,7 +59631,7 @@ PrefabInstance:
     - target: {fileID: 4200885254943762890, guid: 0d78cbde8fcdfdd8c84660723f488a00,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 312.6599
+      value: 318.95508
       objectReference: {fileID: 0}
     - target: {fileID: 4200885254943762890, guid: 0d78cbde8fcdfdd8c84660723f488a00,
         type: 3}

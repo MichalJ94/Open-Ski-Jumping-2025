@@ -8,6 +8,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.Networking;
 using System;
+using System.IO;
 using System.Collections.Generic;
 
 namespace OpenSkiJumping.ScriptableObjects
@@ -44,14 +45,41 @@ namespace OpenSkiJumping.ScriptableObjects
         public Renderer customRightSkiRenderer;
         public Renderer customLeftSkiCloneRenderer;
         public Renderer customRightSkiCloneRenderer;
-        [SerializeField] private SkinnedMeshRenderer suitRenderer;
         public Material transparentHelmetMaterial; // For fallback if texture is missing
         public float mipMapBiasHelmet = -1f;
         public float mipMapBiasSkis = -1f;
         public bool hasCustomSkiTexture = false;
+
+
+        
+        [System.Serializable]
+        public class SuitPart
+        {
+            [Tooltip("Friendly id, e.g. BottomFront, TopFront")]
+            public string key;
+
+            [Tooltip("Material asset that is assigned to this submesh in the suitRenderer.sharedMaterials list.")]
+            public Material material;
+
+            [Tooltip("Color to apply to _BaseColor for this part when testing.")]
+            public Color color;
+
+            [Tooltip("Filename suffix used when loading textures from a chosen suit folder, e.g. _bottomfront.png, _topfront.png")]
+            public string fileSuffix;
+
+            [HideInInspector] public int slotIndex = -1; // resolved at runtime
+        }
+
+
+        [Header("Suit (MPB)")]
+        [SerializeField] private SkinnedMeshRenderer suitRenderer;
+        [SerializeField] private List<SuitPart> suitParts = new List<SuitPart>();
         private static readonly int Color = Shader.PropertyToID("_BaseColor");
         private MaterialPropertyBlock mpb;
         [SerializeField] private int suitBottomFrontIndex = -1;
+
+        private readonly Dictionary<string, Texture2D> _texCache = new Dictionary<string, Texture2D>();
+        private Dictionary<Material, int> materialIndexMap;
 
         public void GetValues()
         {
@@ -304,21 +332,43 @@ namespace OpenSkiJumping.ScriptableObjects
 
         private void Awake()
         {
-            mpb = new MaterialPropertyBlock();
+            if (mpb == null) mpb = new MaterialPropertyBlock();
 
-            // Auto-detect slot if index is not set manually
-            if (suitBottomFrontIndex < 0 && suitRenderer != null)
+            // Auto-resolve suitRenderer if not set
+            if (suitRenderer == null)
             {
-                var mats = suitRenderer.sharedMaterials;
-                for (int i = 0; i < mats.Length; i++)
+                var cube = jumperController?.jumperModel?.transform.Find("Cube");
+                if (cube != null)
+                    suitRenderer = cube.GetComponent<SkinnedMeshRenderer>();
+            }
+
+            // Map SuitPart.material to submesh index
+            if (suitRenderer != null)
+            {
+                var shared = suitRenderer.sharedMaterials;
+                foreach (var part in suitParts)
                 {
-                    if (mats[i] != null && mats[i].name.Contains("CustomSuitBottomFront"))
+                    part.slotIndex = -1;
+                    if (part.material == null) continue;
+
+                    for (int i = 0; i < shared.Length; i++)
                     {
-                        suitBottomFrontIndex = i;
-                        Debug.Log($"Detected CustomSuitBottomFront at index {suitBottomFrontIndex}");
-                        break;
+                        if (shared[i] == part.material) // reference equality
+                        {
+                            part.slotIndex = i;
+                            break;
+                        }
                     }
+
+                    if (part.slotIndex < 0)
+                        Debug.LogWarning($"[SuitParts] Could not find material '{part.material?.name}' for part '{part.key}' in suitRenderer.sharedMaterials.");
+                    else
+                        Debug.Log($"[SuitParts] Resolved {part.key} → slot {part.slotIndex} ({part.material?.name})");
                 }
+            }
+            else
+            {
+                Debug.LogWarning("[SuitParts] suitRenderer not set. Assign the Cube's SkinnedMeshRenderer in the Inspector.");
             }
         }
 
@@ -326,12 +376,97 @@ namespace OpenSkiJumping.ScriptableObjects
         {
             if (Input.GetKeyDown(KeyCode.L))
             {
-                ApplySuitSettings("3D5D7D");
-                
+                // Example test folder: StreamingAssets/textures/suits/testsuit/
+                ApplySuitFromFolder("testsuit", alsoApplyTextures: true);
             }
         }
 
-        public void ApplySuitSettings(string baseColor)
+        /// <summary>
+        /// Applies per-part colors from suitParts and (optionally) loads textures from a suit folder under StreamingAssets/textures/suits/{folderName}.
+        /// Expected filenames: {folderName}{fileSuffix}, e.g. testsuit_topfront.png, testsuit_bottomfront.png
+        /// </summary>
+        public void ApplySuitFromFolder(string folderName, bool alsoApplyTextures)
+        {
+            if (suitRenderer == null)
+            {
+                Debug.LogWarning("[ApplySuitFromFolder] suitRenderer is null.");
+                return;
+            }
+            if (suitParts == null || suitParts.Count == 0)
+            {
+                Debug.LogWarning("[ApplySuitFromFolder] No suitParts configured.");
+                return;
+            }
+
+            string baseFolder = Path.Combine(Application.streamingAssetsPath, "textures", "suits", folderName);
+
+            foreach (var part in suitParts)
+            {
+                if (part.slotIndex < 0) continue;
+
+                // Get existing block for that submesh
+                suitRenderer.GetPropertyBlock(mpb, part.slotIndex);
+
+                // Color for both URP Lit and custom shader
+                mpb.SetColor("_BaseColor", part.color);
+
+                // Optional texture for custom shader
+                if (alsoApplyTextures && !string.IsNullOrEmpty(part.fileSuffix))
+                {
+                    string fileName = folderName + part.fileSuffix;           // e.g. testsuit_topfront.png
+                    string fullPath = Path.Combine(baseFolder, fileName);
+
+                    Texture2D tex = LoadTextureCached(fullPath);
+                    if (tex != null)
+                    {
+                        mpb.SetTexture("_SuitTex", tex);
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"[ApplySuitFromFolder] Missing texture for '{part.key}': {fullPath}");
+                    }
+                }
+
+                suitRenderer.SetPropertyBlock(mpb, part.slotIndex);
+            }
+
+            Debug.Log($"[ApplySuitFromFolder] Applied colors {(alsoApplyTextures ? "+ textures " : "")}from folder '{folderName}'.");
+        }
+
+        private Texture2D LoadTextureCached(string fullPath)
+        {
+            if (string.IsNullOrEmpty(fullPath)) return null;
+
+            if (_texCache.TryGetValue(fullPath, out var cached) && cached != null)
+                return cached;
+
+            if (!File.Exists(fullPath))
+                return null;
+
+            try
+            {
+                byte[] bytes = File.ReadAllBytes(fullPath);
+                var tex = new Texture2D(2, 2, TextureFormat.RGBA32, true);
+                if (!tex.LoadImage(bytes, markNonReadable: false))
+                    return null;
+
+                tex.filterMode = FilterMode.Bilinear;
+                tex.wrapMode = TextureWrapMode.Repeat;
+                tex.mipMapBias = -0.5f;
+                tex.Apply(true, false);
+
+                _texCache[fullPath] = tex;
+                return tex;
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning($"[LoadTextureCached] Failed to load '{fullPath}': {e.Message}");
+                return null;
+            }
+        }
+    
+
+    public void ApplySuitSettings(string baseColor)
         {
             if (suitBottomFrontIndex < 0)
             {
@@ -348,9 +483,87 @@ namespace OpenSkiJumping.ScriptableObjects
 
             Debug.Log($"Applied {actualColor} to suit material slot {suitBottomFrontIndex}");
         }
-    
 
 
+
+        public void ApplyTestSuitColors()
+        {
+            Debug.Log("▶ Running ApplyTestSuitColors");
+
+            // Example base color (you can expand later to per-part config)
+            Color baseColor = SimpleColorPicker.Hex2Color("#3D5D7D");
+
+            // Apply color
+            ApplyColorToMaterialSlot(suitBottomFrontMaterial, baseColor);
+            ApplyColorToMaterialSlot(suitTopFrontMaterial, baseColor);
+
+            // Load textures for testsuit
+            string suitFolder = Path.Combine(Application.streamingAssetsPath, "textures/suits/testsuit/");
+            TryApplyTextureToMaterialSlot(suitBottomFrontMaterial, suitFolder, "testsuit_bottomfront.png");
+            TryApplyTextureToMaterialSlot(suitTopFrontMaterial, suitFolder, "testsuit_topfront.png");
+        }
+
+        private void ApplyColorToMaterialSlot(Material targetMat, Color color)
+        {
+            if (targetMat == null) return;
+
+            if (materialIndexMap.TryGetValue(targetMat, out int index))
+            {
+                suitRenderer.GetPropertyBlock(mpb, index);
+
+                // ✅ Both URP Lit & custom shader use _BaseColor
+                mpb.SetColor("_BaseColor", color);
+
+                suitRenderer.SetPropertyBlock(mpb, index);
+
+                Debug.Log($"[ApplyColorToMaterialSlot] Applied {color} to {targetMat.name} at index {index}");
+            }
+            else
+            {
+                Debug.LogWarning($"[ApplyColorToMaterialSlot] Material {targetMat.name} not found in suitRenderer.sharedMaterials");
+            }
+        }
+
+        private void TryApplyTextureToMaterialSlot(Material targetMat, string folderPath, string fileName)
+        {
+            if (targetMat == null) return;
+
+            string texPath = Path.Combine(folderPath, fileName);
+
+            if (!File.Exists(texPath))
+            {
+                Debug.LogWarning($"[TryApplyTextureToMaterialSlot] Texture not found: {texPath}");
+                return;
+            }
+
+            byte[] fileData = File.ReadAllBytes(texPath);
+            Texture2D tex = new Texture2D(2, 2);
+            if (!tex.LoadImage(fileData))
+            {
+                Debug.LogWarning($"[TryApplyTextureToMaterialSlot] Failed to load PNG: {texPath}");
+                return;
+            }
+
+            tex.filterMode = FilterMode.Bilinear;
+            tex.wrapMode = TextureWrapMode.Repeat;
+            tex.Apply();
+
+            if (materialIndexMap.TryGetValue(targetMat, out int index))
+            {
+                suitRenderer.GetPropertyBlock(mpb, index);
+
+                // ✅ Only our custom shader uses _SuitTex
+                mpb.SetTexture("_SuitTex", tex);
+
+                suitRenderer.SetPropertyBlock(mpb, index);
+
+                Debug.Log($"[TryApplyTextureToMaterialSlot] Applied {fileName} to {targetMat.name} at index {index}");
+            }
+            else
+            {
+                Debug.LogWarning($"[TryApplyTextureToMaterialSlot] Material {targetMat.name} not found in suitRenderer.sharedMaterials");
+            }
+        }
         public void SetValues(Color bibColor)
         {
             jumperMale.gameObject.SetActive(competitor.gender == Gender.Male);
