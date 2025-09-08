@@ -387,6 +387,7 @@ namespace OpenSkiJumping.ScriptableObjects
         /// </summary>
         public void ApplySuitFromFolder(string folderName, bool alsoApplyTextures)
         {
+
             if (suitRenderer == null)
             {
                 Debug.LogWarning("[ApplySuitFromFolder] suitRenderer is null.");
