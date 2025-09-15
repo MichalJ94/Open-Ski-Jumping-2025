@@ -30,6 +30,8 @@ namespace OpenSkiJumping.ScriptableObjects
         public Material suitTopBackMaterial;
         public Material suitTopFrontMaterial;
         public Material suitOverlayMaterial;
+        public Material glovesMaterial;
+        public Material bootsMaterial;
         public GameObject helmetObject;
         public GameObject customHelmetObject;
         public GameObject leftSkiObject;
@@ -582,7 +584,9 @@ namespace OpenSkiJumping.ScriptableObjects
             LoadHelmetTexture();
             LoadSkisTexture();
 
-            // Load optional overlay PNG (one per suit, e.g. "slovenia2425.png")
+            // 2025-09-15 The system for loading suit textures is working properly in the text. Need to put the proper
+            // materials with the custom shader on jumper's "Cube" object for it to work. Take up the project again
+            // when switching to fbx-based workflow
 
             //LoadSuitTexture(); 
         }
