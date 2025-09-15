@@ -1,0 +1,165 @@
+Using pre-set license
+Built from '2020.3/release' branch; Version is '2020.3.2f1 (8fd9074bf66c) revision 9427207'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10 Home; OS build 22631.5909; Version 2009; 64bit' Language: 'pl' Physical Memory: 15628 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+ COMMAND LINE ARGUMENTS:
+E:\Unity\2020.3.2f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+E:/Unity Projects/Open-Ski-Jumping-2025
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+53308
+Successfully changed project path to: E:/Unity Projects/Open-Ski-Jumping-2025
+E:/Unity Projects/Open-Ski-Jumping-2025
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 72.34 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2020.3.2f1 (8fd9074bf66c)
+[Subsystems] Discovering subsystems at path E:/Unity/2020.3.2f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path E:/Unity Projects/Open-Ski-Jumping-2025/Assets
+GfxDevice: creating device client; threaded=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 3060 Laptop GPU (ID=0x2520)
+    Vendor:   
+    VRAM:     5996 MB
+    Driver:   32.0.15.6607
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Initialize mono
+Mono path[0] = 'E:/Unity/2020.3.2f1/Editor/Data/Managed'
+Mono path[1] = 'E:/Unity/2020.3.2f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'E:/Unity/2020.3.2f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56792
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: E:/Unity/2020.3.2f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.000659 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 61.43 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.604 seconds
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.003711 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 65.06 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.153 seconds
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
+Refreshing native plugins compatible for Editor in 0.99 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4055 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 199.4 MB.
+System memory in use after: 199.7 MB.
+
+Unloading 46 unused Assets to reduce memory usage. Loaded Objects now: 4486.
+Total: 2.870000 ms (FindLiveObjects: 0.580400 ms CreateObjectMapping: 0.136400 ms MarkObjects: 2.079800 ms  DeleteObjects: 0.072400 ms)
+
+========================================================================
+Received Import Request.
+  path: Assets/Materials/Jumper/GogglesGlass.mat
+  artifactKey: Guid(65cfd3415134c52e6a09505c75fd05dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Jumper/GogglesGlass.mat using Guid(65cfd3415134c52e6a09505c75fd05dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7d78d3e24e8527346026b272868c2121') in 0.191654 seconds
+  Import took 0.198695 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000592 seconds.
+  path: Assets/Materials/Jumper/Helmet.mat
+  artifactKey: Guid(313fa79230b9c1ba980976ca2762bce7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Jumper/Helmet.mat using Guid(313fa79230b9c1ba980976ca2762bce7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7b9cc96d79be49243c5646d1363d70d6') in 0.011009 seconds
+  Import took 0.016593 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000190 seconds.
+  path: Assets/Materials/Jumper/Gloves.mat
+  artifactKey: Guid(3eaf41d7bbe288b57bbbba114075054e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Jumper/Gloves.mat using Guid(3eaf41d7bbe288b57bbbba114075054e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '17c3b66710fe87a0703c64c4d52f5d4a') in 0.015364 seconds
+  Import took 0.021617 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000210 seconds.
+  path: Assets/Materials/Jumper/SuitBottonBack.mat
+  artifactKey: Guid(9ec6bf25a82501f55a8dec6de6c4939a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Jumper/SuitBottonBack.mat using Guid(9ec6bf25a82501f55a8dec6de6c4939a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '63101b5de272f4392b62341ba642ee27') in 0.013863 seconds
+  Import took 0.020056 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000201 seconds.
+  path: Assets/Materials/Jumper/SuitTopFront.mat
+  artifactKey: Guid(fc5eaa68a5179f2b488c4a9e8507b1d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Jumper/SuitTopFront.mat using Guid(fc5eaa68a5179f2b488c4a9e8507b1d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bbf6f797c37fa08c9d637b774de8b466') in 0.025623 seconds
+  Import took 0.032056 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000216 seconds.
+  path: Assets/Materials/Jumper/SuitBottonFront.mat
+  artifactKey: Guid(dc46f437ad95439e9bd267ad64942812) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Jumper/SuitBottonFront.mat using Guid(dc46f437ad95439e9bd267ad64942812) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fa6f2dafcbb043a8fcf0b30c33af3a9f') in 0.009395 seconds
+  Import took 0.015650 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000283 seconds.
+  path: Assets/Materials/Jumper/Skin.mat
+  artifactKey: Guid(a42b3a34c60daaf79b24efccf5ac82ed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Jumper/Skin.mat using Guid(a42b3a34c60daaf79b24efccf5ac82ed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9eb9f17dc371dcaa150879e1c10c45c7') in 0.012793 seconds
+  Import took 0.019321 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000220 seconds.
+  path: Assets/Materials/Jumper/Skis.mat
+  artifactKey: Guid(a9f3b2c59e004ca0897272388028cb58) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Jumper/Skis.mat using Guid(a9f3b2c59e004ca0897272388028cb58) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '36dc82c7b621b49c64b4e4c22afe9963') in 0.012116 seconds
+  Import took 0.018689 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000177 seconds.
+  path: Assets/Materials/Jumper/Boots.mat
+  artifactKey: Guid(c24bd265b1ce923c0b9f242b90eaf040) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Jumper/Boots.mat using Guid(c24bd265b1ce923c0b9f242b90eaf040) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4f82df1d7032144de5f51c66ec0f7918') in 0.020366 seconds
+  Import took 0.026655 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000179 seconds.
+  path: Assets/Materials/Jumper/SuitTopBack.mat
+  artifactKey: Guid(01156c728e3382af48b1cda192cf3823) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Jumper/SuitTopBack.mat using Guid(01156c728e3382af48b1cda192cf3823) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '77db34d81b80b66f68653cec3ba872f5') in 0.008448 seconds
+  Import took 0.014276 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 33.197698 seconds.
+  path: Assets/SliderChange.cs
+  artifactKey: Guid(9f18082007ada96499b8488837e59f12) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/SliderChange.cs using Guid(9f18082007ada96499b8488837e59f12) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'abe06047d0d804a6ff60ab483bc1d292') in 0.013054 seconds
+  Import took 0.019467 seconds .
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
