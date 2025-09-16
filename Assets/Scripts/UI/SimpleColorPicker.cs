@@ -4,11 +4,14 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 namespace OpenSkiJumping.UI
 {
     public class SimpleColorPicker : MonoBehaviour
     {
         public TMP_InputField input;
+        public global::FlexibleColorPicker fcp;
+
         public Image image;
         [SerializeField] private Color currentColor;
 
@@ -57,8 +60,21 @@ namespace OpenSkiJumping.UI
                 OnColorChange?.Invoke();
         }
 
+        public void FetchColorFromFCP()
+        {
+            // currentColor = fcp.color;
+            SetValue(fcp.hexInput.text.Substring(1, fcp.hexInput.text.Length - 1));
+           
+        }
+
+        public void PassHexToFCP()
+        {
+            fcp.SetColor(currentColor);
+        }
+
         public void HandleValueChanged()
         {
+           // Debug.Log("HandleValueChanged in SimpleColorPicker");
             var hex = input.text;
             bool tmp = TryParseHex(hex, out var red, out var green, out var blue);
             if (!tmp)
