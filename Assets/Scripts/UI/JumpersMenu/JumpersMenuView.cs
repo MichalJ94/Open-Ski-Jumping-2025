@@ -92,6 +92,8 @@ namespace OpenSkiJumping.UI.JumpersMenu
             suitBottomFrontColorPicker.OnColorChange += OnValueChanged;
             suitBottomBackColorPicker.OnColorChange += OnValueChanged;
             skisColorPicker.OnColorChange += OnValueChanged;
+            glovesColorPicker.OnColorChange += OnValueChanged;
+            bootsColorPicker.OnColorChange += OnValueChanged;
             normalHillSlider.onValueChanged.AddListener(x => OnValueChanged());
             largeHillSlider.onValueChanged.AddListener(x => OnValueChanged());
             skiFlyingHillSlider.onValueChanged.AddListener(x => OnValueChanged());
@@ -156,6 +158,8 @@ namespace OpenSkiJumping.UI.JumpersMenu
         [SerializeField] private SimpleColorPicker suitBottomFrontColorPicker;
         [SerializeField] private SimpleColorPicker suitBottomBackColorPicker;
         [SerializeField] private SimpleColorPicker skisColorPicker;
+        [SerializeField] private SimpleColorPicker glovesColorPicker;
+        [SerializeField] private SimpleColorPicker bootsColorPicker;
         [SerializeField] private TMP_InputField imagePathInput;
         [SerializeField] private TMP_InputField helmetTexture;
         [SerializeField] private TMP_InputField skiTexture;
@@ -234,6 +238,18 @@ namespace OpenSkiJumping.UI.JumpersMenu
         {
             get => skisColorPicker.ToHex;
             set => skisColorPicker.SetValueWithoutNotify(value);
+        }
+
+        public string Gloves
+        {
+            get => glovesColorPicker.ToHex;
+            set => glovesColorPicker.SetValueWithoutNotify(value);
+        }
+
+        public string Boots
+        {
+            get => bootsColorPicker.ToHex;
+            set => bootsColorPicker.SetValueWithoutNotify(value);
         }
 
         public string ImagePath

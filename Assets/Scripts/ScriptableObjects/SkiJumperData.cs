@@ -14,6 +14,8 @@ namespace OpenSkiJumping.ScriptableObjects
         public Color suitBottomFrontColor;
         public Color suitBottomBackColor;
         public Color skisColor;
+        public Color glovesColor;
+        public Color bootsColor;
         public Color bibColor;
 
         public void Set(Competitor competitorData, Color newBibColor)
@@ -26,6 +28,8 @@ namespace OpenSkiJumping.ScriptableObjects
             ColorUtility.TryParseHtmlString(competitorData.suitBottomFrontColor, out suitBottomFrontColor);
             ColorUtility.TryParseHtmlString(competitorData.suitBottomBackColor, out suitBottomBackColor);
             ColorUtility.TryParseHtmlString(competitorData.skisColor, out skisColor);
+            ColorUtility.TryParseHtmlString(competitorData.glovesColor, out glovesColor);
+            ColorUtility.TryParseHtmlString(competitorData.bootsColor, out bootsColor);
         }
     }
 }

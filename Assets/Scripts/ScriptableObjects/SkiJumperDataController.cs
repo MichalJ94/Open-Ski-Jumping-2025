@@ -580,6 +580,8 @@ namespace OpenSkiJumping.ScriptableObjects
             suitBottomFrontMaterial.SetColor(Color, SimpleColorPicker.Hex2Color(competitor.suitBottomFrontColor));
             suitBottomBackMaterial.SetColor(Color, SimpleColorPicker.Hex2Color(competitor.suitBottomBackColor));
             skisMaterial.SetColor(Color, SimpleColorPicker.Hex2Color(competitor.skisColor));
+            glovesMaterial.SetColor(Color, SimpleColorPicker.Hex2Color(competitor.glovesColor));
+            bootsMaterial.SetColor(Color, SimpleColorPicker.Hex2Color(competitor.bootsColor));
 
             LoadHelmetTexture();
             LoadSkisTexture();
