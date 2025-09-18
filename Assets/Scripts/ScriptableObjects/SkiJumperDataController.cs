@@ -49,6 +49,8 @@ namespace OpenSkiJumping.ScriptableObjects
         public Renderer customLeftSkiCloneRenderer;
         public Renderer customRightSkiCloneRenderer;
         public Material transparentHelmetMaterial; // For fallback if texture is missing
+        public TMPro.TextMeshPro bibFront;
+        public TMPro.TextMeshPro bibBack;
         public float mipMapBiasHelmet = -1f;
         public float mipMapBiasSkis = -1f;
         public bool hasCustomSkiTexture = false;
@@ -576,6 +578,12 @@ namespace OpenSkiJumping.ScriptableObjects
             jumperController.jumperModel = (competitor.gender == Gender.Male ? jumperMale : jumperFemale);
 
             bibMaterial.SetColor(Color, bibColor);
+            
+            var competitorId = resultsManager.Value.GetCurrentCompetitorLocalId();
+            var competitorBib = resultsManager.Value.Results[competitorId].Bibs[resultsManager.Value.RoundIndex];
+            
+            bibFront.text = competitorBib.ToString();
+            bibBack.text = competitorBib.ToString();
             /*
 
             Texture2D baseBibTexture = Resources.Load<Texture2D>("Textures/BibBase");
