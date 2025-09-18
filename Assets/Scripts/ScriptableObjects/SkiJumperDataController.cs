@@ -10,6 +10,7 @@ using UnityEngine.Networking;
 using System;
 using System.IO;
 using System.Collections.Generic;
+using TMPro;
 
 namespace OpenSkiJumping.ScriptableObjects
 {
@@ -569,11 +570,27 @@ namespace OpenSkiJumping.ScriptableObjects
         }
         public void SetValues(Color bibColor)
         {
+            Debug.Log("SetValues run in SkiJumpData controller. bibColor:" + bibColor.ToString());
             jumperMale.gameObject.SetActive(competitor.gender == Gender.Male);
             jumperFemale.gameObject.SetActive(competitor.gender == Gender.Female);
             jumperController.jumperModel = (competitor.gender == Gender.Male ? jumperMale : jumperFemale);
 
             bibMaterial.SetColor(Color, bibColor);
+            /*
+
+            Texture2D baseBibTexture = Resources.Load<Texture2D>("Textures/BibBase");
+            TMP_FontAsset font = Resources.Load<TMP_FontAsset>("Fonts & Materials/LiberationSans SDF");
+
+            bibMaterial.mainTexture = BibNumberGenerator.Generate(
+                baseBibTexture,
+                12,
+                font,
+                UnityEngine.Color.black,
+                64,               // font size
+                new Vector2(8, 27) // pixel pos (match your UV map)
+            );*/
+
+
             helmetMaterial.SetColor(Color, SimpleColorPicker.Hex2Color(competitor.helmetColor));
             suitTopFrontMaterial.SetColor(Color, SimpleColorPicker.Hex2Color(competitor.suitTopFrontColor));
             suitTopBackMaterial.SetColor(Color, SimpleColorPicker.Hex2Color(competitor.suitTopBackColor));
