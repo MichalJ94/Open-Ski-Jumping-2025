@@ -17,6 +17,7 @@ namespace OpenSkiJumping.Jumping
         [SerializeField] private int currentGate;
         [SerializeField] private decimal currentWind;
         public GameObject gateObject;
+        public GameObject boardObject;
         public Vector3 jumperPosition;
         public Quaternion jumperRotation;
 
@@ -213,6 +214,7 @@ namespace OpenSkiJumping.Jumping
             jumperController.ResetValues();
             jumperController.GetComponent<Transform>().position = hillTransform.position + jumperPosition + Vector3.up;
             gateObject.GetComponent<Transform>().position = hillTransform.position + jumperPosition;
+            boardObject.GetComponent<Transform>().position = hillTransform.position + jumperPosition + new Vector3(-1.5f,1.2f,0) ;
             jumperController.GetComponent<Transform>().rotation = jumperRotation;
 
             fl0 = fl1 = 0;

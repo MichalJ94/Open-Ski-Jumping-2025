@@ -163,6 +163,10 @@ namespace OpenSkiJumping.Hills
         public ModelData inrun;
         public ModelData inrunConstruction;
 
+        [Space][Header("Board")]
+        public ModelData board;
+        public ModelData legs;
+
         /* Guardrails */
         [Space][Header("Guardrails")] public ModelData inrunGuardrailL;
 

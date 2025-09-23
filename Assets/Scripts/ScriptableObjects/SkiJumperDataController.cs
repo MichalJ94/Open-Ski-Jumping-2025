@@ -578,25 +578,39 @@ namespace OpenSkiJumping.ScriptableObjects
             jumperController.jumperModel = (competitor.gender == Gender.Male ? jumperMale : jumperFemale);
 
             bibMaterial.SetColor(Color, bibColor);
+
+           
+
+                var competitorId = resultsManager.Value.GetCurrentCompetitorLocalId();
+                var competitorBib = resultsManager.Value.Results[competitorId].Bibs[resultsManager.Value.RoundIndex];
+
+                
+            if (resultsManager.Value.EventInfo.eventType != OpenSkiJumping.Competition.EventType.Team)
+            {
+                bibFront.text = competitorBib.ToString();
+                bibBack.text = competitorBib.ToString();
+            }
+            else
+            {
+                bibFront.text = (resultsManager.Value.SubroundIndex + 1).ToString();
+                bibBack.text = (resultsManager.Value.SubroundIndex + 1).ToString();
+            }
+
             
-            var competitorId = resultsManager.Value.GetCurrentCompetitorLocalId();
-            var competitorBib = resultsManager.Value.Results[competitorId].Bibs[resultsManager.Value.RoundIndex];
-            
-            bibFront.text = competitorBib.ToString();
-            bibBack.text = competitorBib.ToString();
+
             /*
 
-            Texture2D baseBibTexture = Resources.Load<Texture2D>("Textures/BibBase");
-            TMP_FontAsset font = Resources.Load<TMP_FontAsset>("Fonts & Materials/LiberationSans SDF");
+        Texture2D baseBibTexture = Resources.Load<Texture2D>("Textures/BibBase");
+        TMP_FontAsset font = Resources.Load<TMP_FontAsset>("Fonts & Materials/LiberationSans SDF");
 
-            bibMaterial.mainTexture = BibNumberGenerator.Generate(
-                baseBibTexture,
-                12,
-                font,
-                UnityEngine.Color.black,
-                64,               // font size
-                new Vector2(8, 27) // pixel pos (match your UV map)
-            );*/
+        bibMaterial.mainTexture = BibNumberGenerator.Generate(
+            baseBibTexture,
+            12,
+            font,
+            UnityEngine.Color.black,
+            64,               // font size
+            new Vector2(8, 27) // pixel pos (match your UV map)
+        );*/
 
 
             helmetMaterial.SetColor(Color, SimpleColorPicker.Hex2Color(competitor.helmetColor));
