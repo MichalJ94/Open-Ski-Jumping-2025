@@ -214,7 +214,7 @@ namespace OpenSkiJumping.Jumping
             jumperController.ResetValues();
             jumperController.GetComponent<Transform>().position = hillTransform.position + jumperPosition + Vector3.up;
             gateObject.GetComponent<Transform>().position = hillTransform.position + jumperPosition;
-            boardObject.GetComponent<Transform>().position = hillTransform.position + jumperPosition + new Vector3(-1.5f,1.2f,0) ;
+            boardObject.GetComponent<Transform>().position = hillTransform.position + jumperPosition + new Vector3(-1.2f,0.8f,0) ;
             jumperController.GetComponent<Transform>().rotation = jumperRotation;
 
             fl0 = fl1 = 0;

@@ -13,6 +13,7 @@ using UnityEngine.Serialization;
 using UnityEngine.Networking;
 using UnityEngine.UI.Extensions.ColorPicker;
 using Microsoft.SqlServer.Server;
+using OpenSkiJumping.Competition.Persistent;
 
 namespace OpenSkiJumping.Hills
 {
@@ -228,6 +229,12 @@ namespace OpenSkiJumping.Hills
 
         private Dictionary<Material, Color> originalMaterialColors = new Dictionary<Material, Color>();
 
+
+        [Space][Header("BackDrop")] public GameObject backdropObject;
+        public GameObject customBackdropObject;
+        public float mipMapBiasBackdrop = -1f;
+        public Renderer customBackdropRenderer;
+
         public void SetGate(Hill hill, int nr)
         {
             jumperPosition = new Vector3(hill.GatePoint(nr).x, hill.GatePoint(nr).y, 0);
@@ -282,6 +289,8 @@ namespace OpenSkiJumping.Hills
             {
                 GenerateMarks();
             }
+
+            LoadBackdropTexture();
 
             if (generateTerrain)
             {
@@ -540,6 +549,64 @@ namespace OpenSkiJumping.Hills
             if (hasCollider)
             {
                 gameObject.GetComponent<MeshCollider>().sharedMesh = mesh;
+            }
+        }
+
+
+        private void LoadBackdropTexture()
+        {
+            //Implement hill.backdrop Texture later
+            string textureName = "fis.png";
+
+            if (string.IsNullOrEmpty(textureName))
+            {
+                // UseDefaultBackdrop();
+                return;
+            }
+
+            string fullPath = System.IO.Path.Combine(Application.streamingAssetsPath, "textures", "backdrops", textureName);
+            StartCoroutine(LoadCustomBackdropTextureCoroutine(fullPath));
+        }
+
+        private IEnumerator LoadCustomBackdropTextureCoroutine(string filePath)
+        {
+            string uri = new System.Uri(filePath).AbsoluteUri;
+            using (UnityWebRequest www = UnityWebRequestTexture.GetTexture(uri))
+            {
+                yield return www.SendWebRequest();
+
+                if (www.result != UnityWebRequest.Result.Success)
+                {
+                    Debug.LogWarning("Failed to load backdrop texture: " + www.error);
+                    // UseDefaultBackdrop();
+                    yield break;
+                }
+
+                Texture2D rawTex = DownloadHandlerTexture.GetContent(www);
+                Texture2D tex = new Texture2D(rawTex.width, rawTex.height, rawTex.format, true);
+                tex.SetPixels(rawTex.GetPixels());
+                tex.Apply(true); // generate mipmaps
+
+                tex.mipMapBias = mipMapBiasBackdrop;
+
+                Material[] mats = customBackdropRenderer.materials;
+                if (mats.Length >= 1)
+                {
+                    Material mat = new Material(mats[0]); // duplicate
+                    mat.mainTexture = tex;
+                    mat.mainTexture.mipMapBias = mipMapBiasBackdrop;
+                    mats[0] = mat;
+
+                    customBackdropRenderer.materials = mats;
+
+                    customBackdropObject.SetActive(true);
+                    backdropObject.SetActive(false);
+                }
+                else
+                {
+                    Debug.LogWarning("Custom helmet renderer has no material slots!");
+                  //  UseDefaultBackdrop();
+                }
             }
         }
 

@@ -15,11 +15,11 @@ E:/Unity Projects/Open-Ski-Jumping-2025
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-56077
+56715
 Successfully changed project path to: E:/Unity Projects/Open-Ski-Jumping-2025
 E:/Unity Projects/Open-Ski-Jumping-2025
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 76.87 ms, found 1 plugins.
+Refreshing native plugins compatible for Editor in 82.12 ms, found 1 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2020.3.2f1 (8fd9074bf66c)
 [Subsystems] Discovering subsystems at path E:/Unity/2020.3.2f1/Editor/Data/Resources/UnitySubsystems
@@ -36,218 +36,98 @@ Initialize mono
 Mono path[0] = 'E:/Unity/2020.3.2f1/Editor/Data/Managed'
 Mono path[1] = 'E:/Unity/2020.3.2f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'E:/Unity/2020.3.2f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56612
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56128
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: E:/Unity/2020.3.2f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.000693 seconds.
+Registered in 0.000770 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 71.98 ms, found 1 plugins.
+Refreshing native plugins compatible for Editor in 68.96 ms, found 1 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.656 seconds
+- Completed reload, in  0.648 seconds
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.004478 seconds.
+Registered in 0.003947 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 65.93 ms, found 1 plugins.
+Refreshing native plugins compatible for Editor in 78.15 ms, found 1 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.193 seconds
+- Completed reload, in  1.295 seconds
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
-Refreshing native plugins compatible for Editor in 1.06 ms, found 1 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.06 seconds
+Refreshing native plugins compatible for Editor in 0.99 ms, found 1 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 4062 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 199.9 MB.
-System memory in use after: 200.1 MB.
+System memory in use before: 200.5 MB.
+System memory in use after: 200.7 MB.
 
-Unloading 46 unused Assets to reduce memory usage. Loaded Objects now: 4493.
-Total: 2.805400 ms (FindLiveObjects: 0.496500 ms CreateObjectMapping: 0.132700 ms MarkObjects: 2.104700 ms  DeleteObjects: 0.070400 ms)
-
-========================================================================
-Received Import Request.
-  path: Assets/Materials/Jumper/Helmet.mat
-  artifactKey: Guid(313fa79230b9c1ba980976ca2762bce7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Jumper/Helmet.mat using Guid(313fa79230b9c1ba980976ca2762bce7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '247b910c5c58d1aa996dade7ed815fc6') in 0.182374 seconds
-  Import took 0.189724 seconds .
+Unloading 46 unused Assets to reduce memory usage. Loaded Objects now: 4494.
+Total: 3.380300 ms (FindLiveObjects: 0.850700 ms CreateObjectMapping: 0.180100 ms MarkObjects: 2.265100 ms  DeleteObjects: 0.083400 ms)
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000263 seconds.
-  path: Assets/Materials/Jumper/SuitBottonBack.mat
-  artifactKey: Guid(9ec6bf25a82501f55a8dec6de6c4939a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Jumper/SuitBottonBack.mat using Guid(9ec6bf25a82501f55a8dec6de6c4939a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8097c58ab8a5e846dbd88bb6d11b6bd6') in 0.010350 seconds
-  Import took 0.017156 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000183 seconds.
-  path: Assets/Materials/Jumper/SuitTopFront.mat
-  artifactKey: Guid(fc5eaa68a5179f2b488c4a9e8507b1d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Jumper/SuitTopFront.mat using Guid(fc5eaa68a5179f2b488c4a9e8507b1d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e09a7f6d4ae180f936e57c32f754585b') in 0.008993 seconds
-  Import took 0.016537 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000291 seconds.
-  path: Assets/Materials/Jumper/SuitBottonFront.mat
-  artifactKey: Guid(dc46f437ad95439e9bd267ad64942812) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Jumper/SuitBottonFront.mat using Guid(dc46f437ad95439e9bd267ad64942812) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e28da238e0956dffff1244abbd00e677') in 0.008392 seconds
-  Import took 0.017685 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000188 seconds.
-  path: Assets/Materials/Jumper/Skis.mat
-  artifactKey: Guid(a9f3b2c59e004ca0897272388028cb58) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Jumper/Skis.mat using Guid(a9f3b2c59e004ca0897272388028cb58) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b21c85ecd0454c3a22e97f969c419dcd') in 0.007931 seconds
-  Import took 0.014291 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000202 seconds.
-  path: Assets/Materials/Jumper/SuitTopBack.mat
-  artifactKey: Guid(01156c728e3382af48b1cda192cf3823) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Jumper/SuitTopBack.mat using Guid(01156c728e3382af48b1cda192cf3823) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ac986c498846bf4528a9da6bb552477a') in 0.006938 seconds
-  Import took 0.012836 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000205 seconds.
-  path: Assets/Materials/Jumper/SuitBottonFront.mat
-  artifactKey: Guid(dc46f437ad95439e9bd267ad64942812) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Jumper/SuitBottonFront.mat using Guid(dc46f437ad95439e9bd267ad64942812) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e28da238e0956dffff1244abbd00e677') in 0.005799 seconds
-  Import took 0.011041 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000232 seconds.
-  path: Assets/Materials/Jumper/SuitTopBack.mat
-  artifactKey: Guid(01156c728e3382af48b1cda192cf3823) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Jumper/SuitTopBack.mat using Guid(01156c728e3382af48b1cda192cf3823) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ac986c498846bf4528a9da6bb552477a') in 0.006676 seconds
-  Import took 0.013056 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 36.546634 seconds.
-  path: Assets/Cam1settings.jpg
-  artifactKey: Guid(b58022c8145f0664a9392de80214f45c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Cam1settings.jpg using Guid(b58022c8145f0664a9392de80214f45c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7e392436ba0ae0a986f27ba0e91563c7') in 0.040171 seconds
-  Import took 0.047749 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 53.068943 seconds.
-  path: Packages/com.unity.animation.rigging/Editor/Shapes/BallEffector.asset
-  artifactKey: Guid(e050c2b16fe384bd994474655a4b4968) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Packages/com.unity.animation.rigging/Editor/Shapes/BallEffector.asset using Guid(e050c2b16fe384bd994474655a4b4968) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '71d912fcbdb95eb6ad74efac6717b430') in 0.036624 seconds
-  Import took 0.043528 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000212 seconds.
-  path: Assets/Models/banner.blend
-  artifactKey: Guid(120e976140484de40a7aafd92f49f88d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/banner.blend using Guid(120e976140484de40a7aafd92f49f88d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c33ae6708df33683bcb11d52d11dcabc') in 0.088975 seconds
-  Import took 0.095677 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000199 seconds.
-  path: Packages/com.unity.animation.rigging/Editor/Shapes/BallEffector.asset
-  artifactKey: Guid(e050c2b16fe384bd994474655a4b4968) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Packages/com.unity.animation.rigging/Editor/Shapes/BallEffector.asset using Guid(e050c2b16fe384bd994474655a4b4968) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '71d912fcbdb95eb6ad74efac6717b430') in 0.007789 seconds
-  Import took 0.013867 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000225 seconds.
-  path: Assets/Models/banner.blend
-  artifactKey: Guid(120e976140484de40a7aafd92f49f88d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/banner.blend using Guid(120e976140484de40a7aafd92f49f88d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c33ae6708df33683bcb11d52d11dcabc') in 0.076784 seconds
-  Import took 0.082121 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 9.977160 seconds.
-  path: Assets/Models/banner.blend1
-  artifactKey: Guid(a859fc86c7babda42af879cb99e6164e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/banner.blend1 using Guid(a859fc86c7babda42af879cb99e6164e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a7baa9e2a0cba13fefe1ed4618714753') in 0.003389 seconds
-  Import took 0.009365 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000414 seconds.
-  path: Assets/Models/banner.blend1
-  artifactKey: Guid(a859fc86c7babda42af879cb99e6164e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/banner.blend1 using Guid(a859fc86c7babda42af879cb99e6164e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a7baa9e2a0cba13fefe1ed4618714753') in 0.001595 seconds
-  Import took 0.006700 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 31.180207 seconds.
-  path: Assets/Models/banner.fbx
-  artifactKey: Guid(dc822a3912d0b524ba1f73159e711181) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/banner.fbx using Guid(dc822a3912d0b524ba1f73159e711181) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd680fe370058d25a5d5ab83649c1f293') in 0.072782 seconds
-  Import took 0.081643 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000562 seconds.
-  path: Assets/Models/banner.fbx
-  artifactKey: Guid(dc822a3912d0b524ba1f73159e711181) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/banner.fbx using Guid(dc822a3912d0b524ba1f73159e711181) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd680fe370058d25a5d5ab83649c1f293') in 0.071633 seconds
-  Import took 0.077513 seconds .
+  path: Assets/Scripts/ScriptableObjects/SkiJumperDataController.cs
+  artifactKey: Guid(ba041b551d33ded1d825b476849780df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/ScriptableObjects/SkiJumperDataController.cs using Guid(ba041b551d33ded1d825b476849780df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '82b9b93efe0f94f42d874baef771b444') in 0.023105 seconds
+  Import took 0.029651 seconds .
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.004340 seconds.
+Registered in 0.006495 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.17 ms, found 1 plugins.
+Refreshing native plugins compatible for Editor in 1.03 ms, found 1 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.029 seconds
+- Completed reload, in  0.883 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 1.50 ms, found 1 plugins.
+Refreshing native plugins compatible for Editor in 1.13 ms, found 1 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 3874 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 190.9 MB.
-System memory in use after: 191.1 MB.
+System memory in use before: 185.8 MB.
+System memory in use after: 186.1 MB.
 
-Unloading 37 unused Assets to reduce memory usage. Loaded Objects now: 4579.
-Total: 3.488400 ms (FindLiveObjects: 0.500800 ms CreateObjectMapping: 0.163700 ms MarkObjects: 2.790800 ms  DeleteObjects: 0.031700 ms)
-
-========================================================================
-Received Import Request.
-  Time since last request: 698.182159 seconds.
-  path: Assets/Models/banner.blend
-  artifactKey: Guid(120e976140484de40a7aafd92f49f88d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/banner.blend using Guid(120e976140484de40a7aafd92f49f88d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3272273ce559a879027d90cdf36f038b') in 0.245942 seconds
-  Import took 0.253198 seconds .
+Unloading 37 unused Assets to reduce memory usage. Loaded Objects now: 4497.
+Total: 3.879600 ms (FindLiveObjects: 0.921200 ms CreateObjectMapping: 0.395200 ms MarkObjects: 2.526600 ms  DeleteObjects: 0.034800 ms)
 
 ========================================================================
-Received Import Request.
-  Time since last request: 0.005125 seconds.
-  path: Assets/Models/banner.blend
-  artifactKey: Guid(120e976140484de40a7aafd92f49f88d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/banner.blend using Guid(120e976140484de40a7aafd92f49f88d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3272273ce559a879027d90cdf36f038b') in 0.037249 seconds
-  Import took 0.044036 seconds .
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004688 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.04 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.896 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.06 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3874 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 185.9 MB.
+System memory in use after: 186.2 MB.
+
+Unloading 37 unused Assets to reduce memory usage. Loaded Objects now: 4500.
+Total: 3.053600 ms (FindLiveObjects: 0.455900 ms CreateObjectMapping: 0.160400 ms MarkObjects: 2.405500 ms  DeleteObjects: 0.031000 ms)
 
 AssetImportWorkerClient::OnTransportError - code=2 error=End of file
