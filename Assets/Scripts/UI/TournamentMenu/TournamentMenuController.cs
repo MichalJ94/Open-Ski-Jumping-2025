@@ -2,6 +2,7 @@ using System;
 using OpenSkiJumping.Data;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 using EventType = OpenSkiJumping.Competition.EventType;
 
 namespace OpenSkiJumping.UI.TournamentMenu
@@ -47,6 +48,7 @@ namespace OpenSkiJumping.UI.TournamentMenu
             classificationsHierarchyGO.SetActive(true);
             jumpersListGO.SetActive(tournamentMenuData.GetCurrentEvent().eventType == EventType.Individual);
             teamsListGO.SetActive(tournamentMenuData.GetCurrentEvent().eventType == EventType.Team);
+            RandomEventSystemTest();
         }
 
         public void LoadCompetition()
@@ -58,5 +60,38 @@ namespace OpenSkiJumping.UI.TournamentMenu
         {
             menuController.LoadMainMenu();
         }
+
+        public void RandomEventSystemTest()
+        {
+
+            var save = saves.GetCurrentSave();
+            Debug.Log($"From RandomEventSystemTest save.competitors.Count: {save.competitors.Count}");
+
+
+            int number = Random.Range(0, save.competitors.Count);
+            int skillChange = Random.Range(-5,5);
+            if(skillChange != 0)
+            {
+                save.competitors[number].competitor.normalHillSkill += skillChange;
+                save.competitors[number].competitor.largeHillSkill += skillChange;
+                save.competitors[number].competitor.skiFlyingHillSkill += skillChange;
+                save.randomEvents.Add($"{save.competitors[number].competitor.id} skills {skillChange}");
+                Debug.Log("All random events so far:");
+                foreach(string item in save.randomEvents)
+                {
+                    Debug.Log(item);
+                }
+
+            
+            }
+            
+
+
+
+
+        }
+
+
+
     }
 }

@@ -18,6 +18,7 @@ namespace OpenSkiJumping
         public string name;
         public ResultsDatabase resultsContainer;
         public List<TeamData> teams;
+        public List<String> randomEvents;
 
         public GameSave()
         {

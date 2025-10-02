@@ -174,6 +174,7 @@ namespace OpenSkiJumping.Competition
             savesRepository.SaveData();
             snowParticles.SetActive(false);
             finishCompetition = true;
+            gameplayExtension.registerEvent = true;
             menuController.LoadTournamentMenu();
 
         }
@@ -263,7 +264,7 @@ namespace OpenSkiJumping.Competition
                 {
                     var bibColor =
                         SimpleColorPicker.Hex2Color(save.classificationsData[ind].classification.leaderBibColor);
-
+                    Debug.Log("SimpleColorPicker.Hex2Color(save.classificationsData[ind].classification.leaderBibColor);");
                     if (classificationInfo.eventType == EventType.Individual)
                     {
                         _bibColors[id] = bibColor;
@@ -353,7 +354,7 @@ namespace OpenSkiJumping.Competition
             {
                 cpuJumpPerformed.Invoke();
             }*/
-            skiJumperDataController.SetValues(_bibColors[id]);
+            skiJumperDataController.SetValues(_bibColors[id], "string");
 
             // Debug.Log("From HillSetup hillid:" + hillId + " storeHS: " + storeHS);
         }

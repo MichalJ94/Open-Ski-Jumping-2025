@@ -36,6 +36,26 @@ namespace OpenSkiJumping.UI.TournamentMenu
         public IEnumerable<Competitor> GetTeamMembers() => competitors.Take(4).Select(it => it.competitor);
     }
 
+    [Serializable]
+    public class RandomEventData
+    {
+        public string competitorId;
+        public int skillChange;
+        public string description; // localized text or phrase key
+        public DateTime date;
+
+        public RandomEventData() { } // Unity/serialization needs this
+
+        public RandomEventData(string competitorId, int skillChange, string description)
+        {
+            this.competitorId = competitorId;
+            this.skillChange = skillChange;
+            this.description = description;
+            this.skillChange = skillChange;
+            this.date = DateTime.Now;
+        }
+    }
+
     [CreateAssetMenu(menuName = "ScriptableObjects/TournamentMenuData")]
     public class TournamentMenuData : ScriptableObject
     {

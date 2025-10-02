@@ -31,10 +31,13 @@ namespace OpenSkiJumping.ScriptableObjects
         public Material suitTopBackMaterial;
         public Material suitTopFrontMaterial;
         public Material suitOverlayMaterial;
+        public Material bibOverlayMaterial;
         public Material glovesMaterial;
         public Material bootsMaterial;
         public GameObject helmetObject;
         public GameObject customHelmetObject;
+        public GameObject bibObject;
+        public GameObject customBibObject;
         public GameObject leftSkiObject;
         public GameObject rightSkiObject;
         public GameObject customLeftSkiObject;
@@ -48,6 +51,7 @@ namespace OpenSkiJumping.ScriptableObjects
         public Renderer customRightSkiRenderer;
         public Renderer customLeftSkiCloneRenderer;
         public Renderer customRightSkiCloneRenderer;
+        public Renderer customBibRenderer;
         public Material transparentHelmetMaterial; // For fallback if texture is missing
         public TMPro.TextMeshPro bibFront;
         public TMPro.TextMeshPro bibBack;
@@ -135,11 +139,32 @@ namespace OpenSkiJumping.ScriptableObjects
             StartCoroutine(LoadCustomHelmetTextureCoroutine(fullPath));
         }
 
+        private void LoadBibTexture()
+        {
+            string textureName = "bibTransparent.png";
+
+            if (string.IsNullOrEmpty(textureName))
+            {
+                UseDefaultBib();
+                return;
+            }
+
+            string fullPath = System.IO.Path.Combine(Application.streamingAssetsPath, "textures", "bibs", textureName);
+            StartCoroutine(LoadBibTextureCoroutine(fullPath));
+        }
+
         private void UseDefaultHelmet()
         {
             helmetObject.SetActive(true);
             customHelmetObject.SetActive(false);
         }
+
+        private void UseDefaultBib()
+        {
+            bibObject.SetActive(true);
+            customBibObject.SetActive(false);
+        }
+
 
         private IEnumerator LoadCustomHelmetTextureCoroutine(string filePath)
         {
@@ -182,6 +207,52 @@ namespace OpenSkiJumping.ScriptableObjects
                 }
             }
         }
+
+        private IEnumerator LoadBibTextureCoroutine(string filePath)
+        {
+            string uri = new System.Uri(filePath).AbsoluteUri;
+            using (UnityWebRequest www = UnityWebRequestTexture.GetTexture(uri))
+            {
+                yield return www.SendWebRequest();
+
+                if (www.result != UnityWebRequest.Result.Success)
+                {
+                    Debug.LogWarning("Failed to load bib texture: " + www.error);
+                    UseDefaultHelmet();
+                    yield break;
+                }
+
+                Texture2D rawTex = DownloadHandlerTexture.GetContent(www);
+                Texture2D tex = new Texture2D(rawTex.width, rawTex.height, rawTex.format, true);
+                tex.SetPixels(rawTex.GetPixels());
+                tex.Apply(true); // generate mipmaps
+
+                tex.mipMapBias = mipMapBiasHelmet;
+
+                Material[] mats = customBibRenderer.materials;
+                if (mats.Length >= 1)
+                {
+                    Material mat = new Material(mats[0]); // duplicate
+                    mat.mainTexture = tex;
+                    mat.mainTexture.mipMapBias = mipMapBiasHelmet;
+                    mats[0] = mat;
+
+                    customBibRenderer.materials = mats;
+
+                    customBibObject.SetActive(true);
+                    bibObject.SetActive(false);
+                }
+                else
+                {
+                    Debug.LogWarning("Custom bib renderer has no material slots!");
+                    UseDefaultBib();
+                }
+            }
+        }
+
+
+
+
 
         private void LoadSkisTexture()
         {
@@ -290,51 +361,7 @@ namespace OpenSkiJumping.ScriptableObjects
             }
         }
 
-        private IEnumerator LoadSuitOverlayTexture(string filePath)
-        {
-            string uri = new System.Uri(filePath).AbsoluteUri;
-            using (UnityWebRequest www = UnityWebRequestTexture.GetTexture(uri))
-            {
-                yield return www.SendWebRequest();
-
-                if (www.result != UnityWebRequest.Result.Success)
-                {
-                    Debug.Log("No suit overlay found: " + www.error);
-                    yield break;
-                }
-
-                Texture2D rawTex = DownloadHandlerTexture.GetContent(www);
-                Texture2D tex = new Texture2D(rawTex.width, rawTex.height, rawTex.format, true);
-                tex.SetPixels(rawTex.GetPixels());
-                tex.Apply(true);
-
-                Material mat = new Material(suitOverlayMaterial);
-                mat.mainTexture = tex;
-
-                // 🔍 Get the correct renderer
-                var cubeTransform = jumperController?.jumperModel?.transform.Find("Cube");
-                if (cubeTransform == null)
-                {
-                    Debug.LogWarning("Cube object not found in jumper model!");
-                    yield break;
-                }
-
-                var smr = cubeTransform.GetComponent<SkinnedMeshRenderer>();
-                if (smr == null)
-                {
-                    Debug.LogWarning("Cube has no SkinnedMeshRenderer!");
-                    yield break;
-                }
-
-                // ✅ Add overlay as last material (rendered on top)
-                var mats = smr.materials;
-                Array.Resize(ref mats, mats.Length + 1);
-                mats[mats.Length - 1] = mat;
-                smr.materials = mats;
-            }
-        }
-
-
+       
         private void Awake()
         {
             if (mpb == null) mpb = new MaterialPropertyBlock();
@@ -570,7 +597,7 @@ namespace OpenSkiJumping.ScriptableObjects
                 Debug.LogWarning($"[TryApplyTextureToMaterialSlot] Material {targetMat.name} not found in suitRenderer.sharedMaterials");
             }
         }
-        public void SetValues(Color bibColor)
+        public void SetValues(Color bibColor, string bibTexture)
         {
             Debug.Log("SetValues run in SkiJumpData controller. bibColor:" + bibColor.ToString());
             jumperMale.gameObject.SetActive(competitor.gender == Gender.Male);
@@ -579,7 +606,10 @@ namespace OpenSkiJumping.ScriptableObjects
 
             bibMaterial.SetColor(Color, bibColor);
 
-           
+           if(bibColor != UnityEngine.Color.white)
+            {
+                Debug.Log("bibColor not white!!");
+            }
 
                 var competitorId = resultsManager.Value.GetCurrentCompetitorLocalId();
                 var competitorBib = resultsManager.Value.Results[competitorId].Bibs[resultsManager.Value.RoundIndex];
@@ -624,6 +654,7 @@ namespace OpenSkiJumping.ScriptableObjects
 
             LoadHelmetTexture();
             LoadSkisTexture();
+            LoadBibTexture();
 
             // 2025-09-15 The system for loading suit textures is working properly in the text. Need to put the proper
             // materials with the custom shader on jumper's "Cube" object for it to work. Take up the project again
@@ -645,5 +676,54 @@ namespace OpenSkiJumping.ScriptableObjects
                 Debug.Log("Can't find slovenia2425.png");
             }
         }
+
+        private IEnumerator LoadSuitOverlayTexture(string filePath)
+        {
+            string uri = new System.Uri(filePath).AbsoluteUri;
+            using (UnityWebRequest www = UnityWebRequestTexture.GetTexture(uri))
+            {
+                yield return www.SendWebRequest();
+
+                if (www.result != UnityWebRequest.Result.Success)
+                {
+                    Debug.Log("No suit overlay found: " + www.error);
+                    yield break;
+                }
+
+                Texture2D rawTex = DownloadHandlerTexture.GetContent(www);
+                Texture2D tex = new Texture2D(rawTex.width, rawTex.height, rawTex.format, true);
+                tex.SetPixels(rawTex.GetPixels());
+                tex.Apply(true);
+
+                Material mat = new Material(suitOverlayMaterial);
+                mat.mainTexture = tex;
+
+                // 🔍 Get the correct renderer
+                var cubeTransform = jumperController?.jumperModel?.transform.Find("Cube");
+                if (cubeTransform == null)
+                {
+                    Debug.LogWarning("Cube object not found in jumper model!");
+                    yield break;
+                }
+
+                var smr = cubeTransform.GetComponent<SkinnedMeshRenderer>();
+                if (smr == null)
+                {
+                    Debug.LogWarning("Cube has no SkinnedMeshRenderer!");
+                    yield break;
+                }
+
+                // ✅ Add overlay as last material (rendered on top)
+                var mats = smr.materials;
+                Array.Resize(ref mats, mats.Length + 1);
+                mats[mats.Length - 1] = mat;
+                smr.materials = mats;
+            }
+        }
+
+      
+
+
+
     }
 }
