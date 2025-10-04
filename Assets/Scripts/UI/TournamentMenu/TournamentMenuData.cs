@@ -4,6 +4,7 @@ using System.Linq;
 using OpenSkiJumping.Competition;
 using OpenSkiJumping.Competition.Persistent;
 using OpenSkiJumping.Data;
+using OpenSkiJumping.ScriptableObjects;
 using UnityEngine;
 
 namespace OpenSkiJumping.UI.TournamentMenu
@@ -39,21 +40,29 @@ namespace OpenSkiJumping.UI.TournamentMenu
     [Serializable]
     public class RandomEventData
     {
-        public string competitorId;
+        public int competitorId;
         public int skillChange;
-        public string description; // localized text or phrase key
-        public DateTime date;
+        public TranslatablePhrase phrase;
 
         public RandomEventData() { } // Unity/serialization needs this
 
-        public RandomEventData(string competitorId, int skillChange, string description)
+        public RandomEventData(int competitorId, int skillChange, TranslatablePhrase phrase)
         {
             this.competitorId = competitorId;
             this.skillChange = skillChange;
-            this.description = description;
-            this.skillChange = skillChange;
-            this.date = DateTime.Now;
+            this.phrase = phrase;
         }
+
+        public string GetLocalizedDescription(string competitorName)
+        {
+            // Example phrase value in TranslatablePhrase could be:
+            // English: "{0}'s skills changed by {1}"
+            // Polish: "Umiejêtnoœci {0} zmieni³y siê o {1}"
+            // Slovenian: "{0} je spremenil svoje sposobnosti za {1}"
+            return string.Format(phrase.CurrentValue, competitorName, skillChange);
+        }
+
+
     }
 
     [CreateAssetMenu(menuName = "ScriptableObjects/TournamentMenuData")]
@@ -75,7 +84,7 @@ namespace OpenSkiJumping.UI.TournamentMenu
 
         public string GetRank(RankType rankType, int id)
         {
-         //   Debug.Log($"TournamentMenuData. rankType: {rankType} id {id}");
+            //   Debug.Log($"TournamentMenuData. rankType: {rankType} id {id}");
             if (rankType == RankType.Classification)
                 return Calendar.classifications[id].name;
             if (rankType == RankType.Event)
@@ -123,3 +132,5 @@ namespace OpenSkiJumping.UI.TournamentMenu
         }
     }
 }
+
+

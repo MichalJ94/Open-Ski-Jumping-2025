@@ -18,7 +18,7 @@ namespace OpenSkiJumping
         public string name;
         public ResultsDatabase resultsContainer;
         public List<TeamData> teams;
-        public List<String> randomEvents;
+        public List<RandomEventData> randomEvents;
 
         public GameSave()
         {
@@ -30,6 +30,8 @@ namespace OpenSkiJumping
             resultsContainer = new ResultsDatabase();
             this.calendar = calendar;
 
+            randomEvents = new List<RandomEventData>();
+
             resultsContainer.eventResults = new EventResults[calendar.events.Count];
             resultsContainer.classificationResults =
                 new ClassificationResults[calendar.classifications.Count];
@@ -38,7 +40,7 @@ namespace OpenSkiJumping
                 resultsContainer.classificationResults[i] = new ClassificationResults();
 
             classificationsData = calendar.classifications.Select((it, ind) =>
-                    new ClassificationData {useBib = false, calendarId = ind, priority = ind, classification = it})
+                    new ClassificationData { useBib = false, calendarId = ind, priority = ind, classification = it })
                 .ToList();
 
             var teamsDict = calendar.teams.Select((it, ind) => (it.countryCode, ind))
@@ -47,7 +49,9 @@ namespace OpenSkiJumping
             competitors = calendar.competitorsIds.Select((item, index) =>
                     new CompetitorData
                     {
-                        calendarId = index, registered = true, competitor = competitorsRuntime.GetJumperById(item),
+                        calendarId = index,
+                        registered = true,
+                        competitor = competitorsRuntime.GetJumperById(item),
                         teamId = teamsDict[competitorsRuntime.GetJumperById(item).countryCode]
                     })
                 .ToList();
@@ -56,11 +60,16 @@ namespace OpenSkiJumping
 
             teams = calendar.teams.Select((item, index) => new TeamData
             {
-                calendarId = index, registered = true, team = item,
+                calendarId = index,
+                registered = true,
+                team = item,
                 competitors = competitorsByCountry[item.countryCode].Select((it, ind) => new CompetitorData
-                    {
-                        calendarId = it.calendarId, teamId = ind, competitor = it.competitor, registered = it.registered
-                    })
+                {
+                    calendarId = it.calendarId,
+                    teamId = ind,
+                    competitor = it.competitor,
+                    registered = it.registered
+                })
                     .ToList()
             }).ToList();
 
@@ -91,3 +100,4 @@ namespace OpenSkiJumping
         }
     }
 }
+

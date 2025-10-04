@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 using EventType = OpenSkiJumping.Competition.EventType;
+using OpenSkiJumping.ScriptableObjects;
 
 namespace OpenSkiJumping.UI.TournamentMenu
 {
@@ -19,6 +20,8 @@ namespace OpenSkiJumping.UI.TournamentMenu
         [SerializeField] private GameObject teamsListGO;
         [SerializeField] private GameObject teamSquadGO;
         [SerializeField] private TournamentMenuData tournamentMenuData;
+
+        [SerializeField] private TranslatablePhrase skillChangePhrase;
 
         public event Action OnReloadTeamsList;
 
@@ -63,33 +66,42 @@ namespace OpenSkiJumping.UI.TournamentMenu
 
         public void RandomEventSystemTest()
         {
-
             var save = saves.GetCurrentSave();
-            Debug.Log($"From RandomEventSystemTest save.competitors.Count: {save.competitors.Count}");
+            int number = UnityEngine.Random.Range(0, save.competitors.Count);
+            int skillChange = UnityEngine.Random.Range(-5, 5);
 
-
-            int number = Random.Range(0, save.competitors.Count);
-            int skillChange = Random.Range(-5,5);
-            if(skillChange != 0)
+            if (skillChange != 0)
             {
-                save.competitors[number].competitor.normalHillSkill += skillChange;
-                save.competitors[number].competitor.largeHillSkill += skillChange;
-                save.competitors[number].competitor.skiFlyingHillSkill += skillChange;
-                save.randomEvents.Add($"{save.competitors[number].competitor.id} skills {skillChange}");
+                var competitor = save.competitors[number].competitor;
+                competitor.normalHillSkill += skillChange;
+                competitor.largeHillSkill += skillChange;
+                competitor.skiFlyingHillSkill += skillChange;
+                Debug.Log($"{competitor.firstName} {competitor.lastName} got the skill change {skillChange}");
+
+
+                var randomEvent = new RandomEventData(
+                    number,
+                    skillChange,
+                    skillChangePhrase
+                );
+
+                save.randomEvents.Add(randomEvent);
+
                 Debug.Log("All random events so far:");
-                foreach(string item in save.randomEvents)
+                foreach (var item in save.randomEvents)
                 {
-                    Debug.Log(item);
+                    Debug.Log(item.GetLocalizedDescription(save.competitors[item.competitorId].competitor.id));
                 }
-
-            
             }
-            
-
-
-
-
         }
+
+
+
+
+
+
+
+
 
 
 
