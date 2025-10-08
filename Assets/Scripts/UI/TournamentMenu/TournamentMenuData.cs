@@ -25,6 +25,8 @@ namespace OpenSkiJumping.UI.TournamentMenu
         public Competitor competitor;
         public bool registered;
         public int teamId;
+        public int eventsInjuredLeft;
+
     }
 
     [Serializable]
@@ -37,20 +39,29 @@ namespace OpenSkiJumping.UI.TournamentMenu
         public IEnumerable<Competitor> GetTeamMembers() => competitors.Take(4).Select(it => it.competitor);
     }
 
+    public enum RandomEventType
+    {
+        SkillChange,
+        Injury
+    }
+
     [Serializable]
     public class RandomEventData
     {
         public int competitorId;
+        public RandomEventType eventType;
         public int skillChange;
+        public int eventsInjuredLeft;
         public TranslatablePhrase phrase;
 
         public RandomEventData() { } // Unity/serialization needs this
 
-        public RandomEventData(int competitorId, int skillChange, TranslatablePhrase phrase)
+        public RandomEventData(int competitorId, int skillChange, TranslatablePhrase phrase, int injuryDaysLeft)
         {
             this.competitorId = competitorId;
             this.skillChange = skillChange;
             this.phrase = phrase;
+            this.eventsInjuredLeft = injuryDaysLeft;
         }
 
         public string GetLocalizedDescription(string competitorName)
@@ -59,7 +70,7 @@ namespace OpenSkiJumping.UI.TournamentMenu
             // English: "{0}'s skills changed by {1}"
             // Polish: "Umiejêtnoœci {0} zmieni³y siê o {1}"
             // Slovenian: "{0} je spremenil svoje sposobnosti za {1}"
-            return string.Format(phrase.CurrentValue, competitorName, skillChange);
+            return string.Format(phrase.CurrentValue, competitorName, Math.Abs(skillChange));
         }
 
 

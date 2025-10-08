@@ -52,7 +52,8 @@ namespace OpenSkiJumping
                         calendarId = index,
                         registered = true,
                         competitor = competitorsRuntime.GetJumperById(item),
-                        teamId = teamsDict[competitorsRuntime.GetJumperById(item).countryCode]
+                        teamId = teamsDict[competitorsRuntime.GetJumperById(item).countryCode],
+                        eventsInjuredLeft = 0
                     })
                 .ToList();
 
@@ -68,7 +69,8 @@ namespace OpenSkiJumping
                     calendarId = it.calendarId,
                     teamId = ind,
                     competitor = it.competitor,
-                    registered = it.registered
+                    registered = it.registered,
+                    eventsInjuredLeft = it.eventsInjuredLeft
                 })
                     .ToList()
             }).ToList();

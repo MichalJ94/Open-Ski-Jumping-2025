@@ -652,9 +652,11 @@ namespace OpenSkiJumping.ScriptableObjects
             glovesMaterial.SetColor(Color, SimpleColorPicker.Hex2Color(competitor.glovesColor));
             bootsMaterial.SetColor(Color, SimpleColorPicker.Hex2Color(competitor.bootsColor));
 
-            LoadHelmetTexture();
-            LoadSkisTexture();
-            LoadBibTexture();
+            
+                LoadHelmetTexture();
+                LoadSkisTexture();
+                LoadBibTexture();
+            
 
             // 2025-09-15 The system for loading suit textures is working properly in the text. Need to put the proper
             // materials with the custom shader on jumper's "Cube" object for it to work. Take up the project again

@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 using EventType = OpenSkiJumping.Competition.EventType;
 using OpenSkiJumping.ScriptableObjects;
+using OpenSkiJumping.UI;
+using OpenSkiJumping.UI.TournamentMenu;
 
 namespace OpenSkiJumping.UI.TournamentMenu
 {
@@ -16,12 +18,14 @@ namespace OpenSkiJumping.UI.TournamentMenu
         [SerializeField] private Button playNextEventButton;
 
         [SerializeField] private MainMenuController menuController;
+        [SerializeField] private RandomEventsController randomEventsController;
         [SerializeField] private SavesRuntime saves;
         [SerializeField] private GameObject teamsListGO;
         [SerializeField] private GameObject teamSquadGO;
         [SerializeField] private TournamentMenuData tournamentMenuData;
 
-        [SerializeField] private TranslatablePhrase skillChangePhrase;
+        [SerializeField] private TranslatablePhrase posSkillChangePhrase;
+        [SerializeField] private TranslatablePhrase negSkillChangePhrase;
 
         public event Action OnReloadTeamsList;
 
@@ -78,20 +82,39 @@ namespace OpenSkiJumping.UI.TournamentMenu
                 competitor.skiFlyingHillSkill += skillChange;
                 Debug.Log($"{competitor.firstName} {competitor.lastName} got the skill change {skillChange}");
 
-
-                var randomEvent = new RandomEventData(
+                if (skillChange > 0)
+                {
+                    var randomEvent = new RandomEventData(
                     number,
                     skillChange,
-                    skillChangePhrase
-                );
+                    posSkillChangePhrase,
+                    0
 
-                save.randomEvents.Add(randomEvent);
+                );
+                    save.randomEvents.Add(randomEvent);
+                }
+                else
+                {
+                    var randomEvent = new RandomEventData(
+                                        number,
+                                        skillChange,
+                                        negSkillChangePhrase,
+                                        0);
+                    save.randomEvents.Add(randomEvent);
+                }
+                
+
+
 
                 Debug.Log("All random events so far:");
                 foreach (var item in save.randomEvents)
                 {
-                    Debug.Log(item.GetLocalizedDescription(save.competitors[item.competitorId].competitor.id));
+                    var comp = save.competitors[item.competitorId].competitor;
+                    string compName = $"{comp.firstName} {comp.lastName}";
+                    Debug.Log(item.GetLocalizedDescription(compName));
                 }
+
+                randomEventsController.Show();
             }
         }
 
