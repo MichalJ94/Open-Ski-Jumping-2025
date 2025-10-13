@@ -25,7 +25,7 @@ namespace OpenSkiJumping.UI.TournamentMenu
         public Competitor competitor;
         public bool registered;
         public int teamId;
-        public int eventsInjuredLeft;
+      //  public int eventsInjuredLeft;
 
     }
 
