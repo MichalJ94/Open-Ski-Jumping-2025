@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 namespace OpenSkiJumping.UI.TournamentMenu
 {
     public class RandomEventListItem : ListItemBehaviour

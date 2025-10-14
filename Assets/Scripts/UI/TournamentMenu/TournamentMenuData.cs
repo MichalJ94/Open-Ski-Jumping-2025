@@ -49,31 +49,27 @@ namespace OpenSkiJumping.UI.TournamentMenu
     public class RandomEventData
     {
         public int competitorId;
-        public RandomEventType eventType;
         public int skillChange;
+        public string localizedPhrase;
         public int eventsInjuredLeft;
-        public TranslatablePhrase phrase;
 
-        public RandomEventData() { } // Unity/serialization needs this
 
         public RandomEventData(int competitorId, int skillChange, TranslatablePhrase phrase, int injuryDaysLeft)
         {
             this.competitorId = competitorId;
             this.skillChange = skillChange;
-            this.phrase = phrase;
+            this.localizedPhrase = phrase != null ? phrase.CurrentValue : null;
             this.eventsInjuredLeft = injuryDaysLeft;
+ 
         }
 
         public string GetLocalizedDescription(string competitorName)
         {
-            // Example phrase value in TranslatablePhrase could be:
-            // English: "{0}'s skills changed by {1}"
-            // Polish: "Umiejêtnoœci {0} zmieni³y siê o {1}"
-            // Slovenian: "{0} je spremenil svoje sposobnosti za {1}"
-            return string.Format(phrase.CurrentValue, competitorName, Math.Abs(skillChange));
+            if (string.IsNullOrEmpty(localizedPhrase))
+                return $"{competitorName} skill change: {skillChange}";
+
+            return string.Format(localizedPhrase, competitorName, Math.Abs(skillChange));
         }
-
-
     }
 
     [CreateAssetMenu(menuName = "ScriptableObjects/TournamentMenuData")]

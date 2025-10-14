@@ -224,6 +224,8 @@ namespace OpenSkiJumping.UI.ListView
         {
             var item = Instantiate(listItem.gameObject, content.transform);
             var itemBehaviour = item.GetComponent<TItem>();
+            if (itemBehaviour == null)
+                Debug.LogError($"ListView: Instantiated item does NOT have a {typeof(TItem).Name} component! Prefab: {listItem.name}");
             ConfigureItem?.Invoke(itemBehaviour);
             return item;
         }

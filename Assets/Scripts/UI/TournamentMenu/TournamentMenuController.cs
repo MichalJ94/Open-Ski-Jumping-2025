@@ -44,6 +44,7 @@ namespace OpenSkiJumping.UI.TournamentMenu
         {
             if (tournamentMenuData.GetCurrentEvent() == null)
             {
+                Debug.Log("Running tournamentMenuData.GetCurrentEvent()");
                 nextEventGO.SetActive(false);
                 classificationsHierarchyGO.SetActive(false);
                 jumpersListGO.SetActive(false);
@@ -70,6 +71,7 @@ namespace OpenSkiJumping.UI.TournamentMenu
 
         public void RandomEventSystemTest()
         {
+            //Debug.Log("Running RandomEventSystemTest");
             var save = saves.GetCurrentSave();
             int number = UnityEngine.Random.Range(0, save.competitors.Count);
             int skillChange = UnityEngine.Random.Range(-5, 5);
