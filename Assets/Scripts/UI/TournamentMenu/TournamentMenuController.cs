@@ -56,7 +56,7 @@ namespace OpenSkiJumping.UI.TournamentMenu
             classificationsHierarchyGO.SetActive(true);
             jumpersListGO.SetActive(tournamentMenuData.GetCurrentEvent().eventType == EventType.Individual);
             teamsListGO.SetActive(tournamentMenuData.GetCurrentEvent().eventType == EventType.Team);
-            RandomEventSystemTest();
+            randomEventsController.AddRandomEvents();
         }
 
         public void LoadCompetition()
@@ -69,6 +69,7 @@ namespace OpenSkiJumping.UI.TournamentMenu
             menuController.LoadMainMenu();
         }
 
+        /*
         public void RandomEventSystemTest()
         {
             //Debug.Log("Running RandomEventSystemTest");
@@ -104,7 +105,6 @@ namespace OpenSkiJumping.UI.TournamentMenu
                                         0);
                     save.randomEvents.Add(randomEvent);
                 }
-                
 
 
 
@@ -117,8 +117,8 @@ namespace OpenSkiJumping.UI.TournamentMenu
                 }
 
                 randomEventsController.Show();
-            }
-        }
+            }*/
+        
 
 
 

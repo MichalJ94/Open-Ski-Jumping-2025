@@ -52,23 +52,24 @@ namespace OpenSkiJumping.UI.TournamentMenu
         public int skillChange;
         public string localizedPhrase;
         public int eventsInjuredLeft;
+        public int eventIndex;
 
-
-        public RandomEventData(int competitorId, int skillChange, TranslatablePhrase phrase, int injuryDaysLeft)
+        public RandomEventData(int competitorId, int skillChange, TranslatablePhrase phrase, int injuryDaysLeft, int eventIndex)
         {
             this.competitorId = competitorId;
             this.skillChange = skillChange;
             this.localizedPhrase = phrase != null ? phrase.CurrentValue : null;
             this.eventsInjuredLeft = injuryDaysLeft;
+            this.eventIndex = eventIndex;
  
         }
 
-        public string GetLocalizedDescription(string competitorName)
+        public string GetLocalizedDescription(string competitorName, string eventInfo = "")
         {
             if (string.IsNullOrEmpty(localizedPhrase))
-                return $"{competitorName} skill change: {skillChange}";
+                return $"{competitorName} skill change: {skillChange} after {eventInfo}";
 
-            return string.Format(localizedPhrase, competitorName, Math.Abs(skillChange));
+            return string.Format(localizedPhrase, competitorName, Math.Abs(skillChange), eventInfo);
         }
     }
 

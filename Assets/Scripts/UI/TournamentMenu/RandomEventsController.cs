@@ -3,6 +3,8 @@ using System.Linq;
 using OpenSkiJumping.ScriptableObjects;
 using UnityEngine;
 using OpenSkiJumping.UI.ListView;
+using OpenSkiJumping.Data;
+using OpenSkiJumping.UI.TournamentMenu.ResultsMenu;
 
 namespace OpenSkiJumping.UI.TournamentMenu
 {
@@ -11,8 +13,13 @@ namespace OpenSkiJumping.UI.TournamentMenu
         [SerializeField] private TournamentMenuData tournamentMenuData;
         [SerializeField] private FlagsData flagsData;
         [SerializeField] private RandomEventsListView listView;
+        [SerializeField] private EventsSelectionView eventsSelectionView;
         [SerializeField] private GameObject popupPanel;
         [SerializeField] private GameObject maskObject;
+        [SerializeField] private SavesRuntime saves;
+
+        [SerializeField] private TranslatablePhrase posSkillChangePhrase;
+        [SerializeField] private TranslatablePhrase negSkillChangePhrase;
 
         private List<RandomEventData> randomEvents;
         private List<CompetitorData> competitors;
@@ -64,7 +71,7 @@ namespace OpenSkiJumping.UI.TournamentMenu
                 return;
             }
 
-            randomEvents = save.randomEvents.OrderByDescending(e => e.competitorId).ToList();
+            randomEvents = save.randomEvents.OrderBy(e => e.eventIndex).ToList();
             competitors = save.competitors;
 
             Debug.Log($"Loaded {randomEvents.Count} random events and {competitors.Count} competitors.");
@@ -74,7 +81,7 @@ namespace OpenSkiJumping.UI.TournamentMenu
         }
 
         private void BindListItem(int index, RandomEventListItem listItem)
-        { 
+        {
 
 
             var e = randomEvents[index];
@@ -129,7 +136,21 @@ namespace OpenSkiJumping.UI.TournamentMenu
             }
 
             // Set event text (localized description)
-            listItem.eventText.text = e.GetLocalizedDescription(fullName);
+            //listItem.eventText.text = e.GetLocalizedDescription(fullName);
+
+            string eventInfo = "";
+            if (e.eventIndex > 0 && e.eventIndex <= tournamentMenuData.Calendar.events.Count)
+            {
+                var eventData = tournamentMenuData.Calendar.events[e.eventIndex - 1];
+                eventInfo = $"  ({e.eventIndex} {eventData.hillId})";
+            }
+            else
+            {
+                eventInfo = "unknown event";
+            }
+
+            listItem.eventText.text = e.GetLocalizedDescription(fullName, eventInfo);
+
         }
 
 
@@ -144,6 +165,62 @@ namespace OpenSkiJumping.UI.TournamentMenu
         {
             popupPanel.SetActive(false);
             //maskObject.SetActive(false);
+        }
+
+
+        public void AddRandomEvents()
+        {
+            //Debug.Log("Running RandomEventSystemTest");
+            var save = saves.GetCurrentSave();
+            int number = UnityEngine.Random.Range(0, save.competitors.Count);
+            int skillChange = UnityEngine.Random.Range(-5, 5);
+            if(save.resultsContainer.eventIndex != 0) {
+                if (skillChange != 0)
+                {
+                    var competitor = save.competitors[number].competitor;
+                    competitor.normalHillSkill += skillChange;
+                    competitor.largeHillSkill += skillChange;
+                    competitor.skiFlyingHillSkill += skillChange;
+                    Debug.Log($"{competitor.firstName} {competitor.lastName} got the skill change {skillChange}");
+
+                    if (skillChange > 0)
+                    {
+                        var randomEvent = new RandomEventData(
+                        number,
+                        skillChange,
+                        posSkillChangePhrase,
+                        0,
+                        save.resultsContainer.eventIndex
+
+                    );
+                        save.randomEvents.Add(randomEvent);
+                    }
+                    else
+                    {
+                        var randomEvent = new RandomEventData(
+                                            number,
+                                            skillChange,
+                                            negSkillChangePhrase,
+                                            0,
+                                            save.resultsContainer.eventIndex);
+                        save.randomEvents.Add(randomEvent);
+                    }
+                }
+                Debug.Log($"Events so far: {save.resultsContainer.eventIndex} Latest one: {save.resultsContainer.eventIndex} {save.calendar.events[save.resultsContainer.eventIndex-1].hillId}");
+
+                Debug.Log("All random events so far:");
+                foreach (var item in save.randomEvents)
+                {
+                    var comp = save.competitors[item.competitorId].competitor;
+                    string compName = $"{comp.firstName} {comp.lastName}";
+                    Debug.Log(item.GetLocalizedDescription(compName));
+                }
+
+
+                Show();
+            }
+
+
         }
     }
 }

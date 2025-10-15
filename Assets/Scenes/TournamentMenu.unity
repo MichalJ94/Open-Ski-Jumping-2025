@@ -158,7 +158,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1000, y: 500}
+  m_SizeDelta: {x: 1300, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4199862
 GameObject:
@@ -6525,7 +6525,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 659899078}
   m_HandleRect: {fileID: 659899077}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -13126,7 +13126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.1792453, g: 0.1792453, b: 0.1792453, a: 1}
+  m_Color: {r: 0.14150941, g: 0.14150941, b: 0.14150941, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -15213,8 +15213,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 17.059937, y: 0}
-  m_SizeDelta: {x: -34.120068, y: 0}
+  m_AnchoredPosition: {x: 7.99994, y: 0}
+  m_SizeDelta: {x: -16.000122, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &742836776
 MonoBehaviour:
@@ -16973,7 +16973,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -20, y: 300}
+  m_SizeDelta: {x: -20, y: 350}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &817848082
 GameObject:
@@ -32279,8 +32279,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 27
+  m_fontSizeBase: 27
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -33133,6 +33133,8 @@ GameObject:
   - component: {fileID: 1492670733}
   - component: {fileID: 1492670735}
   - component: {fileID: 1492670734}
+  - component: {fileID: 1492670737}
+  - component: {fileID: 1492670736}
   m_Layer: 5
   m_Name: Random Results Header
   m_TagString: Untagged
@@ -33174,7 +33176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.9019608}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -33199,6 +33201,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1492670732}
   m_CullTransparentMesh: 0
+--- !u!114 &1492670736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492670732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07329bfc749f2c70789e97123d2ac3e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 6cd3e9bbf41731dcbb11de2a48a924ba, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1492670737}
+        m_TargetAssemblyTypeName: OpenSkiJumping.ScriptableObjects.LabelController,
+          Main
+        m_MethodName: ReplaceText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1492670737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492670732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b409d3c910f4e02495f0c3cecc3f2e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texts:
+  - {fileID: 742836776}
+  label: {fileID: 11400000, guid: 04c0580d47490544d981ecf8accfbf9e, type: 2}
 --- !u!1 &1497566109
 GameObject:
   m_ObjectHideFlags: 0
@@ -43810,7 +43856,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2011957892
 RectTransform:
   m_ObjectHideFlags: 0
@@ -44525,8 +44571,14 @@ MonoBehaviour:
   tournamentMenuData: {fileID: 11400000, guid: 7023f85d4abbbe639b75b585f0ec83fb, type: 2}
   flagsData: {fileID: 11400000, guid: 94f547efcb34a33049603d5e07a748ea, type: 2}
   listView: {fileID: 2038786382}
+  eventsSelectionView: {fileID: 0}
   popupPanel: {fileID: 2038786379}
   maskObject: {fileID: 1002594294}
+  saves: {fileID: 11400000, guid: 35d899ff946799fba928fcad588c4b48, type: 2}
+  posSkillChangePhrase: {fileID: 11400000, guid: 0a7267338d2b40442ba91be797b36ce4,
+    type: 2}
+  negSkillChangePhrase: {fileID: 11400000, guid: 4a7ce19fd5c808b4bb27c8bb0dad34a3,
+    type: 2}
 --- !u!114 &2038786382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45785,7 +45837,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
