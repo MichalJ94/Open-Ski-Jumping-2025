@@ -79,7 +79,7 @@ namespace OpenSkiJumping.Competition
                 onJumpFinish.Invoke();
 
                  OnJumpStart();
-                UnityEngine.Debug.Log("OnJumpStart just run");
+              //  UnityEngine.Debug.Log("OnJumpStart just run");
 
               //Aktywacja kodu ponizej bez komentarzy sprawia, ze gra siê zatrzymuje przed ostatnim skoczkiem serii
 
@@ -346,7 +346,7 @@ namespace OpenSkiJumping.Competition
 
         public void OnJumpStart()
         {
-            Debug.Log("OnNewJumperOnGateInvoked");
+           // Debug.Log("OnNewJumperOnGateInvoked");
             var id = resultsManager.Value.GetCurrentJumperId();
             onNewJumper.Invoke();
 

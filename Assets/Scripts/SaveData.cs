@@ -53,7 +53,6 @@ namespace OpenSkiJumping
                         registered = true,
                         competitor = competitorsRuntime.GetJumperById(item),
                         teamId = teamsDict[competitorsRuntime.GetJumperById(item).countryCode]
-                       // eventsInjuredLeft = 0
                     })
                 .ToList();
 

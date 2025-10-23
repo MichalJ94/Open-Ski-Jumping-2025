@@ -599,7 +599,7 @@ namespace OpenSkiJumping.ScriptableObjects
         }
         public void SetValues(Color bibColor, string bibTexture)
         {
-            Debug.Log("SetValues run in SkiJumpData controller. bibColor:" + bibColor.ToString());
+           // Debug.Log("SetValues run in SkiJumpData controller. bibColor:" + bibColor.ToString());
             jumperMale.gameObject.SetActive(competitor.gender == Gender.Male);
             jumperFemale.gameObject.SetActive(competitor.gender == Gender.Female);
             jumperController.jumperModel = (competitor.gender == Gender.Male ? jumperMale : jumperFemale);

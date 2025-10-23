@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2046471
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4346,8 +4346,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2051970617}
   m_HandleRect: {fileID: 2051970616}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 1
+  m_Value: 0
+  m_Size: 0.9999999
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5768,7 +5768,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2127907011}
   m_HandleRect: {fileID: 2127907010}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -6706,7 +6706,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 659899078}
   m_HandleRect: {fileID: 659899077}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -12725,7 +12725,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &606633327
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15786,8 +15786,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2073569595}
   m_HandleRect: {fileID: 2073569594}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 1
+  m_Value: 0
+  m_Size: 0.9999999
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -22094,7 +22094,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2077151353}
   m_HandleRect: {fileID: 2077151352}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -22256,8 +22256,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1048573516}
   m_HandleRect: {fileID: 1048573515}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 1
+  m_Value: 0
+  m_Size: 0.9999999
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -25849,7 +25849,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 248688255}
   m_HandleRect: {fileID: 248688254}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -42033,7 +42033,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1743848436}
   m_HandleRect: {fileID: 1743848435}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -45138,7 +45138,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2038786379}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47f8012aa08ee4247975d2ac18aa7798, type: 3}
   m_Name: 
@@ -45150,6 +45150,7 @@ MonoBehaviour:
   popupPanel: {fileID: 2038786379}
   maskObject: {fileID: 1002594294}
   saves: {fileID: 11400000, guid: 35d899ff946799fba928fcad588c4b48, type: 2}
+  gameConfig: {fileID: 11400000, guid: f26ace0fd7ff848d290abdfbd9b5565f, type: 2}
   posSkillChangePhrase: {fileID: 11400000, guid: 0a7267338d2b40442ba91be797b36ce4,
     type: 2}
   negSkillChangePhrase: {fileID: 11400000, guid: 4a7ce19fd5c808b4bb27c8bb0dad34a3,

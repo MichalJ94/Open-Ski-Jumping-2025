@@ -21,10 +21,13 @@ namespace OpenSkiJumping.UI
         [SerializeField] private SegmentedControl fullScreenSelect;
         [SerializeField] private Slider randomnessSlider;
         [SerializeField] private GameplayExtension gameplayExtension;
+        [SerializeField] private Toggle useRandomEvents;
         [SerializeField] private Slider snowSlider;
         [SerializeField] private Slider windSlider;
         [SerializeField] private Slider gateDownSlider;
         [SerializeField] private Slider turbulenceSlider;
+        [SerializeField] private Slider maxRandomEventsSlider;
+        [SerializeField] private Slider maxRandomEventsSkillChangeSlider;
 
         private List<Resolution> _resolutions;
 
@@ -46,6 +49,7 @@ namespace OpenSkiJumping.UI
             qualityDropdown.SetValueWithoutNotify(QualitySettings.GetQualityLevel());
             qualityDropdown.onValueChanged.AddListener(UpdateQuality);
             
+
             resolutionDropdown.ClearOptions();
             resolutionDropdown.AddOptions(Screen.resolutions.Select(it => $"{it.width} x {it.height}").ToList());
             _resolutions = Screen.resolutions.ToList();
@@ -55,6 +59,10 @@ namespace OpenSkiJumping.UI
 
             fullScreenSelect.SetSelectedSegmentWithoutNotify(Screen.fullScreen == false ? 0 : 1);
             fullScreenSelect.onValueChanged.AddListener(UpdateFullScreen);
+
+            useRandomEvents.SetIsOnWithoutNotify(gameConfig.Config.useRandomEvents);
+            useRandomEvents.onValueChanged.AddListener(UpdateUseRandomEvents);
+
 
             if (gameConfig.Config.randomnessLevelCPU != 0)
             {
@@ -127,6 +135,33 @@ namespace OpenSkiJumping.UI
             gateDownSlider.onValueChanged.AddListener(UpdateGateDownSlider);
 
 
+            if (gameConfig.Config.maxRandomEvents != float.NaN)
+            {
+
+                maxRandomEventsSlider.value = gameConfig.Config.maxRandomEvents;
+                gameplayExtension.maxRandomEvents = maxRandomEventsSlider.value;
+            }
+            else
+            {
+                maxRandomEventsSlider.value = 3f;
+                gameplayExtension.maxRandomEvents = 3f;
+            }
+            maxRandomEventsSlider.onValueChanged.AddListener(UpdateMaxEventsSlider);
+
+            if (gameConfig.Config.maxRandomEventsSkillChange != float.NaN)
+            {
+
+                maxRandomEventsSkillChangeSlider.value = gameConfig.Config.maxRandomEventsSkillChange;
+                gameplayExtension.maxRandomEventsSkillChange = maxRandomEventsSkillChangeSlider.value;
+            }
+            else
+            {
+                maxRandomEventsSkillChangeSlider.value = 5f;
+                gameplayExtension.maxRandomEventsSkillChange = 5f;
+            }
+            maxRandomEventsSkillChangeSlider.onValueChanged.AddListener(UpdateMaxSkillChangeSlider);
+
+
         }
 
         private void UpdateQuality(int arg)
@@ -143,6 +178,14 @@ namespace OpenSkiJumping.UI
         {
             Screen.fullScreen = arg != 0;
         }
+
+
+        private void UpdateUseRandomEvents(bool has)
+        {
+            gameConfig.Config.useRandomEvents = has;
+            gameplayExtension.useRandomEvents = has;
+        }
+
 
         private void UpdateRandomnessSlider(float arg)
         {
@@ -174,10 +217,24 @@ namespace OpenSkiJumping.UI
             gameplayExtension.turbulenceChance = turbulenceSlider.value;
         }
 
+        private void UpdateMaxEventsSlider(float arg)
+        {
+            gameConfig.Config.maxRandomEvents = maxRandomEventsSlider.value;
+            gameplayExtension.maxRandomEvents = maxRandomEventsSlider.value;
+        }
+
+        private void UpdateMaxSkillChangeSlider(float arg)
+        {
+            gameConfig.Config.maxRandomEventsSkillChange = maxRandomEventsSkillChangeSlider.value;
+            gameplayExtension.maxRandomEventsSkillChange = maxRandomEventsSkillChangeSlider.value;
+        }
+
+
         private void UpdateSensitivity(string val)
         {
             gameConfig.Config.mouseSensitivity = float.Parse(val);
         }
+
 
         private void UpdateLanguage(int val)
         {

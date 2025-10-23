@@ -17,6 +17,7 @@ namespace OpenSkiJumping.UI.TournamentMenu
         [SerializeField] private GameObject popupPanel;
         [SerializeField] private GameObject maskObject;
         [SerializeField] private SavesRuntime saves;
+        [SerializeField] private GameConfigRuntime gameConfig;
 
         [SerializeField] private TranslatablePhrase posSkillChangePhrase;
         [SerializeField] private TranslatablePhrase negSkillChangePhrase;
@@ -170,11 +171,26 @@ namespace OpenSkiJumping.UI.TournamentMenu
 
         public void AddRandomEvents()
         {
-            //Debug.Log("Running RandomEventSystemTest");
             var save = saves.GetCurrentSave();
+            if (gameConfig.Config.useRandomEvents == false || save.resultsContainer.eventIndex == 0)
+            {
+                return;
+            }
+
+            int maxEvents = (int)gameConfig.Config.maxRandomEvents;
+            int actualEvents = UnityEngine.Random.Range(0, maxEvents);
+            int maxSkillChange = (int)gameConfig.Config.maxRandomEventsSkillChange;
+            
+
+            Debug.Log($"maxEvents: {maxEvents} actualEvents {actualEvents}");
+
+            int i = 0;
+            while(i < actualEvents)
+            { 
+        
             int number = UnityEngine.Random.Range(0, save.competitors.Count);
-            int skillChange = UnityEngine.Random.Range(-5, 5);
-            if(save.resultsContainer.eventIndex != 0) {
+            int skillChange = UnityEngine.Random.Range(-maxSkillChange, maxSkillChange);
+
                 if (skillChange != 0)
                 {
                     var competitor = save.competitors[number].competitor;
@@ -205,21 +221,27 @@ namespace OpenSkiJumping.UI.TournamentMenu
                                             save.resultsContainer.eventIndex);
                         save.randomEvents.Add(randomEvent);
                     }
-                }
-                Debug.Log($"Events so far: {save.resultsContainer.eventIndex} Latest one: {save.resultsContainer.eventIndex} {save.calendar.events[save.resultsContainer.eventIndex-1].hillId}");
 
-                Debug.Log("All random events so far:");
-                foreach (var item in save.randomEvents)
-                {
-                    var comp = save.competitors[item.competitorId].competitor;
-                    string compName = $"{comp.firstName} {comp.lastName}";
-                    Debug.Log(item.GetLocalizedDescription(compName));
+
+
                 }
 
+                
 
-                Show();
+               
             }
 
+            Debug.Log($"Events so far: {save.resultsContainer.eventIndex} Latest one: {save.resultsContainer.eventIndex} {save.calendar.events[save.resultsContainer.eventIndex - 1].hillId}");
+
+            Debug.Log("All random events so far:");
+            foreach (var item in save.randomEvents)
+            {
+                var comp = save.competitors[item.competitorId].competitor;
+                string compName = $"{comp.firstName} {comp.lastName}";
+                Debug.Log(item.GetLocalizedDescription(compName));
+            }
+
+            Show();
 
         }
     }

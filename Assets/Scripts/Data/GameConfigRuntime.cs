@@ -28,6 +28,12 @@ namespace OpenSkiJumping.Data
 
         public float turbulenceChance;
 
+        public bool useRandomEvents;
+
+        public float maxRandomEvents;
+        
+        public float maxRandomEventsSkillChange;
+
         [JsonConverter(typeof(StringEnumConverter))]
         public Language currentLanguage;
     }

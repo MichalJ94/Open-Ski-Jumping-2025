@@ -344,12 +344,12 @@ namespace OpenSkiJumping.Competition
 
         public void RegisterCPUJump(IJumpData jumpData, GameplayExtension gameplayExtension)
         {
-           UnityEngine.Debug.Log("RegisterCPUJump run begin");
+       //    UnityEngine.Debug.Log("RegisterCPUJump run begin");
 
             try
             {
                 // your code segment which might throw an exception
-                UnityEngine.Debug.Log(EventInfo.roundInfos[RoundIndex]);
+             //   UnityEngine.Debug.Log(EventInfo.roundInfos[RoundIndex]);
             }
             catch (Exception ex)
             {

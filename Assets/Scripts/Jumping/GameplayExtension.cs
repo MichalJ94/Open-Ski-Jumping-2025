@@ -27,6 +27,10 @@ namespace OpenSkiJumping.Scripts2025
         public decimal storeCPUDistance;
         public bool ragdollActive;
         public bool registerEvent;
+        public bool useRandomEvents;
+        public float maxRandomEvents;
+        public float maxRandomEventsSkillChange;
+
 
 
 
@@ -47,6 +51,9 @@ namespace OpenSkiJumping.Scripts2025
                 modifierCPURandomnessLevel = gameConfig.Config.randomnessLevelCPU;
                 gateDownChance = gameConfig.Config.gateDownChance;
                 turbulenceChance = gameConfig.Config.turbulenceChance;
+                useRandomEvents= gameConfig.Config.useRandomEvents;
+                maxRandomEvents = gameConfig.Config.maxRandomEvents;
+                maxRandomEventsSkillChange = gameConfig.Config.maxRandomEventsSkillChange;
             }
             else
             {

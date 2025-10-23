@@ -57,7 +57,7 @@ namespace OpenSkiJumping.UI.TournamentMenu
             classificationsHierarchyGO.SetActive(true);
             jumpersListGO.SetActive(tournamentMenuData.GetCurrentEvent().eventType == EventType.Individual);
             teamsListGO.SetActive(tournamentMenuData.GetCurrentEvent().eventType == EventType.Team);
-            randomEventsController.AddRandomEvents();
+           // randomEventsController.AddRandomEvents();
         }
 
         public void LoadCompetition()
