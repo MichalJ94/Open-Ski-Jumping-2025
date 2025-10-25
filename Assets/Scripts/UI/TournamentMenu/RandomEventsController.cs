@@ -5,6 +5,7 @@ using UnityEngine;
 using OpenSkiJumping.UI.ListView;
 using OpenSkiJumping.Data;
 using OpenSkiJumping.UI.TournamentMenu.ResultsMenu;
+using OpenSkiJumping.Scripts2025;
 
 namespace OpenSkiJumping.UI.TournamentMenu
 {
@@ -13,11 +14,10 @@ namespace OpenSkiJumping.UI.TournamentMenu
         [SerializeField] private TournamentMenuData tournamentMenuData;
         [SerializeField] private FlagsData flagsData;
         [SerializeField] private RandomEventsListView listView;
-        [SerializeField] private EventsSelectionView eventsSelectionView;
         [SerializeField] private GameObject popupPanel;
-        [SerializeField] private GameObject maskObject;
         [SerializeField] private SavesRuntime saves;
         [SerializeField] private GameConfigRuntime gameConfig;
+        [SerializeField] private GameplayExtension gameplayExtension;   
 
         [SerializeField] private TranslatablePhrase posSkillChangePhrase;
         [SerializeField] private TranslatablePhrase negSkillChangePhrase;
@@ -157,9 +157,11 @@ namespace OpenSkiJumping.UI.TournamentMenu
 
         public void Show()
         {
-            popupPanel.SetActive(true);
-            //maskObject.SetActive(true);
-            LoadData();
+            Debug.Log("Running show");
+                popupPanel.SetActive(true);
+                //maskObject.SetActive(true);
+                LoadData();
+            
         }
 
         public void Hide()
@@ -171,6 +173,13 @@ namespace OpenSkiJumping.UI.TournamentMenu
 
         public void AddRandomEvents()
         {
+
+            if (gameplayExtension.handleRandomEvents == false)
+            {
+                return;
+            }
+            gameplayExtension.handleRandomEvents = false;
+
             var save = saves.GetCurrentSave();
             if (gameConfig.Config.useRandomEvents == false || save.resultsContainer.eventIndex == 0)
             {
@@ -180,16 +189,22 @@ namespace OpenSkiJumping.UI.TournamentMenu
             int maxEvents = (int)gameConfig.Config.maxRandomEvents;
             int actualEvents = UnityEngine.Random.Range(0, maxEvents);
             int maxSkillChange = (int)gameConfig.Config.maxRandomEventsSkillChange;
-            
+
 
             Debug.Log($"maxEvents: {maxEvents} actualEvents {actualEvents}");
 
-            int i = 0;
-            while(i < actualEvents)
-            { 
-        
-            int number = UnityEngine.Random.Range(0, save.competitors.Count);
-            int skillChange = UnityEngine.Random.Range(-maxSkillChange, maxSkillChange);
+
+
+            if (actualEvents == 0)
+            {
+                return;
+            }
+
+            for (int i = 0; i < actualEvents; i++)
+            {
+
+                int number = UnityEngine.Random.Range(0, save.competitors.Count);
+                int skillChange = UnityEngine.Random.Range(-maxSkillChange, maxSkillChange);
 
                 if (skillChange != 0)
                 {
@@ -197,8 +212,16 @@ namespace OpenSkiJumping.UI.TournamentMenu
                     competitor.normalHillSkill += skillChange;
                     competitor.largeHillSkill += skillChange;
                     competitor.skiFlyingHillSkill += skillChange;
+
                     Debug.Log($"{competitor.firstName} {competitor.lastName} got the skill change {skillChange}");
 
+                    if (competitor.normalHillSkill > 99) competitor.normalHillSkill = 99;
+                    if (competitor.largeHillSkill > 99) competitor.largeHillSkill = 99;
+                    if (competitor.skiFlyingHillSkill > 99) competitor.skiFlyingHillSkill = 99;
+                    if (competitor.normalHillSkill < 1) competitor.normalHillSkill = 1;
+                    if (competitor.largeHillSkill < 1) competitor.largeHillSkill = 1;
+                    if (competitor.skiFlyingHillSkill < 1) competitor.skiFlyingHillSkill = 1;
+                    
                     if (skillChange > 0)
                     {
                         var randomEvent = new RandomEventData(
@@ -221,28 +244,31 @@ namespace OpenSkiJumping.UI.TournamentMenu
                                             save.resultsContainer.eventIndex);
                         save.randomEvents.Add(randomEvent);
                     }
-
-
-
                 }
 
-                
-
-               
             }
+           
 
-            Debug.Log($"Events so far: {save.resultsContainer.eventIndex} Latest one: {save.resultsContainer.eventIndex} {save.calendar.events[save.resultsContainer.eventIndex - 1].hillId}");
 
-            Debug.Log("All random events so far:");
-            foreach (var item in save.randomEvents)
-            {
-                var comp = save.competitors[item.competitorId].competitor;
-                string compName = $"{comp.firstName} {comp.lastName}";
-                Debug.Log(item.GetLocalizedDescription(compName));
-            }
+
+            //   Debug.Log($"Events so far: {save.resultsContainer.eventIndex} Latest one: {save.resultsContainer.eventIndex} {save.calendar.events[save.resultsContainer.eventIndex - 1].hillId}");
+
+            /* Debug.Log("All random events so far:");
+             foreach (var item in save.randomEvents)
+             {
+                 var comp = save.competitors[item.competitorId].competitor;
+                 string compName = $"{comp.firstName} {comp.lastName}";
+                 Debug.Log(item.GetLocalizedDescription(compName));
+             }
+            */
+
+
 
             Show();
+            
 
         }
+
+       
     }
 }

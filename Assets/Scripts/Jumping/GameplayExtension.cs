@@ -30,7 +30,7 @@ namespace OpenSkiJumping.Scripts2025
         public bool useRandomEvents;
         public float maxRandomEvents;
         public float maxRandomEventsSkillChange;
-
+        public bool handleRandomEvents;
 
 
 

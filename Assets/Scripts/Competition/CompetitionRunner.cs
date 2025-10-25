@@ -175,6 +175,7 @@ namespace OpenSkiJumping.Competition
             snowParticles.SetActive(false);
             finishCompetition = true;
             gameplayExtension.registerEvent = true;
+            gameplayExtension.handleRandomEvents = true;
             menuController.LoadTournamentMenu();
 
         }
