@@ -152,7 +152,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.JumpersSelection
             {
                 var eventInfo = allEvents[i];
 
-                // ❌ Skip team competitions
+                // Skip team competitions
                 if (eventInfo.eventType == OpenSkiJumping.Competition.EventType.Team)
                     continue;
 
@@ -162,64 +162,67 @@ namespace OpenSkiJumping.UI.TournamentMenu.JumpersSelection
                 if (!includeQualiTrial && (isQualification || isTrial))
                     continue;
 
-                if (i >= resultContainer.Length) continue;
-
-                var result = resultContainer[i];
-                if (result == null || result.competitorIds == null || result.results == null)
-                    continue;
-
-                int competitorIndex = result.competitorIds.IndexOf(jumper.calendarId);
-                if (competitorIndex < 0 || competitorIndex >= result.results.Count)
-                    continue;
-
-                var compResult = result.results[competitorIndex];
-
                 string displayHillName = eventInfo.hillId;
                 if (isQualification) displayHillName += " (Q)";
                 else if (isTrial) displayHillName += " Trial";
 
+                int rank = 0;
+                decimal value = 0m;
+                ResultBackgroundStyle style = ResultBackgroundStyle.NoResult;
+
+                // Try to find jumper result
+                if (i < resultContainer.Length)
+                {
+                    var result = resultContainer[i];
+                    if (result != null && result.competitorIds != null && result.results != null)
+                    {
+                        int competitorIndex = result.competitorIds.IndexOf(jumper.calendarId);
+                        if (competitorIndex >= 0 && competitorIndex < result.results.Count)
+                        {
+                            var compResult = result.results[competitorIndex];
+                            rank = compResult.Rank;
+                            value = compResult.TotalPoints;
+
+                            // Determine background style from placement
+                            if (isTrial)
+                                style = ResultBackgroundStyle.Trial;
+                            else if (isQualification)
+                                style = ResultBackgroundStyle.Qualification;
+                            else if (rank == 1)
+                                style = ResultBackgroundStyle.Place1;
+                            else if (rank == 2)
+                                style = ResultBackgroundStyle.Place2;
+                            else if (rank == 3)
+                                style = ResultBackgroundStyle.Place3;
+                            else if (rank > 3 && rank <= 30)
+                                style = ResultBackgroundStyle.Top30;
+                            else if (rank > 30 && rank <= 50)
+                                style = ResultBackgroundStyle.Bottom20;
+                            else
+                                style = ResultBackgroundStyle.NoResult;
+                        }
+                    }
+                }
+
                 var item = new IndResultsListItem
                 {
-                    // temporary ID, will be overwritten
                     competitionID = isQualification ? "Q" : isTrial ? "T" : "",
                     hillName = displayHillName,
                     name = $"{jumper.competitor.firstName} {jumper.competitor.lastName}",
                     countryCode = jumper.competitor.countryCode,
-                    rank = compResult.Rank,
-                    value = compResult.TotalPoints,
-                    backgroundStyle = ResultBackgroundStyle.NoResult
+                    rank = rank,
+                    value = value,
+                    backgroundStyle = style
                 };
-
-                if (isTrial)
-                {
-                    item.backgroundStyle = ResultBackgroundStyle.Trial;
-                }
-                else if (isQualification)
-                {
-                    item.backgroundStyle = ResultBackgroundStyle.Qualification;
-                }
-                else
-                {
-                    if (item.rank == 1)
-                        item.backgroundStyle = ResultBackgroundStyle.Place1;
-                    else if (item.rank == 2)
-                        item.backgroundStyle = ResultBackgroundStyle.Place2;
-                    else if (item.rank == 3)
-                        item.backgroundStyle = ResultBackgroundStyle.Place3;
-                    else if (item.rank > 3 && item.rank <= 30)
-                        item.backgroundStyle = ResultBackgroundStyle.Top30;
-                    else if (item.rank > 30 && item.rank <= 50)
-                        item.backgroundStyle = ResultBackgroundStyle.Bottom20;
-                }
 
                 jumperResults.Add(item);
             }
 
-            // ✅ Assign sequential competitionID numbers post-creation
+            // Assign competition numbers
             int compIndex = 1;
             foreach (var item in jumperResults)
             {
-                if (item.competitionID == "") // i.e. not Q or T
+                if (item.competitionID == "")
                 {
                     item.competitionID = compIndex.ToString();
                     compIndex++;

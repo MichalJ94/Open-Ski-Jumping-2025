@@ -15,8 +15,8 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
         Qualification,
         Trial,
         Place1,
-    Place2,
-    Place3,
+        Place2,
+        Place3
     }
 
     public class IndResultsListItem
