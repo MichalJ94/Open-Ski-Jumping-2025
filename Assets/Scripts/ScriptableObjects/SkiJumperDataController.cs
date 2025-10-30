@@ -4,6 +4,7 @@ using OpenSkiJumping.Competition.Runtime;
 using OpenSkiJumping.Jumping;
 using OpenSkiJumping.New;
 using OpenSkiJumping.UI;
+using OpenSkiJumping.Scripts2025;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.Networking;
@@ -278,6 +279,7 @@ namespace OpenSkiJumping.ScriptableObjects
             customRightSkiObject.SetActive(false);
             customLeftSkiCloneObject.SetActive(false);
             customRightSkiCloneObject.SetActive(false);
+            
         }
 
         private IEnumerator LoadCustomSkisTextureCoroutine(string filePath)
