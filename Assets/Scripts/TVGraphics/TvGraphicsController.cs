@@ -32,7 +32,8 @@ namespace OpenSkiJumping.TVGraphics
     {
         [SerializeField] private SavesRuntime savesRepository;
         [SerializeField] private TMP_Text hillNameText;
-        
+        [SerializeField] private TMP_Text backdropHillNameText;
+
         public int current;
         public float preJumpGraphicsCooldown;
         public float postJumpGraphicsCooldown;
@@ -106,6 +107,7 @@ namespace OpenSkiJumping.TVGraphics
         
             SetMastersActive();
             hillNameText.text = currentEvent.hillId;
+            backdropHillNameText.text = currentEvent.hillId.Split(new string[] { " HS" }, System.StringSplitOptions.None)[0];
         }
 
         public void ActivateRestartButton()
