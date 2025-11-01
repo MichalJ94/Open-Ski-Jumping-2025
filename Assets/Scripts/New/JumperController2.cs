@@ -480,6 +480,27 @@ namespace OpenSkiJumping.New
         {
             float modifier = 1;
             float hS = hillSize = competitionRunner.GetHS();
+
+
+            if (hS > 250)
+            {
+                startForceScale -= (hS - 250) * (0.00007f * modifier);
+            }
+            if (hS > 130)
+            {
+                modifier += (hS - 130) / 10;
+                startForceScale += (hS - 130) * (0.00013f * modifier);
+            }
+            if (hS < 130)
+            {
+                modifier += (130 - hS) / 10;
+                startForceScale -= (130 - hS) * (0.00095f * modifier);
+            }
+
+            /*  if (hS > 250)
+            {
+                startForceScale -= (hS - 250) * (0.00007f * modifier);
+            }
             if (hS > 130)
             {
                 modifier += (hS - 130) / 10;
@@ -489,11 +510,10 @@ namespace OpenSkiJumping.New
             {
                 modifier += (130 - hS) / 10;
                 startForceScale -= (130 - hS) * (0.00062f * modifier);
-            }
-            if (hS > 250)
-            {
-                startForceScale -= (hS - 250) * (0.00007f * modifier);
-            }
+            }*/
+
+
+
         }
 
 
@@ -586,7 +606,7 @@ namespace OpenSkiJumping.New
                     jumperModel.animator.SetFloat("TiltReturnTime", returnTime);
                     */
 
-                    if (Random.value < 0.5f)
+            if (Random.value < 0.5f)
                     {
                         if (Random.value < 0.5f)
                         {

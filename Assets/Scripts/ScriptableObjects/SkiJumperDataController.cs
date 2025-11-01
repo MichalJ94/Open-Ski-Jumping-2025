@@ -59,7 +59,7 @@ namespace OpenSkiJumping.ScriptableObjects
         public float mipMapBiasHelmet = -1f;
         public float mipMapBiasSkis = -1f;
         public bool hasCustomSkiTexture = false;
-
+        public bool hasCustomHelmetTexture = false;
 
         
         [System.Serializable]
@@ -177,10 +177,12 @@ namespace OpenSkiJumping.ScriptableObjects
                 if (www.result != UnityWebRequest.Result.Success)
                 {
                     Debug.LogWarning("Failed to load helmet texture: " + www.error);
+                    hasCustomHelmetTexture = false;
                     UseDefaultHelmet();
                     yield break;
                 }
 
+                hasCustomHelmetTexture = true;
                 Texture2D rawTex = DownloadHandlerTexture.GetContent(www);
                 Texture2D tex = new Texture2D(rawTex.width, rawTex.height, rawTex.format, true);
                 tex.SetPixels(rawTex.GetPixels());

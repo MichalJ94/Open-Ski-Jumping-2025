@@ -33,7 +33,8 @@ namespace OpenSkiJumping.TVGraphics
         [SerializeField] private SavesRuntime savesRepository;
         [SerializeField] private TMP_Text hillNameText;
         [SerializeField] private TMP_Text backdropHillNameText;
-
+        [SerializeField] private GameObject bibTeamNumberFront;
+        [SerializeField] private GameObject bibTeamNumberBack;
         public int current;
         public float preJumpGraphicsCooldown;
         public float postJumpGraphicsCooldown;
@@ -106,6 +107,16 @@ namespace OpenSkiJumping.TVGraphics
             }
         
             SetMastersActive();
+            if(currentEvent.eventType == EventType.Team)
+            {
+                bibTeamNumberBack.SetActive(true);
+                bibTeamNumberFront.SetActive(true);
+            }
+            else
+            {
+                bibTeamNumberFront.SetActive(false);
+                bibTeamNumberBack.SetActive(false);
+            }
             hillNameText.text = currentEvent.hillId;
             backdropHillNameText.text = currentEvent.hillId.Split(new string[] { " HS" }, System.StringSplitOptions.None)[0];
         }
