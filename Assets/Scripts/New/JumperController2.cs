@@ -493,8 +493,8 @@ namespace OpenSkiJumping.New
             }
             if (hS < 130)
             {
-                modifier += (130 - hS) / 10;
-                startForceScale -= (130 - hS) * (0.00095f * modifier);
+                modifier += (130 - hS) / 8;
+                startForceScale -= (130 - hS) * (0.00082f * modifier);
             }
 
             /*  if (hS > 250)

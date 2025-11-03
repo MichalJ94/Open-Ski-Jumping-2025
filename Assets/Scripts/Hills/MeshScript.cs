@@ -230,7 +230,7 @@ namespace OpenSkiJumping.Hills
         private Dictionary<Material, Color> originalMaterialColors = new Dictionary<Material, Color>();
 
 
-        [Space][Header("BackDrop")] public GameObject backdropObject;
+        [Space][Header("BackDrop")] public GameObject defaultBackdropObject;
         public GameObject customBackdropObject;
         public float mipMapBiasBackdrop = -1f;
         public Renderer customBackdropRenderer;
@@ -556,11 +556,12 @@ namespace OpenSkiJumping.Hills
         private void LoadBackdropTexture()
         {
             //Implement hill.backdrop Texture later
-            string textureName = "fis.png";
+            string textureName = profileData.Value.backdropTexture;
 
-            if (string.IsNullOrEmpty(textureName))
+            if (string.IsNullOrEmpty(textureName) || textureName == "Default")
             {
-                // UseDefaultBackdrop();
+                 defaultBackdropObject.SetActive(true);
+                 customBackdropObject.SetActive(false);
                 return;
             }
 
@@ -600,7 +601,7 @@ namespace OpenSkiJumping.Hills
                     customBackdropRenderer.materials = mats;
 
                     customBackdropObject.SetActive(true);
-                    backdropObject.SetActive(false);
+                    defaultBackdropObject.SetActive(false);
                 }
                 else
                 {

@@ -442,7 +442,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c38fc1e241b0b894c97919288f879b2d, type: 2}
+      objectReference: {fileID: 2100000, guid: 62f578db87d412c4896b84ac692d92c8, type: 2}
     - target: {fileID: 2229032678205019293, guid: 120e976140484de40a7aafd92f49f88d,
         type: 3}
       propertyPath: m_Materials.Array.data[1]
@@ -1222,7 +1222,7 @@ MonoBehaviour:
   terrainBase: 2
   terrainObject: {fileID: 989473692}
   time: 1
-  backdropObject: {fileID: 1118363626}
+  defaultBackdropObject: {fileID: 0}
   customBackdropObject: {fileID: 2007513378}
   mipMapBiasBackdrop: -1
   customBackdropRenderer: {fileID: 1587103434}
@@ -2492,7 +2492,7 @@ MonoBehaviour:
   terrainBase: 2
   terrainObject: {fileID: 989473692}
   time: 1
-  backdropObject: {fileID: 0}
+  defaultBackdropObject: {fileID: 0}
   customBackdropObject: {fileID: 0}
   mipMapBiasBackdrop: -1
   customBackdropRenderer: {fileID: 0}
@@ -5408,7 +5408,7 @@ MonoBehaviour:
   terrainBase: 2
   terrainObject: {fileID: 989473692}
   time: 1
-  backdropObject: {fileID: 0}
+  defaultBackdropObject: {fileID: 0}
   customBackdropObject: {fileID: 0}
   mipMapBiasBackdrop: -1
   customBackdropRenderer: {fileID: 0}
@@ -11904,7 +11904,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.46885, y: 329366700}
+  m_AnchoredPosition: {x: 1.46885, y: 332425180}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!1001 &664952345
@@ -13190,6 +13190,7 @@ MonoBehaviour:
   mipMapBiasHelmet: -1
   mipMapBiasSkis: -1
   hasCustomSkiTexture: 0
+  hasCustomHelmetTexture: 0
   suitRenderer: {fileID: 363818653}
   suitParts:
   - key: BottomFront
@@ -16263,7 +16264,7 @@ Camera:
   m_FOVAxisMode: 0
   m_SensorSize: {x: 24.89, y: 18.66}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 30.47967
+  m_FocalLength: 20.259272
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -16272,7 +16273,7 @@ Camera:
     height: 1
   near clip plane: 2
   far clip plane: 1000
-  field of view: 34.03929
+  field of view: 49.454967
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -16297,8 +16298,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 816382546}
-  m_LocalRotation: {x: -0.0048623136, y: -0.4703904, z: -0.0025918847, w: 0.8824412}
-  m_LocalPosition: {x: 37.53, y: -1.32, z: -18.21}
+  m_LocalRotation: {x: 0.07342243, y: 0.000000016812347, z: -0.0000000012377441, w: 0.9973009}
+  m_LocalPosition: {x: 10.41, y: 2.2200005, z: -21.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1167020446}
@@ -21321,6 +21322,7 @@ MonoBehaviour:
   mipMapBiasHelmet: -1
   mipMapBiasSkis: 1
   hasCustomSkiTexture: 0
+  hasCustomHelmetTexture: 0
   suitRenderer: {fileID: 0}
   suitParts: []
   suitBottomFrontIndex: -1
@@ -49754,7 +49756,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1982634237}
-  m_LocalRotation: {x: 0.073422454, y: 0.00000001733506, z: -0.0000000012762276, w: 0.9973009}
+  m_LocalRotation: {x: 0.07342243, y: 0.000000016812347, z: -0.0000000012377441, w: 0.9973009}
   m_LocalPosition: {x: 10.41, y: 2.2200005, z: -21.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -60982,7 +60984,7 @@ PrefabInstance:
     - target: {fileID: 4200885254943762890, guid: 0d78cbde8fcdfdd8c84660723f488a00,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 363.8606
+      value: 369.3164
       objectReference: {fileID: 0}
     - target: {fileID: 4200885254943762890, guid: 0d78cbde8fcdfdd8c84660723f488a00,
         type: 3}
