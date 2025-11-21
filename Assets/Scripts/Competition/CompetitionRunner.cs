@@ -176,6 +176,7 @@ namespace OpenSkiJumping.Competition
             finishCompetition = true;
             gameplayExtension.registerEvent = true;
             gameplayExtension.handleRandomEvents = true;
+            gameplayExtension.timesGateLowered = 0;
             menuController.LoadTournamentMenu();
 
         }
@@ -228,6 +229,8 @@ namespace OpenSkiJumping.Competition
             SetDefaultJumpData();
             windGatePanel.Initialize(hill.profileData.Value.gates);
             DetermineSnow();
+            skiJumperDataController.LoadBibTexture(hill.profileData.Value.bibTexture);
+            gameplayExtension.timesGateLowered = 0;
             onCompetitionStart.Invoke();
             OnRoundStart();
             OnSubroundStart();

@@ -1000,6 +1000,7 @@ namespace OpenSkiJumping.New
             // inrunDrag += gameplayExtension.inrunDragModifier(skillForPresentHill);
             forceScaleModifier = gameplayExtension.forceScaleModifier(skillForPresentHill);
             forceScale -= forceScaleModifier;
+            if (gameplayExtension.timesGateLowered != 0){ for (int i = 0; i < gameplayExtension.timesGateLowered; i++) { forceScale += forceScale*0.015f; } };
             State = 1;
             rig.weight = 0f;
             windModifier = 1f;

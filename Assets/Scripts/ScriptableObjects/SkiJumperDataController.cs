@@ -130,27 +130,36 @@ namespace OpenSkiJumping.ScriptableObjects
         {
             string textureName = competitor.helmetTexture;
 
-            if (string.IsNullOrEmpty(textureName))
+     
+
+            string fullPath = System.IO.Path.Combine(Application.streamingAssetsPath, "textures", "helmet", textureName);
+
+
+            if (string.IsNullOrEmpty(textureName) || textureName == "Default" || !File.Exists(fullPath))
             {
                 UseDefaultHelmet();
                 return;
             }
 
-            string fullPath = System.IO.Path.Combine(Application.streamingAssetsPath, "textures", "helmet", textureName);
+
+
             StartCoroutine(LoadCustomHelmetTextureCoroutine(fullPath));
         }
 
-        private void LoadBibTexture()
+        public void LoadBibTexture(string texture)
         {
-            string textureName = "bibTransparent.png";
+            Debug.Log("LoadBibTexturerun, texture string: " + texture);
 
-            if (string.IsNullOrEmpty(textureName))
+
+            string fullPath = System.IO.Path.Combine(Application.streamingAssetsPath, "textures", "bibs", texture);
+
+            if (string.IsNullOrEmpty(texture) || texture == "Default" || !File.Exists(fullPath))
             {
+                Debug.Log("Noticed that bib file is missing");
                 UseDefaultBib();
                 return;
             }
 
-            string fullPath = System.IO.Path.Combine(Application.streamingAssetsPath, "textures", "bibs", textureName);
             StartCoroutine(LoadBibTextureCoroutine(fullPath));
         }
 
@@ -162,8 +171,10 @@ namespace OpenSkiJumping.ScriptableObjects
 
         private void UseDefaultBib()
         {
-            bibObject.SetActive(true);
+            Debug.Log("UseDefaultBib run");
             customBibObject.SetActive(false);
+            bibObject.SetActive(true);
+            
         }
 
 
@@ -659,7 +670,7 @@ namespace OpenSkiJumping.ScriptableObjects
             
                 LoadHelmetTexture();
                 LoadSkisTexture();
-                LoadBibTexture();
+                //LoadBibTexture();
             
 
             // 2025-09-15 The system for loading suit textures is working properly in the text. Need to put the proper

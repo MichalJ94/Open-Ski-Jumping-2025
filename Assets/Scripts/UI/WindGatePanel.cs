@@ -106,6 +106,7 @@ namespace OpenSkiJumping.UI
                     if (gateSlider.value != 1)
                     {
                         gateSlider.value -= 1;
+                        gameplayExtension.timesGateLowered++;
                     }
                 }
             }

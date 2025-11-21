@@ -33,6 +33,7 @@ namespace OpenSkiJumping.Scripts2025
         public bool handleRandomEvents;
         public bool blankHelmetLoaded;
         public bool blankSkisLoaded;
+        public int timesGateLowered;
 
 
 

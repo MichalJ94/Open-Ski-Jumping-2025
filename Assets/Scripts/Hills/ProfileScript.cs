@@ -101,6 +101,7 @@ namespace OpenSkiJumping.Hills
         public string poleTexture = "Default";
         public string poleColor = "#FFFFFF";
         public string backdropTexture = "";
+        public string bibTexture = "";
         public float inrunMinHeight = 1.5f;
         public float poleThickness = 1f;
         public float poleSpacing = 5f;
