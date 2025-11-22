@@ -126,10 +126,10 @@ namespace OpenSkiJumping.ScriptableObjects
             return competitor.skiFlyingHillSkill;
         }
 
-        private void LoadHelmetTexture()
+        public void LoadHelmetTexture()
         {
             string textureName = competitor.helmetTexture;
-
+            Debug.Log("Z LoadHelmetTexture competitor.id" + competitor.id);
      
 
             string fullPath = System.IO.Path.Combine(Application.streamingAssetsPath, "textures", "helmet", textureName);
@@ -137,14 +137,36 @@ namespace OpenSkiJumping.ScriptableObjects
 
             if (string.IsNullOrEmpty(textureName) || textureName == "Default" || !File.Exists(fullPath))
             {
+                Debug.Log("Noticed that DefaultHelmet outta be used. Competitor ID: " + competitor.id);
                 UseDefaultHelmet();
                 return;
             }
 
-
+            Debug.Log("Start LoadCustomHelmetTextureCoroutine reached for " + competitor.id);
 
             StartCoroutine(LoadCustomHelmetTextureCoroutine(fullPath));
         }
+
+
+        public void LoadBibTextColor(string color)
+        {
+
+            Color newColor = new Color();
+
+            if (ColorUtility.TryParseHtmlString(color, out newColor))
+            {
+                bibFront.color = newColor;
+                bibBack.color = newColor;
+            }
+            else
+            {
+               bibFront.color = UnityEngine.Color.white;
+               bibBack.color = UnityEngine.Color.white;
+            }
+
+           
+        }
+
 
         public void LoadBibTexture(string texture)
         {
@@ -165,9 +187,14 @@ namespace OpenSkiJumping.ScriptableObjects
 
         private void UseDefaultHelmet()
         {
+            
             helmetObject.SetActive(true);
             customHelmetObject.SetActive(false);
+            Debug.Log("helmetObject.activeInHierarchy " + helmetObject.activeInHierarchy + " customHelmetObject.activeInHierarchy " + customHelmetObject.activeInHierarchy);
+            TextureAdjustment();
         }
+
+
 
         private void UseDefaultBib()
         {
@@ -210,7 +237,7 @@ namespace OpenSkiJumping.ScriptableObjects
                     mats[0] = mat;
 
                     customHelmetRenderer.materials = mats;
-
+                    Debug.Log("Custom helmeObject and helmetObject maniupulated in LoadCustomHelmetTextureCoroutine");
                     customHelmetObject.SetActive(true);
                     helmetObject.SetActive(false);
                 }
@@ -614,12 +641,20 @@ namespace OpenSkiJumping.ScriptableObjects
         }
         public void SetValues(Color bibColor, string bibTexture)
         {
+            if(competitor.control == Control.CPU)
+            {
+                return;
+            }
+
+
            // Debug.Log("SetValues run in SkiJumpData controller. bibColor:" + bibColor.ToString());
             jumperMale.gameObject.SetActive(competitor.gender == Gender.Male);
             jumperFemale.gameObject.SetActive(competitor.gender == Gender.Female);
             jumperController.jumperModel = (competitor.gender == Gender.Male ? jumperMale : jumperFemale);
-
+            Debug.Log("Z SetValues w controllerze competitor.id" + competitor.id);
             bibMaterial.SetColor(Color, bibColor);
+            
+
 
            if(bibColor != UnityEngine.Color.white)
             {
@@ -670,8 +705,8 @@ namespace OpenSkiJumping.ScriptableObjects
             
                 LoadHelmetTexture();
                 LoadSkisTexture();
-                //LoadBibTexture();
-            
+            //LoadBibTexture();
+
 
             // 2025-09-15 The system for loading suit textures is working properly in the text. Need to put the proper
             // materials with the custom shader on jumper's "Cube" object for it to work. Take up the project again
@@ -679,6 +714,21 @@ namespace OpenSkiJumping.ScriptableObjects
 
             //LoadSuitTexture(); 
         }
+
+        public void TextureAdjustment()
+        {
+            if (customHelmetObject.activeSelf)
+            {
+                customHelmetObject.SetActive(true);
+            }
+            else
+            {
+                customHelmetObject.SetActive(false);
+            }
+            Debug.Log("Texture Adjustment run for " + competitor.id);
+            Debug.Log("helmetObject.activeSelf " + helmetObject.activeSelf + " customHelmetObject.activeSelf " + customHelmetObject.activeSelf);
+        }
+
 
         private void LoadSuitTexture()
         {

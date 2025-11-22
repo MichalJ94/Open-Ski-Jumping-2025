@@ -230,6 +230,7 @@ namespace OpenSkiJumping.Competition
             windGatePanel.Initialize(hill.profileData.Value.gates);
             DetermineSnow();
             skiJumperDataController.LoadBibTexture(hill.profileData.Value.bibTexture);
+            skiJumperDataController.LoadBibTextColor(hill.profileData.Value.bibTextColor);
             gameplayExtension.timesGateLowered = 0;
             onCompetitionStart.Invoke();
             OnRoundStart();

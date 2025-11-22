@@ -647,22 +647,25 @@ namespace OpenSkiJumping.New
             }
 
 
-
-
-/*
             if (Input.GetKeyDown(KeyCode.F))
             {
-                //jumperModel.animator.SetLayerWeight(jumperModel.animator.GetLayerIndex("LeftRot"), 1f);
-                jumperModel.animator.SetTrigger("TiltLeft");
-                UnityEngine.Debug.Log("jumperModel.animator.SetTrigger(\"TiltLeft\");");
+                skiJumperDataController.TextureAdjustment();
             }
-            if (Input.GetKeyDown(KeyCode.G))
-            {
-                // jumperModel.animator.SetLayerWeight(jumperModel.animator.GetLayerIndex("LeftRot"), 0f);
-                jumperModel.animator.SetTrigger("TiltRight");
-                UnityEngine.Debug.Log("jumperModel.animator.SetTrigger(\"TiltRight\");");
-            }
-*/
+
+            /*
+                        if (Input.GetKeyDown(KeyCode.F))
+                        {
+                            //jumperModel.animator.SetLayerWeight(jumperModel.animator.GetLayerIndex("LeftRot"), 1f);
+                            jumperModel.animator.SetTrigger("TiltLeft");
+                            UnityEngine.Debug.Log("jumperModel.animator.SetTrigger(\"TiltLeft\");");
+                        }
+                        if (Input.GetKeyDown(KeyCode.G))
+                        {
+                            // jumperModel.animator.SetLayerWeight(jumperModel.animator.GetLayerIndex("LeftRot"), 0f);
+                            jumperModel.animator.SetTrigger("TiltRight");
+                            UnityEngine.Debug.Log("jumperModel.animator.SetTrigger(\"TiltRight\");");
+                        }
+            */
             if (Input.GetKeyDown(KeyCode.P))
             {
                 // jumperModel.animator.SetLayerWeight(jumperModel.animator.GetLayerIndex("LeftRot"), 0f);
