@@ -56,6 +56,9 @@ namespace OpenSkiJumping.ScriptableObjects
         public Material transparentHelmetMaterial; // For fallback if texture is missing
         public TMPro.TextMeshPro bibFront;
         public TMPro.TextMeshPro bibBack;
+        public TMPro.TextMeshPro bibTeamFront;
+        public TMPro.TextMeshPro bibTeamBack;
+        public TMP_Text teamStartlistNumber;
         public float mipMapBiasHelmet = -1f;
         public float mipMapBiasSkis = -1f;
         public bool hasCustomSkiTexture = false;
@@ -157,11 +160,16 @@ namespace OpenSkiJumping.ScriptableObjects
             {
                 bibFront.color = newColor;
                 bibBack.color = newColor;
+                bibTeamFront.color = newColor;
+                bibTeamBack.color = newColor;
+                
             }
             else
             {
                bibFront.color = UnityEngine.Color.white;
                bibBack.color = UnityEngine.Color.white;
+               bibTeamFront.color = UnityEngine.Color.white;
+               bibTeamBack.color = UnityEngine.Color.white;    
             }
 
            
@@ -451,7 +459,8 @@ namespace OpenSkiJumping.ScriptableObjects
             if (Input.GetKeyDown(KeyCode.L))
             {
                 // Example test folder: StreamingAssets/textures/suits/testsuit/
-                ApplySuitFromFolder("testsuit", alsoApplyTextures: true);
+                // ApplySuitFromFolder("testsuit", alsoApplyTextures: true);
+                Debug.Log($"subroundIndex {resultsManager.Value.SubroundIndex} GetCurrentCompetitorLocalId {resultsManager.Value.GetCurrentCompetitorLocalId()}");
             }
         }
 
@@ -672,8 +681,10 @@ namespace OpenSkiJumping.ScriptableObjects
             }
             else
             {
-                bibFront.text = (resultsManager.Value.SubroundIndex + 1).ToString();
-                bibBack.text = (resultsManager.Value.SubroundIndex + 1).ToString();
+                bibFront.text = teamStartlistNumber.text;
+                bibBack.text = teamStartlistNumber.text;
+                bibTeamFront.text = (resultsManager.Value.SubroundIndex + 1).ToString();
+                bibTeamBack.text = (resultsManager.Value.SubroundIndex + 1).ToString();
             }
 
             
