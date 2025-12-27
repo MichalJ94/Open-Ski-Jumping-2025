@@ -6,6 +6,7 @@ using OpenSkiJumping.Competition.Persistent;
 using OpenSkiJumping.Competition.Runtime;
 using OpenSkiJumping.Data;
 using OpenSkiJumping.Jumping;
+using OpenSkiJumping.Hills;
 using OpenSkiJumping.Scripts2025;
 using OpenSkiJumping.ScriptableObjects;
 using OpenSkiJumping.ScriptableObjects.Variables;
@@ -48,6 +49,7 @@ namespace OpenSkiJumping.New
         [SerializeField] private int materialIndex = 0; // slot 0 is main texture
 
         [SerializeField] private float mipMapBias = -1.5f;
+        [SerializeField] MeshScript hill;
 
         //                                                                                          BUG Z ROTACJĄ LEŻY W WINDTHRUSTDETERMINERTIMESUSED.
 
@@ -1004,6 +1006,16 @@ namespace OpenSkiJumping.New
             forceScaleModifier = gameplayExtension.forceScaleModifier(skillForPresentHill);
             forceScale -= forceScaleModifier;
             if (gameplayExtension.timesGateLowered != 0){ for (int i = 0; i < gameplayExtension.timesGateLowered; i++) { forceScale += forceScale*0.015f; } };
+            if(hill.profileData.Value.name.Contains("Wisla"))
+            {
+                UnityEngine.Debug.Log("Modifier za problematyczną skocznię");
+                forceScale += forceScale * 0.008f;
+            }
+            if (hill.profileData.Value.name.Contains("Bischofshofen"))
+            {
+                UnityEngine.Debug.Log("Modifier za problematyczną skocznię");
+                forceScale += forceScale * 0.01f;
+            }
             State = 1;
             rig.weight = 0f;
             windModifier = 1f;

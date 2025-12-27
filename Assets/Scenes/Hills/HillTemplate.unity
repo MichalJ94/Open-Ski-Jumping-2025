@@ -10342,7 +10342,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: -90, y: 180, z: 0}
 --- !u!95 &580038673
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -10355,10 +10355,12 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!23 &580038674
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10518,7 +10520,7 @@ GameObject:
   m_IsActive: 1
 --- !u!95 &597703777
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: -6057140222963153312, guid: 01551daf3536d9630a25896801cd8cc0,
     type: 3}
@@ -10532,10 +10534,12 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &597703778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11904,7 +11908,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.46885, y: 360239700}
+  m_AnchoredPosition: {x: 1.46885, y: 360296600}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!1001 &664952345
@@ -13227,6 +13231,7 @@ MonoBehaviour:
   helmetRenderer: {fileID: 367903020}
   materialIndex: 0
   mipMapBias: -1
+  hill: {fileID: 87897532}
   willFall: 0
   desperateLanding: 0
   dirChange: 0
@@ -16381,6 +16386,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
@@ -29342,7 +29348,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1208352403}
-  m_LocalRotation: {x: 0.07342243, y: 0.000000016812347, z: -0.0000000012377441, w: 0.9973009}
+  m_LocalRotation: {x: 0.07342244, y: -0.000000017865892, z: 0.0000000013153075, w: 0.9973009}
   m_LocalPosition: {x: 10.41, y: 2.2200005, z: -21.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -30027,6 +30033,7 @@ ArticulationBody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1250011072}
   m_Enabled: 1
+  serializedVersion: 3
   m_Mass: 1
   m_ParentAnchorPosition: {x: 0.084136814, y: -0.14156303, z: 0.49082112}
   m_ParentAnchorRotation: {x: 0.66574925, y: -0.66576964, z: -0.23825938, w: 0.23824838}
@@ -30069,6 +30076,7 @@ ArticulationBody:
   m_JointFriction: 0.05
   m_Immovable: 0
   m_UseGravity: 1
+  m_CollisionDetectionMode: 0
 --- !u!4 &1250504559 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7756521251989061404, guid: bc098621aee9b8e1f9615ee23b3a963e,
@@ -34348,7 +34356,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 761697686}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.4054384
+  m_Size: 0.40535703
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -41855,6 +41863,7 @@ ArticulationBody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1677753370}
   m_Enabled: 1
+  serializedVersion: 3
   m_Mass: 1
   m_ParentAnchorPosition: {x: 0.51915073, y: 0.46669883, z: -0.000000059604645}
   m_ParentAnchorRotation: {x: 0.38124776, y: 0.59552526, z: -0.38124773, w: 0.5955253}
@@ -41897,6 +41906,7 @@ ArticulationBody:
   m_JointFriction: 0.05
   m_Immovable: 0
   m_UseGravity: 1
+  m_CollisionDetectionMode: 0
 --- !u!4 &1684142838 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1185528451822278825, guid: bc098621aee9b8e1f9615ee23b3a963e,
@@ -48851,6 +48861,7 @@ ArticulationBody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1925593183}
   m_Enabled: 1
+  serializedVersion: 3
   m_Mass: 1
   m_ParentAnchorPosition: {x: 0.0841375, y: 0.14156303, z: 0.4908206}
   m_ParentAnchorRotation: {x: 0.6674327, y: -0.6674126, z: -0.23354803, w: 0.23355971}
@@ -48893,6 +48904,7 @@ ArticulationBody:
   m_JointFriction: 0.05
   m_Immovable: 0
   m_UseGravity: 1
+  m_CollisionDetectionMode: 0
 --- !u!1 &1926534219
 GameObject:
   m_ObjectHideFlags: 0
@@ -51676,7 +51688,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: -90, y: 180, z: 0}
 --- !u!95 &2045814101
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -51689,10 +51701,12 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!23 &2045814102
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -60992,7 +61006,7 @@ PrefabInstance:
     - target: {fileID: 4200885254943762890, guid: 0d78cbde8fcdfdd8c84660723f488a00,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 380.6477
+      value: 383.58545
       objectReference: {fileID: 0}
     - target: {fileID: 4200885254943762890, guid: 0d78cbde8fcdfdd8c84660723f488a00,
         type: 3}
