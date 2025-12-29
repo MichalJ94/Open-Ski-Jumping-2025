@@ -581,7 +581,7 @@ namespace OpenSkiJumping.New
             }
 
 
-            if (state == 2 && !takeoff && Random.value < (float)((0.00001)*gameplayExtension.turbulenceChance))
+            if (state == 2 && !takeoff && Random.value < (float)((0.00002)*(gameplayExtension.turbulenceChance*gameplayExtension.turbulenceChance*0.2f)))
             {
 
                 if (RayCast() < 3f)
