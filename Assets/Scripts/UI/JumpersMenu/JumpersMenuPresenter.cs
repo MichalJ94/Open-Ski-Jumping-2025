@@ -106,6 +106,8 @@ namespace OpenSkiJumping.UI.JumpersMenu
             jumper.suitBottomBackColor = view.SuitBottomBack;
             jumper.helmetColor = view.Helmet;
             jumper.skisColor = view.Skis;
+            jumper.glovesColor = view.Gloves;
+            jumper.bootsColor= view.Boots;
             jumper.normalHillSkill = view.NormalHillSkill;
             jumper.largeHillSkill = view.LargeHillSkill;
             jumper.skiFlyingHillSkill = view.SkiFlyingHillSkill;
