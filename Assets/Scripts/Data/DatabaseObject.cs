@@ -2,6 +2,7 @@ using System.IO;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Serialization;
+using static AutoBackupSystem;
 
 namespace OpenSkiJumping.Data
 {
@@ -43,16 +44,26 @@ namespace OpenSkiJumping.Data
         public override bool LoadData()
         {
             var absolutePath = Path.Combine(Application.streamingAssetsPath, path);
-            if (File.Exists(absolutePath))
+
+            // validate & auto-restore
+            AutoRestoreSystem.TryRestore<T>(absolutePath);
+
+            if (!File.Exists(absolutePath))
             {
-                var dataAsJson = File.ReadAllText(absolutePath);
-                data = JsonConvert.DeserializeObject<T>(dataAsJson);
-                loaded = true;
-                return true;
+                loaded = false;
+                return false;
             }
 
-            loaded = false;
-            return false;
+            var json = File.ReadAllText(absolutePath);
+            if (!JsonValidation.IsValidJson<T>(json, out var result))
+            {
+                loaded = false;
+                return false;
+            }
+
+            data = result;
+            loaded = true;
+            return true;
         }
 
         private bool LoadMultipleFiles(string absolutePath)
@@ -89,8 +100,27 @@ namespace OpenSkiJumping.Data
         public override void SaveData()
         {
             var filePath = Path.Combine(Application.streamingAssetsPath, path);
-            var dataAsJson = JsonConvert.SerializeObject(data, prettyPrint ? Formatting.Indented : Formatting.None);
-            File.WriteAllText(filePath, dataAsJson);
+
+            // Serialize first
+            var json = JsonConvert.SerializeObject(
+                data,
+                prettyPrint ? Formatting.Indented : Formatting.None
+            );
+
+            // SAFETY: do not overwrite with empty/null
+            if (string.IsNullOrEmpty(json) || data == null)
+            {
+                Debug.LogWarning($"Skipped saving empty data: {path}");
+                return;
+            }
+
+            // Write atomically
+            string tempPath = filePath + ".tmp";
+            File.WriteAllText(tempPath, json);
+            File.Replace(tempPath, filePath, null);
+
+            // Backup AFTER successful save
+            AutoBackupSystem.BackupFile(filePath);
         }
     }
 }

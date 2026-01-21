@@ -13,6 +13,7 @@ namespace OpenSkiJumping.Competition.Persistent
         [JsonConverter(typeof(StringEnumConverter))]
         public EventType eventType;
 
+        public string eventGuid;
         public string hillId;
 
         [JsonConverter(typeof(StringEnumConverter))]

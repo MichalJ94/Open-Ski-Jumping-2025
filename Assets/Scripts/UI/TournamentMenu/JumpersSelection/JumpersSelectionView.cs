@@ -65,7 +65,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.JumpersSelection
         {
             var item = jumpers[index];
 
-            listItem.nameText.text = $"{item.competitor.firstName} {item.competitor.lastName.ToUpper()}";
+            listItem.nameText.text = $"{item.competitor.firstName} {item.competitor.lastName.ToUpper()}    (N:  {item.competitor.normalHillSkill}   L:  {item.competitor.largeHillSkill}   SF:  {item.competitor.skiFlyingHillSkill})";
             listItem.countryFlagText.text = item.competitor.countryCode;
             listItem.countryFlagImage.sprite = flagsData.GetFlag(item.competitor.countryCode);
             listItem.genderIconImage.sprite = iconsData.GetGenderIcon(item.competitor.gender);
