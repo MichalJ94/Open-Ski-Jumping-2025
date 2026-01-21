@@ -4,7 +4,9 @@ using System.Linq;
 using OpenSkiJumping.Competition;
 using OpenSkiJumping.Competition.Persistent;
 using OpenSkiJumping.ScriptableObjects;
+using UnityEditor.PackageManager;
 using UnityEngine;
+
 
 namespace OpenSkiJumping.UI.CalendarEditor
 {
@@ -38,21 +40,77 @@ namespace OpenSkiJumping.UI.CalendarEditor
             set => competitors = value;
         }
 
-        public void MoveEvent(EventInfo item, int val)
+
+        public void MigrateEventGuidsIfNeeded()
         {
-            var index = Events.IndexOf(item);
-            if (index < 0 || index + val < 0 || Events.Count <= index + val) return;
-            var buf = Events[index + val];
+            bool changed = false;
 
-            // Swap ids
-            Events[index].id = index + val;
-            Events[index + val].id = index;
+            // 1. Ensure every event has a GUID
+            foreach (var ev in events)
+            {
+                if (string.IsNullOrEmpty(ev.eventGuid))
+                {
+                    ev.eventGuid = Guid.NewGuid().ToString("N");
+                    changed = true;
+                }
+            }
 
-            Events[index + val] = Events[index];
-            Events[index] = buf;
+            // 2. Build index to guid map
+            var indexToGuid = events
+                .Select((ev, index) => (index, ev.eventGuid))
+                .ToDictionary(x => x.index, x => x.eventGuid);
 
-            // Events[index].name = $"{index + 1} {Events[index].hillId}";
-            // Events[index + val].name = $"{index + val + 1} {Events[index].hillId}";
+            // 3. Migrate rank references
+            foreach (var ev in events)
+            {
+                if (ev.ordRankType == RankType.Event && ev.ordRankId >= 0)
+                {
+                    if (indexToGuid.TryGetValue(ev.ordRankId, out var guid))
+                        ev.ordEventGuid = guid;
+                    else
+                        ev.ordEventGuid = null;
+                }
+
+                if (ev.qualRankType == RankType.Event && ev.qualRankId >= 0)
+                {
+                    if (indexToGuid.TryGetValue(ev.qualRankId, out var guid))
+                        ev.qualEventGuid = guid;
+                    else
+                        ev.qualEventGuid = null;
+                }
+
+                if (ev.preQualRankType == RankType.Event && ev.preQualRankId >= 0)
+                {
+                    if (indexToGuid.TryGetValue(ev.preQualRankId, out var guid))
+                        ev.preQualEventGuid = guid;
+                    else
+                        ev.preQualEventGuid = null;
+                }
+            }
+
+            if (changed)
+                Debug.Log("[Calendar] Event GUID migration completed");
+        }
+
+
+        public void MoveEvent(EventInfo item, int direction)
+        {
+            var oldIndex = events.IndexOf(item);
+            var newIndex = oldIndex + direction;
+
+            if (oldIndex < 0 || newIndex < 0 || newIndex >= events.Count)
+                return;
+
+            // Move the event
+            events.RemoveAt(oldIndex);
+            events.Insert(newIndex, item);
+
+            // Reassign IDs so id == index
+            for (int i = 0; i < events.Count; i++)
+                events[i].id = i;
+
+            // CRITICAL STEP
+            RebuildRankIndicesFromGuids();
         }
 
         public void AddEvent(EventInfo item)
@@ -64,60 +122,62 @@ namespace OpenSkiJumping.UI.CalendarEditor
         public bool RemoveEvent(EventInfo item)
         {
             var index = events.IndexOf(item);
-            if (index < 0) return false;
+            if (index < 0)
+                return false;
 
-            // Update references to removed event
-            // 20250203 - need to update the rank type as well
-
-            /*
-             * Kod Jonka
-             * 
-             * 
-             *             foreach (var ev in events)
-            {
-                if (ev.qualRankId == index) ev.qualRankId = -1; // Reset if it was pointing to the removed event
-                else if (ev.qualRankId > index) ev.qualRankId--; // Shift down if the index was higher
-
-                if (ev.ordRankId == index) ev.ordRankId = -1;
-                else if (ev.ordRankId > index) ev.ordRankId--;
-
-                if (ev.preQualRankId == index) ev.preQualRankId = -1;
-                else if (ev.preQualRankId > index) ev.preQualRankId--;
-            }
-
-             * 
-             * 
-             * */
-
-
+            // Update references to the removed event
             foreach (var ev in events)
             {
-                if (ev.qualRankId == index)
+                // ---- ORD RANK ----
+                if (ev.ordRankType == RankType.Event)
                 {
-                    ev.qualRankId = 0;
-                    ev.qualRankType = RankType.None;
-                } // Reset if it was pointing to the removed event
-                else if (ev.qualRankId > index) ev.qualRankId--; // Shift down if the index was higher
-
-                if (ev.ordRankId == index)
-                {
-                    ev.ordRankId = 0;
-                    ev.ordRankType = RankType.None;
+                    if (ev.ordRankId == index)
+                    {
+                        ev.ordRankType = RankType.None;
+                        ev.ordRankId = 0;
+                        ev.ordEventGuid = null;
+                    }
+                    else if (ev.ordRankId > index)
+                    {
+                        ev.ordRankId--;
+                    }
                 }
-                else if (ev.ordRankId > index) ev.ordRankId--;
 
-                if (ev.preQualRankId == index)
+                // ---- QUAL RANK ----
+                if (ev.qualRankType == RankType.Event)
                 {
-                    ev.preQualRankId = 0;
-                    ev.preQualRankType = RankType.None;
+                    if (ev.qualRankId == index)
+                    {
+                        ev.qualRankType = RankType.None;
+                        ev.qualRankId = 0;
+                        ev.qualEventGuid = null;
+                    }
+                    else if (ev.qualRankId > index)
+                    {
+                        ev.qualRankId--;
+                    }
                 }
-                else if (ev.preQualRankId > index) ev.preQualRankId--;
+
+                // ---- PREQUAL RANK ----
+                if (ev.preQualRankType == RankType.Event)
+                {
+                    if (ev.preQualRankId == index)
+                    {
+                        ev.preQualRankType = RankType.None;
+                        ev.preQualRankId = 0;
+                        ev.preQualEventGuid = null;
+                    }
+                    else if (ev.preQualRankId > index)
+                    {
+                        ev.preQualRankId--;
+                    }
+                }
             }
 
-            // Remove the event
+            // Remove the event itself
             events.RemoveAt(index);
 
-            // Reassign event IDs
+            // Reassign IDs to keep editor/UI logic intact
             for (var i = index; i < events.Count; i++)
             {
                 events[i].id = i;
@@ -126,8 +186,71 @@ namespace OpenSkiJumping.UI.CalendarEditor
             return true;
         }
 
+        private void RebuildRankIndicesFromGuids()
+        {
+            // Build GUID to index lookup
+            var guidToIndex = events
+                .Where(e => !string.IsNullOrEmpty(e.eventGuid))
+                .ToDictionary(e => e.eventGuid, e => e.id);
+
+            foreach (var ev in events)
+            {
+                // ---- QUAL ----
+                if (ev.qualRankType == RankType.Event)
+                {
+                    if (!string.IsNullOrEmpty(ev.qualEventGuid) &&
+                        guidToIndex.TryGetValue(ev.qualEventGuid, out var idx))
+                    {
+                        ev.qualRankId = idx;
+                    }
+                    else
+                    {
+                        ev.qualRankType = RankType.None;
+                        ev.qualRankId = 0;
+                        ev.qualEventGuid = null;
+                    }
+                }
+
+                // ---- ORD ----
+                if (ev.ordRankType == RankType.Event)
+                {
+                    if (!string.IsNullOrEmpty(ev.ordEventGuid) &&
+                        guidToIndex.TryGetValue(ev.ordEventGuid, out var idx))
+                    {
+                        ev.ordRankId = idx;
+                    }
+                    else
+                    {
+                        ev.ordRankType = RankType.None;
+                        ev.ordRankId = 0;
+                        ev.ordEventGuid = null;
+                    }
+                }
+
+                // ---- PREQUAL ----
+                if (ev.preQualRankType == RankType.Event)
+                {
+                    if (!string.IsNullOrEmpty(ev.preQualEventGuid) &&
+                        guidToIndex.TryGetValue(ev.preQualEventGuid, out var idx))
+                    {
+                        ev.preQualRankId = idx;
+                    }
+                    else
+                    {
+                        ev.preQualRankType = RankType.None;
+                        ev.preQualRankId = 0;
+                        ev.preQualEventGuid = null;
+                    }
+                }
+            }
+        }
+
+
+
         public void RecalculateEvents()
         {
+            MigrateEventGuidsIfNeeded();
+
             for (var i = 0; i < events.Count; i++) events[i].id = i;
             var map = classificationDataList.Where(item => item.id >= 0)
                 .Select((item, index) => (item, index))
@@ -232,5 +355,8 @@ namespace OpenSkiJumping.UI.CalendarEditor
                 teams = tmpTeams
             };
         }
+
+
     }
+
 }

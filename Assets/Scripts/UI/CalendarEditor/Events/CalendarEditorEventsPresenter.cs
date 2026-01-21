@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenSkiJumping.Competition;
@@ -33,7 +34,11 @@ namespace OpenSkiJumping.UI.CalendarEditor.Events
 
         private void CreateNewEvent()
         {
-            var item = new EventInfo {hillId = hills.GetSortedData().First().name};
+            var item = new EventInfo
+            {
+                eventGuid = Guid.NewGuid().ToString(),
+                hillId = hills.GetSortedData().First().name
+            };
             calendarFactory.AddEvent(item);
             PresentList();
             view.SelectedEvent = item;
@@ -52,6 +57,7 @@ namespace OpenSkiJumping.UI.CalendarEditor.Events
                 qualRankType = item.qualRankType, preQualRankType = item.preQualRankType,
                 preQualRankId = item.preQualRankId, preQualLimitType = item.preQualLimitType,
                 preQualLimit = item.preQualLimit,
+                eventGuid = Guid.NewGuid().ToString(),
                 hillSurface = item.hillSurface
             };
             calendarFactory.AddEvent(duplicated);
@@ -138,11 +144,15 @@ namespace OpenSkiJumping.UI.CalendarEditor.Events
 
         private void MoveEvent(int val)
         {
-            var item = view.SelectedEvent;
-            if (item == null) return;
-            calendarFactory.MoveEvent(view.SelectedEvent, val);
+            var selected = view.SelectedEvent;
+            if (selected == null) return;
+
+            calendarFactory.MoveEvent(selected, val);
+
             PresentList();
-            view.SelectedEvent = item;
+
+            // Re-select the same instance (now at a new index)
+            view.SelectedEvent = selected;
             PresentEventInfo();
         }
 

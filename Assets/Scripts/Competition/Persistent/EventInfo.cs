@@ -28,7 +28,7 @@ namespace OpenSkiJumping.Competition.Persistent
         public RankType ordRankType;
 
         public int ordRankId;
-
+        public string ordEventGuid;
         #endregion
 
         #region QualRank
@@ -36,7 +36,8 @@ namespace OpenSkiJumping.Competition.Persistent
         [JsonConverter(typeof(StringEnumConverter))]
         public RankType qualRankType;
 
-        public int qualRankId;
+        public int qualRankId = -1;
+        public string qualEventGuid;
 
         [JsonConverter(typeof(StringEnumConverter))]
         public LimitType inLimitType;
@@ -51,7 +52,7 @@ namespace OpenSkiJumping.Competition.Persistent
         public RankType preQualRankType;
 
         public int preQualRankId;
-
+        public string preQualEventGuid;
         [JsonConverter(typeof(StringEnumConverter))]
         public LimitType preQualLimitType;
 
