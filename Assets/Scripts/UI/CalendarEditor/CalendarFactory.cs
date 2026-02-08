@@ -4,7 +4,6 @@ using System.Linq;
 using OpenSkiJumping.Competition;
 using OpenSkiJumping.Competition.Persistent;
 using OpenSkiJumping.ScriptableObjects;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 

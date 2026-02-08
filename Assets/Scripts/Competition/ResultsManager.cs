@@ -75,7 +75,7 @@ namespace OpenSkiJumping.Competition
             EventInfo = eventInfo;
             OrderedParticipants = orderedParticipants;
             this.hillInfo = hillInfo;
-            UnityEngine.Debug.Log("Tu¿ przed initGates. eventInfo.roundInfos.Count: " + eventInfo.roundInfos.Count);
+            UnityEngine.Debug.Log("Tu¿ przed initGates. eventInfo.roundInfos.Count:");
             initGates = new int[eventInfo.roundInfos.Count];
             UnityEngine.Debug.Log("Tu¿ po przed initGates = new int[eventInfo.roundInfos.Count];");
             InitializeValues();

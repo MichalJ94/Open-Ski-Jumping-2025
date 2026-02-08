@@ -46,7 +46,7 @@ namespace OpenSkiJumping.Data
             var absolutePath = Path.Combine(Application.streamingAssetsPath, path);
 
             // validate & auto-restore
-            AutoRestoreSystem.TryRestore<T>(absolutePath);
+           // AutoRestoreSystem.TryRestore<T>(absolutePath);
 
             if (!File.Exists(absolutePath))
             {
@@ -55,8 +55,12 @@ namespace OpenSkiJumping.Data
             }
 
             var json = File.ReadAllText(absolutePath);
-            if (!JsonValidation.IsValidJson<T>(json, out var result))
+            if (!JsonValidation.TryDeserialize<T>(json, out var result))
             {
+                Debug.LogWarning($"Invalid JSON detected: {path}. Attempting restore.");
+                if (AutoRestoreSystem.TryRestore<T>(absolutePath))
+                    return LoadData();
+
                 loaded = false;
                 return false;
             }

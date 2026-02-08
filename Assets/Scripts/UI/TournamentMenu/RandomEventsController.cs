@@ -17,7 +17,8 @@ namespace OpenSkiJumping.UI.TournamentMenu
         [SerializeField] private GameObject popupPanel;
         [SerializeField] private SavesRuntime saves;
         [SerializeField] private GameConfigRuntime gameConfig;
-        [SerializeField] private GameplayExtension gameplayExtension;   
+        [SerializeField] private GameplayExtension gameplayExtension;
+        [SerializeField] private GameEvent onLanguageChange;
 
         [SerializeField] private TranslatablePhrase posSkillChangePhrase;
         [SerializeField] private TranslatablePhrase negSkillChangePhrase;

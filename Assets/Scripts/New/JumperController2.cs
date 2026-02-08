@@ -491,7 +491,7 @@ namespace OpenSkiJumping.New
             if (hS > 130)
             {
                 modifier += (hS - 130) / 10;
-                startForceScale += (hS - 130) * (0.00013f * modifier);
+                startForceScale += (hS - 130) * (0.00012f * modifier);
             }
             if (hS < 130)
             {
@@ -1014,7 +1014,7 @@ namespace OpenSkiJumping.New
             if (hill.profileData.Value.name.Contains("Bischofshofen"))
             {
                 UnityEngine.Debug.Log("Modifier za problematyczną skocznię");
-                forceScale += forceScale * 0.01f;
+                forceScale += forceScale * 0.016f;
             }
             State = 1;
             rig.weight = 0f;
