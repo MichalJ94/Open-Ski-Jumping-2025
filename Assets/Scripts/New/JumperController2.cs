@@ -41,6 +41,8 @@ namespace OpenSkiJumping.New
         [SerializeField] private int WindThrustDeterminer;
         [SerializeField] private int WindThrustDeterminerTimesUsed;
         [SerializeField] private float fixedUpdateTorqueReference;
+        [SerializeField] private float postTakeoffClickBlockTime = 0.75f;
+        private bool blockLandingClick;
         public GameObject continueButton;
         private float forceScaleModifier;
         private float windModifier;
@@ -50,6 +52,7 @@ namespace OpenSkiJumping.New
 
         [SerializeField] private float mipMapBias = -1.5f;
         [SerializeField] MeshScript hill;
+
 
         //                                                                                          BUG Z ROTACJĄ LEŻY W WINDTHRUSTDETERMINERTIMESUSED.
 
@@ -707,7 +710,8 @@ namespace OpenSkiJumping.New
                 Jump();
             }
             else if ((State == 2 || State == 3 || State == 4) &&
-                     (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)))
+         !blockLandingClick &&
+         (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)))
             {
 
                 tilting = false;
@@ -1031,17 +1035,24 @@ namespace OpenSkiJumping.New
         {
             takeoff = true;
             State = 2;
+
+            StartCoroutine(BlockLandingClickCoroutine());
+
             if (windGatePanel.windSlider.value > 0)
             {
-
-                rig.weight = (windGatePanel.windSlider.value / 3f);
+                rig.weight = windGatePanel.windSlider.value / 3f;
                 if (rig.weight > 1)
-                {
                     rig.weight = 1;
-                }
+
                 UnityEngine.Debug.Log($"rig.weight during flight: {rig.weight}");
             }
+        }
 
+        private IEnumerator BlockLandingClickCoroutine()
+        {
+            blockLandingClick = true;
+            yield return new WaitForSeconds(postTakeoffClickBlockTime);
+            blockLandingClick = false;
         }
 
         public void Land()

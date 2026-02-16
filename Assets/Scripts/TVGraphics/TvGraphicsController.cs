@@ -119,6 +119,12 @@ namespace OpenSkiJumping.TVGraphics
             }
             hillNameText.text = currentEvent.hillId;
             backdropHillNameText.text = currentEvent.hillId.Split(new string[] { " HS" }, System.StringSplitOptions.None)[0];
+
+            if (backdropHillNameText.text.Contains("Predazzo"))
+            {
+                backdropHillNameText.text = "";
+            }
+
         }
 
         public void ActivateRestartButton()

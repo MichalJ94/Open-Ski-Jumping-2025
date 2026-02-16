@@ -17,8 +17,8 @@ namespace OpenSkiJumping.UI.TournamentMenu
         [SerializeField] private GameObject popupPanel;
         [SerializeField] private SavesRuntime saves;
         [SerializeField] private GameConfigRuntime gameConfig;
-        [SerializeField] private GameplayExtension gameplayExtension;
-        [SerializeField] private GameEvent onLanguageChange;
+        [SerializeField] private GameplayExtension gameplayExtension;   
+
 
         [SerializeField] private TranslatablePhrase posSkillChangePhrase;
         [SerializeField] private TranslatablePhrase negSkillChangePhrase;
@@ -44,7 +44,13 @@ namespace OpenSkiJumping.UI.TournamentMenu
             if (initialized)
                 LoadData();
         }
+        public void RefreshOnLanguageChange()
+        {
+            if (!popupPanel.activeInHierarchy)
+                return;
 
+            LoadData();
+        }
         private void SetupList()
         {
             listView.SelectionType = SelectionType.None;
