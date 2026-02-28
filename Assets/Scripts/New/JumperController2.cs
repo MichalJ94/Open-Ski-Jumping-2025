@@ -844,7 +844,7 @@ namespace OpenSkiJumping.New
 
                 // Interpolate the base multiplier (here using 2.8f as your starting value) 
                 // and add the dynamic hillSize modifier:
-                float multiplier = Mathf.Lerp(3f, minRearWindMultiplier, t) + (-windForce) * (hillSize * GetHillMultiplier(hillSize));
+                float multiplier = Mathf.Lerp(5f, minRearWindMultiplier, t) + (-windForce) * (hillSize * GetHillMultiplier(hillSize));
                 UnityEngine.Debug.Log("GetWindMultiplier() windForce < 0 && windForce > -2f");
                 return multiplier;
             }
