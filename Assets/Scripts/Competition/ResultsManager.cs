@@ -278,7 +278,19 @@ namespace OpenSkiJumping.Competition
 
         public bool RoundFinish()
         {
+
+
             var currentRoundInfo = EventInfo.roundInfos[RoundIndex];
+
+
+            UnityEngine.Debug.Log(
+    $"ROUND FINISH: RoundIndex={RoundIndex}, " +
+    $"outLimit={currentRoundInfo.outLimit}, " +
+    $"outLimitType={currentRoundInfo.outLimitType}, " +
+    $"finalResults BEFORE={finalResults.Count}"
+);
+
+
 
             switch (currentRoundInfo.outLimitType)
             {
@@ -313,7 +325,9 @@ namespace OpenSkiJumping.Competition
                     break;
             }
 
-
+            UnityEngine.Debug.Log(
+    $"ROUND FINISH AFTER LIMIT: finalResults={finalResults.Count}"
+);
             RoundIndex++;
             SubroundIndex = 0;
             return RoundIndex < roundsCount;

@@ -531,15 +531,15 @@
         "gateCompensation": true,
         "windCompensation": true
       },
-      {
+     {
         "roundType": "Normal",
-        "outLimitType": "None",
+        "outLimitType": "Normal",
         "outLimit": 8,
         "useOrdRank": [
           true,
           true,
           true,
-          false
+          true
         ],
         "disableJudgesMarks": false,
         "has95Rule": true,

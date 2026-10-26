@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1824.9504
     height: 937.18805
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Console
   m_RootView: {fileID: 3}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 117
+  controlID: 55
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 93
+  controlID: 39
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -195,7 +195,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 94
+  controlID: 40
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -259,7 +259,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ProjectBrowser
+  m_Name: ConsoleWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -268,16 +268,16 @@ MonoBehaviour:
     y: 576
     width: 1409.5841
     height: 311.1881
-  m_MinSize: {x: 231, y: 271}
-  m_MaxSize: {x: 10001, y: 10021}
-  m_ActualView: {fileID: 16}
+  m_MinSize: {x: 101, y: 121}
+  m_MaxSize: {x: 4001, y: 4021}
+  m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 16}
   - {fileID: 17}
   - {fileID: 18}
   - {fileID: 12}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -443,10 +443,10 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 540}
-      m_SelectedIDs: 40a50200
-      m_LastClickedID: 173376
-      m_ExpandedIDs: 2464fcffd081fdffe681fdffec81fdfff481fdfff881fdfffe81fdff3085fdff9e85fdffb085fdffb885fdffbc85fdff5887fdff5a87fdff5e96fdff409dfdff6a9dfdffd89dfdffdc9dfdfff09dfdff3c9ffdff6e9ffdffa4d3fdffca6afeff8e03ffff0439ffffa29fffff58a0ffffeaa0ffff28a1ffff7ea1ffff92a1ffff98a1ffffaaa1ffffb2a1ffffb6a1ffff22a3ffff42a3ffff52a3ffff54a3ffff68bbffffe4faffff007600007e0d0100d81301008a260200482a0200a02a0200fc2a02007c2b0200f62d0200042f02001231020028310200123402008e35020040a5020090a602006cab0200c8b102000ab90200
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: 6e250000
+      m_LastClickedID: 0
+      m_ExpandedIDs: dafaffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -940,7 +940,7 @@ MonoBehaviour:
     m_SaveData: []
     m_OverlaysVisible: 1
   m_SearchFilter:
-    m_NameFilter: 
+    m_NameFilter: competition
     m_ClassNames: []
     m_AssetLabels: []
     m_AssetBundleNames: []
@@ -950,23 +950,23 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/UI/CalendarEditor
+    - Assets
     m_Globs: []
-    m_OriginalText: 
+    m_OriginalText: 'competition '
     m_FilterByTypeIntersection: 0
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/UI/CalendarEditor
+  - Assets
   m_LastFoldersGridSize: -1
   m_LastProjectPath: E:\Unity Projects\Open-Ski-Jumping-2025
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 609.8119}
-    m_SelectedIDs: 56a80000
-    m_LastClickedID: 43094
-    m_ExpandedIDs: 00000000a2840000a8840000ba840000bc840000c0840000ce84000070a6000056a800007eab000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 127}
+    m_SelectedIDs: b2840000
+    m_LastClickedID: 33970
+    m_ExpandedIDs: 00000000b2840000de8400003485000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -994,7 +994,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000a2840000
+    m_ExpandedIDs: 00000000b2840000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1019,9 +1019,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_SelectedInstanceIDs: 6e250000
+    m_LastClickedInstanceID: 9582
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000e0c4000054c30000ca450100fc7d000074740000c0680000d26d0000566e00000a6e0000126e0000c46d0000fa6d0000d06d0000227100007c7100004271000092a80000ca68000050770000c293000060680000f69a000010700000f66f0000b86f0000447000006e700000ee6f0000087000006a700000e0730000e070000010720000288000007e800000567300007e92000084920000ea7400003a2e00009c720000967200007e720000787200007a8d0000e0a200008e8d0000828d0000b8a60000bca60000eeb70000eab70000307b0000f6810000c8110100b8730000b27300003c2e00008ac20000ce73000082720000c673000012a5000080720000589f000082990000ac7f0100727600007a760000e2c600005476000070780000727e00009e240100527600006e760000d07c0000427600004a760000dc84000048760000207600001c760000b8310000b4310000167a0000149900004a7c0000849f0000c89f0000168b0000449600003a7600007e7a000096760000ccef000058b40000508300006e8400005c32000060320000fa760000a21f010028770000bcce0100ecce0100f8ce01004e770000447700002678000058770000727800006e780000bc76000022cb00005ccb000068770000b8b200005abb0000767700006c770000b4850000
     m_RenameOverlay:
       m_UserAcceptedRename: 0

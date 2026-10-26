@@ -215,6 +215,33 @@ namespace OpenSkiJumping.Competition
             var eventId = save.resultsContainer.eventIndex;
             var currentEventInfo = save.calendar.events[eventId];
 
+
+
+
+
+            Debug.Log($"EVENT LOADED: {currentEventInfo.id}");
+
+            for (int i = 0; i < currentEventInfo.roundInfos.Count; i++)
+            {
+                var r = currentEventInfo.roundInfos[i];
+
+                Debug.Log(
+                    $"ROUND {i}: " +
+                    $"roundType={r.roundType}, " +
+                    $"outLimitType={r.outLimitType}, " +
+                    $"outLimit={r.outLimit}, " +
+                    $"useOrdRank=[{string.Join(",", r.useOrdRank)}], " +
+                    $"disableJudgesMarks={r.disableJudgesMarks}, " +
+                    $"has95Rule={r.has95Rule}, " +
+                    $"reversedBibs={r.reversedBibs}, " +
+                    $"reassignBibs={r.reassignBibs}"
+                );
+            }
+
+
+
+
+
             competitors.competitors = save.competitors.Select(it => it.competitor).ToList();
             competitors.teams = save.teams.Select(it => it.team).ToList();
 
