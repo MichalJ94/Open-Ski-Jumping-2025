@@ -57,7 +57,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
                 secondStyle.text = styl.CurrentValue;
                 
             }
-            else if (item.eventType == Competition.EventType.Team)
+            else if (item.eventType.IsGroupEvent())
             {
                 firstDistance.enabled = false;
                 firstStyle.enabled = false;

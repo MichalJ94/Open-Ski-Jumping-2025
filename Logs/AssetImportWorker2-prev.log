@@ -1,0 +1,592 @@
+Using pre-set license
+Built from '2021.3/respin/2021.3.45f2-0da89fac8e' branch; Version is '2021.3.45f2 (88f88f591b2e) revision 8976527'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 11  (10.0.26200) 64bit Core' Language: 'pl' Physical Memory: 15628 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
+
+COMMAND LINE ARGUMENTS:
+E:\Unity\2021.3.45f2\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker2
+-projectPath
+E:/Unity Projects/Open-Ski-Jumping-2025
+-logFile
+Logs/AssetImportWorker2.log
+-srvPort
+65391
+Successfully changed project path to: E:/Unity Projects/Open-Ski-Jumping-2025
+E:/Unity Projects/Open-Ski-Jumping-2025
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [15340] Host "[IP] 100.122.23.74 [Port] 0 [Flags] 2 [Guid] 1684667094 [EditorId] 1684667094 [Version] 1048832 [Id] WindowsEditor(7,LAPTOP-7BS7T25T) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+
+Player connection [15340] Host "[IP] 100.122.23.74 [Port] 0 [Flags] 2 [Guid] 1684667094 [EditorId] 1684667094 [Version] 1048832 [Id] WindowsEditor(7,LAPTOP-7BS7T25T) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+
+[Physics::Module] Initialized MultithreadedJobDispatcher with {0} workers.
+Refreshing native plugins compatible for Editor in 82.83 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2021.3.45f2 (88f88f591b2e)
+[Subsystems] Discovering subsystems at path E:/Unity/2021.3.45f2/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path E:/Unity Projects/Open-Ski-Jumping-2025/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 3060 Laptop GPU (ID=0x2520)
+    Vendor:   NVIDIA
+    VRAM:     5994 MB
+    Driver:   32.0.15.9200
+Initialize mono
+Mono path[0] = 'E:/Unity/2021.3.45f2/Editor/Data/Managed'
+Mono path[1] = 'E:/Unity/2021.3.45f2/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'E:/Unity/2021.3.45f2/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56120
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: E:/Unity/2021.3.45f2/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.001750 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 69.60 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.591 seconds
+Domain Reload Profiling:
+	ReloadAssembly (591ms)
+		BeginReloadAssembly (90ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (1ms)
+		EndReloadAssembly (424ms)
+			LoadAssemblies (89ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (105ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (26ms)
+			SetupLoadedEditorAssemblies (251ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (6ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (70ms)
+				BeforeProcessingInitializeOnLoad (1ms)
+				ProcessInitializeOnLoadAttributes (133ms)
+				ProcessInitializeOnLoadMethodAttributes (42ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.005744 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 64.45 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Error saving file Library/StateCache/LayerSettings/9e/9ecc5c3c162a7aba29bafa64c8b94b7c.json. Error: System.IO.IOException: Sharing violation on path E:\Unity Projects\Open-Ski-Jumping-2025\Library\StateCache\LayerSettings\9e\9ecc5c3c162a7aba29bafa64c8b94b7c.json
+  at System.IO.FileStream..ctor (System.String path, System.IO.FileMode mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32 bufferSize, System.Boolean anonymous, System.IO.FileOptions options) [0x0019e] in <34c8028f8a3946349d8f0d77e409a1ae>:0 
+  at System.IO.FileStream..ctor (System.String path, System.IO.FileMode mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32 bufferSize, System.IO.FileOptions options) [0x00000] in <34c8028f8a3946349d8f0d77e409a1ae>:0 
+  at (wrapper remoting-invoke-with-check) System.IO.FileStream..ctor(string,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare,int,System.IO.FileOptions)
+  at System.IO.StreamWriter..ctor (System.String path, System.Boolean append, System.Text.Encoding encoding, System.Int32 bufferSize) [0x00055] in <34c8028f8a3946349d8f0d77e409a1ae>:0 
+  at System.IO.StreamWriter..ctor (System.String path, System.Boolean append, System.Text.Encoding encoding) [0x00000] in <34c8028f8a3946349d8f0d77e409a1ae>:0 
+  at (wrapper remoting-invoke-with-check) System.IO.StreamWriter..ctor(string,bool,System.Text.Encoding)
+  at System.IO.File.WriteAllText (System.String path, System.String contents, System.Text.Encoding encoding) [0x00034] in <34c8028f8a3946349d8f0d77e409a1ae>:0 
+  at UnityEditor.StateCache`1[T].SetState (UnityEngine.Hash128 key, T obj) [0x0004b] in <e2ec61eabaea4cfa8892d65208615f30>:0 
+0x00007ff6a7891b6d (Unity) StackWalker::GetCurrentCallstack
+0x00007ff6a78986f9 (Unity) StackWalker::ShowCallstack
+0x00007ff6a882c913 (Unity) GetStacktrace
+0x00007ff6a8ed949d (Unity) DebugStringToFile
+0x00007ff6a698afc2 (Unity) DebugLogHandler_CUSTOM_Internal_Log
+0x0000018612737b83 (Mono JIT Code) (wrapper managed-to-native) UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+0x00000186127378ab (Mono JIT Code) UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+0x0000018612737630 (Mono JIT Code) UnityEngine.Logger:Log (UnityEngine.LogType,object)
+0x00000186127374f5 (Mono JIT Code) UnityEngine.Debug:LogError (object)
+0x0000018612731263 (Mono JIT Code) UnityEditor.StateCache`1<UnityEditor.Tools/LayerSettings>:SetState (UnityEngine.Hash128,UnityEditor.Tools/LayerSettings)
+0x0000018612730e5b (Mono JIT Code) UnityEditor.Tools:set_lockedLayers (int)
+0x000001861272c81b (Mono JIT Code) UnityEditor.Tools:OnEnable ()
+0x000001860be01688 (Mono JIT Code) (wrapper runtime-invoke) object:runtime_invoke_void__this__ (object,intptr,intptr,intptr)
+0x00007ff90503697e (mono-2.0-bdwgc) [mini-runtime.c:3445] mono_jit_runtime_invoke 
+0x00007ff904f6cdd4 (mono-2.0-bdwgc) [object.c:3068] do_runtime_invoke 
+0x00007ff904f6cf4c (mono-2.0-bdwgc) [object.c:3115] mono_runtime_invoke 
+0x00007ff6a77b4bd4 (Unity) scripting_method_invoke
+0x00007ff6a7793e44 (Unity) ScriptingInvocation::Invoke
+0x00007ff6a7793f2e (Unity) ScriptingInvocation::InvokeChecked
+0x00007ff6a782a676 (Unity) SerializableManagedRef::CallMethod
+0x00007ff6a777bdd0 (Unity) MonoBehaviour::AwakeFromLoad
+0x00007ff6a7786d88 (Unity) ResetAndApplyDefaultReferencesOnNewMonoBehaviour
+0x00007ff6a7791d49 (Unity) Scripting::CreateScriptableObjectWithType
+0x00007ff6a697af00 (Unity) ScriptableObject_CUSTOM_CreateScriptableObjectInstanceFromType
+0x000001861272c175 (Mono JIT Code) (wrapper managed-to-native) UnityEngine.ScriptableObject:CreateScriptableObjectInstanceFromType (System.Type,bool)
+0x000001861272c0b3 (Mono JIT Code) UnityEngine.ScriptableObject:CreateInstance (System.Type)
+0x000001861272c033 (Mono JIT Code) UnityEngine.ScriptableObject:CreateInstance<T_REF> ()
+0x000001861272bf83 (Mono JIT Code) UnityEditor.Tools:get_get ()
+0x000001861272b74b (Mono JIT Code) UnityEditor.Tools:get_visibleLayers ()
+0x000001861272b443 (Mono JIT Code) [BoneRendererUtils.cs:121] UnityEditor.Animations.Rigging.BoneRendererUtils:.cctor () 
+0x000001861272aecd (Mono JIT Code) (wrapper runtime-invoke) object:runtime_invoke_void (object,intptr,intptr,intptr)
+0x00007ff90503697e (mono-2.0-bdwgc) [mini-runtime.c:3445] mono_jit_runtime_invoke 
+0x00007ff904f6cdd4 (mono-2.0-bdwgc) [object.c:3068] do_runtime_invoke 
+0x00007ff904f67b79 (mono-2.0-bdwgc) [object.c:563] mono_runtime_class_init_full 
+0x00007ff904e9ddd7 (mono-2.0-bdwgc) [icall.c:1292] ves_icall_System_Runtime_CompilerServices_RuntimeHelpers_RunClassConstructor 
+0x00007ff904ecfebc (mono-2.0-bdwgc) [icall-def.h:756] ves_icall_System_Runtime_CompilerServices_RuntimeHelpers_RunClassConstructor_raw 
+0x000001860e753f1a (Mono JIT Code) (wrapper managed-to-native) System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (intptr)
+0x000001860e753e2b (Mono JIT Code) System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+0x000001860e753573 (Mono JIT Code) UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+0x000001860e87da38 (Mono JIT Code) (wrapper runtime-invoke) <Module>:runtime_invoke_void_object (object,intptr,intptr,intptr)
+0x00007ff90503697e (mono-2.0-bdwgc) [mini-runtime.c:3445] mono_jit_runtime_invoke 
+0x00007ff904f6cdd4 (mono-2.0-bdwgc) [object.c:3068] do_runtime_invoke 
+0x00007ff904f6cf4c (mono-2.0-bdwgc) [object.c:3115] mono_runtime_invoke 
+0x00007ff6a77b4bd4 (Unity) scripting_method_invoke
+0x00007ff6a7793e44 (Unity) ScriptingInvocation::Invoke
+0x00007ff6a778e9a5 (Unity) ScriptingInvocation::Invoke<void>
+0x00007ff6a78d1fc3 (Unity) Scripting::UnityEditor::EditorAssembliesProxy::ProcessInitializeOnLoadAttributes
+0x00007ff6a77889cb (Unity) MonoManager::SetupLoadedEditorAssemblies
+0x00007ff6a777e5ed (Unity) MonoManager::EndReloadAssembly
+0x00007ff6a7786048 (Unity) MonoManager::ReloadAssembly
+0x00007ff6a86e35c2 (Unity) LoadDomainAndUserAssemblies
+0x00007ff6a86e3cf4 (Unity) LoadUserAssemblies
+0x00007ff6a83e5273 (Unity) Application::InitializeProject
+0x00007ff6a8835bc0 (Unity) WinMain
+0x00007ff6a9be598e (Unity) __scrt_common_main_seh
+0x00007ffa04acdda7 (KERNEL32) BaseThreadInitThunk
+0x00007ffa068fee4c (ntdll) RtlUserThreadStart
+
+Package Manager log level set to [2]
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Completed reload, in  2.067 seconds
+Domain Reload Profiling:
+	ReloadAssembly (2067ms)
+		BeginReloadAssembly (105ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (6ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (20ms)
+		EndReloadAssembly (1886ms)
+			LoadAssemblies (95ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (213ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (63ms)
+			SetupLoadedEditorAssemblies (1505ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (3ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (65ms)
+				BeforeProcessingInitializeOnLoad (67ms)
+				ProcessInitializeOnLoadAttributes (1227ms)
+				ProcessInitializeOnLoadMethodAttributes (142ms)
+				AfterProcessingInitializeOnLoad (2ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (5ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
+Refreshing native plugins compatible for Editor in 1.25 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5312 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 91 unused Assets / (2.1 MB). Loaded Objects now: 5743.
+Memory consumption went from 243.5 MB to 241.3 MB.
+Total: 6.472300 ms (FindLiveObjects: 0.419500 ms CreateObjectMapping: 0.178500 ms MarkObjects: 5.359300 ms  DeleteObjects: 0.513900 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:CustomObjectIndexerAttribute: f67f22312cbe972f2da930a377ed3d15 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 960078.339587 seconds.
+  path: Assets/Arts/flags/si.png
+  artifactKey: Guid(66f95624e7262bdbbb76b7319615e145) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/si.png using Guid(66f95624e7262bdbbb76b7319615e145) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '94b238a0f29fffc3f5a6adff3a3e6412') in 0.122737 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Arts/flags/tt.png
+  artifactKey: Guid(cbe7a07e4963e748d874b39e20549eb2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/tt.png using Guid(cbe7a07e4963e748d874b39e20549eb2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '97da4669a12c4af66cf4367d94c1951f') in 0.059655 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Arts/flags/uz.png
+  artifactKey: Guid(966027ab6dd18cc39b86178e2d393e1f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/uz.png using Guid(966027ab6dd18cc39b86178e2d393e1f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '36fd4934ad8b7c124c397ccbed3606fa') in 0.046631 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Arts/flags/tw.png
+  artifactKey: Guid(d74a9a6353cf0c73a8430a4943c2e725) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/tw.png using Guid(d74a9a6353cf0c73a8430a4943c2e725) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c0f1b02c48ab833a3b26e7a45c7862b6') in 0.025412 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Arts/flags/sz.png
+  artifactKey: Guid(0dbefa9026f031205bae9e85213752c4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/sz.png using Guid(0dbefa9026f031205bae9e85213752c4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4beb1debf7bd059ab92fc1031ae54cfc') in 0.010534 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Arts/flags/tf.png
+  artifactKey: Guid(288d449e938bffbe0b637418a66566b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/tf.png using Guid(288d449e938bffbe0b637418a66566b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3e163e9a62a0237d77beb69a5e61287e') in 0.009061 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Arts/flags/ve.png
+  artifactKey: Guid(f6e828cd59991b2419393c1f6e1bd976) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/ve.png using Guid(f6e828cd59991b2419393c1f6e1bd976) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7f7fdc73e67c053255eecbcb4a826373') in 0.012470 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Arts/flags/ss.png
+  artifactKey: Guid(24b161e1e37b56069b967b0c4731e0a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/ss.png using Guid(24b161e1e37b56069b967b0c4731e0a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '847bb5bfcd0c87fceba42de2e0382fc5') in 0.009652 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Arts/flags/tz.png
+  artifactKey: Guid(a40ef892a109e991785f90c8e3775bf2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/tz.png using Guid(a40ef892a109e991785f90c8e3775bf2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b9fd8f166d7710a0f28b3fc7afad26e9') in 0.009440 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Arts/flags/sj.png
+  artifactKey: Guid(32a6eea329e51641a93a9ecd7343ada7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/sj.png using Guid(32a6eea329e51641a93a9ecd7343ada7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '72fd8d561e7f12b03bd2bd56dd9bb2d6') in 0.011307 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Arts/flags/us.png
+  artifactKey: Guid(42cf233ff42a2269fa00c11da31def0b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/us.png using Guid(42cf233ff42a2269fa00c11da31def0b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '03e216bb3e737345b3ffe5cacb669320') in 0.011285 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000054 seconds.
+  path: Assets/Arts/flags/va.png
+  artifactKey: Guid(9c2888bd3c212d7a0a69184c1e0f1192) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/va.png using Guid(9c2888bd3c212d7a0a69184c1e0f1192) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7b3452a5926d3a883e27f0abaa2b0b67') in 0.019618 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Arts/flags/sv.png
+  artifactKey: Guid(c37440abee36eb9228b055bdd5056ea3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/sv.png using Guid(c37440abee36eb9228b055bdd5056ea3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd6d55f3ba864c4abc9c4552e78af43f8') in 0.011287 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Arts/flags/sl.png
+  artifactKey: Guid(bfb48d34f073733529e4316e0780acf7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/sl.png using Guid(bfb48d34f073733529e4316e0780acf7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a7ac81b7bdfb92e95788cc4d06faf99c') in 0.008934 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Arts/flags/sr.png
+  artifactKey: Guid(c79c8285c124d149ba8f1bf2a115b600) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/sr.png using Guid(c79c8285c124d149ba8f1bf2a115b600) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ba5379ba38993c395ac0e8eed1fd3eb1') in 0.010395 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Arts/flags/td.png
+  artifactKey: Guid(6530fadf75c7b59d7b9fb15b9e3d47c6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/td.png using Guid(6530fadf75c7b59d7b9fb15b9e3d47c6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b5f86b84e90565a3ef60de1ba876c952') in 0.012193 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Arts/flags/vc.png
+  artifactKey: Guid(0c1a016bbc9f361819b4f994bfc2fafe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/vc.png using Guid(0c1a016bbc9f361819b4f994bfc2fafe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e4bbd6aa299c4157b5f789bed7820504') in 0.012090 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Arts/flags/tl.png
+  artifactKey: Guid(05cd0a7379ac80ba390c4495414e15d3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/tl.png using Guid(05cd0a7379ac80ba390c4495414e15d3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6b83a80f7138fa5a28b340a465f0ca03') in 0.011784 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Arts/flags/sy.png
+  artifactKey: Guid(e1f9bbfb5daf1640095ce8c20facf8a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/sy.png using Guid(e1f9bbfb5daf1640095ce8c20facf8a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'eb02c45f7e138687a4560e22d53b1a56') in 0.011768 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Arts/flags/st.png
+  artifactKey: Guid(c77cc64388a5df97fac0e72076a2108e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/st.png using Guid(c77cc64388a5df97fac0e72076a2108e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '496947dffef02309bb979a886b714c93') in 0.010014 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 1.538195 seconds.
+  path: Assets/Arts/flags/vg.png
+  artifactKey: Guid(c8ab4afacd3e71164b9a7ac87cb2f360) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/vg.png using Guid(c8ab4afacd3e71164b9a7ac87cb2f360) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e1107012fa19c442e4505d324476e582') in 0.011022 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000242 seconds.
+  path: Assets/Arts/flags/wf.png
+  artifactKey: Guid(7ddaff93ec65e879db6fe8b844ba6676) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/wf.png using Guid(7ddaff93ec65e879db6fe8b844ba6676) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '372706f81e8e66a3f4324ccde16837d8') in 0.012238 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Arts/flags/vn.png
+  artifactKey: Guid(e24ecbcbab328ba748dd6c2fe8f5f567) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/vn.png using Guid(e24ecbcbab328ba748dd6c2fe8f5f567) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd7f9d0bc44be43136d4f0635c72adf11') in 0.013130 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Arts/flags/zw.png
+  artifactKey: Guid(5d429c12e7ff09ac5a86df3c10e90349) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/zw.png using Guid(5d429c12e7ff09ac5a86df3c10e90349) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '09acb39f09f1757fe1d51f2d71af2a46') in 0.032563 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Arts/flags/ye.png
+  artifactKey: Guid(d3742bf99865b004989db62bb4925d62) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/ye.png using Guid(d3742bf99865b004989db62bb4925d62) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a7b6e84543f6cb4dc9f9b1781216a659') in 0.011150 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 1.164439 seconds.
+  path: Assets/Arts/flags/rw.png
+  artifactKey: Guid(aedafd444981a392abac124b1cfa62c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/rw.png using Guid(aedafd444981a392abac124b1cfa62c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '237b120fea6a4dbb3aecb792afd26fc1') in 0.010344 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Arts/flags/sc.png
+  artifactKey: Guid(11fa3fcd46c893dce98ce1626abb6e3c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/sc.png using Guid(11fa3fcd46c893dce98ce1626abb6e3c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f964b46acf8e12d6f98eb3d9ca1deb4e') in 0.014374 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Arts/flags/sh.png
+  artifactKey: Guid(4d3d521a985948bd6854944eb6e415dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/sh.png using Guid(4d3d521a985948bd6854944eb6e415dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4fe38a53798a0f1b0631c62f0b664102') in 0.015166 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Arts/flags/sd.png
+  artifactKey: Guid(cef0c228169e77389ab9df35bf12035a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/sd.png using Guid(cef0c228169e77389ab9df35bf12035a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd1a79f00998358e31ab527a980e87770') in 0.014350 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000126 seconds.
+  path: Assets/Arts/flags/pw.png
+  artifactKey: Guid(bb9bd481154bec6298a0d4fd37ef60c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/pw.png using Guid(bb9bd481154bec6298a0d4fd37ef60c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '610afc9af8ced04d9c8300fd32bdbcf6') in 0.010517 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000040 seconds.
+  path: Assets/Arts/flags/qa.png
+  artifactKey: Guid(b39d947493786cf00b276d2ba6312404) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/qa.png using Guid(b39d947493786cf00b276d2ba6312404) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f265e9a5d3721193c851e3a4b8d4eb68') in 0.014010 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Arts/flags/ro.png
+  artifactKey: Guid(e2f48c63b75c4dd39a35662295973e12) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/ro.png using Guid(e2f48c63b75c4dd39a35662295973e12) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1e8e6f1e9dd5973a2ff0ce0be50dbeea') in 0.009212 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Arts/UI/round_add_white_48dp.png
+  artifactKey: Guid(818f325371af4eaa2bff1317b2228bd9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/UI/round_add_white_48dp.png using Guid(818f325371af4eaa2bff1317b2228bd9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3cbe0a25fef0e2ace2d134e855b7e449') in 0.016391 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.423015 seconds.
+  path: Assets/Arts/flags/pl.png
+  artifactKey: Guid(581ac2091a1dda59a87faed0fe6de114) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/pl.png using Guid(581ac2091a1dda59a87faed0fe6de114) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3242b3b5bdc27a8ec8490ae242078398') in 0.009558 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Arts/flags/pm.png
+  artifactKey: Guid(0c77bc4b128901f4ea26e151c476002a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/pm.png using Guid(0c77bc4b128901f4ea26e151c476002a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4fd7efe1328f074dd86b403fd47b18e3') in 0.011043 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Arts/flags/ps.png
+  artifactKey: Guid(8980c32071de9727bb61688111bd1185) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/ps.png using Guid(8980c32071de9727bb61688111bd1185) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2afe00ac31cfc4fce0a8892a6f7ab5ee') in 0.014660 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Arts/UI/points_icon.png
+  artifactKey: Guid(5388fe3bdbd3ec2b28cf855a8fb8a1d2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/UI/points_icon.png using Guid(5388fe3bdbd3ec2b28cf855a8fb8a1d2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ee88ed87febb496d875f5e2bdff46b9c') in 0.015867 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Arts/flags/pa.png
+  artifactKey: Guid(91b5b49a5a57552b2b0a338522a6c25e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/pa.png using Guid(91b5b49a5a57552b2b0a338522a6c25e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4b8c20b33b91a0143b11ce10600144cf') in 0.008536 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Arts/flags/pe.png
+  artifactKey: Guid(d067c461c31ddaf0b86de5ac858c5ac4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/pe.png using Guid(d067c461c31ddaf0b86de5ac858c5ac4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e9e6945ed0f2559dece336750e1bec2f') in 0.011369 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Arts/osj_logo.png
+  artifactKey: Guid(eb0c5ae298d3f1ec5a119671dad6474a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/osj_logo.png using Guid(eb0c5ae298d3f1ec5a119671dad6474a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '82b63985764920437b5c8f2dff100a56') in 0.027395 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/Arts/flags/nr.png
+  artifactKey: Guid(b6fee10a2840177bda8a6c91bd6da171) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/nr.png using Guid(b6fee10a2840177bda8a6c91bd6da171) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'da3562ea834c90cea0f2c87e00b49083') in 0.017052 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/Arts/flags/pg.png
+  artifactKey: Guid(b32565e5f8631af44a7e771e94367720) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/pg.png using Guid(b32565e5f8631af44a7e771e94367720) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1827201158d5e378d66bce1263e696fe') in 0.013487 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Arts/flags/om.png
+  artifactKey: Guid(54efebd0ba66038929fd47c45fbcdf35) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/om.png using Guid(54efebd0ba66038929fd47c45fbcdf35) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bcf1ad6451839ad181653b5e938b31c3') in 0.015788 seconds 
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Arts/flags/pf.png
+  artifactKey: Guid(fd32c2937f139685fb859b468fbbc360) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Arts/flags/pf.png using Guid(fd32c2937f139685fb859b468fbbc360) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2567dba99afbbf519df03bf267e01548') in 0.016197 seconds 
+Number of asset objects unloaded after import = 4
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0

@@ -15,7 +15,7 @@ E:/Unity Projects/Open-Ski-Jumping-2025
 -logFile
 Logs/AssetImportWorker3.log
 -srvPort
-61724
+53529
 Successfully changed project path to: E:/Unity Projects/Open-Ski-Jumping-2025
 E:/Unity Projects/Open-Ski-Jumping-2025
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -47,12 +47,12 @@ E:/Unity Projects/Open-Ski-Jumping-2025
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [19288] Host "[IP] 100.122.23.74 [Port] 0 [Flags] 2 [Guid] 2721184053 [EditorId] 2721184053 [Version] 1048832 [Id] WindowsEditor(7,LAPTOP-7BS7T25T) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+Player connection [19872] Host "[IP] 100.122.23.74 [Port] 0 [Flags] 2 [Guid] 117509485 [EditorId] 117509485 [Version] 1048832 [Id] WindowsEditor(7,LAPTOP-7BS7T25T) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
 
-Player connection [19288] Host "[IP] 100.122.23.74 [Port] 0 [Flags] 2 [Guid] 2721184053 [EditorId] 2721184053 [Version] 1048832 [Id] WindowsEditor(7,LAPTOP-7BS7T25T) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [19872] Host "[IP] 100.122.23.74 [Port] 0 [Flags] 2 [Guid] 117509485 [EditorId] 117509485 [Version] 1048832 [Id] WindowsEditor(7,LAPTOP-7BS7T25T) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
 
 [Physics::Module] Initialized MultithreadedJobDispatcher with {0} workers.
-Refreshing native plugins compatible for Editor in 74.44 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 67.53 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2021.3.45f2 (88f88f591b2e)
 [Subsystems] Discovering subsystems at path E:/Unity/2021.3.45f2/Editor/Data/Resources/UnitySubsystems
@@ -68,49 +68,49 @@ Initialize mono
 Mono path[0] = 'E:/Unity/2021.3.45f2/Editor/Data/Managed'
 Mono path[1] = 'E:/Unity/2021.3.45f2/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'E:/Unity/2021.3.45f2/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56420
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56016
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: E:/Unity/2021.3.45f2/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.002215 seconds.
+Registered in 0.001649 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 62.83 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 68.20 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.675 seconds
+- Completed reload, in  0.624 seconds
 Domain Reload Profiling:
-	ReloadAssembly (676ms)
-		BeginReloadAssembly (114ms)
+	ReloadAssembly (624ms)
+		BeginReloadAssembly (94ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (1ms)
-		EndReloadAssembly (470ms)
-			LoadAssemblies (112ms)
+		EndReloadAssembly (450ms)
+			LoadAssemblies (93ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (144ms)
+			SetupTypeCache (112ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (24ms)
-			SetupLoadedEditorAssemblies (263ms)
+			RebuildScriptCaches (28ms)
+			SetupLoadedEditorAssemblies (272ms)
 				LogAssemblyErrors (0ms)
 				InitializePlatformSupportModulesInManaged (6ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (63ms)
+				RefreshPlugins (68ms)
 				BeforeProcessingInitializeOnLoad (1ms)
-				ProcessInitializeOnLoadAttributes (149ms)
-				ProcessInitializeOnLoadMethodAttributes (43ms)
+				ProcessInitializeOnLoadAttributes (152ms)
+				ProcessInitializeOnLoadMethodAttributes (44ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.005497 seconds.
+Registered in 0.006377 seconds.
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory is not a mono symbol file
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 69.67 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 72.99 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Error saving file Library/StateCache/LayerSettings/9e/9ecc5c3c162a7aba29bafa64c8b94b7c.json. Error: System.IO.IOException: Sharing violation on path E:\Unity Projects\Open-Ski-Jumping-2025\Library\StateCache\LayerSettings\9e\9ecc5c3c162a7aba29bafa64c8b94b7c.json
   at System.IO.FileStream..ctor (System.String path, System.IO.FileMode mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32 bufferSize, System.Boolean anonymous, System.IO.FileOptions options) [0x0019e] in <34c8028f8a3946349d8f0d77e409a1ae>:0 
@@ -121,91 +121,91 @@ Error saving file Library/StateCache/LayerSettings/9e/9ecc5c3c162a7aba29bafa64c8
   at (wrapper remoting-invoke-with-check) System.IO.StreamWriter..ctor(string,bool,System.Text.Encoding)
   at System.IO.File.WriteAllText (System.String path, System.String contents, System.Text.Encoding encoding) [0x00034] in <34c8028f8a3946349d8f0d77e409a1ae>:0 
   at UnityEditor.StateCache`1[T].SetState (UnityEngine.Hash128 key, T obj) [0x0004b] in <e2ec61eabaea4cfa8892d65208615f30>:0 
-0x00007ff68c6a1b6d (Unity) StackWalker::GetCurrentCallstack
-0x00007ff68c6a86f9 (Unity) StackWalker::ShowCallstack
-0x00007ff68d63c913 (Unity) GetStacktrace
-0x00007ff68dce949d (Unity) DebugStringToFile
-0x00007ff68b79afc2 (Unity) DebugLogHandler_CUSTOM_Internal_Log
-0x0000019ffe7e7b83 (Mono JIT Code) (wrapper managed-to-native) UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
-0x0000019ffe7e78ab (Mono JIT Code) UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-0x0000019ffe7e7630 (Mono JIT Code) UnityEngine.Logger:Log (UnityEngine.LogType,object)
-0x0000019ffe7e74f5 (Mono JIT Code) UnityEngine.Debug:LogError (object)
-0x0000019ffe7e1263 (Mono JIT Code) UnityEditor.StateCache`1<UnityEditor.Tools/LayerSettings>:SetState (UnityEngine.Hash128,UnityEditor.Tools/LayerSettings)
-0x0000019ffe7e0e5b (Mono JIT Code) UnityEditor.Tools:set_lockedLayers (int)
-0x0000019ffe7dd03b (Mono JIT Code) UnityEditor.Tools:OnEnable ()
-0x0000019ffe4f1688 (Mono JIT Code) (wrapper runtime-invoke) object:runtime_invoke_void__this__ (object,intptr,intptr,intptr)
-0x00007ff9bfeb697e (mono-2.0-bdwgc) [mini-runtime.c:3445] mono_jit_runtime_invoke 
-0x00007ff9bfdecdd4 (mono-2.0-bdwgc) [object.c:3068] do_runtime_invoke 
-0x00007ff9bfdecf4c (mono-2.0-bdwgc) [object.c:3115] mono_runtime_invoke 
-0x00007ff68c5c4bd4 (Unity) scripting_method_invoke
-0x00007ff68c5a3e44 (Unity) ScriptingInvocation::Invoke
-0x00007ff68c5a3f2e (Unity) ScriptingInvocation::InvokeChecked
-0x00007ff68c63a676 (Unity) SerializableManagedRef::CallMethod
-0x00007ff68c58bdd0 (Unity) MonoBehaviour::AwakeFromLoad
-0x00007ff68c596d88 (Unity) ResetAndApplyDefaultReferencesOnNewMonoBehaviour
-0x00007ff68c5a1d49 (Unity) Scripting::CreateScriptableObjectWithType
-0x00007ff68b78af00 (Unity) ScriptableObject_CUSTOM_CreateScriptableObjectInstanceFromType
-0x0000019ffe7dc995 (Mono JIT Code) (wrapper managed-to-native) UnityEngine.ScriptableObject:CreateScriptableObjectInstanceFromType (System.Type,bool)
-0x0000019ffe7dc8d3 (Mono JIT Code) UnityEngine.ScriptableObject:CreateInstance (System.Type)
-0x0000019ffe7dc853 (Mono JIT Code) UnityEngine.ScriptableObject:CreateInstance<T_REF> ()
-0x0000019ffe7dc7a3 (Mono JIT Code) UnityEditor.Tools:get_get ()
-0x0000019ffe7dbf6b (Mono JIT Code) UnityEditor.Tools:get_visibleLayers ()
-0x0000019ffe7dbc63 (Mono JIT Code) [BoneRendererUtils.cs:121] UnityEditor.Animations.Rigging.BoneRendererUtils:.cctor () 
-0x0000019ffe7db6ed (Mono JIT Code) (wrapper runtime-invoke) object:runtime_invoke_void (object,intptr,intptr,intptr)
-0x00007ff9bfeb697e (mono-2.0-bdwgc) [mini-runtime.c:3445] mono_jit_runtime_invoke 
-0x00007ff9bfdecdd4 (mono-2.0-bdwgc) [object.c:3068] do_runtime_invoke 
-0x00007ff9bfde7b79 (mono-2.0-bdwgc) [object.c:563] mono_runtime_class_init_full 
-0x00007ff9bfd1ddd7 (mono-2.0-bdwgc) [icall.c:1292] ves_icall_System_Runtime_CompilerServices_RuntimeHelpers_RunClassConstructor 
-0x00007ff9bfd4febc (mono-2.0-bdwgc) [icall-def.h:756] ves_icall_System_Runtime_CompilerServices_RuntimeHelpers_RunClassConstructor_raw 
-0x0000019fffe73bea (Mono JIT Code) (wrapper managed-to-native) System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (intptr)
-0x0000019fffe73afb (Mono JIT Code) System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-0x0000019fffe73243 (Mono JIT Code) UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-0x0000019ffff9da38 (Mono JIT Code) (wrapper runtime-invoke) <Module>:runtime_invoke_void_object (object,intptr,intptr,intptr)
-0x00007ff9bfeb697e (mono-2.0-bdwgc) [mini-runtime.c:3445] mono_jit_runtime_invoke 
-0x00007ff9bfdecdd4 (mono-2.0-bdwgc) [object.c:3068] do_runtime_invoke 
-0x00007ff9bfdecf4c (mono-2.0-bdwgc) [object.c:3115] mono_runtime_invoke 
-0x00007ff68c5c4bd4 (Unity) scripting_method_invoke
-0x00007ff68c5a3e44 (Unity) ScriptingInvocation::Invoke
-0x00007ff68c59e9a5 (Unity) ScriptingInvocation::Invoke<void>
-0x00007ff68c6e1fc3 (Unity) Scripting::UnityEditor::EditorAssembliesProxy::ProcessInitializeOnLoadAttributes
-0x00007ff68c5989cb (Unity) MonoManager::SetupLoadedEditorAssemblies
-0x00007ff68c58e5ed (Unity) MonoManager::EndReloadAssembly
-0x00007ff68c596048 (Unity) MonoManager::ReloadAssembly
-0x00007ff68d4f35c2 (Unity) LoadDomainAndUserAssemblies
-0x00007ff68d4f3cf4 (Unity) LoadUserAssemblies
-0x00007ff68d1f5273 (Unity) Application::InitializeProject
-0x00007ff68d645bc0 (Unity) WinMain
-0x00007ff68e9f598e (Unity) __scrt_common_main_seh
-0x00007ffa973de957 (KERNEL32) BaseThreadInitThunk
-0x00007ffa98887c1c (ntdll) RtlUserThreadStart
+0x00007ff63fe21b6d (Unity) StackWalker::GetCurrentCallstack
+0x00007ff63fe286f9 (Unity) StackWalker::ShowCallstack
+0x00007ff640dbc913 (Unity) GetStacktrace
+0x00007ff64146949d (Unity) DebugStringToFile
+0x00007ff63ef1afc2 (Unity) DebugLogHandler_CUSTOM_Internal_Log
+0x0000026912b2ad13 (Mono JIT Code) (wrapper managed-to-native) UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+0x0000026912b2aa3b (Mono JIT Code) UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+0x0000026912b2a7c0 (Mono JIT Code) UnityEngine.Logger:Log (UnityEngine.LogType,object)
+0x0000026912b2a685 (Mono JIT Code) UnityEngine.Debug:LogError (object)
+0x0000026912b243f3 (Mono JIT Code) UnityEditor.StateCache`1<UnityEditor.Tools/LayerSettings>:SetState (UnityEngine.Hash128,UnityEditor.Tools/LayerSettings)
+0x0000026912b23feb (Mono JIT Code) UnityEditor.Tools:set_lockedLayers (int)
+0x0000026912b2017b (Mono JIT Code) UnityEditor.Tools:OnEnable ()
+0x000002690c111688 (Mono JIT Code) (wrapper runtime-invoke) object:runtime_invoke_void__this__ (object,intptr,intptr,intptr)
+0x00007ff908cb697e (mono-2.0-bdwgc) [mini-runtime.c:3445] mono_jit_runtime_invoke 
+0x00007ff908becdd4 (mono-2.0-bdwgc) [object.c:3068] do_runtime_invoke 
+0x00007ff908becf4c (mono-2.0-bdwgc) [object.c:3115] mono_runtime_invoke 
+0x00007ff63fd44bd4 (Unity) scripting_method_invoke
+0x00007ff63fd23e44 (Unity) ScriptingInvocation::Invoke
+0x00007ff63fd23f2e (Unity) ScriptingInvocation::InvokeChecked
+0x00007ff63fdba676 (Unity) SerializableManagedRef::CallMethod
+0x00007ff63fd0bdd0 (Unity) MonoBehaviour::AwakeFromLoad
+0x00007ff63fd16d88 (Unity) ResetAndApplyDefaultReferencesOnNewMonoBehaviour
+0x00007ff63fd21d49 (Unity) Scripting::CreateScriptableObjectWithType
+0x00007ff63ef0af00 (Unity) ScriptableObject_CUSTOM_CreateScriptableObjectInstanceFromType
+0x0000026912b0faf5 (Mono JIT Code) (wrapper managed-to-native) UnityEngine.ScriptableObject:CreateScriptableObjectInstanceFromType (System.Type,bool)
+0x0000026912b1ff83 (Mono JIT Code) UnityEngine.ScriptableObject:CreateInstance (System.Type)
+0x0000026912b1ff03 (Mono JIT Code) UnityEngine.ScriptableObject:CreateInstance<T_REF> ()
+0x0000026912b1fe53 (Mono JIT Code) UnityEditor.Tools:get_get ()
+0x0000026912b1f61b (Mono JIT Code) UnityEditor.Tools:get_visibleLayers ()
+0x0000026912b1f313 (Mono JIT Code) [BoneRendererUtils.cs:121] UnityEditor.Animations.Rigging.BoneRendererUtils:.cctor () 
+0x0000026912b1ed9d (Mono JIT Code) (wrapper runtime-invoke) object:runtime_invoke_void (object,intptr,intptr,intptr)
+0x00007ff908cb697e (mono-2.0-bdwgc) [mini-runtime.c:3445] mono_jit_runtime_invoke 
+0x00007ff908becdd4 (mono-2.0-bdwgc) [object.c:3068] do_runtime_invoke 
+0x00007ff908be7b79 (mono-2.0-bdwgc) [object.c:563] mono_runtime_class_init_full 
+0x00007ff908b1ddd7 (mono-2.0-bdwgc) [icall.c:1292] ves_icall_System_Runtime_CompilerServices_RuntimeHelpers_RunClassConstructor 
+0x00007ff908b4febc (mono-2.0-bdwgc) [icall-def.h:756] ves_icall_System_Runtime_CompilerServices_RuntimeHelpers_RunClassConstructor_raw 
+0x000002690ea63bea (Mono JIT Code) (wrapper managed-to-native) System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (intptr)
+0x000002690ea63afb (Mono JIT Code) System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+0x000002690ea63243 (Mono JIT Code) UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+0x000002690eb8da38 (Mono JIT Code) (wrapper runtime-invoke) <Module>:runtime_invoke_void_object (object,intptr,intptr,intptr)
+0x00007ff908cb697e (mono-2.0-bdwgc) [mini-runtime.c:3445] mono_jit_runtime_invoke 
+0x00007ff908becdd4 (mono-2.0-bdwgc) [object.c:3068] do_runtime_invoke 
+0x00007ff908becf4c (mono-2.0-bdwgc) [object.c:3115] mono_runtime_invoke 
+0x00007ff63fd44bd4 (Unity) scripting_method_invoke
+0x00007ff63fd23e44 (Unity) ScriptingInvocation::Invoke
+0x00007ff63fd1e9a5 (Unity) ScriptingInvocation::Invoke<void>
+0x00007ff63fe61fc3 (Unity) Scripting::UnityEditor::EditorAssembliesProxy::ProcessInitializeOnLoadAttributes
+0x00007ff63fd189cb (Unity) MonoManager::SetupLoadedEditorAssemblies
+0x00007ff63fd0e5ed (Unity) MonoManager::EndReloadAssembly
+0x00007ff63fd16048 (Unity) MonoManager::ReloadAssembly
+0x00007ff640c735c2 (Unity) LoadDomainAndUserAssemblies
+0x00007ff640c73cf4 (Unity) LoadUserAssemblies
+0x00007ff640975273 (Unity) Application::InitializeProject
+0x00007ff640dc5bc0 (Unity) WinMain
+0x00007ff64217598e (Unity) __scrt_common_main_seh
+0x00007ffa04acdda7 (KERNEL32) BaseThreadInitThunk
+0x00007ffa068fee4c (ntdll) RtlUserThreadStart
 
 Package Manager log level set to [2]
 [Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] Cannot connect to Unity Package Manager local server
 Mono: successfully reloaded assembly
-- Completed reload, in  2.145 seconds
+- Completed reload, in  2.403 seconds
 Domain Reload Profiling:
-	ReloadAssembly (2146ms)
-		BeginReloadAssembly (118ms)
+	ReloadAssembly (2404ms)
+		BeginReloadAssembly (135ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (5ms)
+			DisableScriptedObjects (6ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (21ms)
-		EndReloadAssembly (1950ms)
-			LoadAssemblies (171ms)
+			CreateAndSetChildDomain (25ms)
+		EndReloadAssembly (2177ms)
+			LoadAssemblies (122ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (228ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (79ms)
-			SetupLoadedEditorAssemblies (1466ms)
+			SetupTypeCache (290ms)
+			ReleaseScriptCaches (2ms)
+			RebuildScriptCaches (100ms)
+			SetupLoadedEditorAssemblies (1655ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (3ms)
+				InitializePlatformSupportModulesInManaged (4ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (70ms)
-				BeforeProcessingInitializeOnLoad (63ms)
-				ProcessInitializeOnLoadAttributes (1137ms)
-				ProcessInitializeOnLoadMethodAttributes (191ms)
+				RefreshPlugins (73ms)
+				BeforeProcessingInitializeOnLoad (79ms)
+				ProcessInitializeOnLoadAttributes (1306ms)
+				ProcessInitializeOnLoadMethodAttributes (190ms)
 				AfterProcessingInitializeOnLoad (2ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
@@ -213,13 +213,13 @@ Domain Reload Profiling:
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
-Refreshing native plugins compatible for Editor in 3.13 ms, found 3 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.07 seconds
+Refreshing native plugins compatible for Editor in 2.09 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 5309 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 89 unused Assets / (2.1 MB). Loaded Objects now: 5741.
-Memory consumption went from 242.6 MB to 240.4 MB.
-Total: 8.691000 ms (FindLiveObjects: 0.848900 ms CreateObjectMapping: 0.376900 ms MarkObjects: 6.929800 ms  DeleteObjects: 0.533600 ms)
+Unloading 5312 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 91 unused Assets / (2.1 MB). Loaded Objects now: 5743.
+Memory consumption went from 243.6 MB to 241.5 MB.
+Total: 11.623900 ms (FindLiveObjects: 0.648600 ms CreateObjectMapping: 0.541700 ms MarkObjects: 9.870600 ms  DeleteObjects: 0.561900 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
@@ -234,6 +234,30 @@ AssetImportParameters requested are different than current active one (requested
   custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
   custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 976116.957124 seconds.
+  path: Assets/Resources/Translations/Phrases/WindPhrase.asset
+  artifactKey: Guid(33b5c8afbd9af0d4d970c725cc73aef6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Resources/Translations/Phrases/WindPhrase.asset using Guid(33b5c8afbd9af0d4d970c725cc73aef6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a206437321d9fcea46a4e2607fc4ae12') in 0.051548 seconds 
+Number of asset objects unloaded after import = 48
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Resources/Translations/Phrases/Name.asset
+  artifactKey: Guid(53e90ba9cdb7d257aac12bb345602c8b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Resources/Translations/Phrases/Name.asset using Guid(53e90ba9cdb7d257aac12bb345602c8b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6ee35d7d556100b1e67cf8a9dd10758d') in 0.017828 seconds 
+Number of asset objects unloaded after import = 47
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Resources/Translations/Phrases/Yes.asset
+  artifactKey: Guid(5655295efeb86b255bb3bde419e1c1f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Number of updated assets reloaded before import = 0
+Start importing Assets/Resources/Translations/Phrases/Yes.asset using Guid(5655295efeb86b255bb3bde419e1c1f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5e0182ff0b7ca2f51b64fadb8a260bec') in 0.010313 seconds 
+Number of asset objects unloaded after import = 48
 Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
 AssetImportWorker is now disconnected from the server
 Process exiting

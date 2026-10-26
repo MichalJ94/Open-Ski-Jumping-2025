@@ -81,7 +81,7 @@ namespace OpenSkiJumping.Competition
                  OnJumpStart();
               //  UnityEngine.Debug.Log("OnJumpStart just run");
 
-              //Aktywacja kodu ponizej bez komentarzy sprawia, ze gra siê zatrzymuje przed ostatnim skoczkiem serii
+              //Aktywacja kodu ponizej bez komentarzy sprawia, ze gra siï¿½ zatrzymuje przed ostatnim skoczkiem serii
 
               if (jumperCounter == bibColors-1)
                 {
@@ -104,7 +104,7 @@ namespace OpenSkiJumping.Competition
 
         public void PermitCPUJumpsSetInactive()
         {
-            if (resultsManager.Value.EventInfo.eventType != EventType.Team && resultsManager.Value.EventInfo.roundInfos.Count < 3)
+            if (!resultsManager.Value.EventInfo.eventType.IsGroupEvent() && resultsManager.Value.EventInfo.roundInfos.Count < 3)
             {
                 permitCPUJumps = false;
             }
@@ -134,7 +134,7 @@ namespace OpenSkiJumping.Competition
                 onRoundFinish.Invoke();
                 Debug.Log($"ROUND RESULTS MISSION. onRoundFinish.Invoke(); resultsManager.Value.EventInfo.roundInfos.Count: {resultsManager.Value.EventInfo.roundInfos.Count}");
                 //  LastRankUsable = resultsManager.Value.LastRank.ToArray();
-                if (resultsManager.Value.EventInfo.eventType != EventType.Team && resultsManager.Value.EventInfo.roundInfos.Count < 3)
+                if (!resultsManager.Value.EventInfo.eventType.IsGroupEvent() && resultsManager.Value.EventInfo.roundInfos.Count < 3)
                 {
                     Debug.Log("onRoundCompleted.Invoke();");
                     onRoundCompleted.Invoke();
@@ -145,13 +145,13 @@ namespace OpenSkiJumping.Competition
                 return;
             }
 
-            if (resultsManager.Value.EventInfo.eventType != EventType.Team && resultsManager.Value.EventInfo.roundInfos.Count < 3)
+            if (!resultsManager.Value.EventInfo.eventType.IsGroupEvent() && resultsManager.Value.EventInfo.roundInfos.Count < 3)
             {
                 Debug.Log("CompetitionRunner onRoundCompleted.Invoke(); run in public void public void OnRoundFinish()");
                 onRoundCompleted.Invoke();
             }
             onRoundFinish.Invoke();
-            if (resultsManager.Value.EventInfo.eventType == EventType.Team || resultsManager.Value.EventInfo.roundInfos.Count > 2)
+            if (resultsManager.Value.EventInfo.eventType.IsGroupEvent() || resultsManager.Value.EventInfo.roundInfos.Count > 2)
             {
                 Debug.Log("CompetitionRunner OnCompetitionFinish(); run in public void public void OnRoundFinish()");
                 OnCompetitionFinish();

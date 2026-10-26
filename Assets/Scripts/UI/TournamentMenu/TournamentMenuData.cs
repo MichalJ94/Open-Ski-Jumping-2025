@@ -6,6 +6,7 @@ using OpenSkiJumping.Competition.Persistent;
 using OpenSkiJumping.Data;
 using OpenSkiJumping.ScriptableObjects;
 using UnityEngine;
+using EventType = OpenSkiJumping.Competition.EventType;
 
 namespace OpenSkiJumping.UI.TournamentMenu
 {
@@ -35,7 +36,8 @@ namespace OpenSkiJumping.UI.TournamentMenu
         public List<CompetitorData> competitors;
         public bool registered;
         public Team team;
-        public IEnumerable<Competitor> GetTeamMembers() => competitors.Take(4).Select(it => it.competitor);
+        /// <summary>Returns the first <paramref name="count"/> members of the team (the squad that competes).</summary>
+        public IEnumerable<Competitor> GetTeamMembers(int count = 4) => competitors.Take(count).Select(it => it.competitor);
     }
 
     public enum RandomEventType
@@ -82,7 +84,19 @@ namespace OpenSkiJumping.UI.TournamentMenu
 
         public List<CompetitorData> Competitors => GameSave.competitors;
 
-        public List<TeamData> Teams => GameSave.teams.Where(data => data.competitors.Count >= 4).ToList();
+        /// <summary>Number of jumpers that compete per team in the current event (2 for Duos, 4 otherwise).</summary>
+        public int CurrentTeamSize
+        {
+            get
+            {
+                var currentEvent = GetCurrentEvent();
+                return currentEvent != null && currentEvent.eventType == EventType.Duos
+                    ? EventType.Duos.GetSubRoundsCount()
+                    : EventType.Team.GetSubRoundsCount();
+            }
+        }
+
+        public List<TeamData> Teams => GameSave.teams.Where(data => data.competitors.Count >= CurrentTeamSize).ToList();
 
         public GameSave GameSave => savesRuntime.GetCurrentSave();
 

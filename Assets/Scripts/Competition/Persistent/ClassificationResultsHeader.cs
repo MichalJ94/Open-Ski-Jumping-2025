@@ -36,7 +36,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
         public void UpdateAccordingToSelectedEvent(ClassificationInfo item)
         {
 
-           if(item.eventType == Competition.EventType.Team)
+           if(item.eventType.IsGroupEvent())
             {
                 goldMedal.active = false;
                 silverMedal.active= false;

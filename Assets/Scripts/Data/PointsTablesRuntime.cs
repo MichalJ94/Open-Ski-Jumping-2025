@@ -7,7 +7,9 @@ namespace OpenSkiJumping.Data
     [CreateAssetMenu(menuName = "ScriptableObjects/Data/PointsTablesRuntime")]
     public class PointsTablesRuntime : DatabaseObject<List<List<PointsTable>>>
     {
-        public IEnumerable<PointsTable> GetData(int tableIndex) => Data[tableIndex];
+        /// <summary>Returns the tables of the given group, or an empty list when the group does not exist in the data file.</summary>
+        public IEnumerable<PointsTable> GetData(int tableIndex) =>
+            tableIndex < Data.Count ? Data[tableIndex] : new List<PointsTable>();
 
         public bool Remove(int tableIndex, PointsTable item)
         {

@@ -42,8 +42,11 @@ namespace OpenSkiJumping.UI.CalendarEditor
         public void LoadCalendarEditor()
         {
             if (calendarsMenu.SelectedCalendar == null) return;
+            Debug.Log("Passed calendarsMenu.SelectedCalendar");
             calendar = calendarsMenu.SelectedCalendar;
+            Debug.Log(" calendar = calendarsMenu.SelectedCalendar;");
             LoadCalendar(calendar);
+            Debug.Log(" Passed LoadCalendar");
             calendarsMenu.gameObject.SetActive(false);
             contentGameObject.SetActive(true);
         }

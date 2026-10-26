@@ -1,3 +1,4 @@
+using OpenSkiJumping.Competition;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,6 +6,7 @@ using OpenSkiJumping.ScriptableObjects;
 using OpenSkiJumping.UI.ListView;
 using UnityEngine;
 using UnityEngine.UI;
+using EventType = OpenSkiJumping.Competition.EventType;
 
 namespace OpenSkiJumping.UI.TournamentMenu.TeamSquad
 {
@@ -81,15 +83,20 @@ namespace OpenSkiJumping.UI.TournamentMenu.TeamSquad
         {
             var item = competitors[index];
             listItem.nameText.text = $"{item.competitor.firstName} {item.competitor.lastName.ToUpper()}";
-            if (index < 4)
+            var currentEvent = tournamentMenuData.GetCurrentEvent();
+            if (currentEvent.eventType.IsGroupEvent())
             {
-                listItem.bibImage.sprite = iconsData.GetBibIcon(1);
-                listItem.bibImage.color = bibColors[index];
-            }
-            else
-            {
-                listItem.bibImage.sprite = iconsData.GetBibIcon(0);
-                listItem.bibImage.color = Color.white;
+                var squadSize = currentEvent.eventType.GetSubRoundsCount();
+                if (index < squadSize)
+                {
+                    listItem.bibImage.sprite = iconsData.GetBibIcon(1);
+                    listItem.bibImage.color = bibColors[index];
+                }
+                else
+                {
+                    listItem.bibImage.sprite = iconsData.GetBibIcon(0);
+                    listItem.bibImage.color = Color.white;
+                }
             }
 
             listItem.genderIconImage.sprite = iconsData.GetGenderIcon(item.competitor.gender);

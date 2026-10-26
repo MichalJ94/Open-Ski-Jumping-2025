@@ -109,7 +109,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
                 for (int j = 0; j < model.GameSave.calendar.events[i].classifications.Count; j++)
                 {
 
-                    if (model.GameSave.calendar.events[i].classifications[j] == classificationIndex && model.GameSave.calendar.classifications[classificationIndex].eventType != EventType.Team && model.GameSave.calendar.events[i].eventType != EventType.Team)
+                    if (model.GameSave.calendar.events[i].classifications[j] == classificationIndex && !model.GameSave.calendar.classifications[classificationIndex].eventType.IsGroupEvent() && !model.GameSave.calendar.events[i].eventType.IsGroupEvent())
                     {
                         competitorIDsofWinner = eventResults[i].finalResults[0];
                         actualIDofWinner = eventResults[i].competitorIds[competitorIDsofWinner];
@@ -180,7 +180,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
             {
                 for (int j = 0; j < model.GameSave.calendar.events[i].classifications.Count; j++)
                 {
-                    if (model.GameSave.calendar.events[i].classifications[j] == classificationIndex && model.GameSave.calendar.events[i].eventType != EventType.Team && model.GameSave.calendar.classifications[j].eventType != EventType.Team)
+                    if (model.GameSave.calendar.events[i].classifications[j] == classificationIndex && !model.GameSave.calendar.events[i].eventType.IsGroupEvent() && !model.GameSave.calendar.classifications[j].eventType.IsGroupEvent())
                     {
                         competitorIDsof2ndPlace = eventResults[i].finalResults[1];
                         actualIDof2ndPlace = eventResults[i].competitorIds[competitorIDsof2ndPlace];
@@ -228,7 +228,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
             {
                 for (int j = 0; j < model.GameSave.calendar.events[i].classifications.Count; j++)
                 {
-                    if (model.GameSave.calendar.events[i].classifications[j] == classificationIndex && model.GameSave.calendar.events[i].eventType != EventType.Team && model.GameSave.calendar.classifications[j].eventType != EventType.Team)
+                    if (model.GameSave.calendar.events[i].classifications[j] == classificationIndex && !model.GameSave.calendar.events[i].eventType.IsGroupEvent() && !model.GameSave.calendar.classifications[j].eventType.IsGroupEvent())
                     {
                         competitorIDsof3rdPlace = eventResults[i].finalResults[2];
                         actualIDof3rdPlace = eventResults[i].competitorIds[competitorIDsof3rdPlace];
@@ -278,7 +278,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ResultsMenu
             {
                 for (int j = 0; j < model.GameSave.calendar.events[i].classifications.Count; j++)
                 {
-                    if (model.GameSave.calendar.events[i].eventType != EventType.Team && model.GameSave.calendar.classifications[j].eventType != EventType.Team)
+                    if (!model.GameSave.calendar.events[i].eventType.IsGroupEvent() && !model.GameSave.calendar.classifications[j].eventType.IsGroupEvent())
                     {
                         competitorIDsof4thPlace = eventResults[i].finalResults[3];
                         actualIDof4thPlace = eventResults[i].competitorIds[competitorIDsof4thPlace];

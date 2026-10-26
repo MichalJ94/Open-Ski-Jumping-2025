@@ -23,9 +23,14 @@ namespace OpenSkiJumping.ScriptableObjects
             return classificationTypeIcons[(int) arg];
         }
 
+        /// <summary>
+        /// Returns the icon for the event type. Falls back to the Team icon when no dedicated icon (e.g. Duos) is assigned.
+        /// </summary>
         public Sprite GetEventTypeIcon(EventType arg)
         {
-            return eventTypeIcons[(int) arg];
+            var index = (int) arg;
+            if (index < eventTypeIcons.Length && eventTypeIcons[index] != null) return eventTypeIcons[index];
+            return eventTypeIcons[Mathf.Min((int) EventType.Team, eventTypeIcons.Length - 1)];
         }
 
         public Sprite GetBibIcon(int arg)

@@ -40,7 +40,7 @@ namespace OpenSkiJumping.Competition
                     preQualEventType = calendar.classifications[eventInfo.preQualRankId].eventType;
                 }
 
-                if (preQualEventType != eventInfo.eventType)
+                if (!preQualEventType.IsSameParticipantKind(eventInfo.eventType))
                     preQualifiedCompetitors = Enumerable.Empty<int>();
                 else
                     preQualifiedCompetitors = preQualRankProcessor.GetTrimmedFinalResults(eventResults.participants,
@@ -70,7 +70,7 @@ namespace OpenSkiJumping.Competition
                     qualEventType = calendar.classifications[eventInfo.qualRankId].eventType;
                 }
 
-                if (qualEventType != eventInfo.eventType)
+                if (!qualEventType.IsSameParticipantKind(eventInfo.eventType))
                     competitorsList = eventResults.participants.Select(x => x.id);
                 else
                     competitorsList = qualRankProcessor.GetTrimmedFinalResultsPreQual(eventResults.participants,
@@ -91,26 +91,30 @@ namespace OpenSkiJumping.Competition
                 ordEventType = calendar.classifications[eventInfo.ordRankId].eventType;
             }
 
-            return eventInfo.eventType == ordEventType
+            return eventInfo.eventType.IsSameParticipantKind(ordEventType)
                 ? ordRankProcessor.GetFinalResultsWithCompetitorsList(competitorsList)
                 : competitorsList;
         }
 
         public static List<Participant> EventParticipants(GameSave save, int eventId)
         {
-            var eventParticipants =
-                save.calendar.events[eventId].eventType == EventType.Individual
-                    ? save.competitors.Where(it => it.registered).Select(it => new Participant
+            var eventType = save.calendar.events[eventId].eventType;
+            int requiredMembers = eventType.GetSubRoundsCount();
+
+            var eventParticipants = eventType == EventType.Individual
+                ? save.competitors.Where(it => it.registered).Select(it => new Participant
+                {
+                    competitors = new List<int> {it.calendarId}, id = it.calendarId,
+                    teamId = save.competitors[it.calendarId].teamId
+                }).ToList()
+                : save.teams.Where(it => it.registered && it.competitors.Count >= requiredMembers)
+                    .Select(it => new Participant
                     {
-                        competitors = new List<int> {it.calendarId}, id = it.calendarId,
-                        teamId = save.competitors[it.calendarId].teamId
-                    }).ToList()
-                    : save.teams.Where(it => it.registered && it.competitors.Count >= 4).Select(it => new Participant
-                        {
-                            competitors = it.competitors.Select(x => x.calendarId).Take(4).ToList(), id = it.calendarId,
-                            teamId = it.calendarId
-                        })
-                        .ToList();
+                        competitors = it.competitors.Select(x => x.calendarId).Take(requiredMembers).ToList(),
+                        id = it.calendarId,
+                        teamId = it.calendarId
+                    })
+                    .ToList();
             return eventParticipants;
         }
 

@@ -1,3 +1,4 @@
+using OpenSkiJumping.Competition;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace OpenSkiJumping.UI.CalendarEditor.Classifications
         [SerializeField] private SegmentedControl classificationTypeSelect;
         [SerializeField] private TMP_Dropdown indPointsTableDropdown;
         [SerializeField] private TMP_Dropdown teamPointsTableDropdown;
+        [SerializeField] private TMP_Dropdown duosPointsTableDropdown;
         [SerializeField] private TMP_InputField limitInput;
         [SerializeField] private SegmentedControl limitTypeSelect;
         [SerializeField] private TMP_InputField medalPlacesInput;
@@ -34,6 +36,7 @@ namespace OpenSkiJumping.UI.CalendarEditor.Classifications
 
         [SerializeField] private GameObject indTableObj;
         [SerializeField] private GameObject teamTableObj;
+        [SerializeField] private GameObject duosTableObj;
         [SerializeField] private GameObject limitObj;
         [SerializeField] private GameObject medalsObj;
 
@@ -42,6 +45,7 @@ namespace OpenSkiJumping.UI.CalendarEditor.Classifications
 
         private List<PointsTable> pointsTablesIndividual;
         private List<PointsTable> pointsTablesTeam;
+        private List<PointsTable> pointsTablesDuos = new List<PointsTable>();
         private List<ClassificationInfo> classifications;
 
         public ClassificationInfo SelectedClassification
@@ -92,6 +96,25 @@ namespace OpenSkiJumping.UI.CalendarEditor.Classifications
         {
             get => pointsTablesTeam[teamPointsTableDropdown.value];
             set => SelectPointsTable(value, teamPointsTableDropdown, pointsTablesTeam);
+        }
+
+        public IEnumerable<PointsTable> PointsTablesDuos
+        {
+            set
+            {
+                pointsTablesDuos = value.ToList();
+                duosPointsTableDropdown.ClearOptions();
+                duosPointsTableDropdown.AddOptions(pointsTablesDuos.Select(item => item.name).ToList());
+            }
+        }
+
+        public PointsTable SelectedPointsTableDuos
+        {
+            get => pointsTablesDuos.Count == 0 ? null : pointsTablesDuos[duosPointsTableDropdown.value];
+            set
+            {
+                if (pointsTablesDuos.Count > 0) SelectPointsTable(value, duosPointsTableDropdown, pointsTablesDuos);
+            }
         }
 
         public string Name
@@ -197,6 +220,7 @@ namespace OpenSkiJumping.UI.CalendarEditor.Classifications
             medalPlacesInput.onEndEdit.AddListener(arg => OnCurrentClassificationChanged?.Invoke());
             indPointsTableDropdown.onValueChanged.AddListener(arg => OnCurrentClassificationChanged?.Invoke());
             teamPointsTableDropdown.onValueChanged.AddListener(arg => OnCurrentClassificationChanged?.Invoke());
+            duosPointsTableDropdown.onValueChanged.AddListener(arg => OnCurrentClassificationChanged?.Invoke());
             bibColor.OnColorChange += () => OnCurrentClassificationChanged?.Invoke();
         }
 
@@ -224,12 +248,15 @@ namespace OpenSkiJumping.UI.CalendarEditor.Classifications
             if (SelectedClassification.classificationType == Competition.ClassificationType.Place)
             {
                 indTableObj.SetActive(true);
-                teamTableObj.SetActive(SelectedClassification.eventType == Competition.EventType.Team);
+                var isTeamClassification = SelectedClassification.eventType == Competition.EventType.Team;
+                teamTableObj.SetActive(isTeamClassification);
+                duosTableObj.SetActive(isTeamClassification && pointsTablesDuos.Count > 0);
             }
             else
             {
                 indTableObj.SetActive(false);
                 teamTableObj.SetActive(false);
+                duosTableObj.SetActive(false);
             }
 
             limitInput.gameObject.SetActive(SelectedClassification.teamClassificationLimitType ==

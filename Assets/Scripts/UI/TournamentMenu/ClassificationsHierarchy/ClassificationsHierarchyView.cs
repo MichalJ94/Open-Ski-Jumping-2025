@@ -83,7 +83,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.ClassificationsHierarchy
             var item = classifications[index];
             listItem.nameText.text = item.classification.name;
             listItem.bibImage.color = SimpleColorPicker.Hex2Color(item.classification.leaderBibColor);
-            listItem.eventTypeImage.sprite = eventTypeIcons[(int) item.classification.eventType];
+            listItem.eventTypeImage.sprite = eventTypeIcons[Mathf.Min((int) item.classification.eventType, eventTypeIcons.Length - 1)];
             listItem.classificationTypeImage.sprite =
                 classificationTypeIcons[(int) item.classification.classificationType];
 

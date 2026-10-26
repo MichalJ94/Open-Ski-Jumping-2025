@@ -69,8 +69,12 @@ namespace OpenSkiJumping.UI.TournamentMenu.TeamsSelection
         {
             var item = teams[index];
 
+            var teamSize = tournamentMenuData.CurrentTeamSize;
+            for (var slot = 0; slot < listItem.nameText.Length; slot++)
+                listItem.nameText[slot].gameObject.SetActive(slot < teamSize);
+
             var it = 0;
-            foreach (var jumper in item.GetTeamMembers())
+            foreach (var jumper in item.GetTeamMembers(Mathf.Min(teamSize, listItem.nameText.Length)))
             {
                 listItem.nameText[it].text = $"{jumper.firstName} {jumper.lastName.ToUpper()}";
                 it++;

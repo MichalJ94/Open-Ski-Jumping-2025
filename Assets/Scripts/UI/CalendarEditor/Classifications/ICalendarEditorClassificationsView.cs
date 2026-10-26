@@ -14,6 +14,10 @@ namespace OpenSkiJumping.UI.CalendarEditor.Classifications
         PointsTable SelectedPointsTableIndividual { get; set; }
         PointsTable SelectedPointsTableTeam { get; set; }
 
+        IEnumerable<PointsTable> PointsTablesDuos { set; }
+        /// <summary>Selected table for Duos events; null when no Duos tables are available.</summary>
+        PointsTable SelectedPointsTableDuos { get; set; }
+
         string Name { get; set; }
         int EventType { get; set; }
         int ClassificationType { get; set; }

@@ -101,13 +101,13 @@ namespace OpenSkiJumping.TVGraphics
             {
                 current = 0;
             }
-            else if (currentEvent.eventType == EventType.Team)
+            else if (currentEvent.eventType.IsGroupEvent())
             {
                 current = 1;
             }
         
             SetMastersActive();
-            if(currentEvent.eventType == EventType.Team)
+            if(currentEvent.eventType.IsGroupEvent())
             {
                 bibTeamNumberBack.SetActive(true);
                 bibTeamNumberFront.SetActive(true);

@@ -71,6 +71,7 @@ namespace OpenSkiJumping.UI.CalendarEditor.Classifications
                 view.SelectedPointsTableIndividual = classification.pointsTables[0];
             if (classification.pointsTables.Count >= 2)
                 view.SelectedPointsTableTeam = classification.pointsTables[1];
+            view.SelectedPointsTableDuos = classification.pointsTables.Count >= 3 ? classification.pointsTables[2] : null;
         }
 
         private void SaveClassificationInfo()
@@ -89,7 +90,11 @@ namespace OpenSkiJumping.UI.CalendarEditor.Classifications
             {
                 classification.pointsTables = new List<PointsTable> {view.SelectedPointsTableIndividual};
                 if (classification.eventType == EventType.Team)
+                {
                     classification.pointsTables.Add(view.SelectedPointsTableTeam);
+                    var duosTable = view.SelectedPointsTableDuos;
+                    if (duosTable != null) classification.pointsTables.Add(duosTable);
+                }
             }
 
             PresentList();
@@ -109,6 +114,7 @@ namespace OpenSkiJumping.UI.CalendarEditor.Classifications
         {
             view.PointsTablesIndividual = pointsTables.GetData(0);
             view.PointsTablesTeam = pointsTables.GetData(1);
+            view.PointsTablesDuos = pointsTables.GetData(2);
             PresentList();
             view.SelectedClassification = calendarFactory.Classifications.FirstOrDefault();
             PresentClassificationInfo();

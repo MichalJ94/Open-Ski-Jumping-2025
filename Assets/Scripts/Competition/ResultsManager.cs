@@ -68,6 +68,8 @@ namespace OpenSkiJumping.Competition
         private int maxLosers;
         private int roundsCount;
         private int subRoundsCount;
+        private const int TeamPointsTableIndex = 1;
+        private const int DuosPointsTableIndex = 2;
 
 
         public ResultsManager(EventInfo eventInfo, List<Participant> orderedParticipants, IHillInfo hillInfo)
@@ -75,9 +77,9 @@ namespace OpenSkiJumping.Competition
             EventInfo = eventInfo;
             OrderedParticipants = orderedParticipants;
             this.hillInfo = hillInfo;
-            UnityEngine.Debug.Log("Tu¿ przed initGates. eventInfo.roundInfos.Count:");
+            UnityEngine.Debug.Log("Tuï¿½ przed initGates. eventInfo.roundInfos.Count:");
             initGates = new int[eventInfo.roundInfos.Count];
-            UnityEngine.Debug.Log("Tu¿ po przed initGates = new int[eventInfo.roundInfos.Count];");
+            UnityEngine.Debug.Log("Tuï¿½ po przed initGates = new int[eventInfo.roundInfos.Count];");
             InitializeValues();
         }
 
@@ -88,7 +90,7 @@ namespace OpenSkiJumping.Competition
             Results = new Result[competitorsCount];
             LastRank = new int[competitorsCount];
             roundsCount = EventInfo.roundInfos.Count;
-            subRoundsCount = EventInfo.eventType == EventType.Individual ? 1 : 4;
+            subRoundsCount = EventInfo.eventType.GetSubRoundsCount();
 
             for (var index = 0; index < Results.Length; index++)
             {
@@ -374,7 +376,7 @@ namespace OpenSkiJumping.Competition
 
             JumpResult cpuJump = new JumpResult();
             cpuJump.distance = jumpData.CPUDistance;
-            //Trzeba przeniesc przypisywanie jumperSkill na wczeœniejszy moment niz Gate() w jumperContorller
+            //Trzeba przeniesc przypisywanie jumperSkill na wczeï¿½niejszy moment niz Gate() w jumperContorller
             cpuJump.distance = CalculateFinalCPUDistance(jumpData.CPUDistance, jumpData.JumperSkill, gameplayExtension.modifierCPURandomnessLevel);
             jumpData.Distance = cpuJump.distance;
             // cpuJump.judgesMarks = CalculateJudgesMarks(cpuJump.judgesMarks, cpuJump.distance, hillInfo, jumpData.JumperSkill);
@@ -537,7 +539,7 @@ namespace OpenSkiJumping.Competition
 
             if (skill * modifier > 95)
             {
-                //UnityEngine.Debug.Log("UWAGA! Po modiefierze baardzo d³ugi skok CPU. Skill: " + skill + "skill * modifier: " + skill*modifier);
+                //UnityEngine.Debug.Log("UWAGA! Po modiefierze baardzo dï¿½ugi skok CPU. Skill: " + skill + "skill * modifier: " + skill*modifier);
                 if (skill > 90)
                 {
                     while (skill * modifier > 95)
@@ -566,7 +568,7 @@ namespace OpenSkiJumping.Competition
                 {
                     modifier *= 0.9f;
                 }
-                UnityEngine.Debug.Log("COS SIE JEEEEBLO! Po zmianie modifiera wiekszego ni¿ 1.07. Skok: " + (float)distance * modifier + " skill: " + skill + " modifier " + modifier + " hillsize " + hillInfo.GetHS());
+                UnityEngine.Debug.Log("COS SIE JEEEEBLO! Po zmianie modifiera wiekszego niï¿½ 1.07. Skok: " + (float)distance * modifier + " skill: " + skill + " modifier " + modifier + " hillsize " + hillInfo.GetHS());
             }
 
             /*
@@ -581,7 +583,7 @@ namespace OpenSkiJumping.Competition
                     modifier *= 0.9f;
                 }
 
-                UnityEngine.Debug.Log("COS SIE JEEEEEBLO! D³ugoœæ zbugowanego skoku po zmianach: " + (float)distance * modifier + "skill: " + skill + " modifier " + modifier + " hillsize " + hillInfo.GetHS());
+                UnityEngine.Debug.Log("COS SIE JEEEEEBLO! Dï¿½ugoï¿½ï¿½ zbugowanego skoku po zmianach: " + (float)distance * modifier + "skill: " + skill + " modifier " + modifier + " hillsize " + hillInfo.GetHS());
 
             }
 
@@ -589,7 +591,7 @@ namespace OpenSkiJumping.Competition
             {
                 UnityEngine.Debug.Log("COS SIE JEEEEBLO! Modifier wciaz wiekszy niz 1.1. Skok: " + (float)distance * modifier + " skill: " + skill + " modifier " + modifier + " hillsize " + hillInfo.GetHS());
                 modifier *= Random.Range(skill / 100f, 0.99f);
-                UnityEngine.Debug.Log("COS SIE JEEEEBLO! Po zmianie modifiera wiekszego ni¿ 1.1. Skok: " + (float)distance * modifier + " skill: " + skill + " modifier " + modifier + " hillsize " + hillInfo.GetHS());
+                UnityEngine.Debug.Log("COS SIE JEEEEBLO! Po zmianie modifiera wiekszego niï¿½ 1.1. Skok: " + (float)distance * modifier + " skill: " + skill + " modifier " + modifier + " hillsize " + hillInfo.GetHS());
             }
 
 
@@ -620,7 +622,7 @@ namespace OpenSkiJumping.Competition
 
             
             Results[primaryIndex].TotalPoints = Results[primaryIndex].TotalResults.Sum();
-//Results[primaryIndex].TotalResults[secondaryIndex] i Results[primaryIndex].TotalPoints) to wynik z obu rund. Jeœli jest to runda pierwsza - tylko z pierwszej;
+//Results[primaryIndex].TotalResults[secondaryIndex] i Results[primaryIndex].TotalPoints) to wynik z obu rund. Jeï¿½li jest to runda pierwsza - tylko z pierwszej;
         }
 
         public int CompetitorRank(int id)
@@ -874,6 +876,14 @@ namespace OpenSkiJumping.Competition
                 //     : 0m));
         }
 
+        /// <summary>Duos events use the optional third points table of the classification; other group events use the team table.</summary>
+        private int GetTeamPointsTableIndex(ClassificationInfo classificationInfo)
+        {
+            return EventInfo.eventType == EventType.Duos && classificationInfo.pointsTables.Count > DuosPointsTableIndex
+                ? DuosPointsTableIndex
+                : TeamPointsTableIndex;
+        }
+
         private IEnumerable<(int, decimal)> GetTeamPoints(ClassificationInfo classificationInfo)
         {
             IPointsGiver pointsGiver;
@@ -882,10 +892,10 @@ namespace OpenSkiJumping.Competition
             else
                 pointsGiver = new PointsPointsGiver();
 
-            if (EventInfo.eventType == EventType.Team)
+            if (EventInfo.eventType.IsGroupEvent())
             {
                 return Results.Select((val, index) =>
-                    (OrderedParticipants[index].id, pointsGiver.GetPoints(classificationInfo, val, 1)));
+                    (OrderedParticipants[index].id, pointsGiver.GetPoints(classificationInfo, val, GetTeamPointsTableIndex(classificationInfo))));
             }
 
             var competitorsByTeam = OrderedParticipants.Select((it, ind) => (it, ind)).ToLookup(it => it.it.teamId);

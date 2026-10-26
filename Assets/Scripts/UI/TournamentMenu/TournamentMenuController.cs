@@ -1,3 +1,4 @@
+using OpenSkiJumping.Competition;
 using System;
 using OpenSkiJumping.Data;
 using UnityEngine;
@@ -27,6 +28,7 @@ namespace OpenSkiJumping.UI.TournamentMenu
         [SerializeField] private SavesRuntime saves;
         [SerializeField] private GameObject teamsListGO;
         [SerializeField] private GameObject teamSquadGO;
+        [SerializeField] private GameObject duosListGO;
         [SerializeField] private TournamentMenuData tournamentMenuData;
 
         [SerializeField] private TranslatablePhrase posSkillChangePhrase;
@@ -95,6 +97,7 @@ namespace OpenSkiJumping.UI.TournamentMenu
                 classificationsHierarchyGO.SetActive(false);
                 jumpersListGO.SetActive(false);
                 teamsListGO.SetActive(false);
+                duosListGO.SetActive(false);
 
                 playNextEventButton.gameObject.SetActive(false);
                 startNextSeasonButton.gameObject.SetActive(true);
@@ -106,6 +109,7 @@ namespace OpenSkiJumping.UI.TournamentMenu
             classificationsHierarchyGO.SetActive(true);
             jumpersListGO.SetActive(tournamentMenuData.GetCurrentEvent().eventType == EventType.Individual);
             teamsListGO.SetActive(tournamentMenuData.GetCurrentEvent().eventType == EventType.Team);
+            duosListGO.SetActive(tournamentMenuData.GetCurrentEvent().eventType == EventType.Duos);
             randomEventsController.AddRandomEvents();
             startNextSeasonButton.onClick.AddListener(StartNewSeason);
         }

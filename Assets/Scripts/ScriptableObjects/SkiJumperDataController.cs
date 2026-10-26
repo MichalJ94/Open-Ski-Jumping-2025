@@ -1,4 +1,4 @@
-﻿using OpenSkiJumping.Competition;
+using OpenSkiJumping.Competition;
 using OpenSkiJumping.Competition.Persistent;
 using OpenSkiJumping.Competition.Runtime;
 using OpenSkiJumping.Jumping;
@@ -445,7 +445,7 @@ namespace OpenSkiJumping.ScriptableObjects
                     if (part.slotIndex < 0)
                         Debug.LogWarning($"[SuitParts] Could not find material '{part.material?.name}' for part '{part.key}' in suitRenderer.sharedMaterials.");
                     else
-                        Debug.Log($"[SuitParts] Resolved {part.key} → slot {part.slotIndex} ({part.material?.name})");
+                        Debug.Log($"[SuitParts] Resolved {part.key} ? slot {part.slotIndex} ({part.material?.name})");
                 }
             }
             else
@@ -572,7 +572,7 @@ namespace OpenSkiJumping.ScriptableObjects
 
         public void ApplyTestSuitColors()
         {
-            Debug.Log("▶ Running ApplyTestSuitColors");
+            Debug.Log("? Running ApplyTestSuitColors");
 
             // Example base color (you can expand later to per-part config)
             Color baseColor = SimpleColorPicker.Hex2Color("#3D5D7D");
@@ -595,7 +595,7 @@ namespace OpenSkiJumping.ScriptableObjects
             {
                 suitRenderer.GetPropertyBlock(mpb, index);
 
-                // ✅ Both URP Lit & custom shader use _BaseColor
+                // ? Both URP Lit & custom shader use _BaseColor
                 mpb.SetColor("_BaseColor", color);
 
                 suitRenderer.SetPropertyBlock(mpb, index);
@@ -636,7 +636,7 @@ namespace OpenSkiJumping.ScriptableObjects
             {
                 suitRenderer.GetPropertyBlock(mpb, index);
 
-                // ✅ Only our custom shader uses _SuitTex
+                // ? Only our custom shader uses _SuitTex
                 mpb.SetTexture("_SuitTex", tex);
 
                 suitRenderer.SetPropertyBlock(mpb, index);
@@ -674,7 +674,7 @@ namespace OpenSkiJumping.ScriptableObjects
                 var competitorBib = resultsManager.Value.Results[competitorId].Bibs[resultsManager.Value.RoundIndex];
 
                 
-            if (resultsManager.Value.EventInfo.eventType != OpenSkiJumping.Competition.EventType.Team)
+            if (!resultsManager.Value.EventInfo.eventType.IsGroupEvent())
             {
                 bibFront.text = competitorBib.ToString();
                 bibBack.text = competitorBib.ToString();
@@ -776,7 +776,7 @@ namespace OpenSkiJumping.ScriptableObjects
                 Material mat = new Material(suitOverlayMaterial);
                 mat.mainTexture = tex;
 
-                // 🔍 Get the correct renderer
+                // ?? Get the correct renderer
                 var cubeTransform = jumperController?.jumperModel?.transform.Find("Cube");
                 if (cubeTransform == null)
                 {
@@ -791,7 +791,7 @@ namespace OpenSkiJumping.ScriptableObjects
                     yield break;
                 }
 
-                // ✅ Add overlay as last material (rendered on top)
+                // ? Add overlay as last material (rendered on top)
                 var mats = smr.materials;
                 Array.Resize(ref mats, mats.Length + 1);
                 mats[mats.Length - 1] = mat;

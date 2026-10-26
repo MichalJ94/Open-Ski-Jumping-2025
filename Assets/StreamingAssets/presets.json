@@ -510,5 +510,61 @@
         "windCompensation": false
       }
     ]
+  },
+  {
+    "name": "Duos3Rounds",
+    "roundInfos": [
+      {
+        "roundType": "Normal",
+        "outLimitType": "Normal",
+        "outLimit": 12,
+        "useOrdRank": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "disableJudgesMarks": false,
+        "has95Rule": true,
+        "reversedBibs": false,
+        "reassignBibs": false,
+        "gateCompensation": true,
+        "windCompensation": true
+      },
+      {
+        "roundType": "Normal",
+        "outLimitType": "None",
+        "outLimit": 8,
+        "useOrdRank": [
+          true,
+          true,
+          true,
+          false
+        ],
+        "disableJudgesMarks": false,
+        "has95Rule": true,
+        "reversedBibs": false,
+        "reassignBibs": false,
+        "gateCompensation": true,
+        "windCompensation": true
+      },
+	  {
+        "roundType": "Normal",
+        "outLimitType": "None",
+        "outLimit": -1,
+        "useOrdRank": [
+          true,
+          true,
+          true,
+          false
+        ],
+        "disableJudgesMarks": false,
+        "has95Rule": true,
+        "reversedBibs": false,
+        "reassignBibs": false,
+        "gateCompensation": true,
+        "windCompensation": true
+      }
+    ]
   }
 ]

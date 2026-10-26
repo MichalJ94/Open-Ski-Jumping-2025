@@ -1,4 +1,4 @@
-﻿using OpenSkiJumping.ScriptableObjects;
+using OpenSkiJumping.ScriptableObjects;
 using OpenSkiJumping.UI.JumpersMenu;
 using OpenSkiJumping.UI.ListView;
 using OpenSkiJumping.UI.TournamentMenu.ResultsMenu;
@@ -134,7 +134,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.JumpersSelection
 
             OnJumperSelected?.Invoke(jumper);
 
-            // ✅ Generate full result list for this jumper
+            // ? Generate full result list for this jumper
             var jumperResults = GetResultsForJumper(jumper);
             indResultsListController.Results = jumperResults;
 
@@ -153,7 +153,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.JumpersSelection
                 var eventInfo = allEvents[i];
 
                 // Skip team competitions
-                if (eventInfo.eventType == OpenSkiJumping.Competition.EventType.Team)
+                if (eventInfo.eventType.IsGroupEvent())
                     continue;
 
                 bool isQualification = eventInfo.roundInfos.name.StartsWith("Q");
@@ -249,7 +249,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.JumpersSelection
         {
             includeQualiTrial = isOn;
 
-            // Refresh current jumper’s result list
+            // Refresh current jumper's result list
             if (SelectedJumper != null)
             {
                 var jumperResults = GetResultsForJumper(SelectedJumper);
