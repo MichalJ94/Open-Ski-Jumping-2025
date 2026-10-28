@@ -4,6 +4,8 @@ using System.Linq;
 using OpenSkiJumping.ScriptableObjects;
 using OpenSkiJumping.UI.ListView;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 namespace OpenSkiJumping.UI.TournamentMenu.TeamsSelection
 {
@@ -18,6 +20,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.TeamsSelection
 
         [SerializeField] private TeamsSelectionListView listView;
         [SerializeField] private ToggleGroupExtension toggleGroupExtension;
+        [SerializeField] private Button chooseBestSquadsButton;
 
 
         private List<TeamData> teams;
@@ -40,6 +43,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.TeamsSelection
 
         public event Action<TeamData, bool> OnChangeTeamState;
         public event Action<TeamData> OnEditRequest;
+        public event Action OnChooseBestSquads;
         public event Action OnDataReload;
 
         private void Start()
@@ -47,6 +51,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.TeamsSelection
             ListViewSetup();
             presenter = new TeamsSelectionPresenter(this, tournamentMenuData, tournamentMenuController);
             initialized = true;
+
         }
 
         private void OnEnable()
@@ -63,7 +68,12 @@ namespace OpenSkiJumping.UI.TournamentMenu.TeamsSelection
             listView.ConfigureItem = ConfigureItem;
             listView.SelectionType = SelectionType.None;
             listView.Initialize(BindListViewItem);
+
+            chooseBestSquadsButton.onClick.AddListener(() => OnChooseBestSquads?.Invoke());
         }
+
+
+
 
         private void BindListViewItem(int index, TeamsSelectionListItem listItem)
         {

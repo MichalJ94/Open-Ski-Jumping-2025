@@ -21,6 +21,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.TeamSquad
         [SerializeField] private Button moveUpButton;
         [SerializeField] private Button moveDownButton;
         [SerializeField] private Button backButton;
+        [SerializeField] private Button chooseBestSquadButton;
 
         [SerializeField] private Color[] bibColors;
 
@@ -49,6 +50,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.TeamSquad
         public event Action OnMoveUp;
         public event Action OnMoveDown;
         public event Action OnDataReload;
+        public event Action OnChooseBestSquad;
 
         private void Start()
         {
@@ -70,6 +72,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.TeamSquad
             moveUpButton.onClick.AddListener(() => OnMoveUp?.Invoke());
             moveDownButton.onClick.AddListener(() => OnMoveDown?.Invoke());
             backButton.onClick.AddListener(() => OnSubmit?.Invoke());
+            chooseBestSquadButton.onClick.AddListener(() => OnChooseBestSquad?.Invoke());
         }
 
         private void ListViewSetup()

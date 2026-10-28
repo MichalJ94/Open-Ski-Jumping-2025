@@ -28,10 +28,16 @@ namespace OpenSkiJumping.UI.TournamentMenu.TeamSquad
         {
             var item = view.SelectedCompetitorData;
             if (item == null) return;
-            
+
             model.ChangeCompetitorPriority(item, item.teamId + targetValue);
             PresentList();
             view.SelectedCompetitorData = item;
+        }
+
+        private void ChooseBestSquad()
+        {
+            model.ChooseBestSquad();
+            PresentList();
         }
 
         private void OnSubmit()

@@ -151,6 +151,59 @@ namespace OpenSkiJumping.UI.TournamentMenu
         {
             return GameSave.resultsContainer.eventIndex;
         }
+
+        public void ChooseBestSquad()
+        {
+            var squadSize = CurrentTeamSize;
+
+            var bestCompetitors = EditedTeam.competitors
+                .OrderByDescending(x => x.competitor.largeHillSkill)
+                .Take(squadSize)
+                .OrderBy(x => x.competitor.largeHillSkill)
+                .ToList();
+
+            var bestIds = new HashSet<int>(
+                bestCompetitors.Select(x => x.calendarId));
+
+            var remainingCompetitors = EditedTeam.competitors
+                .Where(x => !bestIds.Contains(x.calendarId))
+                .ToList();
+
+            EditedTeam.competitors = bestCompetitors
+                .Concat(remainingCompetitors)
+                .ToList();
+
+            for (var i = 0; i < EditedTeam.competitors.Count; i++)
+                EditedTeam.competitors[i].teamId = i;
+        }
+        public void ChooseBestSquads()
+        {
+            var squadSize = CurrentTeamSize;
+
+            foreach (var team in Teams)
+            {
+                var bestCompetitors = team.competitors
+                    .OrderByDescending(x => x.competitor.largeHillSkill)
+                    .Take(squadSize)
+                    .OrderBy(x => x.competitor.largeHillSkill)
+                    .ToList();
+
+                var bestIds = new HashSet<int>(
+                    bestCompetitors.Select(x => x.calendarId));
+
+                var remainingCompetitors = team.competitors
+                    .Where(x => !bestIds.Contains(x.calendarId))
+                    .ToList();
+
+                team.competitors = bestCompetitors
+                    .Concat(remainingCompetitors)
+                    .ToList();
+
+                for (var i = 0; i < team.competitors.Count; i++)
+                    team.competitors[i].teamId = i;
+            }
+        }
+
     }
 }
 

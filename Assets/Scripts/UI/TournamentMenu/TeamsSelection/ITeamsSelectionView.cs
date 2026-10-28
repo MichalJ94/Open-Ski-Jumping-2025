@@ -11,5 +11,6 @@ namespace OpenSkiJumping.UI.TournamentMenu.TeamsSelection
         event Action<TeamData, bool> OnChangeTeamState;
         event Action OnDataReload;
         event Action<TeamData> OnEditRequest;
+        event Action OnChooseBestSquads;
     }
 }

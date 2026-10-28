@@ -13,5 +13,6 @@ namespace OpenSkiJumping.UI.TournamentMenu.TeamSquad
         event Action OnMoveUp;
         event Action OnMoveDown;
         event Action OnDataReload;
+
     }
 }

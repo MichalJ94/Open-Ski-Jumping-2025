@@ -26,6 +26,13 @@ namespace OpenSkiJumping.UI.TournamentMenu.TeamsSelection
             menuController.ShowTeamSquad();
         }
 
+        private void ChooseBestSquads()
+        {
+            model.ChooseBestSquads();
+            PresentList();
+        }
+
+
         private void ChangeTeamState(TeamData item, bool value)
         {
             item.registered = value;
@@ -37,6 +44,7 @@ namespace OpenSkiJumping.UI.TournamentMenu.TeamsSelection
             view.OnEditRequest += EditTeam;
             view.OnDataReload += SetInitValues;
             menuController.OnReloadTeamsList += view.RefreshTeams;
+            view.OnChooseBestSquads += ChooseBestSquads;
         }
 
         private void SetInitValues()
